@@ -119,7 +119,7 @@ namespace ThemeEditor.ViewModels
             var dlg = new OpenFileDialog() { Title = "Load" };
             dlg.Filters.Add(new FileDialogFilter() { Name = "Themes", Extensions = { "themes" } });
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-            var result = await dlg.ShowAsync(null); // (Window)this.VisualRoot
+            var result = await dlg.ShowAsync(Application.Current.Windows.FirstOrDefault());
             if (result != null && result[0] != null)
             {
                 var path = result.FirstOrDefault();
@@ -134,7 +134,7 @@ namespace ThemeEditor.ViewModels
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
             dlg.InitialFileName = "Themes";
             dlg.DefaultExtension = "themes";
-            var result = await dlg.ShowAsync(null); // (Window)this.VisualRoot
+            var result = await dlg.ShowAsync(Application.Current.Windows.FirstOrDefault());
             if (result != null)
             {
                 Save(result);
@@ -148,7 +148,7 @@ namespace ThemeEditor.ViewModels
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
             dlg.InitialFileName = CurrentTheme.Name;
             dlg.DefaultExtension = "xaml";
-            var result = await dlg.ShowAsync(null); // (Window)this.VisualRoot
+            var result = await dlg.ShowAsync(Application.Current.Windows.FirstOrDefault());
             if (result != null)
             {
                 Export(result, CurrentTheme);
@@ -430,7 +430,6 @@ namespace ThemeEditor.ViewModels
 
         public void UpdateTheme(IResourceDictionary resources, ThemeViewModel theme)
         {
-            Debug.WriteLine($"UpdateTheme {theme.Name}");
             UpdateThemeAccent(resources, theme);
             UpdateThemeAccent2(resources, theme);
             UpdateThemeAccent3(resources, theme);

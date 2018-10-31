@@ -1,12 +1,6 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:designer="clr-namespace:ThemeEditor;assembly=ThemeEditor"
-             xmlns:views="clr-namespace:ThemeEditor.Views;assembly=ThemeEditor"
-             mc:Ignorable="d"
-             d:DataContext="{x:Static designer:Designer.ThemeEditor}"
-             d:DesignWidth="1100" d:DesignHeight="650">
+             xmlns:views="clr-namespace:ThemeEditor.Views;assembly=ThemeEditor">
     <Grid ColumnDefinitions="*,8,300" Margin="8">
         <TabControl Grid.Column="0">
             <TabItem Header="Preview">

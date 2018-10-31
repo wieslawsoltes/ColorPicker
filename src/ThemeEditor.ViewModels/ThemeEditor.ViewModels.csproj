@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
-    <OutputType>Exe</OutputType>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <OutputType>Library</OutputType>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
@@ -10,18 +10,10 @@
   <Import Project="..\..\build\Rx.props" />
   <Import Project="..\..\build\ReactiveUI.props" />
   <Import Project="..\..\build\Avalonia.props" />
-  <Import Project="..\..\build\Avalonia.Desktop.props" />
-  <Import Project="..\..\build\Avalonia.ReactiveUI.props" />
   <Import Project="..\..\build\Newtonsoft.Json.props" />
 
   <ItemGroup>
     <Compile Include="**\*.cs" Exclude="obj\**" />
-  </ItemGroup>
-
-  <Import Project="..\..\build\EmbedXaml.props" />
-
-  <ItemGroup>
-    <ProjectReference Include="..\ThemeEditor.ViewModels\ThemeEditor.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

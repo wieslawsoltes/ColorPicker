@@ -1,7 +1,7 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ThemeEditor.Views;assembly=ThemeEditor"
-             xmlns:vm="clr-namespace:ThemeEditor.ViewModels;assembly=ThemeEditor">
+             xmlns:vm="clr-namespace:ThemeEditor.ViewModels;assembly=ThemeEditor.ViewModels">
     <UserControl.DataTemplates>
         <DataTemplate DataType="vm:ColorViewModel">
             <local:OverviewColorView/>

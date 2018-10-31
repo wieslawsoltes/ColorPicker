@@ -1,0 +1,12 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Version>0.0.1$(VersionSuffix)</Version>
+    <Authors>Wiesław Šoltés</Authors>
+    <Company>Wiesław Šoltés</Company>
+    <Description>An Avalonia UI Framework theme editor.</Description>
+    <Copyright>Copyright © Wiesław Šoltés 2018</Copyright>
+    <PackageLicenseUrl>https://github.com/wieslawsoltes/ThemeEditor/blob/master/LICENSE.TXT</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/wieslawsoltes/ThemeEditor</PackageProjectUrl>
+    <PackageTags>avalonia;avaloniaui;themes;theme-editor;xaml;csharp</PackageTags>
+  </PropertyGroup>
+</Project>
