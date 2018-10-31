@@ -1,0 +1,22 @@
+﻿<Styles xmlns="https://github.com/avaloniaui">
+    <Style Selector="AccessText">
+        <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
+        <Setter Property="TextBlock.FontSize" Value="{DynamicResource FontSizeNormal}"/>
+    </Style>
+    <Style Selector="TextBlock">
+        <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
+        <Setter Property="TextBlock.FontSize" Value="{DynamicResource FontSizeNormal}"/>
+    </Style>
+    <Style Selector="TextBox">
+        <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
+        <Setter Property="TextBlock.FontSize" Value="{DynamicResource FontSizeNormal}"/>
+    </Style>
+    <Style Selector="MenuItem">
+        <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
+        <Setter Property="TextBlock.FontSize" Value="{DynamicResource FontSizeNormal}"/>
+    </Style>
+    <Style Selector="ToolTip">
+        <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
+        <Setter Property="TextBlock.FontSize" Value="{DynamicResource FontSizeNormal}"/>
+    </Style>
+</Styles>

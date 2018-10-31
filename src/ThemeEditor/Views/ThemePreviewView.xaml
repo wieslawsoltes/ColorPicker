@@ -1,0 +1,49 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:pages="clr-namespace:ThemeEditor.Pages;assembly=ThemeEditor"
+             Background="{DynamicResource ThemeBackgroundBrush}"
+             TextBlock.Foreground="{DynamicResource ThemeForegroundBrush}"
+             TextBlock.FontSize="{DynamicResource FontSizeNormal}">
+    <UserControl.Styles>
+        <StyleInclude Source="resm:ThemeEditor.DefaultThemeAddons.xaml?assembly=ThemeEditor"/>
+        <Style Selector="ScrollViewer.preview">
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        </Style>
+        <Style Selector="TextBlock.h1">
+            <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+        </Style>
+        <Style Selector="TextBlock.h2">
+            <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}"/>
+        </Style>
+        <Style Selector="TextBlock.h3">
+            <Setter Property="FontSize" Value="{DynamicResource FontSizeSmall}"/>
+        </Style>
+    </UserControl.Styles>
+    <ScrollViewer Classes="preview">
+        <StackPanel Spacing="2">
+            <pages:AutoCompleteBoxPage/>
+            <pages:BorderPage/>
+            <pages:ButtonPage/>
+            <pages:ButtonSpinnerPage/>
+            <pages:CalendarPage/>
+            <pages:CheckBoxPage/>
+            <pages:ContextMenuPage/>
+            <pages:DatePickerPage/>
+            <pages:DragAndDropPage/>
+            <pages:DropDownPage/>
+            <pages:ExpanderPage/>
+            <pages:LayoutTransformControlPage/>
+            <pages:ListBoxPage/>
+            <pages:MenuPage/>
+            <pages:NumericUpDownPage/>
+            <pages:ProgressBarPage/>
+            <pages:RadioButtonPage/>
+            <pages:SliderPage/>
+            <pages:TextBoxPage/>
+            <pages:ToolTipPage/>
+            <pages:TreeViewPage/>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

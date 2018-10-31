@@ -1,0 +1,47 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:designer="clr-namespace:ThemeEditor;assembly=ThemeEditor"
+             xmlns:local="clr-namespace:ThemeEditor.Views;assembly=ThemeEditor"
+             xmlns:vm="clr-namespace:ThemeEditor.ViewModels;assembly=ThemeEditor"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static designer:Designer.ThemeEditor}"
+             d:DesignWidth="400" d:DesignHeight="650">
+    <Grid ColumnDefinitions="*" RowDefinitions="Auto,*">
+        <TabControl Grid.Row="0" Classes="default">
+            <TabItem Header="Themes">
+                <StackPanel Spacing="2">
+                    <DropDown Items="{Binding Themes}" SelectedItem="{Binding CurrentTheme, Mode=TwoWay}" Classes="editor">
+                        <DropDown.DataTemplates>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </DropDown.DataTemplates>
+                    </DropDown>
+                    <TextBox Text="{Binding CurrentTheme.Name, Mode=TwoWay}" Classes="left"/>
+                    <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto">
+                        <Button Content="Reset" Command="{Binding ResetCommand}" Grid.Column="0" Grid.Row="0" Classes="default"/>
+                        <Button Content="Remove" Command="{Binding RemoveCommand}" Grid.Column="1" Grid.Row="0" Classes="default"/>
+                        <Button Content="Add" Command="{Binding AddCommand}" Grid.Column="2" Grid.Row="0" Classes="default"/>
+                        <Button Content="Load" Command="{Binding LoadCommand}" Grid.Column="0" Grid.Row="1" Classes="default"/>
+                        <Button Content="Save" Command="{Binding SaveCommand}" Grid.Column="1" Grid.Row="1" Classes="default"/>
+                        <Button Content="Export" Command="{Binding ExportCommand}" Grid.Column="2" Grid.Row="1" Classes="default"/>
+                    </Grid>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+        <TabControl Grid.Row="1" Classes="default">
+            <TabItem Header="Overview">
+                <ScrollViewer>
+                    <local:OverviewView/>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Edit">
+                <ScrollViewer>
+                    <local:EditView/>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

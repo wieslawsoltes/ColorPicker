@@ -1,0 +1,108 @@
+﻿<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Application.Resources>
+        <VisualBrush x:Key="ColorCheckerBoard" TileMode="Tile" Stretch="None" AlignmentX="Left" AlignmentY="Top" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
+            <VisualBrush.Visual>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <Rectangle Width="10" Height="10" Fill="DarkGray"/>
+                        <Rectangle Width="10" Height="10" Fill="LightGray"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <Rectangle Width="10" Height="10" Fill="LightGray"/>
+                        <Rectangle Width="10" Height="10" Fill="DarkGray"/>
+                    </StackPanel>
+                </StackPanel>
+            </VisualBrush.Visual>
+        </VisualBrush>
+    </Application.Resources>
+    <Application.Styles>
+        <StyleInclude Source="resm:Avalonia.Themes.Default.DefaultTheme.xaml?assembly=Avalonia.Themes.Default"/>
+        <StyleInclude Source="resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default"/>
+        <Style Selector="Border.color">
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="Border.preview">
+            <Setter Property="Background" Value="{DynamicResource ColorCheckerBoard}"/>
+            <!--<Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}"/>-->
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
+            <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
+        </Style>
+        <Style Selector="Border.thickness">
+            <Setter Property="BorderBrush" Value="Black"/>
+        </Style>
+        <Style Selector="Button.default">
+            <Setter Property="Margin" Value="2"/>
+        </Style>
+        <Style Selector="ContentControl.editor">
+            <Setter Property="Margin" Value="2"/>
+        </Style>
+        <Style Selector="ContentControl.overview">
+            <Setter Property="Margin" Value="2"/>
+        </Style>
+        <Style Selector="DropDown.editor">
+            <Setter Property="Margin" Value="2"/>
+        </Style>
+        <Style Selector="Expander.default">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style Selector="Slider.slider">
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="IsSnapToTickEnabled" Value="True"/>
+            <Setter Property="TickFrequency" Value="0.1"/>
+            <Setter Property="Margin" Value="2"/>
+        </Style>
+        <Style Selector="TabControl.default">
+            <Setter Property="Margin" Value="2"/>
+        </Style>
+        <Style Selector="TextBlock.left">
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="2"/>
+        </Style>
+        <Style Selector="TextBlock.editor">
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="2"/>
+        </Style>
+        <Style Selector="TextBlock.overview">
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="2"/>
+        </Style>
+        <Style Selector="TextBlock.header">
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+        </Style>
+        <Style Selector="TextBox.export">
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="AcceptsReturn" Value="True"/>
+            <Setter Property="TextWrapping" Value="NoWrap"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+        </Style>
+        <Style Selector="TextBox.left">
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="2"/>
+        </Style>
+        <Style Selector="TextBox.editor">
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="2"/>
+        </Style>
+        <Style Selector="TextBox.overview">
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="2"/>
+        </Style>
+    </Application.Styles>
+</Application>

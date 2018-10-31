@@ -1,0 +1,9 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:local="clr-namespace:ThemeEditor;assembly=ThemeEditor"
+        Width="1100" Height="650"
+        UseLayoutRounding="True"
+        WindowState="Normal" WindowStartupLocation="CenterScreen"
+        FontFamily="system-ui"
+        Title="Avalonia Theme Editor">
+    <local:MainView/>
+</Window>

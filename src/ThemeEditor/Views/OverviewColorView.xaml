@@ -1,0 +1,21 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:ThemeEditor.Converters;assembly=ThemeEditor">
+    <UserControl.Resources>
+        <converters:ColorViewModelToBrushMultiConverter x:Key="ColorViewModelToBrushMultiConverter"/>
+    </UserControl.Resources>
+    <Grid RowDefinitions="Auto" ColumnDefinitions="100,*">
+        <TextBox Text="{Binding Hex, Mode=TwoWay}" IsReadOnly="False" Classes="left" Grid.Row="0" Grid.Column="0"/>
+        <Border Classes="color" Background="{DynamicResource ColorCheckerBoard}" Margin="2" Grid.Row="0" Grid.Column="1"/>
+        <Border Classes="color" Margin="2" Grid.Row="0" Grid.Column="1">
+            <Border.Background>
+                <MultiBinding Mode="OneWay" Converter="{StaticResource ColorViewModelToBrushMultiConverter}">
+                    <Binding Path="A"/>
+                    <Binding Path="R"/>
+                    <Binding Path="G"/>
+                    <Binding Path="B"/>
+                </MultiBinding>
+            </Border.Background>
+        </Border>
+    </Grid>
+</UserControl>

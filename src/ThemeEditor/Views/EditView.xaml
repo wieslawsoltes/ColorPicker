@@ -1,0 +1,103 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ThemeEditor.Views;assembly=ThemeEditor"
+             xmlns:vm="clr-namespace:ThemeEditor.ViewModels;assembly=ThemeEditor">
+    <UserControl.DataTemplates>
+        <DataTemplate DataType="vm:ColorViewModel">
+            <local:EditColorView/>
+        </DataTemplate>
+        <DataTemplate DataType="vm:ThicknessViewModel">
+            <local:EditThicknessView/>
+        </DataTemplate>
+    </UserControl.DataTemplates>
+    <StackPanel Spacing="2">
+        <Expander Header="Background" IsExpanded="True" Classes="default">
+            <StackPanel Spacing="2">
+                <TextBlock Text="Color" Classes="editor"/>
+                <ContentControl Content="{Binding CurrentTheme.ThemeBackgroundColor}" Classes="editor"/>
+            </StackPanel>
+        </Expander>
+        <Expander Header="Foreground" IsExpanded="True" >
+            <StackPanel Spacing="2">
+                <TextBlock Text="Color" Classes="editor"/>
+                <ContentControl Content="{Binding CurrentTheme.ThemeForegroundColor}" Classes="editor"/>
+                <TextBlock Text="Low Color" Classes="editor"/>
+                <ContentControl Content="{Binding CurrentTheme.ThemeForegroundLowColor}" Classes="editor"/>
+            </StackPanel>
+        </Expander>
+        <Expander Header="Accent" IsExpanded="True" Classes="default">
+            <StackPanel Spacing="2">
+                <TextBlock Text="Color 1" Classes="editor"/>
+                <ContentControl Content="{Binding CurrentTheme.ThemeAccentColor}" Classes="editor"/>
+                <TextBlock Text="Color 2" Classes="editor"/>
+                <ContentControl Content="{Binding CurrentTheme.ThemeAccentColor2}" Classes="editor"/>
+                <TextBlock Text="Color 3" Classes="editor"/>
+                <ContentControl Content="{Binding CurrentTheme.ThemeAccentColor3}" Classes="editor"/>
+                <TextBlock Text="Color 4" Classes="editor"/>
+                <ContentControl Content="{Binding CurrentTheme.ThemeAccentColor4}" Classes="editor"/>
+            </StackPanel>
+        </Expander>
+        <Expander Header="Highlight" IsExpanded="True" Classes="default">
+            <StackPanel Spacing="2">
+                <TextBlock Text="Color" Classes="editor"/>
+                <ContentControl Content="{Binding CurrentTheme.HighlightColor}" Classes="editor"/>
+            </StackPanel>
+        </Expander>
+        <Expander Header="Control" IsExpanded="True" Classes="default">
+            <StackPanel Spacing="2">
+                <TextBlock Text="Low Color" Classes="editor"/>
+                <ContentControl Content="{Binding CurrentTheme.ThemeControlLowColor}" Classes="editor"/>
+                <TextBlock Text="Mid Color" Classes="editor"/>
+                <ContentControl Content="{Binding CurrentTheme.ThemeControlMidColor}" Classes="editor"/>
+                <TextBlock Text="High Color" Classes="editor"/>
+                <ContentControl Content="{Binding CurrentTheme.ThemeControlHighColor}" Classes="editor"/>
+            </StackPanel>
+        </Expander>
+        <Expander Header="Control Highlight" IsExpanded="True" Classes="default">
+            <StackPanel Spacing="2">
+                <TextBlock Text="Low Color" Classes="editor"/>
+                <ContentControl Content="{Binding CurrentTheme.ThemeControlHighlightLowColor}" Classes="editor"/>
+                <TextBlock Text="Mid Color" Classes="editor"/>
+                <ContentControl Content="{Binding CurrentTheme.ThemeControlHighlightMidColor}" Classes="editor"/>
+                <TextBlock Text="High Color" Classes="editor"/>
+                <ContentControl Content="{Binding CurrentTheme.ThemeControlHighlightHighColor}" Classes="editor"/>
+            </StackPanel>
+        </Expander>
+        <Expander Header="Border" IsExpanded="True" Classes="default">
+            <StackPanel Spacing="2">
+                <TextBlock Text="Low Color" Classes="editor"/>
+                <ContentControl Content="{Binding CurrentTheme.ThemeBorderLowColor}" Classes="editor"/>
+                <TextBlock Text="Mid Color" Classes="editor"/>
+                <ContentControl Content="{Binding CurrentTheme.ThemeBorderMidColor}" Classes="editor"/>
+                <TextBlock Text="High Color" Classes="editor"/>
+                <ContentControl Content="{Binding CurrentTheme.ThemeBorderHighColor}" Classes="editor"/>
+                <TextBlock Text="Thickness" Classes="editor"/>
+                <ContentControl Content="{Binding CurrentTheme.ThemeBorderThickness}" Classes="editor"/>
+            </StackPanel>
+        </Expander>
+        <Expander Header="Error" IsExpanded="True" Classes="default">
+            <StackPanel Spacing="2">
+                <TextBlock Text="Color" Classes="editor"/>
+                <ContentControl Content="{Binding CurrentTheme.ErrorColor}" Classes="editor"/>
+                <TextBlock Text="Low Color" Classes="editor"/>
+                <ContentControl Content="{Binding CurrentTheme.ErrorLowColor}" Classes="editor"/>
+            </StackPanel>
+        </Expander>
+        <Expander Header="Disabled" IsExpanded="True" Classes="default">
+            <StackPanel Spacing="2">
+                <TextBlock Text="Opacity" Classes="editor"/>
+                <TextBox Text="{Binding CurrentTheme.ThemeDisabledOpacity}" Classes="editor"/>
+            </StackPanel>
+        </Expander>
+        <Expander Header="Font" IsExpanded="True" Classes="default">
+            <StackPanel Spacing="2">
+                <TextBlock Text="Size Small" Classes="editor"/>
+                <TextBox Text="{Binding CurrentTheme.FontSizeSmall}" Classes="editor"/>
+                <TextBlock Text="Size Normal" Classes="editor"/>
+                <TextBox Text="{Binding CurrentTheme.FontSizeNormal}" Classes="editor"/>
+                <TextBlock Text="Size Large" Classes="editor"/>
+                <TextBox Text="{Binding CurrentTheme.FontSizeLarge}" Classes="editor"/>
+            </StackPanel>
+        </Expander>
+    </StackPanel>
+</UserControl>

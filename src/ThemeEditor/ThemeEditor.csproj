@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Version>0.0.1$(VersionSuffix)</Version>
+    <Authors>Wiesław Šoltés</Authors>
+    <Company>Wiesław Šoltés</Company>
+    <Description>A docking layout system.</Description>
+    <Copyright>Copyright © Wiesław Šoltés 2018</Copyright>
+    <PackageLicenseUrl>https://github.com/wieslawsoltes/ThemeEditor/blob/master/LICENSE.TXT</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/wieslawsoltes/ThemeEditor</PackageProjectUrl>
+    <PackageTags>avalonia;avaloniaui;themes;theme-editor;xaml;csharp</PackageTags>
+  </PropertyGroup>
+
+  <Import Project="..\..\build\Rx.props" />
+  <Import Project="..\..\build\ReactiveUI.props" />
+  <Import Project="..\..\build\Avalonia.props" />
+  <Import Project="..\..\build\Avalonia.Desktop.props" />
+  <Import Project="..\..\build\Newtonsoft.Json.props" />
+
+  <ItemGroup>
+    <Compile Include="**\*.cs" Exclude="obj\**" />
+  </ItemGroup>
+
+  <Import Project="..\..\build\EmbedXaml.props" />
+
+</Project>
