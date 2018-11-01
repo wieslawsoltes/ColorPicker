@@ -20,7 +20,7 @@
         <StyleInclude Source="resm:Avalonia.Themes.Default.DefaultTheme.xaml?assembly=Avalonia.Themes.Default"/>
         <StyleInclude Source="resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default"/>
         <Style Selector="Border.color">
-            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="Border.preview">
@@ -30,7 +30,7 @@
             <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
         </Style>
         <Style Selector="Border.thickness">
-            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
         </Style>
         <Style Selector="Button.default">
             <Setter Property="Margin" Value="2"/>
