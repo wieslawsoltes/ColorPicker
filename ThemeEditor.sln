@@ -1,0 +1,75 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2046
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThemeEditor", "src\ThemeEditor\ThemeEditor.csproj", "{683D24E2-5AE0-468F-8A2B-4B1936DAB7FB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThemeEditor.ViewModels", "src\ThemeEditor.ViewModels\ThemeEditor.ViewModels.csproj", "{2B5611EB-1E0D-4EAB-96C9-821A965E496B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{219954C4-6A40-4D94-914E-148B7EBB718E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{3353FD4A-FE9B-4670-86C9-09EF0F7CEDB2}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{2134CB05-065F-4694-83B7-3DF4E9CAFD0E}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE.TXT = LICENSE.TXT
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "git", "git", "{497FBEFD-7228-4E2F-A947-9F416498E263}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{9A80222C-EDE8-42AF-9D6D-76325FC4673F}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet.Config = NuGet.Config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{A88815F2-21C3-4EBA-8DBC-0A461EA7F82C}"
+	ProjectSection(SolutionItems) = preProject
+		build\Avalonia.Desktop.props = build\Avalonia.Desktop.props
+		build\Avalonia.props = build\Avalonia.props
+		build\Avalonia.ReactiveUI.props = build\Avalonia.ReactiveUI.props
+		build\Base.props = build\Base.props
+		build\EmbedXaml.props = build\EmbedXaml.props
+		build\Newtonsoft.Json.props = build\Newtonsoft.Json.props
+		build\ReactiveUI.props = build\ReactiveUI.props
+		build\Rx.props = build\Rx.props
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{683D24E2-5AE0-468F-8A2B-4B1936DAB7FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{683D24E2-5AE0-468F-8A2B-4B1936DAB7FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{683D24E2-5AE0-468F-8A2B-4B1936DAB7FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{683D24E2-5AE0-468F-8A2B-4B1936DAB7FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B5611EB-1E0D-4EAB-96C9-821A965E496B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B5611EB-1E0D-4EAB-96C9-821A965E496B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B5611EB-1E0D-4EAB-96C9-821A965E496B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B5611EB-1E0D-4EAB-96C9-821A965E496B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{683D24E2-5AE0-468F-8A2B-4B1936DAB7FB} = {219954C4-6A40-4D94-914E-148B7EBB718E}
+		{2B5611EB-1E0D-4EAB-96C9-821A965E496B} = {219954C4-6A40-4D94-914E-148B7EBB718E}
+		{2134CB05-065F-4694-83B7-3DF4E9CAFD0E} = {3353FD4A-FE9B-4670-86C9-09EF0F7CEDB2}
+		{497FBEFD-7228-4E2F-A947-9F416498E263} = {3353FD4A-FE9B-4670-86C9-09EF0F7CEDB2}
+		{9A80222C-EDE8-42AF-9D6D-76325FC4673F} = {3353FD4A-FE9B-4670-86C9-09EF0F7CEDB2}
+		{A88815F2-21C3-4EBA-8DBC-0A461EA7F82C} = {3353FD4A-FE9B-4670-86C9-09EF0F7CEDB2}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CF676549-9409-4598-8229-80E04B51ADC5}
+	EndGlobalSection
+EndGlobal
