@@ -108,7 +108,7 @@ namespace ThemeEditor
             sb.AppendLine($"        <Color x:Key=\"ThemeAccentColor\">{theme.ThemeAccentColor.ToHexString()}</Color>");
             sb.AppendLine($"        <Color x:Key=\"ThemeAccentColor2\">{theme.ThemeAccentColor2.ToHexString()}</Color>");
             sb.AppendLine($"        <Color x:Key=\"ThemeAccentColor3\">{theme.ThemeAccentColor3.ToHexString()}</Color>");
-            sb.AppendLine($"        <Color x:Key=\"ThemeAccentColor4\">{theme.ThemeAccentColor4.ToHexString()}A</Color>");
+            sb.AppendLine($"        <Color x:Key=\"ThemeAccentColor4\">{theme.ThemeAccentColor4.ToHexString()}</Color>");
             sb.AppendLine("");
             sb.AppendLine($"        <Color x:Key=\"ThemeBackgroundColor\">{theme.ThemeBackgroundColor.ToHexString()}</Color>");
             sb.AppendLine($"        <Color x:Key=\"ThemeBorderLowColor\">{theme.ThemeBorderLowColor.ToHexString()}</Color>");
