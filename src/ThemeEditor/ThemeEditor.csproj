@@ -21,6 +21,12 @@
 
   <Import Project="..\..\build\EmbedXaml.props" />
 
+  <!--
+  <ItemGroup>
+    <EmbeddedResource Include="Themes\Themes.themes" />
+  </ItemGroup>
+  -->
+
   <ItemGroup>
     <ProjectReference Include="..\ThemeEditor.ViewModels\ThemeEditor.ViewModels.csproj" />
   </ItemGroup>

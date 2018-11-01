@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+//using System.Reflection;
 using Avalonia;
 using ThemeEditor.ViewModels;
 
@@ -16,12 +17,16 @@ namespace ThemeEditor
 
             if (File.Exists(s_ThemesPath))
             {
-                editor.Load(s_ThemesPath);
+                editor.LoadFromFile(s_ThemesPath);
             }
+            //else
+            //{
+            //    editor.LoadFromResource<App>("ThemeEditor.Themes.Themes.themes");
+            //}
 
             BuildAvaloniaApp().Start<MainWindow>(() => editor);
 
-            editor.Save(s_ThemesPath);
+            editor.SaveAsFile(s_ThemesPath);
         }
 
         public static AppBuilder BuildAvaloniaApp()
