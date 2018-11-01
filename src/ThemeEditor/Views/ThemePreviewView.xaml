@@ -1,6 +1,6 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:pages="clr-namespace:ThemeEditor.Pages;assembly=ThemeEditor"
+             xmlns:pages="clr-namespace:ThemeEditor.Preview;assembly=ThemeEditor"
              Background="{DynamicResource ThemeBackgroundBrush}"
              TextBlock.Foreground="{DynamicResource ThemeForegroundBrush}"
              TextBlock.FontSize="{DynamicResource FontSizeNormal}">
@@ -34,7 +34,6 @@
             <pages:DragAndDropPage/>
             <pages:DropDownPage/>
             <pages:ExpanderPage/>
-            <pages:LayoutTransformControlPage/>
             <pages:ListBoxPage/>
             <pages:MenuPage/>
             <pages:NumericUpDownPage/>
