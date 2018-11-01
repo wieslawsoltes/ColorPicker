@@ -16,10 +16,6 @@ ThemeEditor is an [Avalonia UI Framework](http://avaloniaui.net/) theme editor.
 
 [Build instructions](https://github.com/wieslawsoltes/ThemeEditor/wiki/Build).
 
-# Issues
-
-[Theme issues](https://github.com/wieslawsoltes/ThemeEditor/wiki/Issues).
-
 # Resources
 
 * [GitHub source code repository.](https://github.com/wieslawsoltes/ThemeEditor)

@@ -5,7 +5,6 @@
              TextBlock.Foreground="{DynamicResource ThemeForegroundBrush}"
              TextBlock.FontSize="{DynamicResource FontSizeNormal}">
     <UserControl.Styles>
-        <StyleInclude Source="resm:ThemeEditor.Themes.DefaultThemeAddons.xaml?assembly=ThemeEditor"/>
         <Style Selector="ScrollViewer.preview">
             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
             <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
