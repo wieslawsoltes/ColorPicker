@@ -1,6 +1,13 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:views="clr-namespace:ThemeEditor.Views;assembly=ThemeEditor">
+             xmlns:views="clr-namespace:ThemeEditor.Views;assembly=ThemeEditor"
+             Background="{DynamicResource ThemeBackgroundBrush}"
+             TextBlock.Foreground="{DynamicResource ThemeForegroundBrush}"
+             TextBlock.FontSize="{DynamicResource FontSizeNormal}">
+    <UserControl.Styles>
+        <StyleInclude Source="resm:ThemeEditor.Themes.DefaultThemeAddons.xaml?assembly=ThemeEditor"/>
+        <StyleInclude Source="resm:ThemeEditor.Themes.ThemeEditor.xaml?assembly=ThemeEditor"/>
+    </UserControl.Styles>
     <Grid ColumnDefinitions="*,8,300" Margin="8">
         <TabControl Grid.Column="0">
             <TabItem Header="Preview">
