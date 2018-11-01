@@ -8,17 +8,17 @@
         <Color x:Key="ThemeAccentColor3">#66FF00FF</Color>
         <Color x:Key="ThemeAccentColor4">#33FF00FF</Color>
 
-        <Color x:Key="ThemeBackgroundColor">#FF000000</Color>
-        <Color x:Key="ThemeBorderLowColor">#FF3C3C3C</Color>
-        <Color x:Key="ThemeBorderMidColor">#FF606060</Color>
-        <Color x:Key="ThemeBorderHighColor">#FF3C3C3C</Color>
-        <Color x:Key="ThemeControlLowColor">#FF000000</Color>
-        <Color x:Key="ThemeControlMidColor">#FF282828</Color>
-        <Color x:Key="ThemeControlHighColor">#FF3C3C3C</Color>
-        <Color x:Key="ThemeControlHighlightLowColor">#FF808080</Color>
-        <Color x:Key="ThemeControlHighlightMidColor">#FF505050</Color>
-        <Color x:Key="ThemeControlHighlightHighColor">#FF282828</Color>
-        <Color x:Key="ThemeForegroundColor">#FFFFFFFF</Color>
+        <Color x:Key="ThemeBackgroundColor">#FF282828</Color>
+        <Color x:Key="ThemeBorderLowColor">#FF505050</Color>
+        <Color x:Key="ThemeBorderMidColor">#FF808080</Color>
+        <Color x:Key="ThemeBorderHighColor">#FFA0A0A0</Color>
+        <Color x:Key="ThemeControlLowColor">#FF282828</Color>
+        <Color x:Key="ThemeControlMidColor">#FF505050</Color>
+        <Color x:Key="ThemeControlHighColor">#FF808080</Color>
+        <Color x:Key="ThemeControlHighlightLowColor">#FFA8A8A8</Color>
+        <Color x:Key="ThemeControlHighlightMidColor">#FF828282</Color>
+        <Color x:Key="ThemeControlHighlightHighColor">#FF505050</Color>
+        <Color x:Key="ThemeForegroundColor">#FFDEDEDE</Color>
         <Color x:Key="ThemeForegroundLowColor">#FF808080</Color>
 
         <Color x:Key="HighlightColor">#FFFF00FF</Color>
