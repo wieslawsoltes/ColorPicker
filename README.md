@@ -8,6 +8,8 @@
 
 ThemeEditor is an [Avalonia UI Framework](http://avaloniaui.net/) theme editor.
 
+[![ThemeEditor](images/ThemeEditor.png)](images/ThemeEditor.png)
+
 # Usage
 
 [Usage instructions](https://github.com/wieslawsoltes/ThemeEditor/wiki/Usage).
