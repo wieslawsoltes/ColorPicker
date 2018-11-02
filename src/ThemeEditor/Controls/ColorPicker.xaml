@@ -4,6 +4,74 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="256" d:DesignWidth="256">
+    <UserControl.Styles>
+        <Style Selector="Slider.hue:vertical">
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Grid Background="{TemplateBinding Background}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Name="TrackBackground" Grid.Column="1"/>
+                        <Track Name="PART_Track" Grid.Column="1" Orientation="Vertical">
+                            <Track.DecreaseButton>
+                                <RepeatButton Name="PART_DecreaseButton" Classes="repeattrack" />
+                            </Track.DecreaseButton>
+                            <Track.IncreaseButton>
+                                <RepeatButton Name="PART_IncreaseButton" Classes="repeattrack" />
+                            </Track.IncreaseButton>
+                            <Thumb MinWidth="30">
+                                <Thumb.Template>
+                                    <ControlTemplate>
+ 
+                                        <Grid Background="Transparent">
+                                            <Path Fill="#FF000000" Data="M 0,0 L 5,5 L 0,10 Z" />
+                                            <Path Fill="#FF000000" Data="M 5,0 L 0,5 L 5,10 Z" HorizontalAlignment="Right" />
+                                        </Grid> 
+                                    </ControlTemplate>
+                                </Thumb.Template>
+                            </Thumb>
+                        </Track>
+                    </Grid>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <Style Selector="Slider.hue /template/ Track#PART_Track">
+            <Setter Property="Minimum" Value="{TemplateBinding Minimum}"/>
+            <Setter Property="Maximum" Value="{TemplateBinding Maximum}"/>
+            <Setter Property="Value" Value="{TemplateBinding Value, Mode=TwoWay}"/>
+        </Style>
+        <Style Selector="Slider.hue /template/ Border#TrackBackground">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Color="#FFFF0000" Offset="0.0" />
+                            <GradientStop Color="#FFFFFF00" Offset="0.16666666667" />
+                            <GradientStop Color="#FF00FF00" Offset="0.33333333333" />
+                            <GradientStop Color="#FF00FFFF" Offset="0.5" />
+                            <GradientStop Color="#FF0000FF" Offset="0.66666666667" />
+                            <GradientStop Color="#FFFF00FF" Offset="0.83333333333" />
+                            <GradientStop Color="#FFFF0000" Offset="1.0" />
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style Selector="Slider.hue /template/ RepeatButton.repeattrack">
+            <Setter Property="Background" Value="Purple"/>
+            <Setter Property="Foreground" Value="Pink"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Background="Transparent" />
+                </ControlTemplate>
+            </Setter>
+        </Style>
+    </UserControl.Styles>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -30,24 +98,6 @@
                 </Grid.Background>
             </Grid>
         </Grid>
-        <Grid Grid.Column="2">
-            <Grid.Background>
-                <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
-                    <LinearGradientBrush.GradientStops>
-                        <GradientStop Color="#FFFF0000" Offset="0.0" />
-                        <GradientStop Color="#FFFFFF00" Offset="0.16666666667" />
-                        <GradientStop Color="#FF00FF00" Offset="0.33333333333" />
-                        <GradientStop Color="#FF00FFFF" Offset="0.5" />
-                        <GradientStop Color="#FF0000FF" Offset="0.66666666667" />
-                        <GradientStop Color="#FFFF00FF" Offset="0.83333333333" />
-                        <GradientStop Color="#FFFF0000" Offset="1.0" />
-                    </LinearGradientBrush.GradientStops>
-                </LinearGradientBrush>
-            </Grid.Background>
-        </Grid>
-        <Grid Grid.Column="2" VerticalAlignment="Top">
-            <Path Fill="#FF000000" Data="M 0,0 L 5,5 L 0,10 Z" />
-            <Path Fill="#FF000000" Data="M 5,0 L 0,5 L 5,10 Z" HorizontalAlignment="Right" />
-        </Grid>
+        <Slider Grid.Column="2" Minimum="0" Maximum="360" SmallChange="1" LargeChange="30" IsSnapToTickEnabled="False" TickFrequency="0.0" Value="0" Orientation="Vertical" Classes="hue"/>
     </Grid>
 </UserControl>
