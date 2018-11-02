@@ -1,9 +1,13 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ThemeEditor.Controls;assembly=ThemeEditor"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="256" d:DesignWidth="256">
+    <UserControl.Resources>
+        <local:HueToColorConverter x:Key="HueToColorConverter"/>
+    </UserControl.Resources>
     <UserControl.Styles>
         <Style Selector="Slider.hue:vertical">
             <Setter Property="Template">
@@ -25,7 +29,6 @@
                             <Thumb MinWidth="30">
                                 <Thumb.Template>
                                     <ControlTemplate>
- 
                                         <Grid Background="Transparent">
                                             <Path Fill="#FF000000" Data="M 0,0 L 5,5 L 0,10 Z" />
                                             <Path Fill="#FF000000" Data="M 5,0 L 0,5 L 5,10 Z" HorizontalAlignment="Right" />
@@ -83,7 +86,7 @@
                 <LinearGradientBrush StartPoint="0%,50%" EndPoint="100%,50%">
                     <LinearGradientBrush.GradientStops>
                         <GradientStop Offset="0" Color="#FFFFFFFF"/>
-                        <GradientStop Offset="1" Color="#FFFF0000" />
+                        <GradientStop Offset="1" Color="{Binding #hueSlider.Value, Converter={StaticResource HueToColorConverter}}" />
                     </LinearGradientBrush.GradientStops>
                 </LinearGradientBrush>
             </Grid.Background>
@@ -98,6 +101,6 @@
                 </Grid.Background>
             </Grid>
         </Grid>
-        <Slider Grid.Column="2" Minimum="0" Maximum="360" SmallChange="1" LargeChange="30" IsSnapToTickEnabled="False" TickFrequency="0.0" Value="0" Orientation="Vertical" Classes="hue"/>
+        <Slider x:Name="hueSlider" Grid.Column="2" Minimum="0" Maximum="359" SmallChange="1" LargeChange="30" IsSnapToTickEnabled="False" TickFrequency="0.0" Value="0" Orientation="Vertical" Classes="hue"/>
     </Grid>
 </UserControl>
