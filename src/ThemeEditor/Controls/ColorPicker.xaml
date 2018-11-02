@@ -1,0 +1,48 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="30"/>
+        </Grid.ColumnDefinitions>
+        <Grid Margin="2" Grid.Column="0">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0%,50%" EndPoint="100%,50%">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Offset="0" Color="#FFFFFFFF"/>
+                        <GradientStop Offset="1" Color="#FFFF0000" />
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Offset="0" Color="#00000000" />
+                            <GradientStop Offset="1" Color="#FF000000" />
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Grid.Background>
+            </Grid>
+        </Grid>
+        <Grid Margin="2" Grid.Column="1">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Color="#FFFF0000" Offset="0.0" />
+                        <GradientStop Color="#FFFFFF00" Offset="0.16666666667" />
+                        <GradientStop Color="#FF00FF00" Offset="0.33333333333" />
+                        <GradientStop Color="#FF00FFFF" Offset="0.5" />
+                        <GradientStop Color="#FF0000FF" Offset="0.66666666667" />
+                        <GradientStop Color="#FFFF00FF" Offset="0.83333333333" />
+                        <GradientStop Color="#FFFF0000" Offset="1.0" />
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Grid.Background>
+        </Grid>
+        <Grid Margin="2" Grid.Column="1" VerticalAlignment="Top">
+            <Path Fill="#FF000000" Data="M 0,0 L 5,5 L 0,10 Z" />
+            <Path Fill="#FF000000" Data="M 5,0 L 0,5 L 5,10 Z" HorizontalAlignment="Right" />
+        </Grid>
+    </Grid>
+</UserControl>

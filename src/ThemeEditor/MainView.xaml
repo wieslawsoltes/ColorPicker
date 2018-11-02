@@ -1,5 +1,6 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:ThemeEditor.Controls;assembly=ThemeEditor"
              xmlns:views="clr-namespace:ThemeEditor.Views;assembly=ThemeEditor"
              Background="{DynamicResource ThemeBackgroundBrush}"
              TextBlock.Foreground="{DynamicResource ThemeForegroundBrush}"
@@ -19,47 +20,7 @@
             </TabItem>
             <TabItem Header="ColorPicker">
                 <Grid>
-                    <Grid Width="256" Height="256">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="80*"/>
-                            <ColumnDefinition Width="24"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid Margin="2" Grid.Column="0">
-                            <Grid.Background>
-                                <LinearGradientBrush StartPoint="0%,50%" EndPoint="100%,50%">
-                                    <LinearGradientBrush.GradientStops>
-                                        <GradientStop Offset="0" Color="#FFFFFFFF"/>
-                                        <GradientStop Offset="1" Color="#FFFF0000" />
-                                    </LinearGradientBrush.GradientStops>
-                                </LinearGradientBrush>
-                            </Grid.Background>
-                            <Grid>
-                                <Grid.Background>
-                                    <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
-                                        <LinearGradientBrush.GradientStops>
-                                            <GradientStop Offset="0" Color="#00000000" />
-                                            <GradientStop Offset="1" Color="#FF000000" />
-                                        </LinearGradientBrush.GradientStops>
-                                    </LinearGradientBrush>
-                                </Grid.Background>
-                            </Grid>
-                        </Grid>
-                        <Grid Margin="2" Grid.Column="1">
-                            <Grid.Background>
-                                <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
-                                    <LinearGradientBrush.GradientStops>
-                                        <GradientStop Color="#FFFF0000" Offset="0.0" />
-                                        <GradientStop Color="#FFFFFF00" Offset="0.16666666667" />
-                                        <GradientStop Color="#FF00FF00" Offset="0.33333333333" />
-                                        <GradientStop Color="#FF00FFFF" Offset="0.5" />
-                                        <GradientStop Color="#FF0000FF" Offset="0.66666666667" />
-                                        <GradientStop Color="#FFFF00FF" Offset="0.83333333333" />
-                                        <GradientStop Color="#FFFF0000" Offset="1.0" />
-                                    </LinearGradientBrush.GradientStops>
-                                </LinearGradientBrush>
-                            </Grid.Background>
-                        </Grid>
-                    </Grid>
+                    <controls:ColorPicker Width="256" Height="256"/>
                 </Grid>
             </TabItem>
         </TabControl>
