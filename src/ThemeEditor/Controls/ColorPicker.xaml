@@ -1,12 +1,12 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:ThemeEditor.Controls;assembly=ThemeEditor"
+             xmlns:converters="clr-namespace:ThemeEditor.Converters;assembly=ThemeEditor"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="256" d:DesignWidth="256">
     <UserControl.Resources>
-        <local:HueToColorConverter x:Key="HueToColorConverter"/>
+        <converters:HueToColorConverter x:Key="HueToColorConverter"/>
     </UserControl.Resources>
     <UserControl.Styles>
         <Style Selector="Slider.hue:vertical">

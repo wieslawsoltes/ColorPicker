@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
+  </PropertyGroup>
+
+  <Import Project="..\..\build\Rx.props" />
+  <Import Project="..\..\build\XUnit.props" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ThemeEditor.Colors\ThemeEditor.Colors.csproj" />
+  </ItemGroup>
+
+</Project>
