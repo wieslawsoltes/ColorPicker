@@ -19,7 +19,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Border Name="TrackBackground" Grid.Column="1"/>
-                        <Track Name="PART_Track" Grid.Column="1" Orientation="Vertical">
+                        <Track Name="PART_Track" Margin="0,-7,0,-7" Grid.Column="1" Orientation="Vertical">
                             <Track.DecreaseButton>
                                 <RepeatButton Name="PART_DecreaseButton" Classes="repeattrack" />
                             </Track.DecreaseButton>
@@ -30,8 +30,8 @@
                                 <Thumb.Template>
                                     <ControlTemplate>
                                         <Grid Background="Transparent">
-                                            <Path Fill="#FF000000" Data="M 0,0 L 5,5 L 0,10 Z" />
-                                            <Path Fill="#FF000000" Data="M 5,0 L 0,5 L 5,10 Z" HorizontalAlignment="Right" />
+                                            <Path Fill="#C4000000" Data="M 0,0 L 7,7 L 0,14 Z" />
+                                            <Path Fill="#C4000000" Data="M 7,0 L 0,7 L 7,14 Z" HorizontalAlignment="Right" />
                                         </Grid> 
                                     </ControlTemplate>
                                 </Thumb.Template>
