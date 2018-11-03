@@ -30,6 +30,12 @@ namespace ThemeEditor.Colors
             B = rgb.B;
         }
 
+        public RGB WithR(double r) => new RGB(r, G, B);
+
+        public RGB WithG(double g) => new RGB(R, g, B);
+
+        public RGB WithB(double b) => new RGB(R, G, b);
+
         public HSV ToHSV() => ToHSV(R, G, B);
 
         public static HSV ToHSV(double r, double g, double b)

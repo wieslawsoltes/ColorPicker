@@ -30,6 +30,12 @@ namespace ThemeEditor.Colors
             V = hsv.V;
         }
 
+        public HSV WithH(double h) => new HSV(h, S, V);
+
+        public HSV WithS(double s) => new HSV(H, s, V);
+
+        public HSV WithV(double v) => new HSV(H, S, v);
+
         public RGB ToRGB() => ToRGB(H, S, V);
 
         public static RGB ToRGB(double h, double s, double v)
