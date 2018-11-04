@@ -5,17 +5,23 @@
     <OutputType>Library</OutputType>
     <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
     <LangVersion>latest</LangVersion>
+    <IsPackable>False</IsPackable>
   </PropertyGroup>
 
   <PropertyGroup>
-    <Description>A .NET library with basic color types.</Description>
-    <PackageTags>color;colors;hsv;rgb</PackageTags>
+    <Description>A theme editor preview pages.</Description>
+    <PackageTags>theme-editor;themes;preview;avalonia;controls;xaml</PackageTags>
   </PropertyGroup>
 
   <Import Project="..\..\build\Base.props" />
+  <Import Project="..\..\build\Rx.props" />
+  <Import Project="..\..\build\ReactiveUI.props" />
+  <Import Project="..\..\build\Avalonia.props" />
 
   <ItemGroup>
     <Compile Include="**\*.cs" Exclude="obj\**" />
   </ItemGroup>
+
+  <Import Project="..\..\build\EmbedXaml.props" />
 
 </Project>

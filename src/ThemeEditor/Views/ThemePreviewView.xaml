@@ -1,6 +1,6 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:pages="clr-namespace:ThemeEditor.Preview;assembly=ThemeEditor"
+             xmlns:preview="clr-namespace:ThemeEditor.Preview;assembly=ThemeEditor.Preview"
              Background="{DynamicResource ThemeBackgroundBrush}"
              TextBlock.Foreground="{DynamicResource ThemeForegroundBrush}"
              TextBlock.FontSize="{DynamicResource FontSizeNormal}">
@@ -22,26 +22,26 @@
     </UserControl.Styles>
     <ScrollViewer Classes="preview">
         <StackPanel Spacing="2">
-            <pages:AutoCompleteBoxPage/>
-            <pages:BorderPage/>
-            <pages:ButtonPage/>
-            <pages:ButtonSpinnerPage/>
-            <pages:CalendarPage/>
-            <pages:CheckBoxPage/>
-            <pages:ContextMenuPage/>
-            <pages:DatePickerPage/>
-            <pages:DragAndDropPage/>
-            <pages:DropDownPage/>
-            <pages:ExpanderPage/>
-            <pages:ListBoxPage/>
-            <pages:MenuPage/>
-            <pages:NumericUpDownPage/>
-            <pages:ProgressBarPage/>
-            <pages:RadioButtonPage/>
-            <pages:SliderPage/>
-            <pages:TextBoxPage/>
-            <pages:ToolTipPage/>
-            <pages:TreeViewPage/>
+            <preview:AutoCompleteBoxPage/>
+            <preview:BorderPage/>
+            <preview:ButtonPage/>
+            <preview:ButtonSpinnerPage/>
+            <preview:CalendarPage/>
+            <preview:CheckBoxPage/>
+            <preview:ContextMenuPage/>
+            <preview:DatePickerPage/>
+            <preview:DragAndDropPage/>
+            <preview:DropDownPage/>
+            <preview:ExpanderPage/>
+            <preview:ListBoxPage/>
+            <preview:MenuPage/>
+            <preview:NumericUpDownPage/>
+            <preview:ProgressBarPage/>
+            <preview:RadioButtonPage/>
+            <preview:SliderPage/>
+            <preview:TextBoxPage/>
+            <preview:ToolTipPage/>
+            <preview:TreeViewPage/>
         </StackPanel>
     </ScrollViewer>
 </UserControl>

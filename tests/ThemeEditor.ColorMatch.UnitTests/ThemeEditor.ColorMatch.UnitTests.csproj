@@ -10,6 +10,7 @@
   <Import Project="..\..\build\XUnit.props" />
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\ThemeEditor.ColorMatch\ThemeEditor.ColorMatch.csproj" />
     <ProjectReference Include="..\..\src\ThemeEditor.Colors\ThemeEditor.Colors.csproj" />
   </ItemGroup>
 

@@ -1,30 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <OutputType>Library</OutputType>
     <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup>
-    <Description>An Avalonia UI Framework theme editor view models.</Description>
-    <PackageTags>avalonia;avaloniaui;themes;theme-editor;xaml;csharp</PackageTags>
+    <Description>An avalonia control for color matching and palette design.</Description>
+    <PackageTags>color;colorblender;palette;design;colors;hsv;rgb;;ontrols;avalonia;avaloniaui;xaml</PackageTags>
   </PropertyGroup>
 
   <Import Project="..\..\build\Base.props" />
   <Import Project="..\..\build\Rx.props" />
-  <Import Project="..\..\build\ReactiveUI.props" />
   <Import Project="..\..\build\Avalonia.props" />
-  <Import Project="..\..\build\Newtonsoft.Json.props" />
 
   <ItemGroup>
     <Compile Include="**\*.cs" Exclude="obj\**" />
   </ItemGroup>
 
+  <Import Project="..\..\build\EmbedXaml.props" />
+
   <ItemGroup>
     <ProjectReference Include="..\ThemeEditor.ColorMatch\ThemeEditor.ColorMatch.csproj" />
     <ProjectReference Include="..\ThemeEditor.Colors\ThemeEditor.Colors.csproj" />
+    <ProjectReference Include="..\ThemeEditor.ViewModels\ThemeEditor.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

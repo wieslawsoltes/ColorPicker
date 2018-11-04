@@ -1,9 +1,8 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace ThemeEditor.Controls
+namespace ThemeEditor.Controls.ColorPicker
 {
-
     public class ColorPicker : UserControl
     {
         public ColorPicker()

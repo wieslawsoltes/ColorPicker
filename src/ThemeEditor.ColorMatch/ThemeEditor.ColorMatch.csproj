@@ -8,14 +8,18 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Description>A .NET library with basic color types.</Description>
-    <PackageTags>color;colors;hsv;rgb</PackageTags>
+    <Description>A .NET library for color matching and palette design.</Description>
+    <PackageTags>colorblender;colormatch;color;colors;palette;design;hsv;rgb</PackageTags>
   </PropertyGroup>
 
   <Import Project="..\..\build\Base.props" />
 
   <ItemGroup>
     <Compile Include="**\*.cs" Exclude="obj\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ThemeEditor.Colors\ThemeEditor.Colors.csproj" />
   </ItemGroup>
 
 </Project>

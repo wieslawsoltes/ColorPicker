@@ -1,6 +1,8 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using ThemeEditor.Controls.ColorBlender;
+using ThemeEditor.Controls.ColorPicker;
 using ThemeEditor.ViewModels;
 using ThemeEditor.Views;
 
@@ -11,6 +13,8 @@ namespace ThemeEditor
         private ThemePreviewView _previewView = null;
         private TextBox _exportText = null;
         private ThemeEditorView _editorView = null;
+        private ColorPicker _colorPicker = null;
+        private ColorBlender _colorBlender = null;
 
         public MainView()
         {
@@ -19,6 +23,10 @@ namespace ThemeEditor
             _previewView = this.Find<ThemePreviewView>("previewView");
             _exportText = this.Find<TextBox>("exportText");
             _editorView = this.Find<ThemeEditorView>("editorView");
+            _colorPicker = this.Find<ColorPicker>("colorPicker");
+            _colorBlender = this.Find<ColorBlender>("colorBlender");
+
+            _colorBlender.DataContext = new ColorMatchViewModel(213, 46, 49);
         }
 
         private void InitializeComponent()

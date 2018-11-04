@@ -5,7 +5,7 @@ using Avalonia.Data.Converters;
 using Avalonia.Media;
 using ThemeEditor.Colors;
 
-namespace ThemeEditor.Converters
+namespace ThemeEditor.Controls.ColorPicker.Converters
 {
     public class HueToColorConverter : IValueConverter
     {

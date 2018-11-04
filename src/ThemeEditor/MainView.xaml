@@ -1,7 +1,8 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:controls="clr-namespace:ThemeEditor.Controls;assembly=ThemeEditor"
              xmlns:views="clr-namespace:ThemeEditor.Views;assembly=ThemeEditor"
+             xmlns:cb="clr-namespace:ThemeEditor.Controls.ColorBlender;assembly=ThemeEditor.Controls.ColorBlender"
+             xmlns:cp="clr-namespace:ThemeEditor.Controls.ColorPicker;assembly=ThemeEditor.Controls.ColorPicker"
              Background="{DynamicResource ThemeBackgroundBrush}"
              TextBlock.Foreground="{DynamicResource ThemeForegroundBrush}"
              TextBlock.FontSize="{DynamicResource FontSizeNormal}">
@@ -20,7 +21,12 @@
             </TabItem>
             <TabItem Header="ColorPicker">
                 <Grid>
-                    <controls:ColorPicker Width="256" Height="256"/>
+                    <cp:ColorPicker x:Name="colorPicker" Width="256" Height="256"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="ColorBlender">
+                <Grid>
+                    <cb:ColorBlender x:Name="colorBlender"/>
                 </Grid>
             </TabItem>
         </TabControl>
