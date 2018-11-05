@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reactive.Disposables;
+using System.Reflection;
 using System.Runtime.Serialization;
 using Avalonia;
 using Avalonia.Controls;
@@ -47,9 +47,19 @@ namespace ThemeEditor.ViewModels
             set { this.RaiseAndSetIfChanged(ref _defaultTheme, value); }
         }
 
-        public void Load(string path)
+        public string GetResource<T>(string name)
         {
-            var json = File.ReadAllText(path);
+            var assembly = typeof(T).GetTypeInfo().Assembly;
+            string[] resources = assembly.GetManifestResourceNames();
+            var stream = assembly.GetManifestResourceStream(name);
+            using (var reader = new StreamReader(stream))
+            {
+                return reader.ReadToEnd();
+            }
+        }
+
+        public void LoadFromJson(string json)
+        {
 #pragma warning disable CS0618
             var themes = Deserialize<ReactiveList<ThemeViewModel>>(json);
 #pragma warning restore CS0618
@@ -57,19 +67,31 @@ namespace ThemeEditor.ViewModels
             CurrentTheme = themes.FirstOrDefault();
         }
 
-        public void Save(string path)
+        public void LoadFromResource<T>(string name)
+        {
+            var json = GetResource<T>(name);
+            LoadFromJson(json);
+        }
+
+        public void LoadFromFile(string path)
+        {
+            var json = File.ReadAllText(path);
+            LoadFromJson(json);
+        }
+
+        public void SaveAsFile(string path)
         {
             var json = Serialize(Themes);
             File.WriteAllText(path, json);
         }
 
-        public void Export(string path, ThemeViewModel theme)
+        public void ExportAsFile(string path, ThemeViewModel theme)
         {
             var xaml = theme.ToXaml();
             File.WriteAllText(path, xaml);
         }
 
-        public void Reset(ThemeViewModel theme)
+        public void ResetTheme(ThemeViewModel theme)
         {
             if (CurrentTheme != null)
             {
@@ -82,13 +104,13 @@ namespace ThemeEditor.ViewModels
             }
         }
 
-        public void Remove(ThemeViewModel theme)
+        public void RemoveTheme(ThemeViewModel theme)
         {
             Themes.Remove(theme);
             CurrentTheme = Themes.FirstOrDefault();
         }
 
-        public void Add(ThemeViewModel theme)
+        public void AddTheme(ThemeViewModel theme)
         {
             Themes.Add(theme);
             CurrentTheme = theme;
@@ -96,12 +118,12 @@ namespace ThemeEditor.ViewModels
 
         public void ResetCommand()
         {
-            Reset(DefaultTheme.Clone());
+            ResetTheme(DefaultTheme.Clone());
         }
 
         public void RemoveCommand()
         {
-            Remove(CurrentTheme);
+            RemoveTheme(CurrentTheme);
         }
 
         public void AddCommand()
@@ -111,7 +133,7 @@ namespace ThemeEditor.ViewModels
             {
                 theme.Name += "-copy";
             }
-            Add(theme);
+            AddTheme(theme);
         }
 
         public async void LoadCommand()
@@ -123,7 +145,7 @@ namespace ThemeEditor.ViewModels
             if (result != null && result[0] != null)
             {
                 var path = result.FirstOrDefault();
-                Load(path);
+                LoadFromFile(path);
             }
         }
 
@@ -137,7 +159,7 @@ namespace ThemeEditor.ViewModels
             var result = await dlg.ShowAsync(Application.Current.Windows.FirstOrDefault());
             if (result != null)
             {
-                Save(result);
+                SaveAsFile(result);
             }
         }
 
@@ -151,7 +173,7 @@ namespace ThemeEditor.ViewModels
             var result = await dlg.ShowAsync(Application.Current.Windows.FirstOrDefault());
             if (result != null)
             {
-                Export(result, CurrentTheme);
+                ExportAsFile(result, CurrentTheme);
             }
         }
 
