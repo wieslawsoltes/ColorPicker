@@ -1,12 +1,12 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
-              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-              xmlns:converters="clr-namespace:ThemeEditor.Controls.ColorBlender.Converters;assembly=ThemeEditor.Controls.ColorBlender">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:ThemeEditor.Controls.ColorBlender.Converters;assembly=ThemeEditor.Controls.ColorBlender">
     <UserControl.Resources>
         <converters:HtmlColorConverter x:Key="HtmlColorConverter"/>
     </UserControl.Resources>
     <Grid x:Name="swatch" RowDefinitions="*,Auto,Auto" ColumnDefinitions="*">
-        <Rectangle x:Name="col" Cursor="Hand" Fill="Gray" Grid.Column="0" Grid.Row="0" Margin="3,3,3,3" />
-        <TextBox x:Name="HTML" Grid.Column="0" Grid.Row="1" Margin="3,1,3,3" TextAlignment="Center" IsReadOnly="True" >
+        <Rectangle x:Name="col" Cursor="Hand" Fill="Gray" Grid.Column="0" Grid.Row="0" Margin="2" />
+        <TextBox x:Name="HTML" Grid.Column="0" Grid.Row="1" Margin="2" TextAlignment="Left" IsReadOnly="True" >
             <TextBox.Text>
                 <MultiBinding Converter="{StaticResource HtmlColorConverter}">
                     <Binding ElementName="col" Path="Fill.Color.R" Mode="TwoWay" />
@@ -15,10 +15,10 @@
                 </MultiBinding>
             </TextBox.Text>
         </TextBox>
-        <Grid Grid.Column="0" ColumnDefinitions="*,*,*" Grid.Row="2" Margin="3,1,3,4" >
-            <TextBox x:Name="R" Text="{Binding ElementName=col, Path=Fill.Color.R, Mode=TwoWay}" Grid.Column="0" TextAlignment="Center" IsReadOnly="True" />
-            <TextBox x:Name="G" Text="{Binding ElementName=col, Path=Fill.Color.G, Mode=TwoWay}" Grid.Column="1" TextAlignment="Center" IsReadOnly="True" />
-            <TextBox x:Name="B" Text="{Binding ElementName=col, Path=Fill.Color.B, Mode=TwoWay}" Grid.Column="2" TextAlignment="Center" IsReadOnly="True" />
+        <Grid Grid.Column="0" ColumnDefinitions="*,*,*" Grid.Row="2">
+            <TextBox x:Name="R" Text="{Binding ElementName=col, Path=Fill.Color.R, Mode=TwoWay}" Grid.Column="0" Margin="2" TextAlignment="Left" IsReadOnly="True" />
+            <TextBox x:Name="G" Text="{Binding ElementName=col, Path=Fill.Color.G, Mode=TwoWay}" Grid.Column="1" Margin="2" TextAlignment="Left" IsReadOnly="True" />
+            <TextBox x:Name="B" Text="{Binding ElementName=col, Path=Fill.Color.B, Mode=TwoWay}" Grid.Column="2" Margin="2" TextAlignment="Left" IsReadOnly="True" />
         </Grid>
     </Grid>
 </UserControl>
