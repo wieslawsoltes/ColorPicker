@@ -27,11 +27,9 @@
 
   <Import Project="..\..\build\EmbedXaml.props" />
 
-  <!--
   <ItemGroup>
     <EmbeddedResource Include="Themes\Themes.themes" />
   </ItemGroup>
-  -->
 
   <ItemGroup>
     <ProjectReference Include="..\ThemeEditor.ColorMatch\ThemeEditor.ColorMatch.csproj" />

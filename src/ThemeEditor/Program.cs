@@ -19,10 +19,10 @@ namespace ThemeEditor
             {
                 editor.LoadFromFile(s_ThemesPath);
             }
-            //else
-            //{
-            //    editor.LoadFromResource<App>("ThemeEditor.Themes.Themes.themes");
-            //}
+            else
+            {
+                editor.LoadFromResource<App>("ThemeEditor.Themes.Themes.themes");
+            }
 
             BuildAvaloniaApp().Start<MainWindow>(() => editor);
 
