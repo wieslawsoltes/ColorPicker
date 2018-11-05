@@ -7,9 +7,9 @@ using System.Runtime.Serialization;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
-using Newtonsoft.Json;
 using ReactiveUI;
 using ReactiveUI.Legacy;
+using ThemeEditor.ViewModels.Serializer;
 
 namespace ThemeEditor.ViewModels
 {
@@ -23,6 +23,7 @@ namespace ThemeEditor.ViewModels
         private ThemeViewModel _defaultTheme;
         private IDisposable _themeObservable;
         private IDisposable _editorObservable;
+        private ViewModelsSerializer _serializer;
 
 #pragma warning disable CS0618
         [DataMember]
@@ -47,6 +48,11 @@ namespace ThemeEditor.ViewModels
             set { this.RaiseAndSetIfChanged(ref _defaultTheme, value); }
         }
 
+        public ThemeEditorViewModel()
+        {
+            _serializer = new ViewModelsSerializer();
+        }
+
         public string GetResource<T>(string name)
         {
             var assembly = typeof(T).GetTypeInfo().Assembly;
@@ -61,7 +67,7 @@ namespace ThemeEditor.ViewModels
         public void LoadFromJson(string json)
         {
 #pragma warning disable CS0618
-            var themes = Deserialize<ReactiveList<ThemeViewModel>>(json);
+            var themes = _serializer.Deserialize<ReactiveList<ThemeViewModel>>(json);
 #pragma warning restore CS0618
             Themes = themes;
             CurrentTheme = themes.FirstOrDefault();
@@ -81,7 +87,7 @@ namespace ThemeEditor.ViewModels
 
         public void SaveAsFile(string path)
         {
-            var json = Serialize(Themes);
+            var json = _serializer.Serialize(Themes);
             File.WriteAllText(path, json);
         }
 
@@ -175,94 +181,6 @@ namespace ThemeEditor.ViewModels
             {
                 ExportAsFile(result, CurrentTheme);
             }
-        }
-
-        private class ColorViewModelConverter : JsonConverter
-        {
-            public override bool CanConvert(Type objectType)
-            {
-                return objectType == typeof(ColorViewModel);
-            }
-
-            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-            {
-                switch (value as ColorViewModel)
-                {
-                    case ColorViewModel color:
-                        writer.WriteValue(color.ToHexString());
-                        break;
-                    default:
-                        throw new NotSupportedException($"The {value.GetType()} type is not supported.");
-                }
-            }
-
-            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-            {
-                if (objectType == typeof(ColorViewModel))
-                {
-                    return Color.Parse((string)reader.Value).FromColor();
-                }
-                throw new ArgumentException("objectType");
-            }
-        }
-
-        private class ThicknessViewModelConverter : JsonConverter
-        {
-            public override bool CanConvert(Type objectType)
-            {
-                return objectType == typeof(ThicknessViewModel);
-            }
-
-            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-            {
-                switch (value as ThicknessViewModel)
-                {
-                    case ThicknessViewModel thickness:
-                        writer.WriteValue(thickness.ToThickness().ToString());
-                        break;
-                    default:
-                        throw new NotSupportedException($"The {value.GetType()} type is not supported.");
-                }
-            }
-
-            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-            {
-                if (objectType == typeof(ThicknessViewModel))
-                {
-                    return Thickness.Parse((string)reader.Value).FromThickness();
-                }
-                throw new ArgumentException("objectType");
-            }
-        }
-
-        private string Serialize<T>(T value)
-        {
-            return JsonConvert.SerializeObject(
-                value,
-                new JsonSerializerSettings()
-                {
-                    Formatting = Formatting.Indented,
-                    Converters =
-                    {
-                        new ColorViewModelConverter(),
-                        new ThicknessViewModelConverter()
-                    }
-                });
-        }
-
-        private T Deserialize<T>(string json)
-        {
-            return JsonConvert.DeserializeObject<T>(
-                json,
-                new JsonSerializerSettings()
-                {
-                    Formatting = Formatting.Indented,
-                    Converters =
-                    {
-                        new ColorViewModelConverter(),
-                        new ThicknessViewModelConverter()
-                    }
-                });
         }
 
         private ColorViewModel GetColorResource(IResourceNode node, string key)
