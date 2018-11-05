@@ -7,7 +7,7 @@
              TextBlock.Foreground="{DynamicResource ThemeForegroundBrush}"
              TextBlock.FontSize="{DynamicResource FontSizeNormal}">
     <UserControl.Styles>
-        <StyleInclude Source="resm:ThemeEditor.Themes.ThemeEditor.xaml?assembly=ThemeEditor"/>
+        <StyleInclude Source="resm:ThemeEditor.Themes.BaseDark.xaml?assembly=ThemeEditor"/>
     </UserControl.Styles>
     <Grid ColumnDefinitions="*,8,300" Margin="8">
         <TabControl Grid.Column="0">
