@@ -1,13 +1,19 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ThemeEditor.Controls.ColorBlender;assembly=ThemeEditor.Controls.ColorBlender">
-    <Grid Name="layout" RowDefinitions="Auto,*,Auto,Auto,Auto,Auto,Auto" Margin="5">
-        <Grid ColumnDefinitions="*,*,*,*,*,*" Grid.Column="0" Grid.Row="0">
-            <TextBlock Text="Current Blend" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="5,2,5,2" HorizontalAlignment="Left" VerticalAlignment="Center" />
-            <TextBlock Text="algorithm:" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="2" Margin="5,2,5,2" HorizontalAlignment="Right" VerticalAlignment="Center" />
-            <DropDown x:Name="algorithm" Grid.Column="4" Grid.Row="0" Grid.ColumnSpan="2" Items="{Binding Algorithms}" SelectedItem="{Binding CurrentAlgorithm}"/>
-        </Grid>
-        <Grid x:Name="swatches" ColumnDefinitions="*,*,*,*,*,*" Grid.Row="1">
+    <Grid Name="layout" ColumnDefinitions="*,*,*,*,*,*" RowDefinitions="Auto,10,*,10,Auto,10,Auto" Margin="2">
+
+        <TextBlock Text="Current Blend" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="5,2,0,2" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <TextBlock Text="algorithm:" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="2" Margin="5,2,5,2" HorizontalAlignment="Right" VerticalAlignment="Center" />
+        <DropDown x:Name="algorithm" Grid.Column="4" Grid.Row="0" Grid.ColumnSpan="2" Margin="4,0,4,0" Items="{Binding Algorithms}" SelectedItem="{Binding CurrentAlgorithm}">
+            <DropDown.DataTemplates>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </DropDown.DataTemplates>
+        </DropDown>
+
+        <Grid x:Name="swatches" ColumnDefinitions="*,*,*,*,*,*" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="2">
             <local:Swatch x:Name="swatch1" Grid.Column="0" Margin="2" />
             <local:Swatch x:Name="swatch2" Grid.Column="1" Margin="2" />
             <local:Swatch x:Name="swatch3" Grid.Column="2" Margin="2" />
@@ -15,17 +21,16 @@
             <local:Swatch x:Name="swatch5" Grid.Column="4" Margin="2" />
             <local:Swatch x:Name="swatch6" Grid.Column="5" Margin="2" />
         </Grid>
-        <TextBlock Text="Edit Red / Green / Blue" Grid.Column="0" Grid.Row="2" Margin="5,2,5,2" HorizontalAlignment="Left" VerticalAlignment="Center" />
-        <Grid x:Name="colorsRGB" RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="70,40*,50,20,120,20" Grid.Row="3">
+        <Grid x:Name="colorsRGB" RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="70,40*,60,20,120,20" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="4">
             <TextBlock x:Name="inputLabelR" Text="Red" Grid.Column="0" Grid.Row="0" Margin="5,2,5,2" HorizontalAlignment="Left" VerticalAlignment="Center" />
             <TextBlock x:Name="inputLabelG" Text="Green" Grid.Column="0" Grid.Row="1" Margin="5,2,5,2" HorizontalAlignment="Left" VerticalAlignment="Center" />
             <TextBlock x:Name="inputLabelB" Text="Blue" Grid.Column="0" Grid.Row="2" Margin="5,2,5,2" HorizontalAlignment="Left" VerticalAlignment="Center" />
-            <Slider x:Name="sliderR" Grid.Column="1" Grid.Row="0" Margin="5,2,5,2" Value="0" Maximum="255" LargeChange="1" SmallChange="1" IsSnapToTickEnabled="True" />
-            <Slider x:Name="sliderG" Grid.Column="1" Grid.Row="1" Margin="5,2,5,2" Value="0" Maximum="255" LargeChange="1" SmallChange="1" IsSnapToTickEnabled="True" />
-            <Slider x:Name="sliderB" Grid.Column="1" Grid.Row="2" Margin="5,2,5,2" Value="0" Maximum="255" LargeChange="1" SmallChange="1" IsSnapToTickEnabled="True" />
-            <TextBox x:Name="inputR" Text="{Binding ElementName=sliderR, Path=Value, Mode=TwoWay}" Grid.Column="2" Grid.Row="0" Margin="5,2,5,2" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-            <TextBox x:Name="inputG" Text="{Binding ElementName=sliderG, Path=Value, Mode=TwoWay}"  Grid.Column="2" Grid.Row="1" Margin="5,2,5,2" TextAlignment="Center" VerticalAlignment="Center" />
-            <TextBox x:Name="inputB" Text="{Binding ElementName=sliderB, Path=Value, Mode=TwoWay}"  Grid.Column="2" Grid.Row="2" Margin="5,2,5,2" TextAlignment="Center" VerticalAlignment="Center" />
+            <Slider x:Name="sliderR" Grid.Column="1" Grid.Row="0" Margin="5,2,5,2" Value="0" Maximum="255" LargeChange="1" SmallChange="1" TickFrequency="1" IsSnapToTickEnabled="True" />
+            <Slider x:Name="sliderG" Grid.Column="1" Grid.Row="1" Margin="5,2,5,2" Value="0" Maximum="255" LargeChange="1" SmallChange="1" TickFrequency="1" IsSnapToTickEnabled="True" />
+            <Slider x:Name="sliderB" Grid.Column="1" Grid.Row="2" Margin="5,2,5,2" Value="0" Maximum="255" LargeChange="1" SmallChange="1" TickFrequency="1" IsSnapToTickEnabled="True" />
+            <TextBox x:Name="inputR" Text="{Binding ElementName=sliderR, Path=Value, Mode=TwoWay}" Grid.Column="2" Grid.Row="0" Margin="5,2,5,2" TextAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+            <TextBox x:Name="inputG" Text="{Binding ElementName=sliderG, Path=Value, Mode=TwoWay}" Grid.Column="2" Grid.Row="1" Margin="5,2,5,2" TextAlignment="Left" VerticalAlignment="Center" />
+            <TextBox x:Name="inputB" Text="{Binding ElementName=sliderB, Path=Value, Mode=TwoWay}" Grid.Column="2" Grid.Row="2" Margin="5,2,5,2" TextAlignment="Left" VerticalAlignment="Center" />
             <Grid x:Name="variationsRGB" RowDefinitions="*,*,*" ColumnDefinitions="*,*,*" Grid.Row="0" Grid.Column="4" Grid.RowSpan="3">
                 <Rectangle x:Name="rgbvar1" Cursor="Hand" Fill="Gray" Grid.Column="0" Grid.Row="0" Margin="22,2,22,2" Grid.ColumnSpan="2" />
                 <Rectangle x:Name="rgbvar2" Cursor="Hand" Fill="Gray" Grid.Column="1" Grid.Row="0" Margin="22,2,22,2" Grid.ColumnSpan="2" />
@@ -36,17 +41,16 @@
                 <Rectangle x:Name="rgbvar7" Cursor="Hand" Fill="Gray" Grid.Column="1" Grid.Row="2" Margin="22,2,22,2" Grid.ColumnSpan="2" />
             </Grid>
         </Grid>
-        <TextBlock Text="Edit Hue / Saturation / Lightness" Grid.Column="0" Grid.Row="4" Margin="5,2,5,2" HorizontalAlignment="Left" VerticalAlignment="Center" />
-        <Grid x:Name="colorsHSV" RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="70,40*,50,20,120,20" Grid.Row="5">
+        <Grid x:Name="colorsHSV" RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="70,40*,60,20,120,20" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="6">
             <TextBlock x:Name="inputLabelH" Text="Hue" Grid.Column="0" Grid.Row="0" Margin="5,2,5,2" HorizontalAlignment="Left" VerticalAlignment="Center" />
             <TextBlock x:Name="inputLabelS" Text="Saturation" Grid.Column="0" Grid.Row="1" Margin="5,2,5,2" HorizontalAlignment="Left" VerticalAlignment="Center" />
             <TextBlock x:Name="inputLabelV" Text="Lightness" Grid.Column="0" Grid.Row="2" Margin="5,2,5,2" HorizontalAlignment="Left" VerticalAlignment="Center" />
-            <Slider x:Name="sliderH" Grid.Column="1" Grid.Row="0" Margin="5,2,5,2" Value="0" Maximum="359" LargeChange="1" SmallChange="1" IsSnapToTickEnabled="True" />
-            <Slider x:Name="sliderS" Grid.Column="1" Grid.Row="1" Margin="5,2,5,2" Value="0" Maximum="100" LargeChange="1" SmallChange="1" IsSnapToTickEnabled="True" />
-            <Slider x:Name="sliderV" Grid.Column="1" Grid.Row="2" Margin="5,2,5,2" Value="0" Maximum="100" LargeChange="1" SmallChange="1" IsSnapToTickEnabled="True" />
-            <TextBox x:Name="inputH" Text="{Binding ElementName=sliderH, Path=Value, Mode=TwoWay}" Grid.Column="2" Grid.Row="0" Margin="5,2,5,2" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-            <TextBox x:Name="inputS" Text="{Binding ElementName=sliderS, Path=Value, Mode=TwoWay}"  Grid.Column="2" Grid.Row="1" Margin="5,2,5,2" TextAlignment="Center" VerticalAlignment="Center" />
-            <TextBox x:Name="inputV" Text="{Binding ElementName=sliderV, Path=Value, Mode=TwoWay}"  Grid.Column="2" Grid.Row="2" Margin="5,2,5,2" TextAlignment="Center" VerticalAlignment="Center" />
+            <Slider x:Name="sliderH" Grid.Column="1" Grid.Row="0" Margin="5,2,5,2" Value="0" Maximum="359" LargeChange="1" SmallChange="1" TickFrequency="0.5" IsSnapToTickEnabled="False" />
+            <Slider x:Name="sliderS" Grid.Column="1" Grid.Row="1" Margin="5,2,5,2" Value="0" Maximum="100" LargeChange="1" SmallChange="1" TickFrequency="0.5" IsSnapToTickEnabled="False" />
+            <Slider x:Name="sliderV" Grid.Column="1" Grid.Row="2" Margin="5,2,5,2" Value="0" Maximum="100" LargeChange="1" SmallChange="1" TickFrequency="0.5" IsSnapToTickEnabled="False" />
+            <TextBox x:Name="inputH" Text="{Binding ElementName=sliderH, Path=Value, Mode=TwoWay}" Grid.Column="2" Grid.Row="0" Margin="5,2,5,2" TextAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+            <TextBox x:Name="inputS" Text="{Binding ElementName=sliderS, Path=Value, Mode=TwoWay}" Grid.Column="2" Grid.Row="1" Margin="5,2,5,2" TextAlignment="Left" VerticalAlignment="Center" />
+            <TextBox x:Name="inputV" Text="{Binding ElementName=sliderV, Path=Value, Mode=TwoWay}" Grid.Column="2" Grid.Row="2" Margin="5,2,5,2" TextAlignment="Left" VerticalAlignment="Center" />
             <Grid x:Name="variationsHSV" RowDefinitions="*,*,*" ColumnDefinitions="*,*,*" Grid.Row="0" Grid.Column="4" Grid.RowSpan="3">
                 <Rectangle x:Name="hsvvar1" Cursor="Hand" Fill="Gray" Grid.Column="0" Grid.Row="0" Margin="2" />
                 <Rectangle x:Name="hsvvar2" Cursor="Hand" Fill="Gray" Grid.Column="1" Grid.Row="0" Margin="2" />
