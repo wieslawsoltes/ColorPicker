@@ -5,7 +5,7 @@ using ReactiveUI;
 namespace ThemeEditor.ViewModels
 {
     [DataContract]
-    public class ColorViewModel : ReactiveObject
+    public class ArgbColorViewModel : ReactiveObject, IColor
     {
         private byte _a;
         private byte _r;
@@ -77,14 +77,14 @@ namespace ThemeEditor.ViewModels
             }
         }
 
-        public ColorViewModel Clone()
+        public IColor Clone()
         {
-            return new ColorViewModel()
+            return new ArgbColorViewModel()
             {
-                A = this.A,
-                R = this.R,
-                G = this.G,
-                B = this.B
+                A = A,
+                R = R,
+                G = G,
+                B = B
             };
         }
     }

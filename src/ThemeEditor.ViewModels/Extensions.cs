@@ -14,14 +14,32 @@ namespace ThemeEditor
             return new SolidColorBrush(color);
         }
 
-        public static Color ToColor(this ColorViewModel color)
+        public static Color ToColor(this IColor color)
         {
-            return new Color(color.A, color.R, color.G, color.B);
+            switch (color)
+            {
+                case RgbColorViewModel rgb:
+                    return new Color(255, rgb.R, rgb.G, rgb.B);
+                case ArgbColorViewModel argb:
+                    return new Color(argb.A, argb.R, argb.G, argb.B);
+                default:
+                    throw new NotSupportedException($"Not supported color type {color.GetType()}.");
+            }
         }
 
-        public static ColorViewModel FromColor(this Color color)
+        public static RgbColorViewModel RgbFromColor(this Color color)
         {
-            return new ColorViewModel()
+            return new RgbColorViewModel()
+            {
+                R = color.R,
+                G = color.G,
+                B = color.B
+            };
+        }
+
+        public static ArgbColorViewModel ArgbFromColor(this Color color)
+        {
+            return new ArgbColorViewModel()
             {
                 A = color.A,
                 R = color.R,
@@ -30,25 +48,17 @@ namespace ThemeEditor
             };
         }
 
-        public static IBrush ToBrush(this ColorViewModel color)
+        public static IBrush ToBrush(this IColor color)
         {
-            return new SolidColorBrush(ToColor(color));
-        }
-
-        public static Thickness ToThickness(this ThicknessViewModel thickness)
-        {
-            return new Thickness(thickness.Left, thickness.Top, thickness.Right, thickness.Bottom);
-        }
-
-        public static ThicknessViewModel FromThickness(this Thickness thickness)
-        {
-            return new ThicknessViewModel()
+            switch (color)
             {
-                Left = thickness.Left,
-                Top = thickness.Top,
-                Right = thickness.Right,
-                Bottom = thickness.Bottom
-            };
+                case RgbColorViewModel rgb:
+                    return new SolidColorBrush(ToColor(color));
+                case ArgbColorViewModel argb:
+                    return new SolidColorBrush(ToColor(color));
+                default:
+                    throw new NotSupportedException($"Not supported color type {color.GetType()}.");
+            }
         }
 
         public static void FromTextString(this string value, out double left, out double top, out double right, out double bottom)
@@ -65,9 +75,9 @@ namespace ThemeEditor
             return $"{thickness.ToThickness()}";
         }
 
-        public static ColorViewModel FromHexString(this string value)
+        public static ArgbColorViewModel FromHexString(this string value)
         {
-            return Color.Parse(value).FromColor();
+            return Color.Parse(value).ArgbFromColor();
         }
 
         public static void FromHexString(this string value, out byte a, out byte r, out byte g, out byte b)
@@ -79,21 +89,65 @@ namespace ThemeEditor
             b = color.B;
         }
 
-        public static uint ToUint32(this ColorViewModel color)
+        public static uint ToUint32(this RgbColorViewModel color)
+        {
+            return ((uint)255 << 24) | ((uint)color.R << 16) | ((uint)color.G << 8) | (uint)color.B;
+        }
+
+        public static uint ToUint32(this ArgbColorViewModel color)
         {
             return ((uint)color.A << 24) | ((uint)color.R << 16) | ((uint)color.G << 8) | (uint)color.B;
         }
 
-        public static string ToHexString(this ColorViewModel color)
+        public static string ToHexString(this RgbColorViewModel color)
         {
-            uint argb = color.ToUint32();
+            return $"#{color.ToUint32():X8}";
+        }
+
+        public static string ToHexString(this ArgbColorViewModel color)
+        {
+            return $"#{color.ToUint32():X8}";
+        }
+
+        public static string ToHexString3(this IList<object> values)
+        {
+            uint argb = ((uint)255 << 24) | ((uint)(byte)values[0] << 16) | ((uint)(byte)values[1] << 8) | (uint)(byte)values[2];
             return $"#{argb:X8}";
         }
 
-        public static string ToHexString(this IList<object> values)
+        public static string ToHexString4(this IList<object> values)
         {
             uint argb = ((uint)(byte)values[0] << 24) | ((uint)(byte)values[1] << 16) | ((uint)(byte)values[2] << 8) | (uint)(byte)values[3];
             return $"#{argb:X8}";
+        }
+
+        public static string ToHexString(this IColor color)
+        {
+            switch (color)
+            {
+                case RgbColorViewModel rgb:
+                    return $"#{rgb.ToUint32():X8}";
+                case ArgbColorViewModel argb:
+                    return $"#{argb.ToUint32():X8}";
+                default:
+                    throw new NotSupportedException($"Not supported color type {color.GetType()}.");
+            }
+        }
+
+        public static Thickness ToThickness(this ThicknessViewModel thickness)
+        {
+            return new Thickness(thickness.Left, thickness.Top, thickness.Right, thickness.Bottom);
+        }
+
+        public static ThicknessViewModel FromThickness(this Thickness thickness)
+        {
+            return new ThicknessViewModel()
+            {
+                Left = thickness.Left,
+                Top = thickness.Top,
+                Right = thickness.Right,
+                Bottom = thickness.Bottom
+            };
         }
 
         public static string ToXaml(this ThemeViewModel theme)

@@ -4,18 +4,18 @@ using Newtonsoft.Json;
 
 namespace ThemeEditor.ViewModels.Serializer.Converters
 {
-    public class ColorViewModelConverter : JsonConverter
+    public class RgbColorViewModelConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {
-            return objectType == typeof(ColorViewModel);
+            return objectType == typeof(RgbColorViewModel);
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            switch (value as ColorViewModel)
+            switch (value)
             {
-                case ColorViewModel color:
+                case RgbColorViewModel color:
                     writer.WriteValue(color.ToHexString());
                     break;
                 default:
@@ -25,9 +25,9 @@ namespace ThemeEditor.ViewModels.Serializer.Converters
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            if (objectType == typeof(ColorViewModel))
+            if (objectType == typeof(RgbColorViewModel))
             {
-                return Color.Parse((string)reader.Value).FromColor();
+                return Color.Parse((string)reader.Value).RgbFromColor();
             }
             throw new ArgumentException("objectType");
         }

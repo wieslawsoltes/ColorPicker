@@ -20,7 +20,7 @@ namespace ThemeEditor.Converters
                         return AvaloniaProperty.UnsetValue;
                     }
                 }
-                return values.ToHexString();
+                return values.ToHexString4();
             }
             return AvaloniaProperty.UnsetValue;
         }

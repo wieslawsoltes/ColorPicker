@@ -183,9 +183,9 @@ namespace ThemeEditor.ViewModels
             }
         }
 
-        private ColorViewModel GetColorResource(IResourceNode node, string key)
+        private ArgbColorViewModel GetColorResource(IResourceNode node, string key)
         {
-            return ((Color)node.FindResource(key)).FromColor();
+            return ((Color)node.FindResource(key)).ArgbFromColor();
         }
 
         private ThicknessViewModel GetThicknessResource(IResourceNode node, string key)
@@ -430,7 +430,7 @@ namespace ThemeEditor.ViewModels
 
             return disposable;
 
-            void Observe(ReactiveObject value, Action<IResourceDictionary, ThemeViewModel> update)
+            void Observe(IReactiveNotifyPropertyChanged<IReactiveObject> value, Action<IResourceDictionary, ThemeViewModel> update)
             {
                 if (value != null)
                 {
@@ -460,8 +460,10 @@ namespace ThemeEditor.ViewModels
             {
                 CurrentTheme = defaultThem.Clone();
 #pragma warning disable CS0618
-                Themes = new ReactiveList<ThemeViewModel>();
-                Themes.Add(CurrentTheme);
+                Themes = new ReactiveList<ThemeViewModel>
+                {
+                    CurrentTheme
+                };
 #pragma warning restore CS0618
             }
             else

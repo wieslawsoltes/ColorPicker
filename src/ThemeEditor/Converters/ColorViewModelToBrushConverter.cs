@@ -11,7 +11,7 @@ namespace ThemeEditor.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is ColorViewModel color && targetType == typeof(IBrush))
+            if (value is ArgbColorViewModel color && targetType == typeof(IBrush))
             {
                 return color.ToBrush();
             }

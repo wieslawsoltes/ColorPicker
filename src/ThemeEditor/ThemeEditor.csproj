@@ -42,4 +42,13 @@
     <ProjectReference Include="..\ThemeEditor.ViewModels\ThemeEditor.ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Views\EditArgbColorView.xaml.cs">
+      <DependentUpon>EditArgbColorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\OverviewArgbColorView.xaml.cs">
+      <DependentUpon>OverviewArgbColorView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>

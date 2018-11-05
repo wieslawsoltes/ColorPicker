@@ -3,9 +3,9 @@ using Avalonia.Markup.Xaml;
 
 namespace ThemeEditor.Views
 {
-    public class EditColorView : UserControl
+    public class EditArgbColorView : UserControl
     {
-        public EditColorView()
+        public EditArgbColorView()
         {
             this.InitializeComponent();
         }
