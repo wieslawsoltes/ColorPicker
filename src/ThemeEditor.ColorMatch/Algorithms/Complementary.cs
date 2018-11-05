@@ -5,6 +5,8 @@ namespace ThemeEditor.ColorMatch.Algorithms
 {
     public class Complementary : IAlgorithm
     {
+        public string Name => "Complementary";
+
         public Blend Match(HSV hsv)
         {
             Blend outp = new Blend();

@@ -4,6 +4,8 @@ namespace ThemeEditor.ColorMatch.Algorithms
 {
     public class SingleHue : IAlgorithm
     {
+        public string Name => "Single Hue";
+
         public Blend Match(HSV hsv)
         {
             Blend outp = new Blend();

@@ -4,6 +4,8 @@ namespace ThemeEditor.ColorMatch.Algorithms
 {
     public class Classic : IAlgorithm
     {
+        public string Name => "Classic";
+
         public Blend Match(HSV hsv)
         {
             Blend outp = new Blend();

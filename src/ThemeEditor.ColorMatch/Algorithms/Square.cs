@@ -4,6 +4,8 @@ namespace ThemeEditor.ColorMatch.Algorithms
 {
     public class Square : IAlgorithm
     {
+        public string Name => "Square";
+
         public Blend Match(HSV hsv)
         {
             Blend outp = new Blend();

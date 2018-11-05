@@ -5,6 +5,8 @@ namespace ThemeEditor.ColorMatch.Algorithms
 {
     public class Analogue : IAlgorithm
     {
+        public string Name => "Analogue";
+
         public Blend Match(HSV hsv)
         {
             Blend outp = new Blend();

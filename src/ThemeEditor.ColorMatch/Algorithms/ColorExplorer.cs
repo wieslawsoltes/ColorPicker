@@ -5,6 +5,8 @@ namespace ThemeEditor.ColorMatch.Algorithms
 {
     public class ColorExplorer : IAlgorithm
     {
+        public string Name => "Color Explorer";
+
         public Blend Match(HSV hsv)
         {
             Blend outp = new Blend();

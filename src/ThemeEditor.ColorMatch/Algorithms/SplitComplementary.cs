@@ -4,6 +4,8 @@ namespace ThemeEditor.ColorMatch.Algorithms
 {
     public class SplitComplementary : IAlgorithm
     {
+        public string Name => "Split Complementary";
+
         public Blend Match(HSV hsv)
         {
             Blend outp = new Blend();
