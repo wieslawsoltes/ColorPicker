@@ -20,7 +20,7 @@ namespace ThemeEditor.Controls.ColorBlender.Converters
                         return AvaloniaProperty.UnsetValue;
                     }
                 }
-                return $"#{((byte)values[0]).ToString("X2")}{((byte)values[1]).ToString("X2")}{((byte)values[2]).ToString("X2")}";
+                return $"#FF{((byte)values[0]).ToString("X2")}{((byte)values[1]).ToString("X2")}{((byte)values[2]).ToString("X2")}";
             }
             return AvaloniaProperty.UnsetValue;
         }
