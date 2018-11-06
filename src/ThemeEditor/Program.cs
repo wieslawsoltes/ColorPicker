@@ -12,20 +12,22 @@ namespace ThemeEditor
         [STAThread]
         static void Main(string[] args)
         {
-            var editor = new ThemeEditorViewModel();
+            ThemeEditorViewModel vm = default;
 
-            if (File.Exists(s_ThemesPath))
+            BuildAvaloniaApp().BeforeStarting(builder =>
             {
-                editor.LoadFromFile(s_ThemesPath);
-            }
-            else
-            {
-                editor.LoadFromResource<App>("ThemeEditor.Themes.Themes.themes");
-            }
+                vm = new ThemeEditorViewModel();
+                if (File.Exists(s_ThemesPath))
+                {
+                    vm.LoadFromFile(s_ThemesPath);
+                }
+                else
+                {
+                    vm.LoadFromResource<App>("ThemeEditor.Themes.Themes.themes");
+                }
+            }).Start<MainWindow>(() => vm);
 
-            BuildAvaloniaApp().Start<MainWindow>(() => editor);
-
-            editor.SaveAsFile(s_ThemesPath);
+            vm.SaveAsFile(s_ThemesPath);
         }
 
         public static AppBuilder BuildAvaloniaApp()
