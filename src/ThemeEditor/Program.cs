@@ -7,6 +7,7 @@ namespace ThemeEditor
 {
     static class Program
     {
+        static string s_ThemesResource = "ThemeEditor.Themes.Themes.themes";
         static string s_ThemesPath = "Themes.themes";
 
         [STAThread]
@@ -23,7 +24,7 @@ namespace ThemeEditor
                 }
                 else
                 {
-                    vm.LoadFromResource<App>("ThemeEditor.Themes.Themes.themes");
+                    vm.LoadFromResource<App>(s_ThemesResource);
                 }
             }).Start<MainWindow>(() => vm);
 
