@@ -26,7 +26,7 @@ namespace ThemeEditor
             _colorPicker = this.Find<ColorPicker>("colorPicker");
             _colorBlender = this.Find<ColorBlender>("colorBlender");
 
-            _colorBlender.DataContext = new ColorMatchViewModel(213, 46, 49);
+            _colorBlender.DataContext = new ColorMatchViewModel(199, 95, 62);
         }
 
         private void InitializeComponent()
