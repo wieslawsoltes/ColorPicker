@@ -15,12 +15,12 @@
                     </DropDown>
                     <TextBox Text="{Binding CurrentTheme.Name, Mode=TwoWay}" Classes="left"/>
                     <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto">
-                        <Button Content="Reset" Command="{Binding ResetCommand}" Grid.Column="0" Grid.Row="0" Classes="editor"/>
-                        <Button Content="Remove" Command="{Binding RemoveCommand}" Grid.Column="1" Grid.Row="0" Classes="editor"/>
-                        <Button Content="Add" Command="{Binding AddCommand}" Grid.Column="2" Grid.Row="0" Classes="editor"/>
-                        <Button Content="Load" Command="{Binding LoadCommand}" Grid.Column="0" Grid.Row="1" Classes="editor"/>
-                        <Button Content="Save" Command="{Binding SaveCommand}" Grid.Column="1" Grid.Row="1" Classes="editor"/>
-                        <Button Content="Export" Command="{Binding ExportCommand}" Grid.Column="2" Grid.Row="1" Classes="editor"/>
+                        <Button Content="Reset" Command="{Binding ResetThemeCommand}" Grid.Column="0" Grid.Row="0" Classes="editor"/>
+                        <Button Content="Remove" Command="{Binding RemoveThemeCommand}" Grid.Column="1" Grid.Row="0" Classes="editor"/>
+                        <Button Content="Add" Command="{Binding AddThemeCommand}" Grid.Column="2" Grid.Row="0" Classes="editor"/>
+                        <Button Content="Load" Command="{Binding LoadThemesCommand}" Grid.Column="0" Grid.Row="1" Classes="editor"/>
+                        <Button Content="Save" Command="{Binding SaveThemesCommand}" Grid.Column="1" Grid.Row="1" Classes="editor"/>
+                        <Button Content="Export" Command="{Binding ExportThemeCommand}" Grid.Column="2" Grid.Row="1" Classes="editor"/>
                     </Grid>
                 </StackPanel>
             </TabItem>

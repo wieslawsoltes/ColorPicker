@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive.Disposables;
 using System.Reflection;
 using System.Runtime.Serialization;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
@@ -48,9 +49,27 @@ namespace ThemeEditor.ViewModels
             set { this.RaiseAndSetIfChanged(ref _defaultTheme, value); }
         }
 
+        public ReactiveCommand ResetThemeCommand { get; }
+
+        public ReactiveCommand RemoveThemeCommand { get; }
+
+        public ReactiveCommand AddThemeCommand { get; }
+
+        public ReactiveCommand LoadThemesCommand { get; }
+
+        public ReactiveCommand SaveThemesCommand { get; }
+
+        public ReactiveCommand ExportThemeCommand { get; }
+
         public ThemeEditorViewModel()
         {
             _serializer = new ViewModelsSerializer();
+            ResetThemeCommand = ReactiveCommand.Create(ResetTheme);
+            RemoveThemeCommand = ReactiveCommand.Create(RemoveTheme);
+            AddThemeCommand = ReactiveCommand.Create(AddTheme);
+            LoadThemesCommand = ReactiveCommand.CreateFromTask(LoadThemes);
+            SaveThemesCommand = ReactiveCommand.CreateFromTask(SaveThemes);
+            ExportThemeCommand = ReactiveCommand.CreateFromTask(ExportTheme);
         }
 
         public string GetResource<T>(string name)
@@ -122,17 +141,17 @@ namespace ThemeEditor.ViewModels
             CurrentTheme = theme;
         }
 
-        public void ResetCommand()
+        public void ResetTheme()
         {
             ResetTheme(DefaultTheme.Clone());
         }
 
-        public void RemoveCommand()
+        public void RemoveTheme()
         {
             RemoveTheme(CurrentTheme);
         }
 
-        public void AddCommand()
+        public void AddTheme()
         {
             var theme = Themes.Count == 0 || CurrentTheme == null ? DefaultTheme.Clone() : CurrentTheme.Clone();
             if (Themes.Count > 0 && Themes.Count(x => x.Name == theme.Name) > 0)
@@ -142,7 +161,7 @@ namespace ThemeEditor.ViewModels
             AddTheme(theme);
         }
 
-        public async void LoadCommand()
+        public async Task LoadThemes()
         {
             var dlg = new OpenFileDialog() { Title = "Load" };
             dlg.Filters.Add(new FileDialogFilter() { Name = "Themes", Extensions = { "themes" } });
@@ -155,7 +174,7 @@ namespace ThemeEditor.ViewModels
             }
         }
 
-        public async void SaveCommand()
+        public async Task SaveThemes()
         {
             var dlg = new SaveFileDialog() { Title = "Save" };
             dlg.Filters.Add(new FileDialogFilter() { Name = "Themes", Extensions = { "themes" } });
@@ -169,7 +188,7 @@ namespace ThemeEditor.ViewModels
             }
         }
 
-        public async void ExportCommand()
+        public async Task ExportTheme()
         {
             var dlg = new SaveFileDialog() { Title = "Save" };
             dlg.Filters.Add(new FileDialogFilter() { Name = "Xaml", Extensions = { "xaml" } });
