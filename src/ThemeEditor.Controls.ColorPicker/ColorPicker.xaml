@@ -93,6 +93,18 @@
                         <GradientStop Offset="1" Color="#FF000000" />
                     </LinearGradientBrush>
                 </Grid.Background>
+                <Canvas Name="canvas" Background="Transparent">
+                    <Thumb Name="thumb" Canvas.Left="50" Canvas.Top="50" Margin="-5.5,-5.5,0,0">
+                        <Thumb.Template>
+                            <ControlTemplate>
+                                <Grid Background="Transparent">
+                                    <Ellipse Width="11" Height="11" Stroke="#FFFFFFFF" StrokeThickness="1"/>
+                                    <Ellipse Width="9" Height="9" Stroke="#FF000000" StrokeThickness="1"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Thumb.Template>
+                    </Thumb>
+                </Canvas>
             </Grid>
         </Grid>
         <Slider x:Name="hueSlider" Grid.Column="2" Minimum="0" Maximum="359" SmallChange="1" LargeChange="30" IsSnapToTickEnabled="False" TickFrequency="0.0" Value="0" Orientation="Vertical" Classes="hue"/>
