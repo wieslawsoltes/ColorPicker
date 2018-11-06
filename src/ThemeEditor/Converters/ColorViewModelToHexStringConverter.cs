@@ -21,7 +21,7 @@ namespace ThemeEditor.Converters
         {
             if (value is string s && targetType == typeof(ArgbColorViewModel))
             {
-                return s.FromHexString();
+                return s.ArgbFromHexString();
             }
             return AvaloniaProperty.UnsetValue;
         }

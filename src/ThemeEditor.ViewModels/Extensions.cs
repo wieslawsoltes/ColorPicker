@@ -75,7 +75,12 @@ namespace ThemeEditor
             return $"{thickness.ToThickness()}";
         }
 
-        public static ArgbColorViewModel FromHexString(this string value)
+        public static RgbColorViewModel RgbFromHexString(this string value)
+        {
+            return Color.Parse(value).RgbFromColor();
+        }
+
+        public static ArgbColorViewModel ArgbFromHexString(this string value)
         {
             return Color.Parse(value).ArgbFromColor();
         }
