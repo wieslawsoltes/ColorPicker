@@ -1,89 +1,20 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:converters="clr-namespace:ThemeEditor.Controls.ColorPicker.Converters;assembly=ThemeEditor.Controls.ColorPicker"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
              d:DesignHeight="256" d:DesignWidth="256">
     <UserControl.Resources>
-        <converters:HueToColorConverter x:Key="HueToColorConverter"/>
+        <Color x:Key="HueColor">#FFFF0000</Color>
+        <SolidColorBrush x:Key="ColorBrush" Color="#FFFF0000"/>
     </UserControl.Resources>
-    <UserControl.Styles>
-        <Style Selector="Slider.hue:vertical">
-            <Setter Property="Template">
-                <ControlTemplate>
-                    <Grid Background="{TemplateBinding Background}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Border Name="TrackBackground" Grid.Column="1"/>
-                        <Track Name="PART_Track" Margin="0,-7,0,-7" Grid.Column="1" Orientation="Vertical">
-                            <Track.DecreaseButton>
-                                <RepeatButton Name="PART_DecreaseButton" Classes="repeattrack" />
-                            </Track.DecreaseButton>
-                            <Track.IncreaseButton>
-                                <RepeatButton Name="PART_IncreaseButton" Classes="repeattrack" />
-                            </Track.IncreaseButton>
-                            <Thumb MinWidth="30">
-                                <Thumb.Template>
-                                    <ControlTemplate>
-                                        <Grid Background="Transparent">
-                                            <Path Fill="#FF000000" Data="M 0,0 L 7,7 L 0,14 Z" />
-                                            <Path Fill="#FF000000" Data="M 7,0 L 0,7 L 7,14 Z" HorizontalAlignment="Right" />
-                                        </Grid> 
-                                    </ControlTemplate>
-                                </Thumb.Template>
-                            </Thumb>
-                        </Track>
-                    </Grid>
-                </ControlTemplate>
-            </Setter>
-        </Style>
-        <Style Selector="Slider.hue /template/ Track#PART_Track">
-            <Setter Property="Minimum" Value="{TemplateBinding Minimum}"/>
-            <Setter Property="Maximum" Value="{TemplateBinding Maximum}"/>
-            <Setter Property="Value" Value="{TemplateBinding Value, Mode=TwoWay}"/>
-        </Style>
-        <Style Selector="Slider.hue /template/ Border#TrackBackground">
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="Background">
-                <Setter.Value>
-                    <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
-                        <GradientStop Color="#FFFF0000" Offset="0.0" />
-                        <GradientStop Color="#FFFFFF00" Offset="0.16666666667" />
-                        <GradientStop Color="#FF00FF00" Offset="0.33333333333" />
-                        <GradientStop Color="#FF00FFFF" Offset="0.5" />
-                        <GradientStop Color="#FF0000FF" Offset="0.66666666667" />
-                        <GradientStop Color="#FFFF00FF" Offset="0.83333333333" />
-                        <GradientStop Color="#FFFF0000" Offset="1.0" />
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style Selector="Slider.hue /template/ RepeatButton.repeattrack">
-            <Setter Property="Background" Value="Purple"/>
-            <Setter Property="Foreground" Value="Pink"/>
-            <Setter Property="Template">
-                <ControlTemplate>
-                    <Border Background="Transparent" />
-                </ControlTemplate>
-            </Setter>
-        </Style>
-    </UserControl.Styles>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="3"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
+    <Grid ColumnDefinitions="*,3,Auto" RowDefinitions="*,3,Auto">
+        <Grid Grid.Column="0" Grid.Row="0">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0%,50%" EndPoint="100%,50%">
                     <GradientStop Offset="0" Color="#FFFFFFFF"/>
-                    <GradientStop Offset="1" Color="{Binding #hueSlider.Value, Converter={StaticResource HueToColorConverter}}" />
+                    <GradientStop Offset="1" Color="{DynamicResource HueColor}"/>
                 </LinearGradientBrush>
             </Grid.Background>
             <Grid>
@@ -93,8 +24,8 @@
                         <GradientStop Offset="1" Color="#FF000000" />
                     </LinearGradientBrush>
                 </Grid.Background>
-                <Canvas Name="canvas" Background="Transparent">
-                    <Thumb Name="thumb" Canvas.Left="50" Canvas.Top="50" Margin="-5.5,-5.5,0,0">
+                <Canvas Name="colorCanvas" Background="Transparent">
+                    <Thumb Name="colorThumb" Canvas.Left="50" Canvas.Top="50" Margin="-5.5,-5.5,0,0">
                         <Thumb.Template>
                             <ControlTemplate>
                                 <Grid Background="Transparent">
@@ -107,6 +38,33 @@
                 </Canvas>
             </Grid>
         </Grid>
-        <Slider x:Name="hueSlider" Grid.Column="2" Minimum="0" Maximum="359" SmallChange="1" LargeChange="30" IsSnapToTickEnabled="False" TickFrequency="0.0" Value="0" Orientation="Vertical" Classes="hue"/>
+        <Grid Grid.Column="2" Grid.Row="0">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+                    <GradientStop Color="#FFFF0000" Offset="0.0" />
+                    <GradientStop Color="#FFFFFF00" Offset="0.16666666667" />
+                    <GradientStop Color="#FF00FF00" Offset="0.33333333333" />
+                    <GradientStop Color="#FF00FFFF" Offset="0.5" />
+                    <GradientStop Color="#FF0000FF" Offset="0.66666666667" />
+                    <GradientStop Color="#FFFF00FF" Offset="0.83333333333" />
+                    <GradientStop Color="#FFFF0000" Offset="1.0" />
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Canvas Name="hueCanvas" Background="Transparent" Width="30">
+                <Thumb Name="hueThumb" Width="30" Canvas.Left="0" Canvas.Top="50" Margin="0,-7,0,-7">
+                    <Thumb.Template>
+                        <ControlTemplate>
+                            <Grid Background="Transparent">
+                                <Path Fill="#FF000000" Data="M 0,0 L 7,7 L 0,14 Z" />
+                                <Path Fill="#FF000000" Data="M 7,0 L 0,7 L 7,14 Z" HorizontalAlignment="Right" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Thumb.Template>
+                </Thumb>
+            </Canvas>
+        </Grid>
+        <Grid Grid.Column="0" Grid.Row="2">
+            <Rectangle Fill="{DynamicResource ColorBrush}" Height="30"/>
+        </Grid>
     </Grid>
 </UserControl>
