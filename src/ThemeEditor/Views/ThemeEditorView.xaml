@@ -3,7 +3,7 @@
              xmlns:local="clr-namespace:ThemeEditor.Views;assembly=ThemeEditor"
              xmlns:vm="clr-namespace:ThemeEditor.ViewModels;assembly=ThemeEditor.ViewModels">
     <Grid ColumnDefinitions="*" RowDefinitions="Auto,*">
-        <TabControl Grid.Row="0" Classes="default">
+        <TabControl Grid.Row="0" Classes="editor">
             <TabItem Header="Themes">
                 <StackPanel Spacing="2">
                     <DropDown Items="{Binding Themes}" SelectedItem="{Binding CurrentTheme, Mode=TwoWay}" Classes="editor">
@@ -15,17 +15,17 @@
                     </DropDown>
                     <TextBox Text="{Binding CurrentTheme.Name, Mode=TwoWay}" Classes="left"/>
                     <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto">
-                        <Button Content="Reset" Command="{Binding ResetCommand}" Grid.Column="0" Grid.Row="0" Classes="default"/>
-                        <Button Content="Remove" Command="{Binding RemoveCommand}" Grid.Column="1" Grid.Row="0" Classes="default"/>
-                        <Button Content="Add" Command="{Binding AddCommand}" Grid.Column="2" Grid.Row="0" Classes="default"/>
-                        <Button Content="Load" Command="{Binding LoadCommand}" Grid.Column="0" Grid.Row="1" Classes="default"/>
-                        <Button Content="Save" Command="{Binding SaveCommand}" Grid.Column="1" Grid.Row="1" Classes="default"/>
-                        <Button Content="Export" Command="{Binding ExportCommand}" Grid.Column="2" Grid.Row="1" Classes="default"/>
+                        <Button Content="Reset" Command="{Binding ResetCommand}" Grid.Column="0" Grid.Row="0" Classes="editor"/>
+                        <Button Content="Remove" Command="{Binding RemoveCommand}" Grid.Column="1" Grid.Row="0" Classes="editor"/>
+                        <Button Content="Add" Command="{Binding AddCommand}" Grid.Column="2" Grid.Row="0" Classes="editor"/>
+                        <Button Content="Load" Command="{Binding LoadCommand}" Grid.Column="0" Grid.Row="1" Classes="editor"/>
+                        <Button Content="Save" Command="{Binding SaveCommand}" Grid.Column="1" Grid.Row="1" Classes="editor"/>
+                        <Button Content="Export" Command="{Binding ExportCommand}" Grid.Column="2" Grid.Row="1" Classes="editor"/>
                     </Grid>
                 </StackPanel>
             </TabItem>
         </TabControl>
-        <TabControl Grid.Row="1" Classes="default">
+        <TabControl Grid.Row="1" Classes="editor">
             <TabItem Header="Overview">
                 <ScrollViewer>
                     <local:OverviewView/>

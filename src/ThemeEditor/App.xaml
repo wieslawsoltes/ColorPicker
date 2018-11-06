@@ -25,14 +25,13 @@
         </Style>
         <Style Selector="Border.preview">
             <Setter Property="Background" Value="{DynamicResource ColorCheckerBoard}"/>
-            <!--<Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}"/>-->
             <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
             <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
         </Style>
         <Style Selector="Border.thickness">
             <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
         </Style>
-        <Style Selector="Button.default">
+        <Style Selector="Button.editor">
             <Setter Property="Margin" Value="2"/>
         </Style>
         <Style Selector="ContentControl.editor">
@@ -44,8 +43,9 @@
         <Style Selector="DropDown.editor">
             <Setter Property="Margin" Value="2"/>
         </Style>
-        <Style Selector="Expander.default">
+        <Style Selector="Expander.editor">
             <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="IsExpanded" Value="False"/>
         </Style>
         <Style Selector="Slider.slider">
             <Setter Property="Orientation" Value="Horizontal"/>
@@ -55,8 +55,11 @@
             <Setter Property="TickFrequency" Value="0.1"/>
             <Setter Property="Margin" Value="2"/>
         </Style>
-        <Style Selector="TabControl.default">
+        <Style Selector="TabControl.editor">
             <Setter Property="Margin" Value="2"/>
+        </Style>
+        <Style Selector="TabControl.main">
+            <Setter Property="Margin" Value="0"/>
         </Style>
         <Style Selector="TextBlock.left">
             <Setter Property="TextAlignment" Value="Left"/>

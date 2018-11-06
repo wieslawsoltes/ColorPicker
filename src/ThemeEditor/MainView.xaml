@@ -10,7 +10,7 @@
         <StyleInclude Source="resm:ThemeEditor.Themes.BaseDark.xaml?assembly=ThemeEditor"/>
     </UserControl.Styles>
     <Grid ColumnDefinitions="*,8,300" Margin="8">
-        <TabControl Grid.Column="0">
+        <TabControl Grid.Column="0" Classes="main">
             <TabItem Header="Preview">
                 <Border Classes="preview">
                     <views:ThemePreviewView x:Name="previewView"/>
