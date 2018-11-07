@@ -19,6 +19,7 @@
     <Application.Styles>
         <StyleInclude Source="resm:Avalonia.Themes.Default.DefaultTheme.xaml?assembly=Avalonia.Themes.Default"/>
         <StyleInclude Source="resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default"/>
+        <StyleInclude Source="resm:ThemeEditor.Controls.ColorPicker.ColorPicker.xaml?assembly=ThemeEditor.Controls.ColorPicker"/>
         <!-- TODO: Change ContentControl.themed to UserControl.themed when included in Avalonia release. -->
         <Style Selector="ContentControl.themed">
             <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}"/>
