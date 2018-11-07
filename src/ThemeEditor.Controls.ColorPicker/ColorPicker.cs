@@ -211,7 +211,7 @@ namespace ThemeEditor.Controls.ColorPicker
         private void UpdateThumbs()
         {
             double hueX = 0;
-            double hueY = (Hue * _hueCanvas.Bounds.Height) / 359.0;
+            double hueY = (Hue * _hueCanvas.Bounds.Height) / 360.0;
 
             double colorX = (Saturation * _colorCanvas.Bounds.Width) / 100.0;
             double colorY = _colorCanvas.Bounds.Height - ((Value * _colorCanvas.Bounds.Height) / 100.0);
@@ -227,7 +227,7 @@ namespace ThemeEditor.Controls.ColorPicker
         private void UpdateHueColor()
         {
             double topHue = Canvas.GetTop(_hueThumb);
-            double hue = (topHue * 359.0) / _hueCanvas.Bounds.Height;
+            double hue = (topHue * 360.0) / _hueCanvas.Bounds.Height;
 
             Hue = hue;
             HueColor = ColorFromHue(hue);
@@ -240,7 +240,7 @@ namespace ThemeEditor.Controls.ColorPicker
             double topColor = Canvas.GetTop(_colorThumb);
             double leftAlpha = Canvas.GetLeft(_alphaThumb);
 
-            double h = (topHue * 359.0) / _hueCanvas.Bounds.Height;
+            double h = (topHue * 360.0) / _hueCanvas.Bounds.Height;
             double s = (leftColor * 100.0) / _colorCanvas.Bounds.Width;
             double v = 100.0 - ((topColor * 100.0) / _colorCanvas.Bounds.Height);
             double a = (leftAlpha * 100.0) / _alphaCanvas.Bounds.Width;

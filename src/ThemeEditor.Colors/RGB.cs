@@ -44,7 +44,7 @@ namespace ThemeEditor.Colors
             double S = default;
             double V = default;
 
-            var m = r;
+            double m = r;
 
             if (g < m)
             {
@@ -56,7 +56,7 @@ namespace ThemeEditor.Colors
                 m = b;
             }
 
-            var v = r;
+            double v = r;
 
             if (g > v)
             {
@@ -68,8 +68,8 @@ namespace ThemeEditor.Colors
                 v = b;
             }
 
-            var value = 100 * v / 255;
-            var delta = v - m;
+            double value = 100 * v / 255;
+            double delta = v - m;
 
             if (v == 0.0)
             {

@@ -50,45 +50,48 @@ namespace ThemeEditor.Colors
                 return new RGB(R, G, B);
             }
 
-            s = s / 100;
-            v = v / 100;
-            h /= 60;
+            double hh = h;
+            double ss = s / 100;
+            double vv = v / 100;
+            if (hh >= 360.0)
+                hh = 0.0;
+            hh /= 60;
 
-            var i = Math.Floor(h);
-            var f = h - i;
-            var p = v * (1 - s);
-            var q = v * (1 - s * f);
-            var t = v * (1 - s * (1 - f));
+            long i = (long)hh;
+            double ff = hh - i;
+            double p = vv * (1.0 - ss);
+            double q = vv * (1.0 - ss * ff);
+            double t = vv * (1.0 - ss * (1.0 - ff));
 
             switch ((int)i)
             {
                 case 0:
-                    R = v;
+                    R = vv;
                     G = t;
                     B = p;
                     break;
                 case 1:
                     R = q;
-                    G = v;
+                    G = vv;
                     B = p;
                     break;
                 case 2:
                     R = p;
-                    G = v;
+                    G = vv;
                     B = t;
                     break;
                 case 3:
                     R = p;
                     G = q;
-                    B = v;
+                    B = vv;
                     break;
                 case 4:
                     R = t;
                     G = p;
-                    B = v;
+                    B = vv;
                     break;
                 default:
-                    R = v;
+                    R = vv;
                     G = p;
                     B = q;
                     break;
