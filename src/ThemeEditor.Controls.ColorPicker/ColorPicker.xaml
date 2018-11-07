@@ -59,11 +59,36 @@
                     </Canvas>
                 </Grid>
                 <Grid Grid.Column="0" Grid.Row="2">
-                    <Rectangle Height="20">
-                        <Rectangle.Fill>
+                    <Grid.Background>
+                        <VisualBrush TileMode="Tile" Stretch="None" AlignmentX="Left" AlignmentY="Top" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
+                            <VisualBrush.Visual>
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel Orientation="Vertical">
+                                        <Rectangle Width="10" Height="10" Fill="DarkGray"/>
+                                        <Rectangle Width="10" Height="10" Fill="LightGray"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical">
+                                        <Rectangle Width="10" Height="10" Fill="LightGray"/>
+                                        <Rectangle Width="10" Height="10" Fill="DarkGray"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Grid.Background>
+                    <Canvas Name="PART_AlphaCanvas" Height="20">
+                        <Canvas.Background>
                             <SolidColorBrush Color="{Binding Color, RelativeSource={RelativeSource TemplatedParent}}"/>
-                        </Rectangle.Fill>
-                    </Rectangle>
+                        </Canvas.Background>
+                        <Thumb Name="PART_AlphaThumb" Height="20" Canvas.Left="0" Canvas.Top="0" Margin="-5,0,-5,0">
+                            <Thumb.Template>
+                                <ControlTemplate>
+                                    <Grid Background="Transparent">
+                                        <Path Fill="#FF000000" Data="M 0,9 L 0,4 L 5,0 L 10,4 L 10,9 Z" VerticalAlignment="Bottom" />
+                                    </Grid>
+                                </ControlTemplate>
+                            </Thumb.Template>
+                        </Thumb>
+                    </Canvas>
                 </Grid>
             </Grid>
         </ControlTemplate>

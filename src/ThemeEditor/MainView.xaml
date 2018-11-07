@@ -18,8 +18,18 @@
                 <TextBox x:Name="exportText" DataContext="{Binding CurrentTheme}" Classes="export"/>
             </TabItem>
             <TabItem Header="ColorPicker">
-                <Grid>
-                    <cp:ColorPicker x:Name="colorPicker" Width="256" Height="256"/>
+                <Grid ColumnDefinitions="*,Auto">
+                    <cp:ColorPicker x:Name="colorPicker" Grid.Column="0" Hue="180" Saturation="50" Value="50" Alpha="75" Margin="2"/>
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,50" Grid.Column="1" Margin="2">
+                        <TextBlock Text="Hue" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Margin="2"/>
+                        <TextBox Text="{Binding #colorPicker.Hue, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" Margin="2"/>
+                        <TextBlock Text="Saturation" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Margin="2"/>
+                        <TextBox Text="{Binding #colorPicker.Saturation, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" Margin="2"/>
+                        <TextBlock Text="Value" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Margin="2"/>
+                        <TextBox Text="{Binding #colorPicker.Value, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" Margin="2"/>
+                        <TextBlock Text="Alpha" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" Margin="2"/>
+                        <TextBox Text="{Binding #colorPicker.Alpha, Mode=TwoWay}" Grid.Row="3" Grid.Column="1" Margin="2"/>
+                    </Grid>
                 </Grid>
             </TabItem>
             <TabItem Header="ColorBlender">
