@@ -130,31 +130,26 @@ namespace ThemeEditor.Controls.ColorPicker
             return Math.Min(Math.Max(val, min), max);
         }
 
-        private void MoveColorThumb(double x, double y)
+        private void MoveThumb(Canvas canvas, Thumb thumb, double x, double y)
         {
-            double left = Clamp(x, 0, _colorCanvas.Bounds.Width);
-            double top = Clamp(y, 0, _colorCanvas.Bounds.Height);
-            Canvas.SetLeft(_colorThumb, left);
-            Canvas.SetTop(_colorThumb, top);
-        }
-
-        private void MoveHueThumb(double x, double y)
-        {
-            double top = Clamp(y, 0, _hueCanvas.Bounds.Height);
-            Canvas.SetTop(_hueThumb, top);
+            double left = Clamp(x, 0, canvas.Bounds.Width);
+            double top = Clamp(y, 0, canvas.Bounds.Height);
+            Canvas.SetLeft(thumb, left);
+            Canvas.SetTop(thumb, top);
         }
 
         private void UpdateThumbs()
         {
-            HSV hsv = new RGB(HueColor.R, HueColor.G, HueColor.B).ToHSV();
-            double x = (hsv.S * _colorCanvas.Bounds.Width) / 100.0;
-            double y = _colorCanvas.Bounds.Height - ((hsv.V * _colorCanvas.Bounds.Height) / 100.0);
+            HSV hsvHueColor = new RGB(HueColor.R, HueColor.G, HueColor.B).ToHSV();
+            double hueX = 0;
+            double hueY = (hsvHueColor.H * _hueCanvas.Bounds.Height) / 359.0;
 
-            MoveHueThumb(0, (hsv.H * _hueCanvas.Bounds.Height) / 359);
-            MoveColorThumb(x, y);
+            HSV hsvColor = new RGB(Color.R, Color.G, Color.B).ToHSV();
+            double colorX = (hsvColor.S * _colorCanvas.Bounds.Width) / 100.0;
+            double colorY = _colorCanvas.Bounds.Height - ((hsvColor.V * _colorCanvas.Bounds.Height) / 100.0);
 
-            UpdateColor();
-            UpdateHueColor();
+            MoveThumb(_hueCanvas, _hueThumb, hueX, hueY);
+            MoveThumb(_colorCanvas, _colorThumb, colorX, colorY);
         }
 
         private void UpdateHueColor()
@@ -168,14 +163,14 @@ namespace ThemeEditor.Controls.ColorPicker
         private void UpdateColor()
         {
             double topHue = Canvas.GetTop(_hueThumb);
-            double hue = (topHue * 359.0) / _hueCanvas.Bounds.Height;
-
             double leftColor = Canvas.GetLeft(_colorThumb);
             double topColor = Canvas.GetTop(_colorThumb);
-            double saturation = (leftColor * 100.0) / _colorCanvas.Bounds.Width;
-            double lightness = 100.0 - ((topColor * 100.0) / _colorCanvas.Bounds.Height);
 
-            Color = ColorFromHSV(hue, saturation, lightness);
+            double h = (topHue * 359.0) / _hueCanvas.Bounds.Height;
+            double s = (leftColor * 100.0) / _colorCanvas.Bounds.Width;
+            double v = 100.0 - ((topColor * 100.0) / _colorCanvas.Bounds.Height);
+
+            Color = ColorFromHSV(h, s, v);
         }
 
         private void ColorCanvas_PointerPressed(object sender, PointerPressedEventArgs e)
@@ -184,7 +179,7 @@ namespace ThemeEditor.Controls.ColorPicker
             {
                 var position = e.GetPosition(_colorCanvas);
 
-                MoveColorThumb(position.X, position.Y);
+                MoveThumb(_colorCanvas, _colorThumb, position.X, position.Y);
 
                 UpdateColor();
                 UpdateHueColor();
@@ -207,7 +202,7 @@ namespace ThemeEditor.Controls.ColorPicker
             {
                 var position = e.GetPosition(_colorCanvas);
 
-                MoveColorThumb(position.X, position.Y);
+                MoveThumb(_colorCanvas, _colorThumb, position.X, position.Y);
 
                 UpdateColor();
                 UpdateHueColor();
@@ -219,7 +214,7 @@ namespace ThemeEditor.Controls.ColorPicker
             double left = Canvas.GetLeft(_colorThumb);
             double top = Canvas.GetTop(_colorThumb);
 
-            MoveColorThumb(left + e.Vector.X, top + e.Vector.Y);
+            MoveThumb(_colorCanvas, _colorThumb, left + e.Vector.X, top + e.Vector.Y);
 
             UpdateColor();
             UpdateHueColor();
@@ -231,7 +226,7 @@ namespace ThemeEditor.Controls.ColorPicker
             {
                 var position = e.GetPosition(_hueCanvas);
 
-                MoveHueThumb(position.X, position.Y);
+                MoveThumb(_hueCanvas, _hueThumb, 0, position.Y);
 
                 UpdateColor();
                 UpdateHueColor();
@@ -254,7 +249,7 @@ namespace ThemeEditor.Controls.ColorPicker
             {
                 var position = e.GetPosition(_hueCanvas);
 
-                MoveHueThumb(position.X, position.Y);
+                MoveThumb(_hueCanvas, _hueThumb, 0, position.Y);
 
                 UpdateColor();
                 UpdateHueColor();
@@ -265,7 +260,8 @@ namespace ThemeEditor.Controls.ColorPicker
         {
             double left = Canvas.GetLeft(_hueThumb);
             double top = Canvas.GetTop(_hueThumb);
-            MoveHueThumb(left + e.Vector.X, top + e.Vector.Y);
+
+            MoveThumb(_hueCanvas, _hueThumb, left + e.Vector.X, top + e.Vector.Y);
 
             UpdateColor();
             UpdateHueColor();
