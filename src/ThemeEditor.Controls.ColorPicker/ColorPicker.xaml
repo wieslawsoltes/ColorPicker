@@ -1,7 +1,7 @@
 ﻿<Style xmlns="https://github.com/avaloniaui"
-     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-     xmlns:local="clr-namespace:ThemeEditor.Controls.ColorPicker;assembly=ThemeEditor.Controls.ColorPicker"
-     Selector="local|ColorPicker">
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       xmlns:local="clr-namespace:ThemeEditor.Controls.ColorPicker;assembly=ThemeEditor.Controls.ColorPicker"
+       Selector="local|ColorPicker">
     <Setter Property="Template">
         <ControlTemplate>
             <Grid ColumnDefinitions="*,3,Auto" RowDefinitions="*,3,Auto">
