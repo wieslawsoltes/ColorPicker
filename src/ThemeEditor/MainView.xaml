@@ -3,9 +3,7 @@
              xmlns:views="clr-namespace:ThemeEditor.Views;assembly=ThemeEditor"
              xmlns:cb="clr-namespace:ThemeEditor.Controls.ColorBlender;assembly=ThemeEditor.Controls.ColorBlender"
              xmlns:cp="clr-namespace:ThemeEditor.Controls.ColorPicker;assembly=ThemeEditor.Controls.ColorPicker"
-             Background="{DynamicResource ThemeBackgroundBrush}"
-             TextBlock.Foreground="{DynamicResource ThemeForegroundBrush}"
-             TextBlock.FontSize="{DynamicResource FontSizeNormal}">
+             Classes="themed">
     <UserControl.Styles>
         <StyleInclude Source="resm:ThemeEditor.Themes.BaseDark.xaml?assembly=ThemeEditor"/>
     </UserControl.Styles>

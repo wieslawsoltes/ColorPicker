@@ -19,6 +19,12 @@
     <Application.Styles>
         <StyleInclude Source="resm:Avalonia.Themes.Default.DefaultTheme.xaml?assembly=Avalonia.Themes.Default"/>
         <StyleInclude Source="resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default"/>
+        <!-- TODO: Change ContentControl.themed to UserControl.themed when included in Avalonia release. -->
+        <Style Selector="ContentControl.themed">
+            <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
+            <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}"/>
+        </Style>
         <Style Selector="Border.color">
             <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
