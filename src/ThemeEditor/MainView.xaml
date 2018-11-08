@@ -34,7 +34,7 @@
                         <TextBox Text="{Binding #colorPicker.Value, Mode=TwoWay}" ToolTip.Tip="Value" Grid.Row="2" Grid.Column="1" Margin="2"/>
                         <TextBlock Text="A" ToolTip.Tip="Alpha" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" Margin="2"/>
                         <TextBox Text="{Binding #colorPicker.Alpha, Mode=TwoWay}" ToolTip.Tip="Alpha" Grid.Row="3" Grid.Column="1" Margin="2"/>
-                        <TextBox Text="{Binding #colorPicker.HueColor, Mode=TwoWay, Converter={StaticResource ColorToHexStringConverter}}" ToolTip.Tip="Hex value" Grid.Row="4" Grid.Column="1" Margin="2"/>
+                        <!--<TextBox Text="{Binding #colorPicker.HueColor, Mode=TwoWay, Converter={StaticResource ColorToHexStringConverter}}" ToolTip.Tip="Hex value" Grid.Row="4" Grid.Column="1" Margin="2"/>-->
                         <TextBox Text="{Binding #colorPicker.Color, Mode=TwoWay, Converter={StaticResource ColorToHexStringConverter}}" ToolTip.Tip="Hex value" Grid.Row="5" Grid.Column="1" Margin="2"/>
                         <!--<TextBox Text="{Binding #colorPicker.Color, Mode=OneWay, Converter={x:Static cp:ColorPicker.ColorToHex}}" ToolTip.Tip="Hex value" Grid.Row="5" Grid.Column="1" Margin="2"/>-->
                     </Grid>
