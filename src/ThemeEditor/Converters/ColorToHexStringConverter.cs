@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Text.RegularExpressions;
 using Avalonia;
 using Avalonia.Data.Converters;
 using Avalonia.Media;
@@ -8,6 +9,8 @@ namespace ThemeEditor.Converters
 {
     public class ColorToHexStringConverter : IValueConverter
     {
+        private static Regex s_hexRegex = new Regex("^#[a-fA-F0-9]{8}$");
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is Color color && targetType == typeof(string))
@@ -21,7 +24,17 @@ namespace ThemeEditor.Converters
         {
             if (value is string s && targetType == typeof(Color))
             {
-                return Color.Parse(s);
+                try
+                {
+                    if (s_hexRegex.Match(s).Success)
+                    {
+                        return Color.Parse(s);
+                    }
+                }
+                catch(Exception)
+                {
+                    return AvaloniaProperty.UnsetValue;
+                }
             }
             return AvaloniaProperty.UnsetValue;
         }
