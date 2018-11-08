@@ -4,6 +4,19 @@
 
 [![NuGet](https://img.shields.io/nuget/v/ThemeEditor.ViewModels.svg)](https://www.nuget.org/packages/ThemeEditor.ViewModels) [![MyGet](https://img.shields.io/myget/themeeditor-nightly/vpre/ThemeEditor.ViewModels.svg?label=myget)](https://www.myget.org/gallery/themeeditor-nightly) 
 
+[![Github All Releases](https://img.shields.io/github/downloads/wieslawsoltes/themeeditor/total.svg)](https://github.com/wieslawsoltes/ThemeEditor/releases)
+[![GitHub Release](https://img.shields.io/github/release/wieslawsoltes/themeeditor.svg)](https://github.com/wieslawsoltes/ThemeEditor/releases/latest)
+[![Github Releases](https://img.shields.io/github/downloads/wieslawsoltes/themeeditor/latest/total.svg)](https://github.com/wieslawsoltes/ThemeEditor/releases)
+
+## Download
+
+| Platform              | Version    | Download                                                                                                                                     |
+|-----------------------|------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| win7-x64              | 0.0.1      | [ThemeEditor-win7-x64.zip](https://github.com/wieslawsoltes/ThemeEditor/releases/download/0.0.1/ThemeEditor-win7-x64.zip)                    |
+| ubuntu.14.04-x64      | 0.0.1      | [ThemeEditor-ubuntu.14.04-x64.zip](https://github.com/wieslawsoltes/ThemeEditor/releases/download/0.0.1/ThemeEditor-ubuntu.14.04-x64.zip)    |
+| debian.8-x64          | 0.0.1      | [ThemeEditor-debian.8-x64.zip](https://github.com/wieslawsoltes/ThemeEditor/releases/download/0.0.1/ThemeEditor-debian.8-x64.zip)            |
+| osx.10.12-x64         | 0.0.1      | [ThemeEditor-osx.10.12-x64.zip](https://github.com/wieslawsoltes/ThemeEditor/releases/download/0.0.1/ThemeEditor-osx.10.12-x64.zip)          |
+
 # About
 
 ThemeEditor is an [Avalonia UI Framework](http://avaloniaui.net/) theme editor.
