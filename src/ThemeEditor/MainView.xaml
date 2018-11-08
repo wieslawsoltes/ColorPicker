@@ -25,7 +25,7 @@
             <TabItem Header="ColorPicker">
                 <Grid ColumnDefinitions="*,Auto">
                     <cp:ColorPicker x:Name="colorPicker" Grid.Column="0" Hue="180" Saturation="50" Value="50" Alpha="75" Margin="2"/>
-                    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,120" Grid.Column="1" Margin="2">
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,120" Grid.Column="1" Margin="2">
                         <TextBlock Text="H" ToolTip.Tip="Hue" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Margin="2"/>
                         <TextBox Text="{Binding #colorPicker.Hue, Mode=TwoWay}" ToolTip.Tip="Hue" Grid.Row="0" Grid.Column="1" Margin="2"/>
                         <TextBlock Text="S" ToolTip.Tip="Saturation" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Margin="2"/>
@@ -34,7 +34,9 @@
                         <TextBox Text="{Binding #colorPicker.Value, Mode=TwoWay}" ToolTip.Tip="Value" Grid.Row="2" Grid.Column="1" Margin="2"/>
                         <TextBlock Text="A" ToolTip.Tip="Alpha" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" Margin="2"/>
                         <TextBox Text="{Binding #colorPicker.Alpha, Mode=TwoWay}" ToolTip.Tip="Alpha" Grid.Row="3" Grid.Column="1" Margin="2"/>
-                        <TextBox Text="{Binding #colorPicker.Color, Mode=TwoWay, Converter={StaticResource ColorToHexStringConverter}}" ToolTip.Tip="Hex value" Grid.Row="4" Grid.Column="1" Margin="2"/>
+                        <TextBox Text="{Binding #colorPicker.HueColor, Mode=TwoWay, Converter={StaticResource ColorToHexStringConverter}}" ToolTip.Tip="Hex value" Grid.Row="4" Grid.Column="1" Margin="2"/>
+                        <TextBox Text="{Binding #colorPicker.Color, Mode=TwoWay, Converter={StaticResource ColorToHexStringConverter}}" ToolTip.Tip="Hex value" Grid.Row="5" Grid.Column="1" Margin="2"/>
+                        <!--<TextBox Text="{Binding #colorPicker.Color, Mode=OneWay, Converter={x:Static cp:ColorPicker.ColorToHex}}" ToolTip.Tip="Hex value" Grid.Row="5" Grid.Column="1" Margin="2"/>-->
                     </Grid>
                 </Grid>
             </TabItem>
