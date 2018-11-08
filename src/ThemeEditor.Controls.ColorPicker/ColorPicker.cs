@@ -2,6 +2,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Data.Converters;
 using Avalonia.Input;
 using Avalonia.Media;
 using ThemeEditor.Colors;
@@ -10,17 +11,20 @@ namespace ThemeEditor.Controls.ColorPicker
 {
     public class ColorPicker : TemplatedControl
     {
+        public static readonly IValueConverter ColorToHex =
+            new FuncValueConverter<Color, string>(c => $"#{c.A.ToString("X2")}{c.R.ToString("X2")}{c.G.ToString("X2")}{c.B.ToString("X2")}");
+
         public static readonly StyledProperty<double> HueProperty =
-            AvaloniaProperty.Register<ColorPicker, double>(nameof(Hue), 0.0);
+            AvaloniaProperty.Register<ColorPicker, double>(nameof(Hue), 0.0, validate: ValidateHue);
 
         public static readonly StyledProperty<double> SaturationProperty =
-            AvaloniaProperty.Register<ColorPicker, double>(nameof(Saturation), 100.0);
+            AvaloniaProperty.Register<ColorPicker, double>(nameof(Saturation), 100.0, validate: ValidateSaturation);
 
         public static readonly StyledProperty<double> ValueProperty =
-            AvaloniaProperty.Register<ColorPicker, double>(nameof(Value), 100.0);
+            AvaloniaProperty.Register<ColorPicker, double>(nameof(Value), 100.0, validate: ValidateValue);
 
         public static readonly StyledProperty<double> AlphaProperty =
-            AvaloniaProperty.Register<ColorPicker, double>(nameof(Alpha), 100.0);
+            AvaloniaProperty.Register<ColorPicker, double>(nameof(Alpha), 100.0, validate: ValidateAlpha);
 
         public static readonly StyledProperty<Color> HueColorProperty =
             AvaloniaProperty.Register<ColorPicker, Color>(nameof(HueColor), new Color(0xFF, 0xFF, 0x00, 0x00));
@@ -34,9 +38,52 @@ namespace ThemeEditor.Controls.ColorPicker
         private Thumb _hueThumb;
         private Canvas _alphaCanvas;
         private Thumb _alphaThumb;
+        private bool _updating = false;
+
+        private static double ValidateHue(ColorPicker cp, double hue)
+        {
+            if (hue < 0.0 || hue > 360.0)
+            {
+                throw new ArgumentException("Invalid Hue value.");
+            }
+            return hue;
+        }
+
+        private static double ValidateSaturation(ColorPicker cp, double saturation)
+        {
+            if (saturation < 0.0 || saturation > 100.0)
+            {
+                throw new ArgumentException("Invalid Saturation value.");
+            }
+            return saturation;
+        }
+
+        private static double ValidateValue(ColorPicker cp, double value)
+        {
+            if (value < 0.0 || value > 100.0)
+            {
+                throw new ArgumentException("Invalid Value value.");
+            }
+            return value;
+        }
+
+        private static double ValidateAlpha(ColorPicker cp, double alpha)
+        {
+            if (alpha < 0.0 || alpha > 100.0)
+            {
+                throw new ArgumentException("Invalid Alpha value.");
+            }
+            return alpha;
+        }
 
         public ColorPicker()
         {
+            this.GetObservable(HueProperty).Subscribe(x => Update());
+            this.GetObservable(SaturationProperty).Subscribe(x => Update());
+            this.GetObservable(ValueProperty).Subscribe(x => Update());
+            this.GetObservable(AlphaProperty).Subscribe(x => Update());
+            this.GetObservable(HueColorProperty).Subscribe(x => UpdateOnHueColorChange());
+            this.GetObservable(ColorProperty).Subscribe(x => UpdateOnColorChange());
         }
 
         public double Hue
@@ -160,7 +207,7 @@ namespace ThemeEditor.Controls.ColorPicker
         protected override Size ArrangeOverride(Size finalSize)
         {
             var size = base.ArrangeOverride(finalSize);
-            if (IsTemplateValid())
+            if (IsTemplateValid() && !_updating)
             {
                 UpdateThumbs();
                 UpdateColors();
@@ -206,6 +253,7 @@ namespace ThemeEditor.Controls.ColorPicker
 
         private void UpdateThumbs()
         {
+            _updating = true;
             double hueX = 0;
             double hueY = (Hue * _hueCanvas.Bounds.Height) / 360.0;
             double colorX = (Saturation * _colorCanvas.Bounds.Width) / 100.0;
@@ -215,10 +263,12 @@ namespace ThemeEditor.Controls.ColorPicker
             MoveThumb(_hueCanvas, _hueThumb, hueX, hueY);
             MoveThumb(_colorCanvas, _colorThumb, colorX, colorY);
             MoveThumb(_alphaCanvas, _alphaThumb, alphaX, alphaY);
+            _updating = false;
         }
 
         private void UpdateColors()
         {
+            _updating = true;
             double hueY = Canvas.GetTop(_hueThumb);
             double colorX = Canvas.GetLeft(_colorThumb);
             double colorY = Canvas.GetTop(_colorThumb);
@@ -233,6 +283,45 @@ namespace ThemeEditor.Controls.ColorPicker
             Alpha = a;
             HueColor = ColorFromH(h);
             Color = ColorFromHSVA(h, s, v, a);
+            _updating = false;
+        }
+
+        private void Update()
+        {
+            if (IsTemplateValid() && !_updating)
+            {
+                UpdateThumbs();
+                UpdateColors();
+            }
+        }
+
+        private void UpdateOnColorChange()
+        {
+            if (IsTemplateValid() && !_updating)
+            {
+                _updating = true;
+                HSV hsv = new RGB(Color.R, Color.G, Color.B).ToHSV();
+                Hue = hsv.H;
+                Saturation = hsv.S;
+                Value = hsv.V;
+                Alpha = (Color.A * 100.0) / 255.0;
+                HueColor = ColorFromH(hsv.H);
+                _updating = false;
+                UpdateThumbs();
+            }
+        }
+
+        private void UpdateOnHueColorChange()
+        {
+            if (IsTemplateValid() && !_updating)
+            {
+                _updating = true;
+                HSV hsv = new RGB(HueColor.R, HueColor.G, HueColor.B).ToHSV();
+                Hue = hsv.H;
+                Color = ColorFromHSVA(Hue, Saturation, Value, Alpha);
+                _updating = false;
+                UpdateThumbs();
+            }
         }
 
         private void ColorCanvas_PointerPressed(object sender, PointerPressedEventArgs e)
