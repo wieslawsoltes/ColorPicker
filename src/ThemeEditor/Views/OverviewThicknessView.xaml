@@ -7,13 +7,13 @@
              mc:Ignorable="d"
              d:DesignWidth="500" d:DesignHeight="400">
     <UserControl.Resources>
-        <converters:ThicknessViewModelToThicknessMultiConverter x:Key="ThicknessViewModelToThicknessMultiConverter"/>
+        <converters:ThicknessViewModelToThicknessConverter x:Key="ThicknessViewModelToThicknessConverter"/>
     </UserControl.Resources>
     <Grid RowDefinitions="Auto" ColumnDefinitions="100,*">
         <TextBox Text="{Binding Text, Mode=TwoWay}" IsReadOnly="False" Classes="left" Grid.Row="0" Grid.Column="0"/>
         <Border Classes="thickness" Margin="2" Grid.Row="0" Grid.Column="1">
             <Border.BorderThickness>
-                <MultiBinding Mode="OneWay" Converter="{StaticResource ThicknessViewModelToThicknessMultiConverter}">
+                <MultiBinding Mode="OneWay" Converter="{StaticResource ThicknessViewModelToThicknessConverter}">
                     <Binding Path="Left"/>
                     <Binding Path="Top"/>
                     <Binding Path="Right"/>

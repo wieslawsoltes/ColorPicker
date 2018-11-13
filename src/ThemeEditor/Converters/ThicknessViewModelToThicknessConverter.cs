@@ -7,7 +7,7 @@ using Avalonia.Data.Converters;
 
 namespace ThemeEditor.Converters
 {
-    public class ThicknessViewModelToThicknessMultiConverter : IMultiValueConverter
+    public class ThicknessViewModelToThicknessConverter : IMultiValueConverter
     {
         public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
         {

@@ -39,7 +39,7 @@
                         <TextBox Text="{Binding #colorPicker.Value, Mode=TwoWay}" ToolTip.Tip="Value" Grid.Row="2" Grid.Column="1" Margin="2"/>
                         <TextBlock Text="A" ToolTip.Tip="Alpha" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" Margin="2"/>
                         <TextBox Text="{Binding #colorPicker.Alpha, Mode=TwoWay}" ToolTip.Tip="Alpha" Grid.Row="3" Grid.Column="1" Margin="2"/>
-                        <TextBox Text="{Binding #colorPicker.Color, Mode=TwoWay, Converter={StaticResource ColorToHexConverter}}" ToolTip.Tip="Hex value" Grid.Row="4" Grid.Column="1" Margin="2"/>
+                        <TextBox x:Name="hexText" Text="" ToolTip.Tip="Hex value" Grid.Row="4" Grid.Column="1" Margin="2"/>
                     </Grid>
                 </Grid>
             </TabItem>

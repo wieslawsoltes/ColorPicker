@@ -8,7 +8,7 @@ using Avalonia.Media;
 
 namespace ThemeEditor.Converters
 {
-    public class ColorViewModelToBrushMultiConverter : IMultiValueConverter
+    public class ColorViewModelToBrushConverter : IMultiValueConverter
     {
         public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
         {

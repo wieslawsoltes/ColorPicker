@@ -3,8 +3,6 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
-using Avalonia.Media;
-using ThemeEditor.Colors;
 
 namespace ThemeEditor.Controls.ColorPicker
 {
@@ -21,9 +19,6 @@ namespace ThemeEditor.Controls.ColorPicker
 
         public static readonly StyledProperty<double> AlphaProperty =
             AvaloniaProperty.Register<ColorPicker, double>(nameof(Alpha), 100.0, validate: ValidateAlpha);
-
-        public static readonly StyledProperty<Color> ColorProperty =
-            AvaloniaProperty.Register<ColorPicker, Color>(nameof(Color), new Color(0xFF, 0xFF, 0x00, 0x00));
 
         private static double ValidateHue(ColorPicker cp, double hue)
         {
@@ -75,7 +70,6 @@ namespace ThemeEditor.Controls.ColorPicker
             this.GetObservable(SaturationProperty).Subscribe(x => UpdateOnHsvaChange());
             this.GetObservable(ValueProperty).Subscribe(x => UpdateOnHsvaChange());
             this.GetObservable(AlphaProperty).Subscribe(x => UpdateOnHsvaChange());
-            this.GetObservable(ColorProperty).Subscribe(x => UpdateOnColorChange());
         }
 
         public double Hue
@@ -100,12 +94,6 @@ namespace ThemeEditor.Controls.ColorPicker
         {
             get { return GetValue(AlphaProperty); }
             set { SetValue(AlphaProperty, value); }
-        }
-
-        public Color Color
-        {
-            get { return GetValue(ColorProperty); }
-            set { SetValue(ColorProperty, value); }
         }
 
         protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
@@ -228,10 +216,10 @@ namespace ThemeEditor.Controls.ColorPicker
         {
             _updating = true;
             double hueX = 0;
-            double hueY = (Hue * _hueCanvas.Bounds.Height) / 360.0;
-            double colorX = (Saturation * _colorCanvas.Bounds.Width) / 100.0;
-            double colorY = _colorCanvas.Bounds.Height - ((Value * _colorCanvas.Bounds.Height) / 100.0);
-            double alphaX = ((Alpha * _alphaCanvas.Bounds.Width) / 100.0);
+            double hueY = Hue * _hueCanvas.Bounds.Height / 360.0;
+            double colorX = Saturation * _colorCanvas.Bounds.Width / 100.0;
+            double colorY = _colorCanvas.Bounds.Height - (Value * _colorCanvas.Bounds.Height / 100.0);
+            double alphaX = Alpha * _alphaCanvas.Bounds.Width / 100.0;
             double alphaY = 0;
             MoveThumb(_hueCanvas, _hueThumb, hueX, hueY);
             MoveThumb(_colorCanvas, _colorThumb, colorX, colorY);
@@ -246,17 +234,14 @@ namespace ThemeEditor.Controls.ColorPicker
             double colorX = Canvas.GetLeft(_colorThumb);
             double colorY = Canvas.GetTop(_colorThumb);
             double alphaX = Canvas.GetLeft(_alphaThumb);
-            double h = (hueY * 360.0) / _hueCanvas.Bounds.Height;
-            double s = (colorX * 100.0) / _colorCanvas.Bounds.Width;
-            double v = 100.0 - ((colorY * 100.0) / _colorCanvas.Bounds.Height);
-            double a = (alphaX * 100.0) / _alphaCanvas.Bounds.Width;
+            double h = hueY * 360.0 / _hueCanvas.Bounds.Height;
+            double s = colorX * 100.0 / _colorCanvas.Bounds.Width;
+            double v = 100.0 - (colorY * 100.0 / _colorCanvas.Bounds.Height);
+            double a = alphaX * 100.0 / _alphaCanvas.Bounds.Width;
             Hue = h;
             Saturation = s;
             Value = v;
             Alpha = a;
-            RGB rgb = new HSV(h, s, v).ToRGB();
-            byte A = (byte)((a * 255.0) / 100.0);
-            Color = new Color(A, (byte)rgb.R, (byte)rgb.G, (byte)rgb.B);
             _updating = false;
         }
 
@@ -266,21 +251,6 @@ namespace ThemeEditor.Controls.ColorPicker
             {
                 UpdateThumbs();
                 UpdateProperties();
-            }
-        }
-
-        private void UpdateOnColorChange()
-        {
-            if (IsTemplateValid() && !_updating)
-            {
-                _updating = true;
-                HSV hsv = new RGB(Color.R, Color.G, Color.B).ToHSV();
-                Hue = hsv.H;
-                Saturation = hsv.S;
-                Value = hsv.V;
-                Alpha = (Color.A * 100.0) / 255.0;
-                _updating = false;
-                UpdateThumbs();
             }
         }
 
