@@ -167,10 +167,13 @@ namespace ThemeEditor.ViewModels
             dlg.Filters.Add(new FileDialogFilter() { Name = "Themes", Extensions = { "themes" } });
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
             var result = await dlg.ShowAsync(Application.Current.Windows.FirstOrDefault());
-            if (result != null && result[0] != null)
+            if (result != null)
             {
                 var path = result.FirstOrDefault();
-                LoadFromFile(path);
+                if (path != null)
+                {
+                    LoadFromFile(path);
+                }
             }
         }
 
