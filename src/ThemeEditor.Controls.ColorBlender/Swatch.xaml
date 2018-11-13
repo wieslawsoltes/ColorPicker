@@ -7,16 +7,16 @@
              mc:Ignorable="d"
              d:DesignWidth="500" d:DesignHeight="400">
     <UserControl.Resources>
-        <converters:HtmlColorConverter x:Key="HtmlColorConverter"/>
+        <converters:RgbToHexConverter x:Key="RgbToHexConverter"/>
     </UserControl.Resources>
     <Grid x:Name="swatch" RowDefinitions="*,Auto,Auto" ColumnDefinitions="*">
         <Rectangle x:Name="col" Cursor="Hand" Fill="Gray" Grid.Column="0" Grid.Row="0" Margin="2" />
         <TextBox x:Name="HTML" Grid.Column="0" Grid.Row="1" Margin="2" TextAlignment="Left" IsReadOnly="True" >
             <TextBox.Text>
-                <MultiBinding Converter="{StaticResource HtmlColorConverter}">
-                    <Binding ElementName="col" Path="Fill.Color.R" Mode="TwoWay" />
-                    <Binding ElementName="col" Path="Fill.Color.G" Mode="TwoWay" />
-                    <Binding ElementName="col" Path="Fill.Color.B" Mode="TwoWay" />
+                <MultiBinding Converter="{StaticResource RgbToHexConverter}">
+                    <Binding ElementName="col" Path="Fill.Color.R"/>
+                    <Binding ElementName="col" Path="Fill.Color.G"/>
+                    <Binding ElementName="col" Path="Fill.Color.B"/>
                 </MultiBinding>
             </TextBox.Text>
         </TextBox>

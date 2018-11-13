@@ -7,7 +7,7 @@ using Avalonia.Data.Converters;
 
 namespace ThemeEditor.Controls.ColorBlender.Converters
 {
-    public class HtmlColorConverter : IMultiValueConverter
+    public class RgbToHexConverter : IMultiValueConverter
     {
         public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
         {
