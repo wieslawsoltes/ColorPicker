@@ -1,7 +1,12 @@
 ﻿<Style xmlns="https://github.com/avaloniaui"
        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
        xmlns:local="clr-namespace:ThemeEditor.Controls.ColorPicker;assembly=ThemeEditor.Controls.ColorPicker"
+       xmlns:converters="clr-namespace:ThemeEditor.Controls.ColorPicker.Converters;assembly=ThemeEditor.Controls.ColorPicker"
        Selector="local|ColorPicker">
+    <Style.Resources>
+        <converters:HueToColorConverter x:Key="HueToColorConverter"/>
+        <converters:HsvaToColorConverter x:Key="HsvaToColorConverter"/>
+    </Style.Resources>
     <Setter Property="Template">
         <ControlTemplate>
             <Grid ColumnDefinitions="*,3,Auto" RowDefinitions="*,3,Auto">
@@ -9,7 +14,7 @@
                     <Grid.Background>
                         <LinearGradientBrush StartPoint="0%,50%" EndPoint="100%,50%">
                             <GradientStop Offset="0" Color="#FFFFFFFF"/>
-                            <GradientStop Offset="1" Color="{Binding HueColor, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <GradientStop Offset="1" Color="{Binding Hue, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HueToColorConverter}}"/>
                         </LinearGradientBrush>
                     </Grid.Background>
                     <Grid>
@@ -77,7 +82,16 @@
                     </Grid.Background>
                     <Canvas Name="PART_AlphaCanvas" Height="20">
                         <Canvas.Background>
-                            <SolidColorBrush Color="{Binding Color, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <SolidColorBrush>
+                                <SolidColorBrush.Color>
+                                    <MultiBinding Mode="OneWay" Converter="{StaticResource HsvaToColorConverter}">
+                                        <Binding Path="Hue" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                        <Binding Path="Saturation" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                        <Binding Path="Value" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                        <Binding Path="Alpha" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                    </MultiBinding>
+                                </SolidColorBrush.Color>
+                            </SolidColorBrush>
                         </Canvas.Background>
                         <Thumb Name="PART_AlphaThumb" Height="20" Canvas.Left="0" Canvas.Top="0" Margin="-5,0,-5,0">
                             <Thumb.Template>

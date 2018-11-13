@@ -5,17 +5,18 @@ using Avalonia;
 using Avalonia.Data.Converters;
 using Avalonia.Media;
 
-namespace ThemeEditor.Converters
+namespace ThemeEditor.Controls.ColorPicker.Converters
 {
-    public class ColorToHexStringConverter : IValueConverter
+    public class ColorToHexConverter : IValueConverter
     {
         private static Regex s_hexRegex = new Regex("^#[a-fA-F0-9]{8}$");
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is Color color && targetType == typeof(string))
+            if (value is Color c && targetType == typeof(string))
             {
-                return $"#{color.A.ToString("X2")}{color.R.ToString("X2")}{color.G.ToString("X2")}{color.B.ToString("X2")}";
+                uint rgb = c.ToUint32();
+                return $"#{rgb:X8}";
             }
             return AvaloniaProperty.UnsetValue;
         }
@@ -31,7 +32,7 @@ namespace ThemeEditor.Converters
                         return Color.Parse(s);
                     }
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     return AvaloniaProperty.UnsetValue;
                 }

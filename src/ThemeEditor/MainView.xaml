@@ -3,15 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:converters="clr-namespace:ThemeEditor.Converters;assembly=ThemeEditor"
              xmlns:views="clr-namespace:ThemeEditor.Views;assembly=ThemeEditor"
              xmlns:cb="clr-namespace:ThemeEditor.Controls.ColorBlender;assembly=ThemeEditor.Controls.ColorBlender"
              xmlns:cp="clr-namespace:ThemeEditor.Controls.ColorPicker;assembly=ThemeEditor.Controls.ColorPicker"
+             xmlns:cpc="clr-namespace:ThemeEditor.Controls.ColorPicker.Converters;assembly=ThemeEditor.Controls.ColorPicker"
              mc:Ignorable="d"
              d:DesignWidth="1100" d:DesignHeight="650"
              Classes="themed">
     <UserControl.Resources>
-        <converters:ColorToHexStringConverter x:Key="ColorToHexStringConverter"/>
+        <cpc:ColorToHexConverter x:Key="ColorToHexConverter"/>
     </UserControl.Resources>
     <UserControl.Styles>
         <StyleInclude Source="resm:ThemeEditor.Themes.BaseDark.xaml?assembly=ThemeEditor"/>
@@ -30,7 +30,7 @@
             <TabItem Header="ColorPicker">
                 <Grid ColumnDefinitions="*,Auto">
                     <cp:ColorPicker x:Name="colorPicker" Grid.Column="0" Hue="180" Saturation="50" Value="50" Alpha="75" Margin="2"/>
-                    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,120" Grid.Column="1" Margin="2">
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,120" Grid.Column="1" Margin="2">
                         <TextBlock Text="H" ToolTip.Tip="Hue" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Margin="2"/>
                         <TextBox Text="{Binding #colorPicker.Hue, Mode=TwoWay}" ToolTip.Tip="Hue" Grid.Row="0" Grid.Column="1" Margin="2"/>
                         <TextBlock Text="S" ToolTip.Tip="Saturation" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Margin="2"/>
@@ -39,9 +39,7 @@
                         <TextBox Text="{Binding #colorPicker.Value, Mode=TwoWay}" ToolTip.Tip="Value" Grid.Row="2" Grid.Column="1" Margin="2"/>
                         <TextBlock Text="A" ToolTip.Tip="Alpha" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" Margin="2"/>
                         <TextBox Text="{Binding #colorPicker.Alpha, Mode=TwoWay}" ToolTip.Tip="Alpha" Grid.Row="3" Grid.Column="1" Margin="2"/>
-                        <!--<TextBox Text="{Binding #colorPicker.HueColor, Mode=TwoWay, Converter={StaticResource ColorToHexStringConverter}}" ToolTip.Tip="Hex value" Grid.Row="4" Grid.Column="1" Margin="2"/>-->
-                        <TextBox Text="{Binding #colorPicker.Color, Mode=TwoWay, Converter={StaticResource ColorToHexStringConverter}}" ToolTip.Tip="Hex value" Grid.Row="5" Grid.Column="1" Margin="2"/>
-                        <!--<TextBox Text="{Binding #colorPicker.Color, Mode=OneWay, Converter={x:Static cp:ColorPicker.ColorToHex}}" ToolTip.Tip="Hex value" Grid.Row="5" Grid.Column="1" Margin="2"/>-->
+                        <TextBox Text="{Binding #colorPicker.Color, Mode=TwoWay, Converter={StaticResource ColorToHexConverter}}" ToolTip.Tip="Hex value" Grid.Row="4" Grid.Column="1" Margin="2"/>
                     </Grid>
                 </Grid>
             </TabItem>
