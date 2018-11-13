@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reflection;
 using System.Runtime.Serialization;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
+using Avalonia.Threading;
 using ReactiveUI;
 using ReactiveUI.Legacy;
 using ThemeEditor.ViewModels.Serializer;
@@ -49,17 +51,17 @@ namespace ThemeEditor.ViewModels
             set { this.RaiseAndSetIfChanged(ref _defaultTheme, value); }
         }
 
-        public ReactiveCommand ResetThemeCommand { get; }
+        public ReactiveCommand<Unit, Unit> ResetThemeCommand { get; }
 
-        public ReactiveCommand RemoveThemeCommand { get; }
+        public ReactiveCommand<Unit, Unit> RemoveThemeCommand { get; }
 
-        public ReactiveCommand AddThemeCommand { get; }
+        public ReactiveCommand<Unit, Unit> AddThemeCommand { get; }
 
-        public ReactiveCommand LoadThemesCommand { get; }
+        public ReactiveCommand<Unit, Unit> LoadThemesCommand { get; }
 
-        public ReactiveCommand SaveThemesCommand { get; }
+        public ReactiveCommand<Unit, Unit> SaveThemesCommand { get; }
 
-        public ReactiveCommand ExportThemeCommand { get; }
+        public ReactiveCommand<Unit, Unit> ExportThemeCommand { get; }
 
         public ThemeEditorViewModel()
         {
