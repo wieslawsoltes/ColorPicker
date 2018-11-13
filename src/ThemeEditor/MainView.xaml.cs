@@ -13,12 +13,23 @@ namespace ThemeEditor
 {
     public class MainView : UserControl
     {
+        public static readonly StyledProperty<string> HexProperty =
+            AvaloniaProperty.Register<MainView, string>(nameof(Hex), "", validate: ValidateHex);
+
+        private static string ValidateHex(MainView view, string hex)
+        {
+            if (!ColorHelpers.IsValidHexColor(hex))
+            {
+                throw new ArgumentException("Invalid Hex value.");
+            }
+            return hex;
+        }
+
         private ThemePreviewView _previewView = null;
         private TextBox _exportText = null;
         private ThemeEditorView _editorView = null;
         private ColorPicker _colorPicker = null;
         private ColorBlender _colorBlender = null;
-        private TextBox _hexText = null;
         private bool _updating = false;
 
         public MainView()
@@ -30,15 +41,20 @@ namespace ThemeEditor
             _editorView = this.Find<ThemeEditorView>("editorView");
             _colorPicker = this.Find<ColorPicker>("colorPicker");
             _colorBlender = this.Find<ColorBlender>("colorBlender");
-            _hexText = this.Find<TextBox>("hexText");
 
             _colorPicker.GetObservable(ColorPicker.HueProperty).Subscribe(x => UpdateOnHsvaChange());
             _colorPicker.GetObservable(ColorPicker.SaturationProperty).Subscribe(x => UpdateOnHsvaChange());
             _colorPicker.GetObservable(ColorPicker.ValueProperty).Subscribe(x => UpdateOnHsvaChange());
             _colorPicker.GetObservable(ColorPicker.AlphaProperty).Subscribe(x => UpdateOnHsvaChange());
-            _hexText.GetObservable(TextBox.TextProperty).Subscribe(x => UpdateOnHexChange());
+            this.GetObservable(MainView.HexProperty).Subscribe(x => UpdateOnHexChange());
 
             _colorBlender.DataContext = new ColorMatchViewModel(199, 95, 62);
+        }
+
+        public string Hex
+        {
+            get { return GetValue(HexProperty); }
+            set { SetValue(HexProperty, value); }
         }
 
         private void InitializeComponent()
@@ -73,15 +89,14 @@ namespace ThemeEditor
                 _colorPicker.Saturation,
                 _colorPicker.Value,
                 _colorPicker.Alpha);
-            _hexText.Text = ColorHelpers.ToHexColor(color);
+            Hex = ColorHelpers.ToHexColor(color);
         }
 
         private void UpdatePicker()
         {
-            string hex = _hexText.Text;
-            if (ColorHelpers.IsValidHexColor(hex))
+            if (ColorHelpers.IsValidHexColor(Hex))
             {
-                Color color = Color.Parse(hex);
+                Color color = Color.Parse(Hex);
                 ColorHelpers.FromColor(color,
                     out double h,
                     out double s,
