@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:ThemeEditor;assembly=ThemeEditor"
         mc:Ignorable="d"
-        d:DesignWidth="1100" d:DesignHeight="650"
+        d:DesignWidth="900" d:DesignHeight="500"
         Width="1100" Height="650"
         UseLayoutRounding="True"
         WindowState="Normal" WindowStartupLocation="CenterScreen"

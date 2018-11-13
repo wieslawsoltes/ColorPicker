@@ -8,7 +8,7 @@
              xmlns:cp="clr-namespace:ThemeEditor.Controls.ColorPicker;assembly=ThemeEditor.Controls.ColorPicker"
              xmlns:cpc="clr-namespace:ThemeEditor.Controls.ColorPicker.Converters;assembly=ThemeEditor.Controls.ColorPicker"
              mc:Ignorable="d"
-             d:DesignWidth="1100" d:DesignHeight="650"
+             d:DesignWidth="900" d:DesignHeight="500"
              Classes="themed">
     <UserControl.Resources>
         <cpc:ColorToHexConverter x:Key="ColorToHexConverter"/>
