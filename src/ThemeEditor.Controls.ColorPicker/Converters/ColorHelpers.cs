@@ -10,7 +10,7 @@ namespace ThemeEditor.Controls.ColorPicker.Converters
 
         public static bool IsValidHexColor(string hex)
         {
-            return s_hexRegex.Match(hex).Success;
+            return !string.IsNullOrWhiteSpace(hex) && s_hexRegex.Match(hex).Success;
         }
 
         public static string ToHexColor(Color color)
