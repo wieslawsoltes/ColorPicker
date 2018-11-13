@@ -14,7 +14,7 @@ namespace ThemeEditor.Controls.ColorPicker.Converters
             double[] v = values.OfType<double>().ToArray();
             if (v.Length == values.Count)
             {
-                return ColorHelpers.ToColor(v[0], v[1], v[2], v[3]);
+                return ColorHelpers.FromHSVA(v[0], v[1], v[2], v[3]);
             }
             return AvaloniaProperty.UnsetValue;
         }

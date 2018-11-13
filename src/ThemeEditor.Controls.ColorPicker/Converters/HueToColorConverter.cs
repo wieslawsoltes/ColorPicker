@@ -12,7 +12,7 @@ namespace ThemeEditor.Controls.ColorPicker.Converters
         {
             if (value is double h && targetType == typeof(Color))
             {
-                return ColorHelpers.ToColor(h, 100, 100, 100);
+                return ColorHelpers.FromHSVA(h, 100, 100, 100);
             }
             return AvaloniaProperty.UnsetValue;
         }

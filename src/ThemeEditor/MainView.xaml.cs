@@ -16,6 +16,15 @@ namespace ThemeEditor
         public static readonly StyledProperty<string> HexProperty =
             AvaloniaProperty.Register<MainView, string>(nameof(Hex), "", validate: ValidateHex);
 
+        public static readonly StyledProperty<byte> RedProperty =
+            AvaloniaProperty.Register<MainView, byte>(nameof(Red), 0xFF, validate: ValidateRed);
+
+        public static readonly StyledProperty<byte> GreenProperty =
+            AvaloniaProperty.Register<MainView, byte>(nameof(Green), 0xFF, validate: ValidateGreen);
+
+        public static readonly StyledProperty<byte> BlueProperty =
+            AvaloniaProperty.Register<MainView, byte>(nameof(Blue), 0xFF, validate: ValidateBlue);
+
         private static string ValidateHex(MainView view, string hex)
         {
             if (!ColorHelpers.IsValidHexColor(hex))
@@ -23,6 +32,33 @@ namespace ThemeEditor
                 throw new ArgumentException("Invalid Hex value.");
             }
             return hex;
+        }
+
+        private static byte ValidateRed(MainView view, byte red)
+        {
+            if (red < 0 || red > 255)
+            {
+                throw new ArgumentException("Invalid Red value.");
+            }
+            return red;
+        }
+
+        private static byte ValidateGreen(MainView view, byte green)
+        {
+            if (green < 0 || green > 255)
+            {
+                throw new ArgumentException("Invalid Green value.");
+            }
+            return green;
+        }
+
+        private static byte ValidateBlue(MainView view, byte blue)
+        {
+            if (blue < 0 || blue > 255)
+            {
+                throw new ArgumentException("Invalid Blue value.");
+            }
+            return blue;
         }
 
         private ThemePreviewView _previewView = null;
@@ -47,6 +83,10 @@ namespace ThemeEditor
             _colorPicker.GetObservable(ColorPicker.ValueProperty).Subscribe(x => UpdateOnHsvaChange());
             _colorPicker.GetObservable(ColorPicker.AlphaProperty).Subscribe(x => UpdateOnHsvaChange());
             this.GetObservable(MainView.HexProperty).Subscribe(x => UpdateOnHexChange());
+            this.GetObservable(MainView.RedProperty).Subscribe(x => UpdateOnRGBChange());
+            this.GetObservable(MainView.GreenProperty).Subscribe(x => UpdateOnRGBChange());
+            this.GetObservable(MainView.BlueProperty).Subscribe(x => UpdateOnRGBChange());
+
 
             _colorBlender.DataContext = new ColorMatchViewModel(199, 95, 62);
         }
@@ -55,6 +95,24 @@ namespace ThemeEditor
         {
             get { return GetValue(HexProperty); }
             set { SetValue(HexProperty, value); }
+        }
+
+        public byte Red
+        {
+            get { return GetValue(RedProperty); }
+            set { SetValue(RedProperty, value); }
+        }
+
+        public byte Green
+        {
+            get { return GetValue(GreenProperty); }
+            set { SetValue(GreenProperty, value); }
+        }
+
+        public byte Blue
+        {
+            get { return GetValue(BlueProperty); }
+            set { SetValue(BlueProperty, value); }
         }
 
         private void InitializeComponent()
@@ -82,13 +140,26 @@ namespace ThemeEditor
             }
         }
 
-        private void UpdateHex()
+        private Color GetColor()
         {
-            Color color = ColorHelpers.ToColor(
+            return ColorHelpers.FromHSVA(
                 _colorPicker.Hue,
                 _colorPicker.Saturation,
                 _colorPicker.Value,
                 _colorPicker.Alpha);
+        }
+
+        private void UpdateRGB()
+        {
+            Color color = GetColor();
+            Red = color.R;
+            Green = color.G;
+            Blue = color.B;
+        }
+
+        private void UpdateHex()
+        {
+            Color color = GetColor();
             Hex = ColorHelpers.ToHexColor(color);
         }
 
@@ -115,6 +186,7 @@ namespace ThemeEditor
             {
                 _updating = true;
                 UpdateHex();
+                UpdateRGB();
                 _updating = false;
             }
         }
@@ -124,6 +196,19 @@ namespace ThemeEditor
             if (_updating == false)
             {
                 _updating = true;
+                UpdatePicker();
+                UpdateRGB();
+                _updating = false;
+            }
+        }
+
+        private void UpdateOnRGBChange()
+        {
+            if (_updating == false)
+            {
+                _updating = true;
+                Color color = ColorHelpers.FromRGBA(Red, Green, Blue, _colorPicker.Alpha);
+                Hex = ColorHelpers.ToHexColor(color);
                 UpdatePicker();
                 _updating = false;
             }
