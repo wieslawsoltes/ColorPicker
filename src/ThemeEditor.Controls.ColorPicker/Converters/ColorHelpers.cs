@@ -18,6 +18,11 @@ namespace ThemeEditor.Controls.ColorPicker.Converters
             return $"#{color.ToUint32():X8}";
         }
 
+        public static Color FromHexColor(string hex)
+        {
+            return Color.Parse(hex);
+        }
+
         public static void FromColor(Color color, out double h, out double s, out double v, out double a)
         {
             HSV hsv = new RGB(color.R, color.G, color.B).ToHSV();

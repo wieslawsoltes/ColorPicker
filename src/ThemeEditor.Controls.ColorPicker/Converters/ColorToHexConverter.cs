@@ -25,7 +25,7 @@ namespace ThemeEditor.Controls.ColorPicker.Converters
                 {
                     if (ColorHelpers.IsValidHexColor(s))
                     {
-                        return Color.Parse(s);
+                        return ColorHelpers.FromHexColor(s);
                     }
                 }
                 catch (Exception)

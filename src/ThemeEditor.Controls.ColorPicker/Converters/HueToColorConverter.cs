@@ -3,7 +3,6 @@ using System.Globalization;
 using Avalonia;
 using Avalonia.Data.Converters;
 using Avalonia.Media;
-using ThemeEditor.Colors;
 
 namespace ThemeEditor.Controls.ColorPicker.Converters
 {
@@ -26,8 +25,8 @@ namespace ThemeEditor.Controls.ColorPicker.Converters
                 {
                     if (ColorHelpers.IsValidHexColor(s))
                     {
-                        var c = Color.Parse(s);
-                        return new RGB(c.R, c.G, c.B).ToHSV().H;
+                        ColorHelpers.FromColor(ColorHelpers.FromHexColor(s), out double h, out _, out _, out _);
+                        return h;
                     }
                 }
                 catch (Exception)
