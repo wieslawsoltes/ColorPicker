@@ -19,6 +19,7 @@
         <StyleInclude Source="resm:ThemeEditor.Controls.ColorPicker.ColorPicker.xaml?assembly=ThemeEditor.Controls.ColorPicker"/>
         <Style Selector="NumericUpDown.picker /template/ TextBox#PART_TextBox">
             <Setter Property="Margin" Value="4"/>
+            <Setter Property="Padding" Value="4"/>
         </Style>
         <Style Selector="NumericUpDown.picker">
             <Setter Property="ClipValueToMinMax" Value="True"/>
@@ -45,7 +46,7 @@
                         <NumericUpDown Value="{Binding #colorPicker.Hue, Mode=TwoWay}" ToolTip.Tip="Hue" Minimum="0" Maximum="360" Increment="0.5" CultureInfo="en-US" FormatString="{}{0:N2} °" Classes="picker" Grid.Row="0" Grid.Column="1" Margin="2"/>
                         <!-- Saturation -->
                         <TextBlock Text="S" ToolTip.Tip="Saturation" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Margin="2"/>
-                        <NumericUpDown Value="{Binding #colorPicker.Saturation, Mode=TwoWay}" ToolTip.Tip="Saturation" Minimum="0" Maximum="100" Increment="0.005" CultureInfo="en-US" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="1" Grid.Column="1" Margin="2"/>
+                        <NumericUpDown Value="{Binding #colorPicker.Saturation, Mode=TwoWay}" ToolTip.Tip="Saturation" Minimum="0" Maximum="100" Increment="0.5" CultureInfo="en-US" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="1" Grid.Column="1" Margin="2"/>
                         <!-- Value -->
                         <TextBlock Text="V" ToolTip.Tip="Value" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Margin="2"/>
                         <NumericUpDown Value="{Binding #colorPicker.Value, Mode=TwoWay}" ToolTip.Tip="Value" Minimum="0" Maximum="100" Increment="0.5" CultureInfo="en-US" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="2" Grid.Column="1" Margin="2"/>
