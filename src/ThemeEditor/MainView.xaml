@@ -17,10 +17,6 @@
     <UserControl.Styles>
         <StyleInclude Source="resm:ThemeEditor.Themes.BaseDark.xaml?assembly=ThemeEditor"/>
         <StyleInclude Source="resm:ThemeEditor.Controls.ColorPicker.ColorPicker.xaml?assembly=ThemeEditor.Controls.ColorPicker"/>
-        <!-- TODO: Remove after https://github.com/AvaloniaUI/Avalonia/pull/2103 is merged. -->
-        <StyleInclude Source="resm:ThemeEditor.ButtonSpinner.xaml?assembly=ThemeEditor"/>
-        <!-- TODO: Remove after https://github.com/AvaloniaUI/Avalonia/pull/2103 is merged. -->
-        <StyleInclude Source="resm:ThemeEditor.NumericUpDown.xaml?assembly=ThemeEditor"/>
         <Style Selector="NumericUpDown.picker">
             <Setter Property="ClipValueToMinMax" Value="True"/>
             <Setter Property="ShowButtonSpinner" Value="True"/>
