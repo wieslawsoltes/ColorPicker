@@ -36,16 +36,9 @@
                         <TextBox Name="PART_TextBox"
                                  BorderThickness="0"
                                  Background="Transparent"
-                                 ContextMenu="{TemplateBinding ContextMenu}"
-                                 FontFamily="{TemplateBinding FontFamily}"
-                                 FontSize="{TemplateBinding FontSize}"
-                                 FontStyle="{TemplateBinding FontStyle}"
-                                 FontWeight="{TemplateBinding FontWeight}"
-                                 Foreground="{TemplateBinding Foreground}"
                                  Watermark="{TemplateBinding Watermark}"
                                  IsReadOnly="{TemplateBinding IsReadOnly}"
                                  Text="{TemplateBinding Text}"
-                                 Padding="{TemplateBinding Padding}"
                                  AcceptsReturn="False"
                                  TextWrapping="NoWrap">
                         </TextBox>
@@ -54,6 +47,7 @@
             </Setter>
         </Style>
         <Style Selector="NumericUpDown.picker /template/ TextBox#PART_TextBox">
+            <Setter Property="Padding" Value="4"/>
             <Setter Property="Margin" Value="4"/>
             <Setter Property="MinWidth" Value="20"/>
         </Style>
