@@ -128,7 +128,6 @@
     <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLowBrush}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
     <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
-    <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}" />
     <Setter Property="Template">
       <ControlTemplate>
         <ButtonSpinner Name="PART_Spinner"
@@ -143,7 +142,11 @@
           <TextBox Name="PART_TextBox"
                    BorderThickness="0"
                    Background="Transparent"
+                   BorderBrush="{TemplateBinding BorderBrush}"
+                   BorderThickness="{TemplateBinding BorderThickness}"
+                   Padding="{TemplateBinding Padding}"
                    Watermark="{TemplateBinding Watermark}"
+                   DataValidationErrors.Errors="{TemplateBinding (DataValidationErrors.Errors)}"
                    IsReadOnly="{TemplateBinding IsReadOnly}"
                    Text="{TemplateBinding Text}"
                    AcceptsReturn="False"
