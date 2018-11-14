@@ -42,16 +42,16 @@
                     <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,120" Grid.Column="1" Margin="2">
                         <!-- Hue -->
                         <TextBlock Text="H" ToolTip.Tip="Hue" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Margin="2"/>
-                        <NumericUpDown Value="{Binding #colorPicker.Hue, Mode=TwoWay}" ToolTip.Tip="Hue" Minimum="0" Maximum="360" Increment="0.5" CultureInfo="en-US" FormatString="{0:N2} °" Classes="picker" Grid.Row="0" Grid.Column="1" Margin="2"/>
+                        <NumericUpDown Value="{Binding #colorPicker.Hue, Mode=TwoWay}" ToolTip.Tip="Hue" Minimum="0" Maximum="360" Increment="0.5" CultureInfo="en-US" FormatString="\{0:N2\} °" Classes="picker" Grid.Row="0" Grid.Column="1" Margin="2"/>
                         <!-- Saturation -->
                         <TextBlock Text="S" ToolTip.Tip="Saturation" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Margin="2"/>
-                        <NumericUpDown Value="{Binding #colorPicker.Saturation, Mode=TwoWay}" ToolTip.Tip="Saturation" Minimum="0" Maximum="100" Increment="0.005" CultureInfo="en-US" FormatString="{0:N2} %" Classes="picker" Grid.Row="1" Grid.Column="1" Margin="2"/>
+                        <NumericUpDown Value="{Binding #colorPicker.Saturation, Mode=TwoWay}" ToolTip.Tip="Saturation" Minimum="0" Maximum="100" Increment="0.005" CultureInfo="en-US" FormatString="\{0:N2\} %" Classes="picker" Grid.Row="1" Grid.Column="1" Margin="2"/>
                         <!-- Value -->
                         <TextBlock Text="V" ToolTip.Tip="Value" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Margin="2"/>
-                        <NumericUpDown Value="{Binding #colorPicker.Value, Mode=TwoWay}" ToolTip.Tip="Value" Minimum="0" Maximum="100" Increment="0.5" CultureInfo="en-US" FormatString="{0:N2} %" Classes="picker" Grid.Row="2" Grid.Column="1" Margin="2"/>
+                        <NumericUpDown Value="{Binding #colorPicker.Value, Mode=TwoWay}" ToolTip.Tip="Value" Minimum="0" Maximum="100" Increment="0.5" CultureInfo="en-US" FormatString="\{0:N2\} %" Classes="picker" Grid.Row="2" Grid.Column="1" Margin="2"/>
                         <!-- Alpha -->
                         <TextBlock Text="A" ToolTip.Tip="Alpha" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" Margin="2"/>
-                        <NumericUpDown Value="{Binding #colorPicker.Alpha, Mode=TwoWay}" ToolTip.Tip="Alpha" Minimum="0" Maximum="100" Increment="0.5" CultureInfo="en-US" FormatString="{0:N2} %" Classes="picker" Grid.Row="3" Grid.Column="1" Margin="2"/>
+                        <NumericUpDown Value="{Binding #colorPicker.Alpha, Mode=TwoWay}" ToolTip.Tip="Alpha" Minimum="0" Maximum="100" Increment="0.5" CultureInfo="en-US" FormatString="\{0:N2\} %" Classes="picker" Grid.Row="3" Grid.Column="1" Margin="2"/>
                         <!-- Hex -->
                         <TextBox Text="{Binding $parent[local:MainView].Hex}" ToolTip.Tip="Hex value" Grid.Row="4" Grid.Column="1" Margin="2"/>
                         <!-- Red -->
