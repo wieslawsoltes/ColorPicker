@@ -17,8 +17,45 @@
     <UserControl.Styles>
         <StyleInclude Source="resm:ThemeEditor.Themes.BaseDark.xaml?assembly=ThemeEditor"/>
         <StyleInclude Source="resm:ThemeEditor.Controls.ColorPicker.ColorPicker.xaml?assembly=ThemeEditor.Controls.ColorPicker"/>
+        <Style Selector="NumericUpDown.picker">
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLowBrush}"/>
+            <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
+            <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <ButtonSpinner Name="PART_Spinner"
+                                   Background="{TemplateBinding Background}"
+                                   BorderThickness="{TemplateBinding BorderThickness}"
+                                   BorderBrush="{TemplateBinding BorderBrush}"
+                                   HorizontalContentAlignment="Stretch"
+                                   VerticalContentAlignment="Stretch"
+                                   AllowSpin="{TemplateBinding AllowSpin}"
+                                   ShowButtonSpinner="{TemplateBinding ShowButtonSpinner}"
+                                   ButtonSpinnerLocation="{TemplateBinding ButtonSpinnerLocation}">
+                        <TextBox Name="PART_TextBox"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 ContextMenu="{TemplateBinding ContextMenu}"
+                                 FontFamily="{TemplateBinding FontFamily}"
+                                 FontSize="{TemplateBinding FontSize}"
+                                 FontStyle="{TemplateBinding FontStyle}"
+                                 FontWeight="{TemplateBinding FontWeight}"
+                                 Foreground="{TemplateBinding Foreground}"
+                                 Watermark="{TemplateBinding Watermark}"
+                                 IsReadOnly="{TemplateBinding IsReadOnly}"
+                                 Text="{TemplateBinding Text}"
+                                 Padding="{TemplateBinding Padding}"
+                                 TextAlignment="{TemplateBinding TextAlignment}"
+                                 MinWidth="20"
+                                 AcceptsReturn="False"
+                                 TextWrapping="NoWrap">
+                        </TextBox>
+                    </ButtonSpinner>
+                </ControlTemplate>
+            </Setter>
+        </Style>
         <Style Selector="NumericUpDown.picker /template/ TextBox#PART_TextBox">
-            <Setter Property="Margin" Value="4"/>
             <Setter Property="Padding" Value="4"/>
         </Style>
         <Style Selector="NumericUpDown.picker">
