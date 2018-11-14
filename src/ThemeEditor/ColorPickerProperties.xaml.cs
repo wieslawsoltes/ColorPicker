@@ -104,6 +104,7 @@ namespace ThemeEditor
         {
             AvaloniaXamlLoader.Load(this);
         }
+
         protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
         {
             base.OnAttachedToVisualTree(e);
@@ -130,6 +131,7 @@ namespace ThemeEditor
                 _disposables = null;
             }
         }
+
         private Color GetColor()
         {
             return ColorHelpers.FromHSVA(
