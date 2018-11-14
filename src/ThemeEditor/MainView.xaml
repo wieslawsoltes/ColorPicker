@@ -143,7 +143,6 @@
                    BorderThickness="0"
                    Background="Transparent"
                    BorderBrush="{TemplateBinding BorderBrush}"
-                   BorderThickness="{TemplateBinding BorderThickness}"
                    Padding="{TemplateBinding Padding}"
                    Watermark="{TemplateBinding Watermark}"
                    DataValidationErrors.Errors="{TemplateBinding (DataValidationErrors.Errors)}"
