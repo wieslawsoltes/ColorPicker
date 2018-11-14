@@ -4,10 +4,9 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
-using ThemeEditor.Controls.ColorPicker;
 using ThemeEditor.Controls.ColorPicker.Converters;
 
-namespace ThemeEditor
+namespace ThemeEditor.Controls.ColorPicker
 {
     public class ColorPickerProperties : UserControl
     {
