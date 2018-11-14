@@ -46,8 +46,6 @@
                                  IsReadOnly="{TemplateBinding IsReadOnly}"
                                  Text="{TemplateBinding Text}"
                                  Padding="{TemplateBinding Padding}"
-                                 TextAlignment="{TemplateBinding TextAlignment}"
-                                 MinWidth="20"
                                  AcceptsReturn="False"
                                  TextWrapping="NoWrap">
                         </TextBox>
@@ -57,6 +55,7 @@
         </Style>
         <Style Selector="NumericUpDown.picker /template/ TextBox#PART_TextBox">
             <Setter Property="Padding" Value="4"/>
+            <Setter Property="MinWidth" Value="20"/>
         </Style>
         <Style Selector="NumericUpDown.picker">
             <Setter Property="ClipValueToMinMax" Value="True"/>
