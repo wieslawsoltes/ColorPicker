@@ -125,7 +125,7 @@
   <!-- https://github.com/AvaloniaUI/Avalonia/blob/master/src/Avalonia.Themes.Default/NumericUpDown.xaml -->
 
   <Style Selector="NumericUpDown.picker">
-    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLowBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
     <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
     <Setter Property="Template">
