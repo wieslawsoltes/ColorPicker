@@ -17,6 +17,14 @@
     <UserControl.Styles>
         <StyleInclude Source="resm:ThemeEditor.Themes.BaseDark.xaml?assembly=ThemeEditor"/>
         <StyleInclude Source="resm:ThemeEditor.Controls.ColorPicker.ColorPicker.xaml?assembly=ThemeEditor.Controls.ColorPicker"/>
+        <Style Selector="NumericUpDown.picker /template/ TextBox#PART_TextBox">
+            <Setter Property="Margin" Value="4"/>
+        </Style>
+        <Style Selector="NumericUpDown.picker">
+            <Setter Property="ClipValueToMinMax" Value="True"/>
+            <Setter Property="ShowButtonSpinner" Value="True"/>
+            <Setter Property="AllowSpin" Value="True"/>
+        </Style>
     </UserControl.Styles>
     <Grid ColumnDefinitions="*,8,300" Margin="8">
         <TabControl Grid.Column="0" Classes="main">
@@ -32,21 +40,29 @@
                 <Grid ColumnDefinitions="*,Auto">
                     <cp:ColorPicker x:Name="colorPicker" Grid.Column="0" Hue="198" Saturation="92" Value="85" Alpha="100" Margin="2"/>
                     <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,120" Grid.Column="1" Margin="2">
+                        <!-- Hue -->
                         <TextBlock Text="H" ToolTip.Tip="Hue" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Margin="2"/>
-                        <TextBox Text="{Binding #colorPicker.Hue, Mode=TwoWay}" ToolTip.Tip="Hue" Grid.Row="0" Grid.Column="1" Margin="2"/>
+                        <NumericUpDown Value="{Binding #colorPicker.Hue, Mode=TwoWay}" ToolTip.Tip="Hue" Minimum="0" Maximum="360" Increment="0.5" CultureInfo="en-US" FormatString="{0:N2} °" Classes="picker" Grid.Row="0" Grid.Column="1" Margin="2"/>
+                        <!-- Saturation -->
                         <TextBlock Text="S" ToolTip.Tip="Saturation" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Margin="2"/>
-                        <TextBox Text="{Binding #colorPicker.Saturation, Mode=TwoWay}" ToolTip.Tip="Saturation" Grid.Row="1" Grid.Column="1" Margin="2"/>
+                        <NumericUpDown Value="{Binding #colorPicker.Saturation, Mode=TwoWay}" ToolTip.Tip="Saturation" Minimum="0" Maximum="100" Increment="0.005" CultureInfo="en-US" FormatString="{0:N2} %" Classes="picker" Grid.Row="1" Grid.Column="1" Margin="2"/>
+                        <!-- Value -->
                         <TextBlock Text="V" ToolTip.Tip="Value" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Margin="2"/>
-                        <TextBox Text="{Binding #colorPicker.Value, Mode=TwoWay}" ToolTip.Tip="Value" Grid.Row="2" Grid.Column="1" Margin="2"/>
+                        <NumericUpDown Value="{Binding #colorPicker.Value, Mode=TwoWay}" ToolTip.Tip="Value" Minimum="0" Maximum="100" Increment="0.5" CultureInfo="en-US" FormatString="{0:N2} %" Classes="picker" Grid.Row="2" Grid.Column="1" Margin="2"/>
+                        <!-- Alpha -->
                         <TextBlock Text="A" ToolTip.Tip="Alpha" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" Margin="2"/>
-                        <TextBox Text="{Binding #colorPicker.Alpha, Mode=TwoWay}" ToolTip.Tip="Alpha" Grid.Row="3" Grid.Column="1" Margin="2"/>
+                        <NumericUpDown Value="{Binding #colorPicker.Alpha, Mode=TwoWay}" ToolTip.Tip="Alpha" Minimum="0" Maximum="100" Increment="0.5" CultureInfo="en-US" FormatString="{0:N2} %" Classes="picker" Grid.Row="3" Grid.Column="1" Margin="2"/>
+                        <!-- Hex -->
                         <TextBox Text="{Binding $parent[local:MainView].Hex}" ToolTip.Tip="Hex value" Grid.Row="4" Grid.Column="1" Margin="2"/>
+                        <!-- Red -->
                         <TextBlock Text="R" ToolTip.Tip="Red" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0" Margin="2"/>
-                        <TextBox Text="{Binding $parent[local:MainView].Red}" ToolTip.Tip="Red" Grid.Row="5" Grid.Column="1" Margin="2"/>
+                        <NumericUpDown Value="{Binding $parent[local:MainView].Red}" ToolTip.Tip="Red" Minimum="0" Maximum="255" Increment="1" CultureInfo="en-US" FormatString="G" Classes="picker" Grid.Row="5" Grid.Column="1" Margin="2"/>
+                        <!-- Green -->
                         <TextBlock Text="G" ToolTip.Tip="Green" VerticalAlignment="Center" Grid.Row="6" Grid.Column="0" Margin="2"/>
-                        <TextBox Text="{Binding $parent[local:MainView].Green}" ToolTip.Tip="Green" Grid.Row="6" Grid.Column="1" Margin="2"/>
+                        <NumericUpDown Value="{Binding $parent[local:MainView].Green}" ToolTip.Tip="Green" Minimum="0" Maximum="255" Increment="1" CultureInfo="en-US" FormatString="G" Classes="picker" Grid.Row="6" Grid.Column="1" Margin="2"/>
+                        <!-- Blue -->
                         <TextBlock Text="B" ToolTip.Tip="Blue" VerticalAlignment="Center" Grid.Row="7" Grid.Column="0" Margin="2"/>
-                        <TextBox Text="{Binding $parent[local:MainView].Blue}" ToolTip.Tip="Blue" Grid.Row="7" Grid.Column="1" Margin="2"/>
+                        <NumericUpDown Value="{Binding $parent[local:MainView].Blue}" ToolTip.Tip="Blue" Minimum="0" Maximum="255" Increment="1" CultureInfo="en-US" FormatString="G" Classes="picker" Grid.Row="7" Grid.Column="1" Margin="2"/>
                     </Grid>
                 </Grid>
             </TabItem>
