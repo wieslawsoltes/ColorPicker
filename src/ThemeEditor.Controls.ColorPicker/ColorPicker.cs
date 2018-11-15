@@ -121,7 +121,7 @@ namespace ThemeEditor.Controls.ColorPicker
             this.GetObservable(AlphaProperty).Subscribe(x => OnHsvaChange());
             this.GetObservable(RedProperty).Subscribe(x => OnRgbChange());
             this.GetObservable(GreenProperty).Subscribe(x => OnRgbChange());
-            this.GetObservable(BlueProperty).Subscribe(x => OnRgbChange()));
+            this.GetObservable(BlueProperty).Subscribe(x => OnRgbChange());
             this.GetObservable(HexProperty).Subscribe(x => OnHexChange());
         }
 
