@@ -44,40 +44,18 @@ namespace ThemeEditor.Colors
             double S = default;
             double V = default;
 
-            double m = r;
+            double min = Math.Min(Math.Min(r, g), b);
+            double max = Math.Max(Math.Max(r, g), b);
 
-            if (g < m)
-            {
-                m = g;
-            }
+            double delta = max - min;
 
-            if (b < m)
-            {
-                m = b;
-            }
-
-            double v = r;
-
-            if (g > v)
-            {
-                v = g;
-            }
-
-            if (b > v)
-            {
-                v = b;
-            }
-
-            double value = 100 * v / 255;
-            double delta = v - m;
-
-            if (v == 0.0)
+            if (max == 0.0)
             {
                 S = 0;
             }
             else
             {
-                S = 100 * delta / v;
+                S = 100.0 * delta / max;
             }
 
             if (S == 0)
@@ -86,28 +64,28 @@ namespace ThemeEditor.Colors
             }
             else
             {
-                if (r == v)
+                if (r == max)
                 {
                     H = 60.0 * (g - b) / delta;
                 }
-                else if (g == v)
+                else if (g == max)
                 {
                     H = 120.0 + 60.0 * (b - r) / delta;
                 }
-                else if (b == v)
+                else if (b == max)
                 {
                     H = 240.0 + 60.0 * (r - g) / delta;
                 }
 
                 if (H < 0.0)
                 {
-                    H = H + 360.0;
+                    H += 360.0;
                 }
             }
 
             H = Math.Round(H);
             S = Math.Round(S);
-            V = Math.Round(value);
+            V = Math.Round(100.0 * max / 255.0);
 
             return new HSV(H, S, V);
         }

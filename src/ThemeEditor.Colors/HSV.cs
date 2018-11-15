@@ -51,11 +51,11 @@ namespace ThemeEditor.Colors
             }
 
             double hh = h;
-            double ss = s / 100;
-            double vv = v / 100;
+            double ss = s / 100.0;
+            double vv = v / 100.0;
             if (hh >= 360.0)
                 hh = 0.0;
-            hh /= 60;
+            hh /= 60.0;
 
             long i = (long)hh;
             double ff = hh - i;
@@ -97,9 +97,9 @@ namespace ThemeEditor.Colors
                     break;
             }
 
-            R = Math.Round(R * 255);
-            G = Math.Round(G * 255);
-            B = Math.Round(B * 255);
+            R = Math.Round(R * 255.0);
+            G = Math.Round(G * 255.0);
+            B = Math.Round(B * 255.0);
 
             return new RGB(R, G, B);
         }
