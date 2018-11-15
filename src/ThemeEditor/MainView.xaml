@@ -11,17 +11,9 @@
              mc:Ignorable="d"
              d:DesignWidth="900" d:DesignHeight="500"
              Classes="themed">
-    <UserControl.Resources>
-        <cpc:ColorToHexConverter x:Key="ColorToHexConverter"/>
-    </UserControl.Resources>
     <UserControl.Styles>
         <StyleInclude Source="resm:ThemeEditor.Themes.BaseDark.xaml?assembly=ThemeEditor"/>
         <StyleInclude Source="resm:ThemeEditor.Controls.ColorPicker.ColorPicker.xaml?assembly=ThemeEditor.Controls.ColorPicker"/>
-        <Style Selector="NumericUpDown.picker">
-            <Setter Property="ClipValueToMinMax" Value="True"/>
-            <Setter Property="ShowButtonSpinner" Value="True"/>
-            <Setter Property="AllowSpin" Value="True"/>
-        </Style>
     </UserControl.Styles>
     <Grid ColumnDefinitions="*,8,300" Margin="8">
         <TabControl Grid.Column="0" Classes="main">
