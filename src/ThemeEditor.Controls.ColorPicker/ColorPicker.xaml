@@ -136,7 +136,7 @@
                     <TextBlock Text="G" ToolTip.Tip="Green" Classes="picker" Grid.Row="5" Grid.Column="0"/>
                     <NumericUpDown Value="{Binding Green, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="255" Increment="1" FormatString="G" Classes="picker" Grid.Row="5" Grid.Column="1"/>
                     <TextBlock Text="B" ToolTip.Tip="Blue" Classes="picker" Grid.Row="6" Grid.Column="0"/>
-                    <NumericUpDown Value="{Binding Blue, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="255" Increment="1" FormatString="G" Classes="picker" Grid.Row="6" Grid.Column="1"/>
+                    <NumericUpDown Value="{Binding Blue, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="255" Increment="1" FormatString="G" Classes="picker" Grid.Row="6" Grid.Column="1"/>
                     <TextBox Text="{Binding Hex, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" ToolTip.Tip="Hex value" Classes="picker" Grid.Row="7" Grid.Column="1"/>
                 </Grid>
             </Grid>
