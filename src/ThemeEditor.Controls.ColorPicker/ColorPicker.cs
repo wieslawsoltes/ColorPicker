@@ -259,15 +259,7 @@ namespace ThemeEditor.Controls.ColorPicker
         protected override Size ArrangeOverride(Size finalSize)
         {
             var size = base.ArrangeOverride(finalSize);
-            if (IsTemplateValid() && !_updating)
-            {
-                _updating = true;
-                UpdateThumbsFromHsva();
-                UpdateHsvaFromThumbs();
-                UpdateRgbFromHsva();
-                UpdateHexFromHsva();
-                _updating = false;
-            }
+            OnHsvaChange();
             return size;
         }
 
@@ -352,7 +344,7 @@ namespace ThemeEditor.Controls.ColorPicker
 
         private void OnHsvaChange()
         {
-            if (IsTemplateValid() && !_updating)
+            if (_updating == false && IsTemplateValid())
             {
                 _updating = true;
                 UpdateThumbsFromHsva();
