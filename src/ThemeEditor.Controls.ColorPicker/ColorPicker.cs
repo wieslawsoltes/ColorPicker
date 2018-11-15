@@ -357,7 +357,7 @@ namespace ThemeEditor.Controls.ColorPicker
 
         private void OnRgbChange()
         {
-            if (_updating == false)
+            if (_updating == false && IsTemplateValid())
             {
                 _updating = true;
                 Color color = ColorHelpers.FromRGBA(Red, Green, Blue, Alpha);
@@ -370,7 +370,7 @@ namespace ThemeEditor.Controls.ColorPicker
 
         private void OnHexChange()
         {
-            if (_updating == false)
+            if (_updating == false && IsTemplateValid())
             {
                 _updating = true;
                 UpdateHsvaFromHex();
