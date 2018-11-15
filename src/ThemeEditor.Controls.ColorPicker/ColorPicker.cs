@@ -363,6 +363,7 @@ namespace ThemeEditor.Controls.ColorPicker
                 Color color = ColorHelpers.FromRGBA(Red, Green, Blue, Alpha);
                 Hex = ColorHelpers.ToHexColor(color);
                 UpdateHsvaFromHex();
+                UpdateThumbsFromHsva();
                 _updating = false;
             }
         }
@@ -374,6 +375,7 @@ namespace ThemeEditor.Controls.ColorPicker
                 _updating = true;
                 UpdateHsvaFromHex();
                 UpdateRgbFromHsva();
+                UpdateThumbsFromHsva();
                 _updating = false;
             }
         }
