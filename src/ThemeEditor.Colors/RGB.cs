@@ -85,10 +85,6 @@ namespace ThemeEditor.Colors
                 }
             }
 
-            //H = Math.Round(H);
-            //S = Math.Round(S);
-            //V = Math.Round(V);
-
             return new HSV(H, S, V);
         }
     }

@@ -9,9 +9,9 @@ namespace ThemeEditor.Colors.UnitTests
         {
             var rgb = new RGB(67.0, 93.0, 125.0);
             var actual = rgb.ToHSV();
-            Assert.Equal(213.0, actual.H);
-            Assert.Equal(46.0, actual.S);
-            Assert.Equal(49.0, actual.V);
+            Assert.Equal(213.103448275862, actual.H);
+            Assert.Equal(46.4, actual.S);
+            Assert.Equal(49.0196078431373, actual.V);
         }
     }
 }
