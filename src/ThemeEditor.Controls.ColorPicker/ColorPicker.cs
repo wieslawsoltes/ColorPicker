@@ -261,10 +261,12 @@ namespace ThemeEditor.Controls.ColorPicker
             var size = base.ArrangeOverride(finalSize);
             if (IsTemplateValid() && !_updating)
             {
-                UpdateHsvaThumbs();
+                _updating = true;
+                UpdateThumbsFromHsva();
                 UpdateHsvaFromThumbs();
-                UpdateHexFromHsva();
                 UpdateRgbFromHsva();
+                UpdateHexFromHsva();
+                _updating = false;
             }
             return size;
         }
@@ -292,9 +294,8 @@ namespace ThemeEditor.Controls.ColorPicker
             Canvas.SetTop(thumb, top);
         }
 
-        private void UpdateHsvaThumbs()
+        private void UpdateThumbsFromHsva()
         {
-            _updating = true;
             double hueX = 0;
             double hueY = Hue * _hueCanvas.Bounds.Height / 360.0;
             double colorX = Saturation * _colorCanvas.Bounds.Width / 100.0;
@@ -304,12 +305,10 @@ namespace ThemeEditor.Controls.ColorPicker
             MoveThumb(_hueCanvas, _hueThumb, hueX, hueY);
             MoveThumb(_colorCanvas, _colorThumb, colorX, colorY);
             MoveThumb(_alphaCanvas, _alphaThumb, alphaX, alphaY);
-            _updating = false;
         }
 
         private void UpdateHsvaFromThumbs()
         {
-            _updating = true;
             double hueY = Canvas.GetTop(_hueThumb);
             double colorX = Canvas.GetLeft(_colorThumb);
             double colorY = Canvas.GetTop(_colorThumb);
@@ -322,15 +321,6 @@ namespace ThemeEditor.Controls.ColorPicker
             Saturation = s;
             Value = v;
             Alpha = a;
-            _updating = false;
-        }
-
-        private void UpdateRgbFromHsva()
-        {
-            Color color = ColorHelpers.FromHSVA(Hue, Saturation, Value, Alpha);
-            Red = color.R;
-            Green = color.G;
-            Blue = color.B;
         }
 
         private void UpdateHsvaFromHex()
@@ -346,6 +336,14 @@ namespace ThemeEditor.Controls.ColorPicker
             }
         }
 
+        private void UpdateRgbFromHsva()
+        {
+            Color color = ColorHelpers.FromHSVA(Hue, Saturation, Value, Alpha);
+            Red = color.R;
+            Green = color.G;
+            Blue = color.B;
+        }
+
         private void UpdateHexFromHsva()
         {
             Color color = ColorHelpers.FromHSVA(Hue, Saturation, Value, Alpha);
@@ -356,10 +354,12 @@ namespace ThemeEditor.Controls.ColorPicker
         {
             if (IsTemplateValid() && !_updating)
             {
-                UpdateHsvaThumbs();
+                _updating = true;
+                UpdateThumbsFromHsva();
                 UpdateHsvaFromThumbs();
-                UpdateHexFromHsva();
                 UpdateRgbFromHsva();
+                UpdateHexFromHsva();
+                _updating = false;
             }
         }
 
@@ -392,7 +392,11 @@ namespace ThemeEditor.Controls.ColorPicker
             {
                 var position = e.GetPosition(_colorCanvas);
                 MoveThumb(_colorCanvas, _colorThumb, position.X, position.Y);
+                _updating = true;
                 UpdateHsvaFromThumbs();
+                UpdateRgbFromHsva();
+                UpdateHexFromHsva();
+                _updating = false;
                 e.Device.Capture(_colorCanvas);
             }
         }
@@ -411,7 +415,11 @@ namespace ThemeEditor.Controls.ColorPicker
             {
                 var position = e.GetPosition(_colorCanvas);
                 MoveThumb(_colorCanvas, _colorThumb, position.X, position.Y);
+                _updating = true;
                 UpdateHsvaFromThumbs();
+                UpdateRgbFromHsva();
+                UpdateHexFromHsva();
+                _updating = false;
             }
         }
 
@@ -420,7 +428,11 @@ namespace ThemeEditor.Controls.ColorPicker
             double left = Canvas.GetLeft(_colorThumb);
             double top = Canvas.GetTop(_colorThumb);
             MoveThumb(_colorCanvas, _colorThumb, left + e.Vector.X, top + e.Vector.Y);
+            _updating = true;
             UpdateHsvaFromThumbs();
+            UpdateRgbFromHsva();
+            UpdateHexFromHsva();
+            _updating = false;
         }
 
         private void HueCanvas_PointerPressed(object sender, PointerPressedEventArgs e)
@@ -429,7 +441,11 @@ namespace ThemeEditor.Controls.ColorPicker
             {
                 var position = e.GetPosition(_hueCanvas);
                 MoveThumb(_hueCanvas, _hueThumb, 0, position.Y);
+                _updating = true;
                 UpdateHsvaFromThumbs();
+                UpdateRgbFromHsva();
+                UpdateHexFromHsva();
+                _updating = false;
                 e.Device.Capture(_hueCanvas);
             }
         }
@@ -448,7 +464,11 @@ namespace ThemeEditor.Controls.ColorPicker
             {
                 var position = e.GetPosition(_hueCanvas);
                 MoveThumb(_hueCanvas, _hueThumb, 0, position.Y);
+                _updating = true;
                 UpdateHsvaFromThumbs();
+                UpdateRgbFromHsva();
+                UpdateHexFromHsva();
+                _updating = false;
             }
         }
 
@@ -456,7 +476,11 @@ namespace ThemeEditor.Controls.ColorPicker
         {
             double top = Canvas.GetTop(_hueThumb);
             MoveThumb(_hueCanvas, _hueThumb, 0, top + e.Vector.Y);
+            _updating = true;
             UpdateHsvaFromThumbs();
+            UpdateRgbFromHsva();
+            UpdateHexFromHsva();
+            _updating = false;
         }
 
         private void AlphaCanvas_PointerPressed(object sender, PointerPressedEventArgs e)
@@ -465,7 +489,11 @@ namespace ThemeEditor.Controls.ColorPicker
             {
                 var position = e.GetPosition(_alphaCanvas);
                 MoveThumb(_alphaCanvas, _alphaThumb, position.X, 0);
+                _updating = true;
                 UpdateHsvaFromThumbs();
+                UpdateRgbFromHsva();
+                UpdateHexFromHsva();
+                _updating = false;
                 e.Device.Capture(_alphaCanvas);
             }
         }
@@ -484,7 +512,11 @@ namespace ThemeEditor.Controls.ColorPicker
             {
                 var position = e.GetPosition(_alphaCanvas);
                 MoveThumb(_alphaCanvas, _alphaThumb, position.X, 0);
+                _updating = true;
                 UpdateHsvaFromThumbs();
+                UpdateRgbFromHsva();
+                UpdateHexFromHsva();
+                _updating = false;
             }
         }
 
@@ -492,7 +524,11 @@ namespace ThemeEditor.Controls.ColorPicker
         {
             double left = Canvas.GetLeft(_alphaThumb);
             MoveThumb(_alphaCanvas, _alphaThumb, left + e.Vector.X, 0);
+            _updating = true;
             UpdateHsvaFromThumbs();
+            UpdateRgbFromHsva();
+            UpdateHexFromHsva();
+            _updating = false;
         }
     }
 }
