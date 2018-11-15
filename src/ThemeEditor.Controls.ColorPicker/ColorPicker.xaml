@@ -133,7 +133,6 @@
                         <Style Selector="TextBox.picker">
                             <Setter Property="Margin" Value="2"/>
                         </Style>
-
                     </Grid.Styles>
                     <TextBlock Text="H" ToolTip.Tip="Hue" Classes="picker" Grid.Row="0" Grid.Column="0"/>
                     <NumericUpDown Value="{Binding Hue, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="360" Increment="0.5" FormatString="{}{0:N2} °" Classes="picker" Grid.Row="0" Grid.Column="1"/>
