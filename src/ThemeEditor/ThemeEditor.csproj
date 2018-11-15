@@ -19,8 +19,9 @@
   <Import Project="..\..\build\Avalonia.props" />
   <Import Project="..\..\build\Avalonia.Desktop.props" />
   <Import Project="..\..\build\Avalonia.ReactiveUI.props" />
-  <!--<Import Project="..\..\build\NSubsys.props" />-->
   <Import Project="..\..\build\Newtonsoft.Json.props" />
+  <!--<Import Project="..\..\build\NSubsys.props" />-->
+  <Import Project="..\..\build\Linker.props" />
 
   <ItemGroup>
     <Compile Include="**\*.cs" Exclude="obj\**" />
