@@ -113,14 +113,14 @@
                             <Setter Property="ShowButtonSpinner" Value="True"/>
                             <Setter Property="AllowSpin" Value="True"/>
                             <Setter Property="CultureInfo" Value="en-US"/>
-                            <Setter Property="Margin" Value="1"/>
+                            <Setter Property="Margin" Value="2"/>
                         </Style>
                         <Style Selector="TextBlock.picker">
                             <Setter Property="VerticalAlignment" Value="Center"/>
-                            <Setter Property="Margin" Value="1"/>
+                            <Setter Property="Margin" Value="2"/>
                         </Style>
                         <Style Selector="TextBox.picker">
-                            <Setter Property="Margin" Value="1"/>
+                            <Setter Property="Margin" Value="2"/>
                         </Style>
                     </Grid.Styles>
                     <TextBlock Text="H" ToolTip.Tip="Hue" Classes="picker" Grid.Row="0" Grid.Column="0"/>
