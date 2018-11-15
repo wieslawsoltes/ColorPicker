@@ -49,6 +49,8 @@ namespace ThemeEditor.Colors
 
             double delta = max - min;
 
+            V = 100.0 * max / 255.0;
+
             if (max == 0.0)
             {
                 S = 0;
@@ -83,9 +85,9 @@ namespace ThemeEditor.Colors
                 }
             }
 
-            H = Math.Round(H);
-            S = Math.Round(S);
-            V = Math.Round(100.0 * max / 255.0);
+            //H = Math.Round(H);
+            //S = Math.Round(S);
+            //V = Math.Round(V);
 
             return new HSV(H, S, V);
         }
