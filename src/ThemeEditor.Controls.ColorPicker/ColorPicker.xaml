@@ -106,7 +106,7 @@
                         </Canvas>
                     </Grid>
                 </Grid>
-                <Grid Name="PART_PropertiesGrid" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,90" Grid.Column="1">
+                <Grid Name="PART_PropertiesGrid" RowDefinitions="Auto,Auto" ColumnDefinitions="*" Grid.Column="1">
                     <Grid.Styles>
                         <Style Selector="NumericUpDown.picker">
                             <Setter Property="ClipValueToMinMax" Value="True"/>
@@ -126,6 +126,9 @@
                             <Setter Property="Margin" Value="1"/>
                             <Setter Property="Padding" Value="4"/>
                         </Style>
+                        <Style Selector="TabControl.picker">
+                            <Setter Property="Margin" Value="0"/>
+                        </Style>
                         <Style Selector="TextBlock.picker">
                             <Setter Property="VerticalAlignment" Value="Center"/>
                             <Setter Property="Margin" Value="2"/>
@@ -134,21 +137,45 @@
                             <Setter Property="Margin" Value="2"/>
                         </Style>
                     </Grid.Styles>
-                    <TextBlock Text="H" ToolTip.Tip="Hue" Classes="picker" Grid.Row="0" Grid.Column="0"/>
-                    <NumericUpDown Value="{Binding Hue, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="360" Increment="0.5" FormatString="{}{0:N2} °" Classes="picker" Grid.Row="0" Grid.Column="1"/>
-                    <TextBlock Text="S" ToolTip.Tip="Saturation" Classes="picker" Grid.Row="1" Grid.Column="0"/>
-                    <NumericUpDown Value="{Binding Saturation, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="1" Grid.Column="1"/>
-                    <TextBlock Text="V" ToolTip.Tip="Value" Classes="picker" Grid.Row="2" Grid.Column="0"/>
-                    <NumericUpDown Value="{Binding Value, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="2" Grid.Column="1"/>
-                    <TextBlock Text="A" ToolTip.Tip="Alpha" Classes="picker" Grid.Row="3" Grid.Column="0"/>
-                    <NumericUpDown Value="{Binding Alpha, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="3" Grid.Column="1"/>
-                    <TextBlock Text="R" ToolTip.Tip="Red" Classes="picker" Grid.Row="4" Grid.Column="0"/>
-                    <NumericUpDown Value="{Binding Red, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="255" Increment="1" FormatString="G" Classes="picker" Grid.Row="4" Grid.Column="1"/>
-                    <TextBlock Text="G" ToolTip.Tip="Green" Classes="picker" Grid.Row="5" Grid.Column="0"/>
-                    <NumericUpDown Value="{Binding Green, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="255" Increment="1" FormatString="G" Classes="picker" Grid.Row="5" Grid.Column="1"/>
-                    <TextBlock Text="B" ToolTip.Tip="Blue" Classes="picker" Grid.Row="6" Grid.Column="0"/>
-                    <NumericUpDown Value="{Binding Blue, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="255" Increment="1" FormatString="G" Classes="picker" Grid.Row="6" Grid.Column="1"/>
-                    <TextBox Text="{Binding Hex, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" ToolTip.Tip="Hex value" Classes="picker" Grid.Row="7" Grid.Column="1"/>
+                    <TabControl Classes="picker" Grid.Row="0">
+                        <TabItem Header="HSV">
+                            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,90">
+                                <TextBlock Text="H" ToolTip.Tip="Hue" Classes="picker" Grid.Row="0" Grid.Column="0"/>
+                                <NumericUpDown Value="{Binding Hue, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="360" Increment="0.5" FormatString="{}{0:N2} °" Classes="picker" Grid.Row="0" Grid.Column="1"/>
+                                <TextBlock Text="S" ToolTip.Tip="Saturation" Classes="picker" Grid.Row="1" Grid.Column="0"/>
+                                <NumericUpDown Value="{Binding Saturation, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="1" Grid.Column="1"/>
+                                <TextBlock Text="V" ToolTip.Tip="Value" Classes="picker" Grid.Row="2" Grid.Column="0"/>
+                                <NumericUpDown Value="{Binding Value, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="2" Grid.Column="1"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="RGB">
+                            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,90">
+                                <TextBlock Text="R" ToolTip.Tip="Red" Classes="picker" Grid.Row="0" Grid.Column="0"/>
+                                <NumericUpDown Value="{Binding Red, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="255" Increment="1" FormatString="G" Classes="picker" Grid.Row="0" Grid.Column="1"/>
+                                <TextBlock Text="G" ToolTip.Tip="Green" Classes="picker" Grid.Row="1" Grid.Column="0"/>
+                                <NumericUpDown Value="{Binding Green, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="255" Increment="1" FormatString="G" Classes="picker" Grid.Row="1" Grid.Column="1"/>
+                                <TextBlock Text="B" ToolTip.Tip="Blue" Classes="picker" Grid.Row="2" Grid.Column="0"/>
+                                <NumericUpDown Value="{Binding Blue, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="255" Increment="1" FormatString="G" Classes="picker" Grid.Row="2" Grid.Column="1"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="CMYK">
+                            <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,90">
+                                <TextBlock Text="C" ToolTip.Tip="Cyan" Classes="picker" Grid.Row="0" Grid.Column="0"/>
+                                <NumericUpDown Value="{Binding Cyan, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="0" Grid.Column="1"/>
+                                <TextBlock Text="M" ToolTip.Tip="Magenta" Classes="picker" Grid.Row="1" Grid.Column="0"/>
+                                <NumericUpDown Value="{Binding Magenta, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="1" Grid.Column="1"/>
+                                <TextBlock Text="Y" ToolTip.Tip="Yellow" Classes="picker" Grid.Row="2" Grid.Column="0"/>
+                                <NumericUpDown Value="{Binding Yellow, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="2" Grid.Column="1"/>
+                                <TextBlock Text="K" ToolTip.Tip="Black key" Classes="picker" Grid.Row="3" Grid.Column="0"/>
+                                <NumericUpDown Value="{Binding BlackKey, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="3" Grid.Column="1"/>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                    <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,90" Grid.Row="1">
+                        <TextBlock Text="A" ToolTip.Tip="Alpha" Classes="picker" Grid.Row="0" Grid.Column="0"/>
+                        <NumericUpDown Value="{Binding Alpha, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="0" Grid.Column="1"/>
+                        <TextBox Text="{Binding Hex, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" ToolTip.Tip="Hex value" Classes="picker" Grid.Row="1" Grid.Column="1"/>
+                    </Grid>
                 </Grid>
             </Grid>
         </ControlTemplate>
