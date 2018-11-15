@@ -26,7 +26,7 @@
                 <TextBox x:Name="exportText" DataContext="{Binding CurrentTheme}" Classes="export"/>
             </TabItem>
             <TabItem Header="ColorPicker">
-                <cp:ColorPicker x:Name="colorPicker" Hex="#CC119EDA"/>
+                <cp:ColorPicker x:Name="colorPicker" Value1="180" Value2="50" Value3="50" Value4="75"/>
             </TabItem>
             <TabItem Header="ColorBlender">
                 <Grid>

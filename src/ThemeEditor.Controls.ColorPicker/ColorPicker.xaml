@@ -15,7 +15,7 @@
                         <Grid.Background>
                             <LinearGradientBrush StartPoint="0%,50%" EndPoint="100%,50%">
                                 <GradientStop Offset="0" Color="#FFFFFFFF"/>
-                                <GradientStop Offset="1" Color="{Binding Hue, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HueToColorConverter}}"/>
+                                <GradientStop Offset="1" Color="{Binding Value1, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HueToColorConverter}}"/>
                             </LinearGradientBrush>
                         </Grid.Background>
                         <Grid>
@@ -86,10 +86,10 @@
                                 <SolidColorBrush>
                                     <SolidColorBrush.Color>
                                         <MultiBinding Mode="OneWay" Converter="{StaticResource HsvaToColorConverter}">
-                                            <Binding Path="Hue" RelativeSource="{RelativeSource TemplatedParent}"/>
-                                            <Binding Path="Saturation" RelativeSource="{RelativeSource TemplatedParent}"/>
-                                            <Binding Path="Value" RelativeSource="{RelativeSource TemplatedParent}"/>
-                                            <Binding Path="Alpha" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                            <Binding Path="Value1" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                            <Binding Path="Value2" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                            <Binding Path="Value3" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                            <Binding Path="Value4" RelativeSource="{RelativeSource TemplatedParent}"/>
                                         </MultiBinding>
                                     </SolidColorBrush.Color>
                                 </SolidColorBrush>
@@ -140,22 +140,28 @@
                     <TabControl Classes="picker" Grid.Row="0">
                         <TabItem Header="HSV">
                             <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,90">
+                                <Grid.DataContext>
+                                    <local:HsvProperties ColorPicker="{Binding RelativeSource={RelativeSource TemplatedParent}}"/>
+                                </Grid.DataContext>
                                 <TextBlock Text="H" ToolTip.Tip="Hue" Classes="picker" Grid.Row="0" Grid.Column="0"/>
-                                <NumericUpDown Value="{Binding Hue, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="360" Increment="0.5" FormatString="{}{0:N2} °" Classes="picker" Grid.Row="0" Grid.Column="1"/>
+                                <NumericUpDown Value="{Binding Hue, Mode=TwoWay}" Minimum="0" Maximum="360" Increment="0.5" FormatString="{}{0:N2} °" Classes="picker" Grid.Row="0" Grid.Column="1"/>
                                 <TextBlock Text="S" ToolTip.Tip="Saturation" Classes="picker" Grid.Row="1" Grid.Column="0"/>
-                                <NumericUpDown Value="{Binding Saturation, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="1" Grid.Column="1"/>
+                                <NumericUpDown Value="{Binding Saturation, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="1" Grid.Column="1"/>
                                 <TextBlock Text="V" ToolTip.Tip="Value" Classes="picker" Grid.Row="2" Grid.Column="0"/>
-                                <NumericUpDown Value="{Binding Value, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="2" Grid.Column="1"/>
+                                <NumericUpDown Value="{Binding Value, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="2" Grid.Column="1"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="RGB">
                             <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,90">
+                                <Grid.DataContext>
+                                    <local:RgbProperties ColorPicker="{Binding RelativeSource={RelativeSource TemplatedParent}}"/>
+                                </Grid.DataContext>
                                 <TextBlock Text="R" ToolTip.Tip="Red" Classes="picker" Grid.Row="0" Grid.Column="0"/>
-                                <NumericUpDown Value="{Binding Red, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="255" Increment="1" FormatString="G" Classes="picker" Grid.Row="0" Grid.Column="1"/>
+                                <NumericUpDown Value="{Binding Red, Mode=TwoWay}" Minimum="0" Maximum="255" Increment="1" FormatString="G" Classes="picker" Grid.Row="0" Grid.Column="1"/>
                                 <TextBlock Text="G" ToolTip.Tip="Green" Classes="picker" Grid.Row="1" Grid.Column="0"/>
-                                <NumericUpDown Value="{Binding Green, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="255" Increment="1" FormatString="G" Classes="picker" Grid.Row="1" Grid.Column="1"/>
+                                <NumericUpDown Value="{Binding Green, Mode=TwoWay}" Minimum="0" Maximum="255" Increment="1" FormatString="G" Classes="picker" Grid.Row="1" Grid.Column="1"/>
                                 <TextBlock Text="B" ToolTip.Tip="Blue" Classes="picker" Grid.Row="2" Grid.Column="0"/>
-                                <NumericUpDown Value="{Binding Blue, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="255" Increment="1" FormatString="G" Classes="picker" Grid.Row="2" Grid.Column="1"/>
+                                <NumericUpDown Value="{Binding Blue, Mode=TwoWay}" Minimum="0" Maximum="255" Increment="1" FormatString="G" Classes="picker" Grid.Row="2" Grid.Column="1"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="CMYK">
