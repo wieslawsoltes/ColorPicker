@@ -38,6 +38,8 @@ namespace ThemeEditor.Colors
 
         public HSV ToHSV() => ToHSV(R, G, B);
 
+        public CMYK ToCMYK() => ToCMYK(R, G, B);
+
         public static HSV ToHSV(double r, double g, double b)
         {
             double H = default;
@@ -86,6 +88,30 @@ namespace ThemeEditor.Colors
             }
 
             return new HSV(H, S, V);
+        }
+
+        public static CMYK ToCMYK(double r, double g, double b)
+        {
+            double C = default(double);
+            double M = default(double);
+            double Y = default(double);
+            double K = default(double);
+
+            double rr = r / 255.0;
+            double gg = g / 255.0;
+            double bb = b / 255.0;
+
+            K = 1.0 - Math.Max(Math.Max(rr, gg), bb);
+            C = (1.0 - rr - K) / (1.0 - K);
+            M = (1.0 - gg - K) / (1.0 - K);
+            Y = (1.0 - bb - K) / (1.0 - K);
+
+            C *= 100.0;
+            M *= 100.0;
+            Y *= 100.0;
+            K *= 100.0;
+
+            return new CMYK(C, M, Y, K);
         }
     }
 }

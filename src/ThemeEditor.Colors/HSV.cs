@@ -38,6 +38,8 @@ namespace ThemeEditor.Colors
 
         public RGB ToRGB() => ToRGB(H, S, V);
 
+        public CMYK ToCMYK() => ToCMYK(H, S, V);
+
         public static RGB ToRGB(double h, double s, double v)
         {
             double R = default;
@@ -102,6 +104,11 @@ namespace ThemeEditor.Colors
             B = Math.Round(B * 255.0);
 
             return new RGB(R, G, B);
+        }
+
+        public static CMYK ToCMYK(double h, double s, double v)
+        {
+            return ToRGB(h, s, v).ToCMYK();
         }
     }
 }
