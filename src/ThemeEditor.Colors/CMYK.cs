@@ -12,16 +12,16 @@ namespace ThemeEditor.Colors
         public CMYK(double c, double m, double y, double k)
         {
             C = c;
-            Y = y;
             M = m;
+            Y = y;
             K = k;
         }
 
         public CMYK(CMYK cmyk)
         {
             C = cmyk.C;
-            Y = cmyk.Y;
             M = cmyk.M;
+            Y = cmyk.Y;
             K = cmyk.K;
         }
 
@@ -29,8 +29,8 @@ namespace ThemeEditor.Colors
         {
             CMYK cmyk = rgb.ToCMYK();
             C = cmyk.C;
-            Y = cmyk.Y;
             M = cmyk.M;
+            Y = cmyk.Y;
             K = cmyk.K;
         }
 
@@ -38,8 +38,8 @@ namespace ThemeEditor.Colors
         {
             CMYK cmyk = hsv.ToCMYK();
             C = cmyk.C;
-            Y = cmyk.Y;
             M = cmyk.M;
+            Y = cmyk.Y;
             K = cmyk.K;
         }
 
