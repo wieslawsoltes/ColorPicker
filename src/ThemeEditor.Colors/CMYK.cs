@@ -36,7 +36,7 @@ namespace ThemeEditor.Colors
 
         public CMYK(HSV hsv)
         {
-            CMYK cmyk = hsv.ToRGB().ToCMYK();
+            CMYK cmyk = hsv.ToCMYK();
             C = cmyk.C;
             Y = cmyk.Y;
             M = cmyk.M;

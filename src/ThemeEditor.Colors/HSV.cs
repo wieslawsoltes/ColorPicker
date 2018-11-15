@@ -30,6 +30,14 @@ namespace ThemeEditor.Colors
             V = hsv.V;
         }
 
+        public HSV(CMYK cmyk)
+        {
+            HSV hsv = cmyk.ToHSV();
+            H = hsv.H;
+            S = hsv.S;
+            V = hsv.V;
+        }
+
         public HSV WithH(double h) => new HSV(h, S, V);
 
         public HSV WithS(double s) => new HSV(H, s, V);

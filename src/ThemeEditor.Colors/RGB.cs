@@ -30,6 +30,14 @@ namespace ThemeEditor.Colors
             B = rgb.B;
         }
 
+        public RGB(CMYK cmyk)
+        {
+            RGB rgb = cmyk.ToRGB();
+            R = rgb.R;
+            G = rgb.G;
+            B = rgb.B;
+        }
+
         public RGB WithR(double r) => new RGB(r, G, B);
 
         public RGB WithG(double g) => new RGB(R, g, B);
