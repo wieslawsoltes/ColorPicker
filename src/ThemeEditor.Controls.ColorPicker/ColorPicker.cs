@@ -391,8 +391,8 @@ namespace ThemeEditor.Controls.ColorPicker
             if (e.MouseButton == MouseButton.Left)
             {
                 var position = e.GetPosition(_colorCanvas);
-                MoveThumb(_colorCanvas, _colorThumb, position.X, position.Y);
                 _updating = true;
+                MoveThumb(_colorCanvas, _colorThumb, position.X, position.Y);
                 UpdateHsvaFromThumbs();
                 UpdateRgbFromHsva();
                 UpdateHexFromHsva();
@@ -414,8 +414,8 @@ namespace ThemeEditor.Controls.ColorPicker
             if (e.Device.Captured == _colorCanvas)
             {
                 var position = e.GetPosition(_colorCanvas);
-                MoveThumb(_colorCanvas, _colorThumb, position.X, position.Y);
                 _updating = true;
+                MoveThumb(_colorCanvas, _colorThumb, position.X, position.Y);
                 UpdateHsvaFromThumbs();
                 UpdateRgbFromHsva();
                 UpdateHexFromHsva();
@@ -427,8 +427,8 @@ namespace ThemeEditor.Controls.ColorPicker
         {
             double left = Canvas.GetLeft(_colorThumb);
             double top = Canvas.GetTop(_colorThumb);
-            MoveThumb(_colorCanvas, _colorThumb, left + e.Vector.X, top + e.Vector.Y);
             _updating = true;
+            MoveThumb(_colorCanvas, _colorThumb, left + e.Vector.X, top + e.Vector.Y);
             UpdateHsvaFromThumbs();
             UpdateRgbFromHsva();
             UpdateHexFromHsva();
@@ -440,8 +440,8 @@ namespace ThemeEditor.Controls.ColorPicker
             if (e.MouseButton == MouseButton.Left)
             {
                 var position = e.GetPosition(_hueCanvas);
-                MoveThumb(_hueCanvas, _hueThumb, 0, position.Y);
                 _updating = true;
+                MoveThumb(_hueCanvas, _hueThumb, 0, position.Y);
                 UpdateHsvaFromThumbs();
                 UpdateRgbFromHsva();
                 UpdateHexFromHsva();
@@ -463,8 +463,8 @@ namespace ThemeEditor.Controls.ColorPicker
             if (e.Device.Captured == _hueCanvas)
             {
                 var position = e.GetPosition(_hueCanvas);
-                MoveThumb(_hueCanvas, _hueThumb, 0, position.Y);
                 _updating = true;
+                MoveThumb(_hueCanvas, _hueThumb, 0, position.Y);
                 UpdateHsvaFromThumbs();
                 UpdateRgbFromHsva();
                 UpdateHexFromHsva();
@@ -475,8 +475,8 @@ namespace ThemeEditor.Controls.ColorPicker
         private void HueThumb_DragDelta(object sender, VectorEventArgs e)
         {
             double top = Canvas.GetTop(_hueThumb);
-            MoveThumb(_hueCanvas, _hueThumb, 0, top + e.Vector.Y);
             _updating = true;
+            MoveThumb(_hueCanvas, _hueThumb, 0, top + e.Vector.Y);
             UpdateHsvaFromThumbs();
             UpdateRgbFromHsva();
             UpdateHexFromHsva();
@@ -488,8 +488,8 @@ namespace ThemeEditor.Controls.ColorPicker
             if (e.MouseButton == MouseButton.Left)
             {
                 var position = e.GetPosition(_alphaCanvas);
-                MoveThumb(_alphaCanvas, _alphaThumb, position.X, 0);
                 _updating = true;
+                MoveThumb(_alphaCanvas, _alphaThumb, position.X, 0);
                 UpdateHsvaFromThumbs();
                 UpdateRgbFromHsva();
                 UpdateHexFromHsva();
@@ -511,8 +511,8 @@ namespace ThemeEditor.Controls.ColorPicker
             if (e.Device.Captured == _alphaCanvas)
             {
                 var position = e.GetPosition(_alphaCanvas);
-                MoveThumb(_alphaCanvas, _alphaThumb, position.X, 0);
                 _updating = true;
+                MoveThumb(_alphaCanvas, _alphaThumb, position.X, 0);
                 UpdateHsvaFromThumbs();
                 UpdateRgbFromHsva();
                 UpdateHexFromHsva();
@@ -523,8 +523,8 @@ namespace ThemeEditor.Controls.ColorPicker
         private void AlphaThumb_DragDelta(object sender, VectorEventArgs e)
         {
             double left = Canvas.GetLeft(_alphaThumb);
-            MoveThumb(_alphaCanvas, _alphaThumb, left + e.Vector.X, 0);
             _updating = true;
+            MoveThumb(_alphaCanvas, _alphaThumb, left + e.Vector.X, 0);
             UpdateHsvaFromThumbs();
             UpdateRgbFromHsva();
             UpdateHexFromHsva();
