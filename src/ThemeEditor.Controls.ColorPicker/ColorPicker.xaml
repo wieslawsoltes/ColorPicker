@@ -114,6 +114,14 @@
                             <Setter Property="AllowSpin" Value="True"/>
                             <Setter Property="CultureInfo" Value="en-US"/>
                             <Setter Property="Margin" Value="2"/>
+                            <Setter Property="Padding" Value="1"/>
+                        </Style>
+                        <Style Selector="NumericUpDown.picker /template/ TextBox#PART_Spinner">
+                            <Setter Property="Padding" Value="2"/>
+                        </Style>
+                        <Style Selector="NumericUpDown.picker /template/ TextBox#PART_TextBox">
+                            <Setter Property="Margin" Value="2"/>
+                            <Setter Property="Padding" Value="1"/>
                         </Style>
                         <Style Selector="TextBlock.picker">
                             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -122,6 +130,7 @@
                         <Style Selector="TextBox.picker">
                             <Setter Property="Margin" Value="2"/>
                         </Style>
+
                     </Grid.Styles>
                     <TextBlock Text="H" ToolTip.Tip="Hue" Classes="picker" Grid.Row="0" Grid.Column="0"/>
                     <NumericUpDown Value="{Binding Hue, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="360" Increment="0.5" FormatString="{}{0:N2} °" Classes="picker" Grid.Row="0" Grid.Column="1"/>
