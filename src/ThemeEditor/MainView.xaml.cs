@@ -14,19 +14,15 @@ namespace ThemeEditor
         private TextBox _exportText = null;
         private ThemeEditorView _editorView = null;
         private ColorPicker _colorPicker = null;
-        private ColorPickerProperties _colorPickerProperties = null;
         private ColorBlender _colorBlender = null;
 
         public MainView()
         {
             this.InitializeComponent();
-
             _previewView = this.Find<ThemePreviewView>("previewView");
             _exportText = this.Find<TextBox>("exportText");
             _editorView = this.Find<ThemeEditorView>("editorView");
             _colorPicker = this.Find<ColorPicker>("colorPicker");
-            _colorPickerProperties = this.Find<ColorPickerProperties>("colorPickerProperties");
-            _colorPickerProperties.ColorPicker = _colorPicker;
             _colorBlender = this.Find<ColorBlender>("colorBlender");
             _colorBlender.DataContext = new ColorMatchViewModel(199, 95, 62);
         }

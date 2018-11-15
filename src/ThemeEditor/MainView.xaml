@@ -26,10 +26,7 @@
                 <TextBox x:Name="exportText" DataContext="{Binding CurrentTheme}" Classes="export"/>
             </TabItem>
             <TabItem Header="ColorPicker">
-                <Grid ColumnDefinitions="*,Auto">
-                    <cp:ColorPicker x:Name="colorPicker" Hue="198" Saturation="92" Value="85" Alpha="100" Grid.Column="0" Margin="2"/>
-                    <cp:ColorPickerProperties x:Name="colorPickerProperties" Grid.Column="1" Margin="2"/>
-                </Grid>
+                <cp:ColorPicker x:Name="colorPicker" Hue="198" Saturation="92" Value="85" Alpha="100"/>
             </TabItem>
             <TabItem Header="ColorBlender">
                 <Grid>
