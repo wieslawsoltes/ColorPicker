@@ -109,28 +109,37 @@ namespace ThemeEditor.Controls.ColorPicker
 
         private void OnValue1Change(double value1)
         {
-            _updating = true;
-            UpdatePropertyValues();
-            _updating = false;
+            if (_updating == false && ColorPicker != null)
+            {
+                _updating = true;
+                UpdatePropertyValues();
+                _updating = false;
+            }
         }
 
         private void OnValue2Change(double value2)
         {
-            _updating = true;
-            UpdatePropertyValues();
-            _updating = false;
+            if (_updating == false && ColorPicker != null)
+            {
+                _updating = true;
+                UpdatePropertyValues();
+                _updating = false;
+            }
         }
 
         private void OnValue3Change(double value3)
         {
-            _updating = true;
-            UpdatePropertyValues();
-            _updating = false;
+            if (_updating == false && ColorPicker != null)
+            {
+                _updating = true;
+                UpdatePropertyValues();
+                _updating = false;
+            }
         }
 
         private void OnHueChange(double hue)
         {
-            if (ColorPicker != null)
+            if (_updating == false && ColorPicker != null)
             {
                 _updating = true;
                 UpdateColorPickerValues();
@@ -140,7 +149,7 @@ namespace ThemeEditor.Controls.ColorPicker
 
         private void OnSaturationChange(double saturation)
         {
-            if (ColorPicker != null)
+            if (_updating == false && ColorPicker != null)
             {
                 _updating = true;
                 UpdateColorPickerValues();
@@ -150,7 +159,7 @@ namespace ThemeEditor.Controls.ColorPicker
 
         private void OnValueChange(double value)
         {
-            if (ColorPicker != null)
+            if (_updating == false && ColorPicker != null)
             {
                 _updating = true;
                 UpdateColorPickerValues();

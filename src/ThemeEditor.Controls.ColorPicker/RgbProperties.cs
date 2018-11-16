@@ -133,7 +133,7 @@ namespace ThemeEditor.Controls.ColorPicker
 
         private void OnValue1Change(double value1)
         {
-            if (ColorPicker != null)
+            if (_updating == false && ColorPicker != null)
             {
                 _updating = true;
                 UpdatePropertyValues();
@@ -143,7 +143,7 @@ namespace ThemeEditor.Controls.ColorPicker
 
         private void OnValue2Change(double value2)
         {
-            if (ColorPicker != null)
+            if (_updating == false && ColorPicker != null)
             {
                 _updating = true;
                 UpdatePropertyValues();
@@ -153,7 +153,7 @@ namespace ThemeEditor.Controls.ColorPicker
 
         private void OnValue3Change(double value3)
         {
-            if (ColorPicker != null)
+            if (_updating == false && ColorPicker != null)
             {
                 _updating = true;
                 UpdatePropertyValues();
@@ -163,7 +163,7 @@ namespace ThemeEditor.Controls.ColorPicker
 
         private void OnRedChange(byte red)
         {
-            if (ColorPicker != null)
+            if (_updating == false && ColorPicker != null)
             {
                 _updating = true;
                 UpdateColorPickerValues();
@@ -173,7 +173,7 @@ namespace ThemeEditor.Controls.ColorPicker
 
         private void OnGreenChange(byte green)
         {
-            if (ColorPicker != null)
+            if (_updating == false && ColorPicker != null)
             {
                 _updating = true;
                 UpdateColorPickerValues();
@@ -183,7 +183,7 @@ namespace ThemeEditor.Controls.ColorPicker
 
         private void OnBlueChange(byte value)
         {
-            if (ColorPicker != null)
+            if (_updating == false && ColorPicker != null)
             {
                 _updating = true;
                 UpdateColorPickerValues();
