@@ -5,7 +5,9 @@ using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Data.Converters;
 using Avalonia.Input;
+using Avalonia.Media;
 using ThemeEditor.Colors;
+using ThemeEditor.Controls.ColorPicker.Converters;
 
 namespace ThemeEditor.Controls.ColorPicker
 {
