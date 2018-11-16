@@ -90,7 +90,7 @@ namespace ThemeEditor.Controls.ColorPicker
             ColorPicker.Value3 = Value;
         }
 
-        private void UpdateHsvValues()
+        private void UpdatePropertyValues()
         {
             Hue = ColorPicker.Value1;
             Saturation = ColorPicker.Value2;
@@ -110,21 +110,21 @@ namespace ThemeEditor.Controls.ColorPicker
         private void OnValue1Change(double value1)
         {
             _updating = true;
-            UpdateHsvValues();
+            UpdatePropertyValues();
             _updating = false;
         }
 
         private void OnValue2Change(double value2)
         {
             _updating = true;
-            UpdateHsvValues();
+            UpdatePropertyValues();
             _updating = false;
         }
 
         private void OnValue3Change(double value3)
         {
             _updating = true;
-            UpdateHsvValues();
+            UpdatePropertyValues();
             _updating = false;
         }
 
@@ -155,16 +155,6 @@ namespace ThemeEditor.Controls.ColorPicker
                 _updating = true;
                 UpdateColorPickerValues();
                 _updating = false;
-            }
-        }
-
-        private void OnColorPickerChange(ColorPicker colorPicker)
-        {
-            if (ColorPicker != null)
-            {
-                ColorPicker.GetObservable(ColorPicker.Value1Property).Subscribe(x => OnValue1Change(x));
-                ColorPicker.GetObservable(ColorPicker.Value2Property).Subscribe(x => OnValue2Change(x));
-                ColorPicker.GetObservable(ColorPicker.Value3Property).Subscribe(x => OnValue3Change(x));
             }
         }
     }

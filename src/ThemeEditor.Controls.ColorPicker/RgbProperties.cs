@@ -112,7 +112,7 @@ namespace ThemeEditor.Controls.ColorPicker
             ColorPicker.Value3 = hsv.V;
         }
 
-        private void UpdateRgbValues()
+        private void UpdatePropertyValues()
         {
             HSV hsv = new HSV(ColorPicker.Value1, ColorPicker.Value2, ColorPicker.Value3);
             RGB rgb = hsv.ToRGB();
@@ -136,7 +136,7 @@ namespace ThemeEditor.Controls.ColorPicker
             if (ColorPicker != null)
             {
                 _updating = true;
-                UpdateRgbValues();
+                UpdatePropertyValues();
                 _updating = false;
             }
         }
@@ -146,7 +146,7 @@ namespace ThemeEditor.Controls.ColorPicker
             if (ColorPicker != null)
             {
                 _updating = true;
-                UpdateRgbValues();
+                UpdatePropertyValues();
                 _updating = false;
             }
         }
@@ -156,7 +156,7 @@ namespace ThemeEditor.Controls.ColorPicker
             if (ColorPicker != null)
             {
                 _updating = true;
-                UpdateRgbValues();
+                UpdatePropertyValues();
                 _updating = false;
             }
         }
