@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Avalonia;
+using Avalonia.Logging.Serilog;
 using ThemeEditor.ViewModels;
 
 namespace ThemeEditor
@@ -34,6 +35,7 @@ namespace ThemeEditor
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
                          .UsePlatformDetect()
-                         .UseReactiveUI();
+                         .UseReactiveUI()
+                         .LogToDebug();
     }
 }
