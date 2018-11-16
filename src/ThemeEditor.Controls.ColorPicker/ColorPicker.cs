@@ -9,299 +9,7 @@ using ThemeEditor.Colors;
 
 namespace ThemeEditor.Controls.ColorPicker
 {
-    public class HsvProperties : AvaloniaObject
-    {
-        public static readonly StyledProperty<ColorPicker> ColorPickerProperty =
-            AvaloniaProperty.Register<HsvProperties, ColorPicker>(nameof(ColorPicker));
-
-        public static readonly StyledProperty<double> HueProperty =
-            AvaloniaProperty.Register<HsvProperties, double>(nameof(Hue), 0.0, validate: ValidateHue);
-
-        public static readonly StyledProperty<double> SaturationProperty =
-            AvaloniaProperty.Register<HsvProperties, double>(nameof(Saturation), 100.0, validate: ValidateSaturation);
-
-        public static readonly StyledProperty<double> ValueProperty =
-            AvaloniaProperty.Register<HsvProperties, double>(nameof(Value), 100.0, validate: ValidateValue);
-
-        private static double ValidateHue(HsvProperties cp, double hue)
-        {
-            if (hue < 0.0 || hue > 360.0)
-            {
-                throw new ArgumentException("Invalid Hue value.");
-            }
-            return hue;
-        }
-
-        private static double ValidateSaturation(HsvProperties cp, double saturation)
-        {
-            if (saturation < 0.0 || saturation > 100.0)
-            {
-                throw new ArgumentException("Invalid Saturation value.");
-            }
-            return saturation;
-        }
-
-        private static double ValidateValue(HsvProperties cp, double value)
-        {
-            if (value < 0.0 || value > 100.0)
-            {
-                throw new ArgumentException("Invalid Value value.");
-            }
-            return value;
-        }
-
-        public HsvProperties()
-        {
-            this.GetObservable(HueProperty).Subscribe(x => OnHueChange(x));
-            this.GetObservable(SaturationProperty).Subscribe(x => OnSaturationChange(x));
-            this.GetObservable(ValueProperty).Subscribe(x => OnValueChange(x));
-            this.GetObservable(ColorPickerProperty).Subscribe(x => OnColorPickerChange(x));
-        }
-
-        public ColorPicker ColorPicker
-        {
-            get { return GetValue(ColorPickerProperty); }
-            set { SetValue(ColorPickerProperty, value); }
-        }
-
-        public double Hue
-        {
-            get { return GetValue(HueProperty); }
-            set { SetValue(HueProperty, value); }
-        }
-
-        public double Saturation
-        {
-            get { return GetValue(SaturationProperty); }
-            set { SetValue(SaturationProperty, value); }
-        }
-
-        public double Value
-        {
-            get { return GetValue(ValueProperty); }
-            set { SetValue(ValueProperty, value); }
-        }
-
-        private void OnHueChange(double hue)
-        {
-            if (ColorPicker != null)
-            {
-                ColorPicker.Value1 = hue;
-            }
-        }
-
-        private void OnSaturationChange(double saturation)
-        {
-            if (ColorPicker != null)
-            {
-                ColorPicker.Value2 = saturation;
-            }
-        }
-
-        private void OnValueChange(double value)
-        {
-            if (ColorPicker != null)
-            {
-                ColorPicker.Value3 = value;
-            }
-        }
-
-        private void OnColorPickerChange(ColorPicker colorPicker)
-        {
-            if (ColorPicker != null)
-            {
-                ColorPicker.GetObservable(ColorPicker.Value1Property).Subscribe(x => OnValue1Change(x));
-                ColorPicker.GetObservable(ColorPicker.Value2Property).Subscribe(x => OnValue2Change(x));
-                ColorPicker.GetObservable(ColorPicker.Value3Property).Subscribe(x => OnValue3Change(x));
-            }
-        }
-
-        private void OnValue1Change(double value1)
-        {
-            Hue = value1;
-        }
-
-        private void OnValue2Change(double value2)
-        {
-            Saturation = value2;
-        }
-
-        private void OnValue3Change(double value3)
-        {
-            Value = value3;
-        }
-    }
-
-    public class RgbProperties : AvaloniaObject
-    {
-        public static readonly StyledProperty<ColorPicker> ColorPickerProperty =
-            AvaloniaProperty.Register<RgbProperties, ColorPicker>(nameof(ColorPicker));
-
-        public static readonly StyledProperty<byte> RedProperty =
-            AvaloniaProperty.Register<RgbProperties, byte>(nameof(Red), 0xFF, validate: ValidateRed);
-
-        public static readonly StyledProperty<byte> GreenProperty =
-            AvaloniaProperty.Register<RgbProperties, byte>(nameof(Green), 0x00, validate: ValidateGreen);
-
-        public static readonly StyledProperty<byte> BlueProperty =
-            AvaloniaProperty.Register<RgbProperties, byte>(nameof(Blue), 0x00, validate: ValidateBlue);
-
-        //public static readonly StyledProperty<double> AlphaProperty =
-        //    AvaloniaProperty.Register<RgbProperties, double>(nameof(Alpha), 100.0, validate: ValidateAlpha);
-
-        private static byte ValidateRed(RgbProperties cp, byte red)
-        {
-            if (red < 0 || red > 255)
-            {
-                throw new ArgumentException("Invalid Red value.");
-            }
-            return red;
-        }
-
-        private static byte ValidateGreen(RgbProperties cp, byte green)
-        {
-            if (green < 0 || green > 255)
-            {
-                throw new ArgumentException("Invalid Green value.");
-            }
-            return green;
-        }
-
-        private static byte ValidateBlue(RgbProperties cp, byte blue)
-        {
-            if (blue < 0 || blue > 255)
-            {
-                throw new ArgumentException("Invalid Blue value.");
-            }
-            return blue;
-        }
-
-        //private static double ValidateAlpha(RgbProperties cp, double alpha)
-        //{
-        //    if (alpha < 0.0 || alpha > 100.0)
-        //    {
-        //        throw new ArgumentException("Invalid Alpha value.");
-        //    }
-        //    return alpha;
-        //}
-
-        public RgbProperties()
-        {
-            this.GetObservable(RedProperty).Subscribe(x => OnRedChange(x));
-            this.GetObservable(GreenProperty).Subscribe(x => OnGreenChange(x));
-            this.GetObservable(BlueProperty).Subscribe(x => OnValueChange(x));
-            this.GetObservable(ColorPickerProperty).Subscribe(x => OnColorPickerChange(x));
-            //this.GetObservable(AlphaProperty).Subscribe(x => OnHsvaChange());
-        }
-
-        public ColorPicker ColorPicker
-        {
-            get { return GetValue(ColorPickerProperty); }
-            set { SetValue(ColorPickerProperty, value); }
-        }
-
-        public byte Red
-        {
-            get { return GetValue(RedProperty); }
-            set { SetValue(RedProperty, value); }
-        }
-
-        public byte Green
-        {
-            get { return GetValue(GreenProperty); }
-            set { SetValue(GreenProperty, value); }
-        }
-
-        public byte Blue
-        {
-            get { return GetValue(BlueProperty); }
-            set { SetValue(BlueProperty, value); }
-        }
-
-        //public double Alpha
-        //{
-        //    get { return GetValue(AlphaProperty); }
-        //    set { SetValue(AlphaProperty, value); }
-        //}
-
-        private void UpdateColorPickerValues()
-        {
-            RGB rgb = new RGB(Red, Green, Blue);
-            HSV hsv = rgb.ToHSV();
-            ColorPicker.Value1 = hsv.H;
-            ColorPicker.Value2 = hsv.S;
-            ColorPicker.Value3 = hsv.V;
-        }
-
-        private void OnRedChange(byte red)
-        {
-            if (ColorPicker != null)
-            {
-                UpdateColorPickerValues();
-            }
-        }
-
-        private void OnGreenChange(byte green)
-        {
-            if (ColorPicker != null)
-            {
-                UpdateColorPickerValues();
-            }
-        }
-
-        private void OnValueChange(byte value)
-        {
-            if (ColorPicker != null)
-            {
-                UpdateColorPickerValues();
-            }
-        }
-
-        private void OnColorPickerChange(ColorPicker colorPicker)
-        {
-            if (ColorPicker != null)
-            {
-                ColorPicker.GetObservable(ColorPicker.Value1Property).Subscribe(x => OnValue1Change(x));
-                ColorPicker.GetObservable(ColorPicker.Value2Property).Subscribe(x => OnValue2Change(x));
-                ColorPicker.GetObservable(ColorPicker.Value3Property).Subscribe(x => OnValue3Change(x));
-            }
-        }
-
-        private void UpdateRgbValues()
-        {
-            HSV hsv = new HSV(ColorPicker.Value1, ColorPicker.Value2, ColorPicker.Value3);
-            RGB rgb = hsv.ToRGB();
-            Red = (byte)rgb.R;
-            Green = (byte)rgb.G;
-            Blue = (byte)rgb.B;
-        }
-
-        private void OnValue1Change(double value1)
-        {
-            if (ColorPicker != null)
-            {
-                UpdateRgbValues();
-            }
-        }
-
-        private void OnValue2Change(double value2)
-        {
-            if (ColorPicker != null)
-            {
-                UpdateRgbValues();
-            }
-        }
-
-        private void OnValue3Change(double value3)
-        {
-            if (ColorPicker != null)
-            {
-                UpdateRgbValues();
-            }
-        }
-    }
-
-    public class HueValueConverter : IValueConverter
+    public class HueConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -322,7 +30,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    public class SaturationValueConverter : IValueConverter
+    public class SaturationConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -343,7 +51,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    public class ValueValueConverter : IValueConverter
+    public class ValueConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -364,7 +72,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    public class AlphaValueConverter : IValueConverter
+    public class AlphaConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -669,10 +377,10 @@ namespace ThemeEditor.Controls.ColorPicker
         }
         */
 
-        private IValueConverter Value1Converter = new HueValueConverter();
-        private IValueConverter Value2Converter = new SaturationValueConverter();
-        private IValueConverter Value3Converter = new ValueValueConverter();
-        private IValueConverter Value4Converter = new AlphaValueConverter();
+        private IValueConverter Value1Converter = new HueConverter();
+        private IValueConverter Value2Converter = new SaturationConverter();
+        private IValueConverter Value3Converter = new ValueConverter();
+        private IValueConverter Value4Converter = new AlphaConverter();
 
         public T Convert<T>(IValueConverter converter, T value, T param)
         {
