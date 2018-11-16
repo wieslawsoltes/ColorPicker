@@ -136,10 +136,13 @@
                         <Style Selector="TextBox.picker">
                             <Setter Property="Margin" Value="2"/>
                         </Style>
+                        <Style Selector="Grid.properties">
+                            <Setter Property="Margin" Value="16"/>
+                        </Style>
                     </Grid.Styles>
                     <TabControl Classes="picker" Grid.Row="0">
                         <TabItem Header="HSV">
-                            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,90">
+                            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,90" Classes="properties">
                                 <Grid.DataContext>
                                     <local:HsvProperties ColorPicker="{Binding RelativeSource={RelativeSource TemplatedParent}}"/>
                                 </Grid.DataContext>
@@ -152,7 +155,7 @@
                             </Grid>
                         </TabItem>
                         <TabItem Header="RGB">
-                            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,90">
+                            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,90" Classes="properties">
                                 <Grid.DataContext>
                                     <local:RgbProperties ColorPicker="{Binding RelativeSource={RelativeSource TemplatedParent}}"/>
                                 </Grid.DataContext>
@@ -165,7 +168,7 @@
                             </Grid>
                         </TabItem>
                         <TabItem Header="CMYK">
-                            <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,90">
+                            <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,90" Classes="properties">
                                 <Grid.DataContext>
                                     <local:CmykProperties ColorPicker="{Binding RelativeSource={RelativeSource TemplatedParent}}"/>
                                 </Grid.DataContext>
@@ -182,7 +185,7 @@
                     </TabControl>
                     <TabControl Classes="picker" Grid.Row="1">
                         <TabItem Header="Hex">
-                            <Grid RowDefinitions="Auto" ColumnDefinitions="*">
+                            <Grid RowDefinitions="Auto" ColumnDefinitions="*" Classes="properties">
                                 <TextBox Text="{Binding Hex, Mode=TwoWay}" ToolTip.Tip="Hex value" Classes="picker">
                                     <TextBox.DataContext>
                                         <local:HexProperties ColorPicker="{Binding RelativeSource={RelativeSource TemplatedParent}}"/>
@@ -191,7 +194,7 @@
                             </Grid>
                         </TabItem>
                         <TabItem Header="Alpha">
-                            <Grid RowDefinitions="Auto" ColumnDefinitions="*">
+                            <Grid RowDefinitions="Auto" ColumnDefinitions="*" Classes="properties">
                                 <NumericUpDown Value="{Binding Alpha, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker">
                                     <NumericUpDown.DataContext>
                                         <local:AlphaProperties ColorPicker="{Binding RelativeSource={RelativeSource TemplatedParent}}"/>
