@@ -66,11 +66,11 @@ namespace ThemeEditor.Controls.ColorPicker
 
         public CmykProperties()
         {
-            this.GetObservable(ColorPickerProperty).Subscribe(x => OnColorPickerChange(x));
-            this.GetObservable(CyanProperty).Subscribe(x => OnCyanChange(x));
-            this.GetObservable(MagentaProperty).Subscribe(x => OnMagentaChange(x));
-            this.GetObservable(YellowProperty).Subscribe(x => OnYellowChange(x));
-            this.GetObservable(BlackKeyProperty).Subscribe(x => OnBlackKeyChange(x));
+            this.GetObservable(ColorPickerProperty).Subscribe(x => OnColorPickerChange());
+            this.GetObservable(CyanProperty).Subscribe(x => UpdateColorPickerValues());
+            this.GetObservable(MagentaProperty).Subscribe(x => UpdateColorPickerValues());
+            this.GetObservable(YellowProperty).Subscribe(x => UpdateColorPickerValues());
+            this.GetObservable(BlackKeyProperty).Subscribe(x => UpdateColorPickerValues());
         }
 
         public ColorPicker ColorPicker
@@ -105,100 +105,40 @@ namespace ThemeEditor.Controls.ColorPicker
 
         private void UpdateColorPickerValues()
         {
-            CMYK cmyk = new CMYK(Cyan, Magenta, Yellow, BlackKey);
-            HSV hsv = cmyk.ToHSV();
-            ColorPicker.Value1 = hsv.H;
-            ColorPicker.Value2 = hsv.S;
-            ColorPicker.Value3 = hsv.V;
+            if (_updating == false && ColorPicker != null)
+            {
+                _updating = true;
+                CMYK cmyk = new CMYK(Cyan, Magenta, Yellow, BlackKey);
+                HSV hsv = cmyk.ToHSV();
+                ColorPicker.Value1 = hsv.H;
+                ColorPicker.Value2 = hsv.S;
+                ColorPicker.Value3 = hsv.V;
+                _updating = false;
+            }
         }
 
         private void UpdatePropertyValues()
         {
-            HSV hsv = new HSV(ColorPicker.Value1, ColorPicker.Value2, ColorPicker.Value3);
-            CMYK cmyk = hsv.ToCMYK();
-            Cyan = cmyk.C;
-            Magenta = cmyk.M;
-            Yellow = cmyk.Y;
-            BlackKey = cmyk.K;
+            if (_updating == false && ColorPicker != null)
+            {
+                _updating = true;
+                HSV hsv = new HSV(ColorPicker.Value1, ColorPicker.Value2, ColorPicker.Value3);
+                CMYK cmyk = hsv.ToCMYK();
+                Cyan = cmyk.C;
+                Magenta = cmyk.M;
+                Yellow = cmyk.Y;
+                BlackKey = cmyk.K;
+                _updating = false;
+            }
         }
 
-        private void OnColorPickerChange(ColorPicker colorPicker)
+        private void OnColorPickerChange()
         {
             if (ColorPicker != null)
             {
-                ColorPicker.GetObservable(ColorPicker.Value1Property).Subscribe(x => OnValue1Change(x));
-                ColorPicker.GetObservable(ColorPicker.Value2Property).Subscribe(x => OnValue2Change(x));
-                ColorPicker.GetObservable(ColorPicker.Value3Property).Subscribe(x => OnValue3Change(x));
-            }
-        }
-
-        private void OnValue1Change(double value1)
-        {
-            if (_updating == false && ColorPicker != null)
-            {
-                _updating = true;
-                UpdatePropertyValues();
-                _updating = false;
-            }
-        }
-
-        private void OnValue2Change(double value2)
-        {
-            if (_updating == false && ColorPicker != null)
-            {
-                _updating = true;
-                UpdatePropertyValues();
-                _updating = false;
-            }
-        }
-
-        private void OnValue3Change(double value3)
-        {
-            if (_updating == false && ColorPicker != null)
-            {
-                _updating = true;
-                UpdatePropertyValues();
-                _updating = false;
-            }
-        }
-
-        private void OnCyanChange(double cyan)
-        {
-            if (_updating == false && ColorPicker != null)
-            {
-                _updating = true;
-                UpdateColorPickerValues();
-                _updating = false;
-            }
-        }
-
-        private void OnMagentaChange(double magenta)
-        {
-            if (_updating == false && ColorPicker != null)
-            {
-                _updating = true;
-                UpdateColorPickerValues();
-                _updating = false;
-            }
-        }
-
-        private void OnYellowChange(double yellow)
-        {
-            if (_updating == false && ColorPicker != null)
-            {
-                _updating = true;
-                UpdateColorPickerValues();
-                _updating = false;
-            }
-        }
-
-        private void OnBlackKeyChange(double blackKey)
-        {
-            if (_updating == false && ColorPicker != null)
-            {
-                _updating = true;
-                UpdateColorPickerValues();
-                _updating = false;
+                ColorPicker.GetObservable(ColorPicker.Value1Property).Subscribe(x => UpdatePropertyValues());
+                ColorPicker.GetObservable(ColorPicker.Value2Property).Subscribe(x => UpdatePropertyValues());
+                ColorPicker.GetObservable(ColorPicker.Value3Property).Subscribe(x => UpdatePropertyValues());
             }
         }
     }

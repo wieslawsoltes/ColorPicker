@@ -23,9 +23,6 @@ namespace ThemeEditor.Controls.ColorPicker
         public static readonly StyledProperty<byte> BlueProperty =
             AvaloniaProperty.Register<RgbProperties, byte>(nameof(Blue), 0x00, validate: ValidateBlue);
 
-        //public static readonly StyledProperty<double> AlphaProperty =
-        //    AvaloniaProperty.Register<RgbProperties, double>(nameof(Alpha), 100.0, validate: ValidateAlpha);
-
         private static byte ValidateRed(RgbProperties cp, byte red)
         {
             if (red < 0 || red > 255)
@@ -53,24 +50,14 @@ namespace ThemeEditor.Controls.ColorPicker
             return blue;
         }
 
-        //private static double ValidateAlpha(RgbProperties cp, double alpha)
-        //{
-        //    if (alpha < 0.0 || alpha > 100.0)
-        //    {
-        //        throw new ArgumentException("Invalid Alpha value.");
-        //    }
-        //    return alpha;
-        //}
-
         private bool _updating = false;
 
         public RgbProperties()
         {
-            this.GetObservable(ColorPickerProperty).Subscribe(x => OnColorPickerChange(x));
-            this.GetObservable(RedProperty).Subscribe(x => OnRedChange(x));
-            this.GetObservable(GreenProperty).Subscribe(x => OnGreenChange(x));
-            this.GetObservable(BlueProperty).Subscribe(x => OnBlueChange(x));
-            //this.GetObservable(AlphaProperty).Subscribe(x => OnHsvaChange());
+            this.GetObservable(ColorPickerProperty).Subscribe(x => OnColorPickerChange());
+            this.GetObservable(RedProperty).Subscribe(x => UpdateColorPickerValues());
+            this.GetObservable(GreenProperty).Subscribe(x => UpdateColorPickerValues());
+            this.GetObservable(BlueProperty).Subscribe(x => UpdateColorPickerValues());
         }
 
         public ColorPicker ColorPicker
@@ -97,97 +84,41 @@ namespace ThemeEditor.Controls.ColorPicker
             set { SetValue(BlueProperty, value); }
         }
 
-        //public double Alpha
-        //{
-        //    get { return GetValue(AlphaProperty); }
-        //    set { SetValue(AlphaProperty, value); }
-        //}
-
         private void UpdateColorPickerValues()
         {
-            RGB rgb = new RGB(Red, Green, Blue);
-            HSV hsv = rgb.ToHSV();
-            ColorPicker.Value1 = hsv.H;
-            ColorPicker.Value2 = hsv.S;
-            ColorPicker.Value3 = hsv.V;
+            if (_updating == false && ColorPicker != null)
+            {
+                _updating = true;
+                RGB rgb = new RGB(Red, Green, Blue);
+                HSV hsv = rgb.ToHSV();
+                ColorPicker.Value1 = hsv.H;
+                ColorPicker.Value2 = hsv.S;
+                ColorPicker.Value3 = hsv.V;
+                _updating = false;
+            }
         }
 
         private void UpdatePropertyValues()
         {
-            HSV hsv = new HSV(ColorPicker.Value1, ColorPicker.Value2, ColorPicker.Value3);
-            RGB rgb = hsv.ToRGB();
-            Red = (byte)rgb.R;
-            Green = (byte)rgb.G;
-            Blue = (byte)rgb.B;
+            if (_updating == false && ColorPicker != null)
+            {
+                _updating = true;
+                HSV hsv = new HSV(ColorPicker.Value1, ColorPicker.Value2, ColorPicker.Value3);
+                RGB rgb = hsv.ToRGB();
+                Red = (byte)rgb.R;
+                Green = (byte)rgb.G;
+                Blue = (byte)rgb.B;
+                _updating = false;
+            }
         }
 
-        private void OnColorPickerChange(ColorPicker colorPicker)
+        private void OnColorPickerChange()
         {
             if (ColorPicker != null)
             {
-                ColorPicker.GetObservable(ColorPicker.Value1Property).Subscribe(x => OnValue1Change(x));
-                ColorPicker.GetObservable(ColorPicker.Value2Property).Subscribe(x => OnValue2Change(x));
-                ColorPicker.GetObservable(ColorPicker.Value3Property).Subscribe(x => OnValue3Change(x));
-            }
-        }
-
-        private void OnValue1Change(double value1)
-        {
-            if (_updating == false && ColorPicker != null)
-            {
-                _updating = true;
-                UpdatePropertyValues();
-                _updating = false;
-            }
-        }
-
-        private void OnValue2Change(double value2)
-        {
-            if (_updating == false && ColorPicker != null)
-            {
-                _updating = true;
-                UpdatePropertyValues();
-                _updating = false;
-            }
-        }
-
-        private void OnValue3Change(double value3)
-        {
-            if (_updating == false && ColorPicker != null)
-            {
-                _updating = true;
-                UpdatePropertyValues();
-                _updating = false;
-            }
-        }
-
-        private void OnRedChange(byte red)
-        {
-            if (_updating == false && ColorPicker != null)
-            {
-                _updating = true;
-                UpdateColorPickerValues();
-                _updating = false;
-            }
-        }
-
-        private void OnGreenChange(byte green)
-        {
-            if (_updating == false && ColorPicker != null)
-            {
-                _updating = true;
-                UpdateColorPickerValues();
-                _updating = false;
-            }
-        }
-
-        private void OnBlueChange(byte value)
-        {
-            if (_updating == false && ColorPicker != null)
-            {
-                _updating = true;
-                UpdateColorPickerValues();
-                _updating = false;
+                ColorPicker.GetObservable(ColorPicker.Value1Property).Subscribe(x => UpdatePropertyValues());
+                ColorPicker.GetObservable(ColorPicker.Value2Property).Subscribe(x => UpdatePropertyValues());
+                ColorPicker.GetObservable(ColorPicker.Value3Property).Subscribe(x => UpdatePropertyValues());
             }
         }
     }

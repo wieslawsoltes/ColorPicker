@@ -180,11 +180,26 @@
                             </Grid>
                         </TabItem>
                     </TabControl>
-                    <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,90" Grid.Row="1">
-                        <TextBlock Text="A" ToolTip.Tip="Alpha" Classes="picker" Grid.Row="0" Grid.Column="0"/>
-                        <NumericUpDown Value="{Binding Alpha, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="0" Grid.Column="1"/>
-                        <TextBox Text="{Binding Hex, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" ToolTip.Tip="Hex value" Classes="picker" Grid.Row="1" Grid.Column="1"/>
-                    </Grid>
+                    <TabControl Classes="picker" Grid.Row="1">
+                        <TabItem Header="Hex">
+                            <Grid RowDefinitions="Auto" ColumnDefinitions="*">
+                                <TextBox Text="{Binding Hex, Mode=TwoWay}" ToolTip.Tip="Hex value" Classes="picker">
+                                    <TextBox.DataContext>
+                                        <local:HexProperties ColorPicker="{Binding RelativeSource={RelativeSource TemplatedParent}}"/>
+                                    </TextBox.DataContext>
+                                </TextBox>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Alpha">
+                            <Grid RowDefinitions="Auto" ColumnDefinitions="*">
+                                <NumericUpDown Value="{Binding Alpha, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker">
+                                    <NumericUpDown.DataContext>
+                                        <local:AlphaProperties ColorPicker="{Binding RelativeSource={RelativeSource TemplatedParent}}"/>
+                                    </NumericUpDown.DataContext>
+                                </NumericUpDown>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
                 </Grid>
             </Grid>
         </ControlTemplate>
