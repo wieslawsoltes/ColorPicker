@@ -108,7 +108,7 @@ namespace ThemeEditor.Controls.ColorPicker
             }
         }
 
-        private void OnColorPickerChange(ColorPicker colorPicker)
+        private void OnColorPickerChange()
         {
             if (ColorPicker != null)
             {
