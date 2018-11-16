@@ -120,11 +120,11 @@
                             <Setter Property="Padding" Value="1"/>
                         </Style>
                         <Style Selector="ButtonSpinner /template/ RepeatButton">
-                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="Padding" Value="1"/>
                         </Style>
                         <Style Selector="NumericUpDown.picker /template/ TextBox#PART_TextBox">
                             <Setter Property="Margin" Value="1"/>
-                            <Setter Property="Padding" Value="4"/>
+                            <Setter Property="Padding" Value="3"/>
                         </Style>
                         <Style Selector="TabControl.picker">
                             <Setter Property="Margin" Value="0"/>
