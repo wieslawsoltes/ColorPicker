@@ -70,7 +70,7 @@ namespace ThemeEditor.Controls.ColorPicker
             this.GetObservable(CyanProperty).Subscribe(x => OnCyanChange(x));
             this.GetObservable(MagentaProperty).Subscribe(x => OnMagentaChange(x));
             this.GetObservable(YellowProperty).Subscribe(x => OnYellowChange(x));
-            this.GetObservable(BlackKeyProperty).Subscribe(x => OnBlackKeyChange());
+            this.GetObservable(BlackKeyProperty).Subscribe(x => OnBlackKeyChange(x));
         }
 
         public ColorPicker ColorPicker
