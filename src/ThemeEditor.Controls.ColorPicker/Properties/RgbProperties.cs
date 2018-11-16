@@ -9,7 +9,7 @@ using ThemeEditor.Colors;
 
 namespace ThemeEditor.Controls.ColorPicker
 {
-    public class RgbProperties : AvaloniaObject
+    public class RgbProperties : ColorPickerProperties
     {
         public static readonly StyledProperty<byte> RedProperty =
             AvaloniaProperty.Register<RgbProperties, byte>(nameof(Red), 0xFF, validate: ValidateRed);

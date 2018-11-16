@@ -9,7 +9,7 @@ using ThemeEditor.Colors;
 
 namespace ThemeEditor.Controls.ColorPicker
 {
-    public class CmykProperties : AvaloniaObject
+    public class CmykProperties : ColorPickerProperties
     {
         public static readonly StyledProperty<double> CyanProperty =
             AvaloniaProperty.Register<CmykProperties, double>(nameof(Cyan), 0.0, validate: ValidateCyan);

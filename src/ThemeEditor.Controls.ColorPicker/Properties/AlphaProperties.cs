@@ -9,7 +9,7 @@ using ThemeEditor.Colors;
 
 namespace ThemeEditor.Controls.ColorPicker
 {
-    public class AlphaProperties : AvaloniaObject
+    public class AlphaProperties : ColorPickerProperties
     {
         public static readonly StyledProperty<double> AlphaProperty =
             AvaloniaProperty.Register<AlphaProperties, double>(nameof(Alpha), 100.0, validate: ValidateAlpha);

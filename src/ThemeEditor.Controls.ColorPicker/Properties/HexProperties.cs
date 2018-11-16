@@ -11,7 +11,7 @@ using ThemeEditor.Controls.ColorPicker.Converters;
 
 namespace ThemeEditor.Controls.ColorPicker
 {
-    public class HexProperties : AvaloniaObject
+    public class HexProperties : ColorPickerProperties
     {
         public static readonly StyledProperty<string> HexProperty =
             AvaloniaProperty.Register<HexProperties, string>(nameof(Hex), "#FFFF0000", validate: ValidateHex);
