@@ -54,10 +54,10 @@ namespace ThemeEditor.Controls.ColorPicker
 
         public HsvProperties()
         {
-            this.GetObservable(ColorPickerProperty).Subscribe(x => OnColorPickerChange(x));
-            this.GetObservable(HueProperty).Subscribe(x => OnHueChange(x));
-            this.GetObservable(SaturationProperty).Subscribe(x => OnSaturationChange(x));
-            this.GetObservable(ValueProperty).Subscribe(x => OnValueChange(x));
+            this.GetObservable(ColorPickerProperty).Subscribe(x => OnColorPickerChange());
+            this.GetObservable(HueProperty).Subscribe(x => UpdateColorPickerValues());
+            this.GetObservable(SaturationProperty).Subscribe(x => UpdateColorPickerValues());
+            this.GetObservable(ValueProperty).Subscribe(x => UpdateColorPickerValues());
         }
 
         public ColorPicker ColorPicker
@@ -86,85 +86,35 @@ namespace ThemeEditor.Controls.ColorPicker
 
         private void UpdateColorPickerValues()
         {
-            ColorPicker.Value1 = Hue;
-            ColorPicker.Value2 = Saturation;
-            ColorPicker.Value3 = Value;
+            if (_updating == false && ColorPicker != null)
+            {
+                _updating = true;
+                ColorPicker.Value1 = Hue;
+                ColorPicker.Value2 = Saturation;
+                ColorPicker.Value3 = Value;
+                _updating = false;
+            }
         }
 
         private void UpdatePropertyValues()
         {
-            Hue = ColorPicker.Value1;
-            Saturation = ColorPicker.Value2;
-            Value = ColorPicker.Value3;
+            if (_updating == false && ColorPicker != null)
+            {
+                _updating = true;
+                Hue = ColorPicker.Value1;
+                Saturation = ColorPicker.Value2;
+                Value = ColorPicker.Value3;
+                _updating = false;
+            }
         }
 
         private void OnColorPickerChange(ColorPicker colorPicker)
         {
             if (ColorPicker != null)
             {
-                ColorPicker.GetObservable(ColorPicker.Value1Property).Subscribe(x => OnValue1Change(x));
-                ColorPicker.GetObservable(ColorPicker.Value2Property).Subscribe(x => OnValue2Change(x));
-                ColorPicker.GetObservable(ColorPicker.Value3Property).Subscribe(x => OnValue3Change(x));
-            }
-        }
-
-        private void OnValue1Change(double value1)
-        {
-            if (_updating == false && ColorPicker != null)
-            {
-                _updating = true;
-                UpdatePropertyValues();
-                _updating = false;
-            }
-        }
-
-        private void OnValue2Change(double value2)
-        {
-            if (_updating == false && ColorPicker != null)
-            {
-                _updating = true;
-                UpdatePropertyValues();
-                _updating = false;
-            }
-        }
-
-        private void OnValue3Change(double value3)
-        {
-            if (_updating == false && ColorPicker != null)
-            {
-                _updating = true;
-                UpdatePropertyValues();
-                _updating = false;
-            }
-        }
-
-        private void OnHueChange(double hue)
-        {
-            if (_updating == false && ColorPicker != null)
-            {
-                _updating = true;
-                UpdateColorPickerValues();
-                _updating = false;
-            }
-        }
-
-        private void OnSaturationChange(double saturation)
-        {
-            if (_updating == false && ColorPicker != null)
-            {
-                _updating = true;
-                UpdateColorPickerValues();
-                _updating = false;
-            }
-        }
-
-        private void OnValueChange(double value)
-        {
-            if (_updating == false && ColorPicker != null)
-            {
-                _updating = true;
-                UpdateColorPickerValues();
-                _updating = false;
+                ColorPicker.GetObservable(ColorPicker.Value1Property).Subscribe(x => UpdatePropertyValues());
+                ColorPicker.GetObservable(ColorPicker.Value2Property).Subscribe(x => UpdatePropertyValues());
+                ColorPicker.GetObservable(ColorPicker.Value3Property).Subscribe(x => UpdatePropertyValues());
             }
         }
     }
