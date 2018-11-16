@@ -137,7 +137,7 @@
                             <Setter Property="Margin" Value="2"/>
                         </Style>
                         <Style Selector="Grid.properties">
-                            <Setter Property="Margin" Value="16"/>
+                            <Setter Property="Margin" Value="16,0,16,0"/>
                         </Style>
                     </Grid.Styles>
                     <TabControl Classes="picker" Grid.Row="0">
