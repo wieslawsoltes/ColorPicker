@@ -54,6 +54,7 @@ namespace ThemeEditor.Controls.ColorPicker
 
         public HsvProperties()
         {
+            this.GetObservable(ColorPickerProperty).Subscribe(x => OnColorPickerChange(x));
             this.GetObservable(HueProperty).Subscribe(x => OnHueChange(x));
             this.GetObservable(SaturationProperty).Subscribe(x => OnSaturationChange(x));
             this.GetObservable(ValueProperty).Subscribe(x => OnValueChange(x));
