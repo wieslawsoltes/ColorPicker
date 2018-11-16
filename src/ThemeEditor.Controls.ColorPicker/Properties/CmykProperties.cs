@@ -11,9 +11,6 @@ namespace ThemeEditor.Controls.ColorPicker
 {
     public class CmykProperties : AvaloniaObject
     {
-        public static readonly StyledProperty<ColorPicker> ColorPickerProperty =
-            AvaloniaProperty.Register<CmykProperties, ColorPicker>(nameof(ColorPicker));
-
         public static readonly StyledProperty<double> CyanProperty =
             AvaloniaProperty.Register<CmykProperties, double>(nameof(Cyan), 0.0, validate: ValidateCyan);
 
@@ -64,19 +61,12 @@ namespace ThemeEditor.Controls.ColorPicker
 
         private bool _updating = false;
 
-        public CmykProperties()
+        public CmykProperties() : base()
         {
-            this.GetObservable(ColorPickerProperty).Subscribe(x => OnColorPickerChange());
             this.GetObservable(CyanProperty).Subscribe(x => UpdateColorPickerValues());
             this.GetObservable(MagentaProperty).Subscribe(x => UpdateColorPickerValues());
             this.GetObservable(YellowProperty).Subscribe(x => UpdateColorPickerValues());
             this.GetObservable(BlackKeyProperty).Subscribe(x => UpdateColorPickerValues());
-        }
-
-        public ColorPicker ColorPicker
-        {
-            get { return GetValue(ColorPickerProperty); }
-            set { SetValue(ColorPickerProperty, value); }
         }
 
         public double Cyan
@@ -103,7 +93,7 @@ namespace ThemeEditor.Controls.ColorPicker
             set { SetValue(BlackKeyProperty, value); }
         }
 
-        private void UpdateColorPickerValues()
+        public override void UpdateColorPickerValues()
         {
             if (_updating == false && ColorPicker != null)
             {
@@ -117,7 +107,7 @@ namespace ThemeEditor.Controls.ColorPicker
             }
         }
 
-        private void UpdatePropertyValues()
+        public override void UpdatePropertyValues()
         {
             if (_updating == false && ColorPicker != null)
             {
@@ -129,16 +119,6 @@ namespace ThemeEditor.Controls.ColorPicker
                 Yellow = cmyk.Y;
                 BlackKey = cmyk.K;
                 _updating = false;
-            }
-        }
-
-        private void OnColorPickerChange()
-        {
-            if (ColorPicker != null)
-            {
-                ColorPicker.GetObservable(ColorPicker.Value1Property).Subscribe(x => UpdatePropertyValues());
-                ColorPicker.GetObservable(ColorPicker.Value2Property).Subscribe(x => UpdatePropertyValues());
-                ColorPicker.GetObservable(ColorPicker.Value3Property).Subscribe(x => UpdatePropertyValues());
             }
         }
     }

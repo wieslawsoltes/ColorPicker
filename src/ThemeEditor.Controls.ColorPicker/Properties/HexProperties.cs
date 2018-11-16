@@ -13,9 +13,6 @@ namespace ThemeEditor.Controls.ColorPicker
 {
     public class HexProperties : AvaloniaObject
     {
-        public static readonly StyledProperty<ColorPicker> ColorPickerProperty =
-            AvaloniaProperty.Register<HexProperties, ColorPicker>(nameof(ColorPicker));
-
         public static readonly StyledProperty<string> HexProperty =
             AvaloniaProperty.Register<HexProperties, string>(nameof(Hex), "#FFFF0000", validate: ValidateHex);
 
@@ -30,16 +27,9 @@ namespace ThemeEditor.Controls.ColorPicker
 
         private bool _updating = false;
 
-        public HexProperties()
+        public HexProperties() : base()
         {
-            this.GetObservable(ColorPickerProperty).Subscribe(x => OnColorPickerChange());
             this.GetObservable(HexProperty).Subscribe(x => UpdateColorPickerValues());
-        }
-
-        public ColorPicker ColorPicker
-        {
-            get { return GetValue(ColorPickerProperty); }
-            set { SetValue(ColorPickerProperty, value); }
         }
 
         public string Hex
@@ -48,7 +38,7 @@ namespace ThemeEditor.Controls.ColorPicker
             set { SetValue(HexProperty, value); }
         }
 
-        private void UpdateColorPickerValues()
+        public override void UpdateColorPickerValues()
         {
             if (_updating == false && ColorPicker != null)
             {
@@ -63,7 +53,7 @@ namespace ThemeEditor.Controls.ColorPicker
             }
         }
 
-        private void UpdatePropertyValues()
+        public override void UpdatePropertyValues()
         {
             if (_updating == false && ColorPicker != null)
             {
@@ -71,17 +61,6 @@ namespace ThemeEditor.Controls.ColorPicker
                 Color color = ColorHelpers.FromHSVA(ColorPicker.Value1, ColorPicker.Value2, ColorPicker.Value3, ColorPicker.Value4);
                 Hex = ColorHelpers.ToHexColor(color);
                 _updating = false;
-            }
-        }
-
-        private void OnColorPickerChange()
-        {
-            if (ColorPicker != null)
-            {
-                ColorPicker.GetObservable(ColorPicker.Value1Property).Subscribe(x => UpdatePropertyValues());
-                ColorPicker.GetObservable(ColorPicker.Value2Property).Subscribe(x => UpdatePropertyValues());
-                ColorPicker.GetObservable(ColorPicker.Value3Property).Subscribe(x => UpdatePropertyValues());
-                ColorPicker.GetObservable(ColorPicker.Value4Property).Subscribe(x => UpdatePropertyValues());
             }
         }
     }
