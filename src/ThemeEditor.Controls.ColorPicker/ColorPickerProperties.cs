@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Globalization;
 using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
-using Avalonia.Data.Converters;
-using Avalonia.Input;
 
 namespace ThemeEditor.Controls.ColorPicker
 {
