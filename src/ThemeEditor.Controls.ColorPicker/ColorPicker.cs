@@ -5,6 +5,9 @@ using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Data.Converters;
 using Avalonia.Input;
+using Avalonia.Media;
+using ThemeEditor.Colors;
+using ThemeEditor.Controls.ColorPicker.Converters;
 
 namespace ThemeEditor.Controls.ColorPicker
 {
@@ -89,6 +92,406 @@ namespace ThemeEditor.Controls.ColorPicker
                 return v * 100.0 / range;
             }
             return AvaloniaProperty.UnsetValue;
+        }
+    }
+
+    public class HsvProperties : ColorPickerProperties
+    {
+        public static readonly StyledProperty<double> HueProperty =
+            AvaloniaProperty.Register<HsvProperties, double>(nameof(Hue), 0.0, validate: ValidateHue);
+
+        public static readonly StyledProperty<double> SaturationProperty =
+            AvaloniaProperty.Register<HsvProperties, double>(nameof(Saturation), 100.0, validate: ValidateSaturation);
+
+        public static readonly StyledProperty<double> ValueProperty =
+            AvaloniaProperty.Register<HsvProperties, double>(nameof(Value), 100.0, validate: ValidateValue);
+
+        private static double ValidateHue(HsvProperties cp, double hue)
+        {
+            if (hue < 0.0 || hue > 360.0)
+            {
+                throw new ArgumentException("Invalid Hue value.");
+            }
+            return hue;
+        }
+
+        private static double ValidateSaturation(HsvProperties cp, double saturation)
+        {
+            if (saturation < 0.0 || saturation > 100.0)
+            {
+                throw new ArgumentException("Invalid Saturation value.");
+            }
+            return saturation;
+        }
+
+        private static double ValidateValue(HsvProperties cp, double value)
+        {
+            if (value < 0.0 || value > 100.0)
+            {
+                throw new ArgumentException("Invalid Value value.");
+            }
+            return value;
+        }
+
+        private bool _updating = false;
+
+        public HsvProperties() : base()
+        {
+            this.GetObservable(HueProperty).Subscribe(x => UpdateColorPickerValues());
+            this.GetObservable(SaturationProperty).Subscribe(x => UpdateColorPickerValues());
+            this.GetObservable(ValueProperty).Subscribe(x => UpdateColorPickerValues());
+        }
+
+        public double Hue
+        {
+            get { return GetValue(HueProperty); }
+            set { SetValue(HueProperty, value); }
+        }
+
+        public double Saturation
+        {
+            get { return GetValue(SaturationProperty); }
+            set { SetValue(SaturationProperty, value); }
+        }
+
+        public double Value
+        {
+            get { return GetValue(ValueProperty); }
+            set { SetValue(ValueProperty, value); }
+        }
+
+        public override void UpdateColorPickerValues()
+        {
+            if (_updating == false && ColorPicker != null)
+            {
+                _updating = true;
+                ColorPicker.Value1 = Hue;
+                ColorPicker.Value2 = Saturation;
+                ColorPicker.Value3 = Value;
+                _updating = false;
+            }
+        }
+
+        public override void UpdatePropertyValues()
+        {
+            if (_updating == false && ColorPicker != null)
+            {
+                _updating = true;
+                Hue = ColorPicker.Value1;
+                Saturation = ColorPicker.Value2;
+                Value = ColorPicker.Value3;
+                _updating = false;
+            }
+        }
+    }
+
+    public class RgbProperties : ColorPickerProperties
+    {
+        public static readonly StyledProperty<byte> RedProperty =
+            AvaloniaProperty.Register<RgbProperties, byte>(nameof(Red), 0xFF, validate: ValidateRed);
+
+        public static readonly StyledProperty<byte> GreenProperty =
+            AvaloniaProperty.Register<RgbProperties, byte>(nameof(Green), 0x00, validate: ValidateGreen);
+
+        public static readonly StyledProperty<byte> BlueProperty =
+            AvaloniaProperty.Register<RgbProperties, byte>(nameof(Blue), 0x00, validate: ValidateBlue);
+
+        private static byte ValidateRed(RgbProperties cp, byte red)
+        {
+            if (red < 0 || red > 255)
+            {
+                throw new ArgumentException("Invalid Red value.");
+            }
+            return red;
+        }
+
+        private static byte ValidateGreen(RgbProperties cp, byte green)
+        {
+            if (green < 0 || green > 255)
+            {
+                throw new ArgumentException("Invalid Green value.");
+            }
+            return green;
+        }
+
+        private static byte ValidateBlue(RgbProperties cp, byte blue)
+        {
+            if (blue < 0 || blue > 255)
+            {
+                throw new ArgumentException("Invalid Blue value.");
+            }
+            return blue;
+        }
+
+        private bool _updating = false;
+
+        public RgbProperties() : base()
+        {
+            this.GetObservable(RedProperty).Subscribe(x => UpdateColorPickerValues());
+            this.GetObservable(GreenProperty).Subscribe(x => UpdateColorPickerValues());
+            this.GetObservable(BlueProperty).Subscribe(x => UpdateColorPickerValues());
+        }
+
+        public byte Red
+        {
+            get { return GetValue(RedProperty); }
+            set { SetValue(RedProperty, value); }
+        }
+
+        public byte Green
+        {
+            get { return GetValue(GreenProperty); }
+            set { SetValue(GreenProperty, value); }
+        }
+
+        public byte Blue
+        {
+            get { return GetValue(BlueProperty); }
+            set { SetValue(BlueProperty, value); }
+        }
+
+        public override void UpdateColorPickerValues()
+        {
+            if (_updating == false && ColorPicker != null)
+            {
+                _updating = true;
+                RGB rgb = new RGB(Red, Green, Blue);
+                HSV hsv = rgb.ToHSV();
+                ColorPicker.Value1 = hsv.H;
+                ColorPicker.Value2 = hsv.S;
+                ColorPicker.Value3 = hsv.V;
+                _updating = false;
+            }
+        }
+
+        public override void UpdatePropertyValues()
+        {
+            if (_updating == false && ColorPicker != null)
+            {
+                _updating = true;
+                HSV hsv = new HSV(ColorPicker.Value1, ColorPicker.Value2, ColorPicker.Value3);
+                RGB rgb = hsv.ToRGB();
+                Red = (byte)rgb.R;
+                Green = (byte)rgb.G;
+                Blue = (byte)rgb.B;
+                _updating = false;
+            }
+        }
+    }
+
+    public class CmykProperties : ColorPickerProperties
+    {
+        public static readonly StyledProperty<double> CyanProperty =
+            AvaloniaProperty.Register<CmykProperties, double>(nameof(Cyan), 0.0, validate: ValidateCyan);
+
+        public static readonly StyledProperty<double> MagentaProperty =
+            AvaloniaProperty.Register<CmykProperties, double>(nameof(Magenta), 100.0, validate: ValidateMagenta);
+
+        public static readonly StyledProperty<double> YellowProperty =
+            AvaloniaProperty.Register<CmykProperties, double>(nameof(Yellow), 100.0, validate: ValidateYellow);
+
+        public static readonly StyledProperty<double> BlackKeyProperty =
+            AvaloniaProperty.Register<CmykProperties, double>(nameof(BlackKey), 0.0, validate: ValidateBlackKey);
+
+        private static double ValidateCyan(CmykProperties cp, double cyan)
+        {
+            if (cyan < 0.0 || cyan > 100.0)
+            {
+                throw new ArgumentException("Invalid Cyan value.");
+            }
+            return cyan;
+        }
+
+        private static double ValidateMagenta(CmykProperties cp, double magenta)
+        {
+            if (magenta < 0.0 || magenta > 100.0)
+            {
+                throw new ArgumentException("Invalid Magenta value.");
+            }
+            return magenta;
+        }
+
+        private static double ValidateYellow(CmykProperties cp, double yellow)
+        {
+            if (yellow < 0.0 || yellow > 100.0)
+            {
+                throw new ArgumentException("Invalid Yellow value.");
+            }
+            return yellow;
+        }
+
+        private static double ValidateBlackKey(CmykProperties cp, double blackKey)
+        {
+            if (blackKey < 0.0 || blackKey > 100.0)
+            {
+                throw new ArgumentException("Invalid BlackKey value.");
+            }
+            return blackKey;
+        }
+
+        private bool _updating = false;
+
+        public CmykProperties() : base()
+        {
+            this.GetObservable(CyanProperty).Subscribe(x => UpdateColorPickerValues());
+            this.GetObservable(MagentaProperty).Subscribe(x => UpdateColorPickerValues());
+            this.GetObservable(YellowProperty).Subscribe(x => UpdateColorPickerValues());
+            this.GetObservable(BlackKeyProperty).Subscribe(x => UpdateColorPickerValues());
+        }
+
+        public double Cyan
+        {
+            get { return GetValue(CyanProperty); }
+            set { SetValue(CyanProperty, value); }
+        }
+
+        public double Magenta
+        {
+            get { return GetValue(MagentaProperty); }
+            set { SetValue(MagentaProperty, value); }
+        }
+
+        public double Yellow
+        {
+            get { return GetValue(YellowProperty); }
+            set { SetValue(YellowProperty, value); }
+        }
+
+        public double BlackKey
+        {
+            get { return GetValue(BlackKeyProperty); }
+            set { SetValue(BlackKeyProperty, value); }
+        }
+
+        public override void UpdateColorPickerValues()
+        {
+            if (_updating == false && ColorPicker != null)
+            {
+                _updating = true;
+                CMYK cmyk = new CMYK(Cyan, Magenta, Yellow, BlackKey);
+                HSV hsv = cmyk.ToHSV();
+                ColorPicker.Value1 = hsv.H;
+                ColorPicker.Value2 = hsv.S;
+                ColorPicker.Value3 = hsv.V;
+                _updating = false;
+            }
+        }
+
+        public override void UpdatePropertyValues()
+        {
+            if (_updating == false && ColorPicker != null)
+            {
+                _updating = true;
+                HSV hsv = new HSV(ColorPicker.Value1, ColorPicker.Value2, ColorPicker.Value3);
+                CMYK cmyk = hsv.ToCMYK();
+                Cyan = cmyk.C;
+                Magenta = cmyk.M;
+                Yellow = cmyk.Y;
+                BlackKey = cmyk.K;
+                _updating = false;
+            }
+        }
+    }
+
+    public class HexProperties : ColorPickerProperties
+    {
+        public static readonly StyledProperty<string> HexProperty =
+            AvaloniaProperty.Register<HexProperties, string>(nameof(Hex), "#FFFF0000", validate: ValidateHex);
+
+        private static string ValidateHex(HexProperties cp, string hex)
+        {
+            if (!ColorHelpers.IsValidHexColor(hex))
+            {
+                throw new ArgumentException("Invalid Hex value.");
+            }
+            return hex;
+        }
+
+        private bool _updating = false;
+
+        public HexProperties() : base()
+        {
+            this.GetObservable(HexProperty).Subscribe(x => UpdateColorPickerValues());
+        }
+
+        public string Hex
+        {
+            get { return GetValue(HexProperty); }
+            set { SetValue(HexProperty, value); }
+        }
+
+        public override void UpdateColorPickerValues()
+        {
+            if (_updating == false && ColorPicker != null)
+            {
+                _updating = true;
+                Color color = Color.Parse(Hex);
+                ColorHelpers.FromColor(color, out double h, out double s, out double v, out double a);
+                ColorPicker.Value1 = h;
+                ColorPicker.Value2 = s;
+                ColorPicker.Value3 = v;
+                ColorPicker.Value4 = a;
+                _updating = false;
+            }
+        }
+
+        public override void UpdatePropertyValues()
+        {
+            if (_updating == false && ColorPicker != null)
+            {
+                _updating = true;
+                Color color = ColorHelpers.FromHSVA(ColorPicker.Value1, ColorPicker.Value2, ColorPicker.Value3, ColorPicker.Value4);
+                Hex = ColorHelpers.ToHexColor(color);
+                _updating = false;
+            }
+        }
+    }
+
+    public class AlphaProperties : ColorPickerProperties
+    {
+        public static readonly StyledProperty<double> AlphaProperty =
+            AvaloniaProperty.Register<AlphaProperties, double>(nameof(Alpha), 100.0, validate: ValidateAlpha);
+
+        private static double ValidateAlpha(AlphaProperties cp, double alpha)
+        {
+            if (alpha < 0.0 || alpha > 100.0)
+            {
+                throw new ArgumentException("Invalid Alpha value.");
+            }
+            return alpha;
+        }
+
+        private bool _updating = false;
+
+        public AlphaProperties() : base()
+        {
+            this.GetObservable(AlphaProperty).Subscribe(x => UpdateColorPickerValues());
+        }
+
+        public double Alpha
+        {
+            get { return GetValue(AlphaProperty); }
+            set { SetValue(AlphaProperty, value); }
+        }
+
+        public override void UpdateColorPickerValues()
+        {
+            if (_updating == false && ColorPicker != null)
+            {
+                _updating = true;
+                ColorPicker.Value4 = Alpha;
+                _updating = false;
+            }
+        }
+
+        public override void UpdatePropertyValues()
+        {
+            if (_updating == false && ColorPicker != null)
+            {
+                _updating = true;
+                Alpha = ColorPicker.Value4;
+                _updating = false;
+            }
         }
     }
 
