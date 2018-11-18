@@ -509,6 +509,9 @@ namespace ThemeEditor.Controls.ColorPicker
         public static readonly StyledProperty<double> Value4Property =
             AvaloniaProperty.Register<ColorPicker, double>(nameof(Value4));
 
+        public static readonly StyledProperty<Color> ColorProperty =
+            AvaloniaProperty.Register<ColorPicker, Color>(nameof(Color));
+
         private Canvas _colorCanvas;
         private Thumb _colorThumb;
         private Canvas _hueCanvas;
@@ -527,6 +530,7 @@ namespace ThemeEditor.Controls.ColorPicker
             this.GetObservable(Value2Property).Subscribe(x => OnValueChange());
             this.GetObservable(Value3Property).Subscribe(x => OnValueChange());
             this.GetObservable(Value4Property).Subscribe(x => OnValueChange());
+            this.GetObservable(ColorProperty).Subscribe(x => OnColorChange());
         }
 
         public double Value1
@@ -551,6 +555,12 @@ namespace ThemeEditor.Controls.ColorPicker
         {
             get { return GetValue(Value4Property); }
             set { SetValue(Value4Property, value); }
+        }
+
+        public Color Color
+        {
+            get { return GetValue(ColorProperty); }
+            set { SetValue(ColorProperty, value); }
         }
 
         protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
@@ -638,7 +648,8 @@ namespace ThemeEditor.Controls.ColorPicker
         protected override Size ArrangeOverride(Size finalSize)
         {
             var size = base.ArrangeOverride(finalSize);
-            OnValueChange();
+            //OnValueChange();
+            OnColorChange();
             return size;
         }
 
@@ -683,6 +694,18 @@ namespace ThemeEditor.Controls.ColorPicker
 
         private double GetValue4Range() => _alphaCanvas.Bounds.Width;
 
+        private void UpdateThumbsFromColor()
+        {
+            ColorHelpers.FromColor(Color, out double h, out double s, out double v, out double a);
+            double hueY = Convert(_value1Converter, h, GetValue1Range());
+            double colorX = Convert(_value2Converter, s, GetValue2Range());
+            double colorY = Convert(_value3Converter, v, GetValue3Range());
+            double alphaX = Convert(_value4Converter, a, GetValue4Range());
+            MoveThumb(_hueCanvas, _hueThumb, 0, hueY);
+            MoveThumb(_colorCanvas, _colorThumb, colorX, colorY);
+            MoveThumb(_alphaCanvas, _alphaThumb, alphaX, 0);
+        }
+
         private void UpdateThumbsFromValues()
         {
             double hueY = Convert(_value1Converter, Value1, GetValue1Range());
@@ -704,6 +727,20 @@ namespace ThemeEditor.Controls.ColorPicker
             Value2 = ConvertBack(_value2Converter, colorX, GetValue2Range());
             Value3 = ConvertBack(_value3Converter, colorY, GetValue3Range());
             Value4 = ConvertBack(_value4Converter, alphaX, GetValue4Range());
+            Color = ColorHelpers.FromHSVA(Value1, Value2, Value3, Value4);
+        }
+
+        private void UpdateColorFromThumbs()
+        {
+            double hueY = Canvas.GetTop(_hueThumb);
+            double colorX = Canvas.GetLeft(_colorThumb);
+            double colorY = Canvas.GetTop(_colorThumb);
+            double alphaX = Canvas.GetLeft(_alphaThumb);
+            double h = ConvertBack(_value1Converter, hueY, GetValue1Range());
+            double s = ConvertBack(_value2Converter, colorX, GetValue2Range());
+            double v = ConvertBack(_value3Converter, colorY, GetValue3Range());
+            double a = ConvertBack(_value4Converter, alphaX, GetValue4Range());
+            Color = ColorHelpers.FromHSVA(h, s, v, a);
         }
 
         private void OnValueChange()
@@ -713,9 +750,23 @@ namespace ThemeEditor.Controls.ColorPicker
                 _updating = true;
                 UpdateThumbsFromValues();
                 UpdateValuesFromThumbs();
+                UpdateColorFromThumbs();
                 _updating = false;
             }
         }
+
+        private void OnColorChange()
+        {
+            if (_updating == false && IsTemplateValid())
+            {
+                _updating = true;
+                UpdateThumbsFromColor();
+                UpdateValuesFromThumbs();
+                UpdateColorFromThumbs();
+                _updating = false;
+            }
+        }
+
         private void ColorCanvas_PointerPressed(object sender, PointerPressedEventArgs e)
         {
             if (e.MouseButton == MouseButton.Left)
@@ -724,6 +775,7 @@ namespace ThemeEditor.Controls.ColorPicker
                 _updating = true;
                 MoveThumb(_colorCanvas, _colorThumb, position.X, position.Y);
                 UpdateValuesFromThumbs();
+                UpdateColorFromThumbs();
                 _updating = false;
                 e.Device.Capture(_colorCanvas);
             }
@@ -745,6 +797,7 @@ namespace ThemeEditor.Controls.ColorPicker
                 _updating = true;
                 MoveThumb(_colorCanvas, _colorThumb, position.X, position.Y);
                 UpdateValuesFromThumbs();
+                UpdateColorFromThumbs();
                 _updating = false;
             }
         }
@@ -756,6 +809,7 @@ namespace ThemeEditor.Controls.ColorPicker
             _updating = true;
             MoveThumb(_colorCanvas, _colorThumb, left + e.Vector.X, top + e.Vector.Y);
             UpdateValuesFromThumbs();
+            UpdateColorFromThumbs();
             _updating = false;
         }
 
@@ -767,6 +821,7 @@ namespace ThemeEditor.Controls.ColorPicker
                 _updating = true;
                 MoveThumb(_hueCanvas, _hueThumb, 0, position.Y);
                 UpdateValuesFromThumbs();
+                UpdateColorFromThumbs();
                 _updating = false;
                 e.Device.Capture(_hueCanvas);
             }
@@ -788,6 +843,7 @@ namespace ThemeEditor.Controls.ColorPicker
                 _updating = true;
                 MoveThumb(_hueCanvas, _hueThumb, 0, position.Y);
                 UpdateValuesFromThumbs();
+                UpdateColorFromThumbs();
                 _updating = false;
             }
         }
@@ -798,6 +854,7 @@ namespace ThemeEditor.Controls.ColorPicker
             _updating = true;
             MoveThumb(_hueCanvas, _hueThumb, 0, top + e.Vector.Y);
             UpdateValuesFromThumbs();
+            UpdateColorFromThumbs();
             _updating = false;
         }
 
@@ -809,6 +866,7 @@ namespace ThemeEditor.Controls.ColorPicker
                 _updating = true;
                 MoveThumb(_alphaCanvas, _alphaThumb, position.X, 0);
                 UpdateValuesFromThumbs();
+                UpdateColorFromThumbs();
                 _updating = false;
                 e.Device.Capture(_alphaCanvas);
             }
@@ -830,6 +888,7 @@ namespace ThemeEditor.Controls.ColorPicker
                 _updating = true;
                 MoveThumb(_alphaCanvas, _alphaThumb, position.X, 0);
                 UpdateValuesFromThumbs();
+                UpdateColorFromThumbs();
                 _updating = false;
             }
         }
@@ -840,6 +899,7 @@ namespace ThemeEditor.Controls.ColorPicker
             _updating = true;
             MoveThumb(_alphaCanvas, _alphaThumb, left + e.Vector.X, 0);
             UpdateValuesFromThumbs();
+            UpdateColorFromThumbs();
             _updating = false;
         }
     }
