@@ -7,7 +7,6 @@
              xmlns:views="clr-namespace:ThemeEditor.Views;assembly=ThemeEditor"
              xmlns:cb="clr-namespace:ThemeEditor.Controls.ColorBlender;assembly=ThemeEditor.Controls.ColorBlender"
              xmlns:cp="clr-namespace:ThemeEditor.Controls.ColorPicker;assembly=ThemeEditor.Controls.ColorPicker"
-             xmlns:cpc="clr-namespace:ThemeEditor.Controls.ColorPicker.Converters;assembly=ThemeEditor.Controls.ColorPicker"
              mc:Ignorable="d"
              d:DesignWidth="900" d:DesignHeight="500"
              Classes="themed">

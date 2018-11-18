@@ -1,11 +1,10 @@
 ﻿<Style xmlns="https://github.com/avaloniaui"
        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
        xmlns:local="clr-namespace:ThemeEditor.Controls.ColorPicker;assembly=ThemeEditor.Controls.ColorPicker"
-       xmlns:converters="clr-namespace:ThemeEditor.Controls.ColorPicker.Converters;assembly=ThemeEditor.Controls.ColorPicker"
        Selector="local|ColorPicker">
     <Style.Resources>
-        <converters:HueToColorConverter x:Key="HueToColorConverter"/>
-        <converters:HsvaToColorConverter x:Key="HsvaToColorConverter"/>
+        <local:HueToColorConverter x:Key="HueToColorConverter"/>
+        <local:HsvaToColorConverter x:Key="HsvaToColorConverter"/>
     </Style.Resources>
     <Setter Property="Template">
         <ControlTemplate>

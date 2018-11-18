@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Text.RegularExpressions;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
@@ -7,10 +10,51 @@ using Avalonia.Data.Converters;
 using Avalonia.Input;
 using Avalonia.Media;
 using ThemeEditor.Colors;
-using ThemeEditor.Controls.ColorPicker.Converters;
 
 namespace ThemeEditor.Controls.ColorPicker
 {
+    public static class ColorHelpers
+    {
+        private static Regex s_hexRegex = new Regex("^#[a-fA-F0-9]{8}$");
+
+        public static bool IsValidHexColor(string hex)
+        {
+            return !string.IsNullOrWhiteSpace(hex) && s_hexRegex.Match(hex).Success;
+        }
+
+        public static string ToHexColor(Color color)
+        {
+            return $"#{color.ToUint32():X8}";
+        }
+
+        public static Color FromHexColor(string hex)
+        {
+            return Color.Parse(hex);
+        }
+
+        public static void FromColor(Color color, out double h, out double s, out double v, out double a)
+        {
+            HSV hsv = new RGB(color.R, color.G, color.B).ToHSV();
+            h = hsv.H;
+            s = hsv.S;
+            v = hsv.V;
+            a = color.A * 100.0 / 255.0;
+        }
+
+        public static Color FromHSVA(double h, double s, double v, double a)
+        {
+            RGB rgb = new HSV(h, s, v).ToRGB();
+            byte A = (byte)(a * 255.0 / 100.0);
+            return new Color(A, (byte)rgb.R, (byte)rgb.G, (byte)rgb.B);
+        }
+
+        public static Color FromRGBA(byte r, byte g, byte b, double a)
+        {
+            byte A = (byte)(a * 255.0 / 100.0);
+            return new Color(A, r, g, b);
+        }
+    }
+
     public class HueConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -92,6 +136,83 @@ namespace ThemeEditor.Controls.ColorPicker
                 return v * 100.0 / range;
             }
             return AvaloniaProperty.UnsetValue;
+        }
+    }
+
+    public class HsvaToColorConverter : IMultiValueConverter
+    {
+        public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
+        {
+            double[] v = values.OfType<double>().ToArray();
+            if (v.Length == values.Count)
+            {
+                return ColorHelpers.FromHSVA(v[0], v[1], v[2], v[3]);
+            }
+            return AvaloniaProperty.UnsetValue;
+        }
+    }
+
+    public class HueToColorConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is double h && targetType == typeof(Color))
+            {
+                return ColorHelpers.FromHSVA(h, 100, 100, 100);
+            }
+            return AvaloniaProperty.UnsetValue;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is string s && targetType == typeof(double))
+            {
+                try
+                {
+                    if (ColorHelpers.IsValidHexColor(s))
+                    {
+                        ColorHelpers.FromColor(ColorHelpers.FromHexColor(s), out double h, out _, out _, out _);
+                        return h;
+                    }
+                }
+                catch (Exception)
+                {
+                    return AvaloniaProperty.UnsetValue;
+                }
+            }
+            return AvaloniaProperty.UnsetValue;
+        }
+    }
+
+    public abstract class ColorPickerProperties : AvaloniaObject
+    {
+        public static readonly StyledProperty<ColorPicker> ColorPickerProperty =
+            AvaloniaProperty.Register<ColorPickerProperties, ColorPicker>(nameof(ColorPicker));
+
+        public ColorPickerProperties()
+        {
+            this.GetObservable(ColorPickerProperty).Subscribe(x => OnColorPickerChange());
+        }
+
+        public ColorPicker ColorPicker
+        {
+            get { return GetValue(ColorPickerProperty); }
+            set { SetValue(ColorPickerProperty, value); }
+        }
+
+        public abstract void UpdateColorPickerValues();
+
+        public abstract void UpdatePropertyValues();
+
+        public virtual void OnColorPickerChange()
+        {
+            if (ColorPicker != null)
+            {
+                ColorPicker.GetObservable(ColorPicker.Value1Property).Subscribe(x => UpdatePropertyValues());
+                ColorPicker.GetObservable(ColorPicker.Value2Property).Subscribe(x => UpdatePropertyValues());
+                ColorPicker.GetObservable(ColorPicker.Value3Property).Subscribe(x => UpdatePropertyValues());
+                ColorPicker.GetObservable(ColorPicker.Value4Property).Subscribe(x => UpdatePropertyValues());
+            }
         }
     }
 
