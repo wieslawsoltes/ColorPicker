@@ -83,7 +83,7 @@ namespace ThemeEditor.Preview
         public async Task Open()
         {
             var dialog = new OpenFileDialog();
-            var result = await dialog.ShowAsync();
+            var result = await dialog.ShowAsync(App.Current.MainWindow);
 
             if (result != null)
             {

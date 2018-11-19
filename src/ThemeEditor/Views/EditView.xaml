@@ -104,5 +104,11 @@
                 <TextBox Text="{Binding CurrentTheme.FontSizeLarge}" Classes="editor"/>
             </StackPanel>
         </Expander>
+        <Expander Header="ScrollBar" Classes="editor">
+            <StackPanel Spacing="2">
+                <TextBlock Text="Thickness" Classes="editor"/>
+                <TextBox Text="{Binding CurrentTheme.ScrollBarThickness}" Classes="editor"/>
+            </StackPanel>
+        </Expander>
     </StackPanel>
 </UserControl>

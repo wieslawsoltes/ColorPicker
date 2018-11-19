@@ -24,7 +24,8 @@
     "ThemeDisabledOpacity": 0.5,
     "FontSizeSmall": 10.0,
     "FontSizeNormal": 12.0,
-    "FontSizeLarge": 16.0
+    "FontSizeLarge": 16.0,
+    "ScrollBarThickness": 10.0
   },
   {
     "Name": "BaseDark",
@@ -51,6 +52,7 @@
     "ThemeDisabledOpacity": 0.5,
     "FontSizeSmall": 10.0,
     "FontSizeNormal": 12.0,
-    "FontSizeLarge": 16.0
+    "FontSizeLarge": 16.0,
+    "ScrollBarThickness": 10.0
   }
 ]

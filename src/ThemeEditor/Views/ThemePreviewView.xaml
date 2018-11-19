@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:preview="clr-namespace:ThemeEditor.Preview;assembly=ThemeEditor.Preview"
+             xmlns:preview="clr-namespace:ThemeEditor.Preview;assembly=ThemeEditor"
              mc:Ignorable="d"
              d:DesignWidth="900" d:DesignHeight="700"
              Classes="themed">
@@ -42,6 +42,7 @@
             <preview:ProgressBarPage/>
             <preview:RadioButtonPage/>
             <preview:SliderPage/>
+            <preview:TabControlPage/>
             <preview:TextBoxPage/>
             <preview:ToolTipPage/>
             <preview:TreeViewPage/>

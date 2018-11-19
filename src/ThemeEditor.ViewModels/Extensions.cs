@@ -213,6 +213,8 @@ namespace ThemeEditor
             sb.AppendLine($"        <sys:Double x:Key=\"FontSizeSmall\">{FormattableString.Invariant($"{theme.FontSizeSmall}")}</sys:Double>");
             sb.AppendLine($"        <sys:Double x:Key=\"FontSizeNormal\">{FormattableString.Invariant($"{theme.FontSizeNormal}")}</sys:Double>");
             sb.AppendLine($"        <sys:Double x:Key=\"FontSizeLarge\">{FormattableString.Invariant($"{theme.FontSizeLarge}")}</sys:Double>");
+            sb.AppendLine("");
+            sb.AppendLine($"        <sys:Double x:Key=\"ScrollBarThickness\">{FormattableString.Invariant($"{theme.ScrollBarThickness}")}</sys:Double>");
             sb.AppendLine("    </Style.Resources>");
             sb.AppendLine("</Style>");
 
