@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.Markup.Xaml.Styling;
 using ThemeEditor.Controls.ColorBlender;
 using ThemeEditor.Controls.ColorPicker;
 using ThemeEditor.ViewModels;
