@@ -47,7 +47,10 @@ namespace ThemeEditor
 
             if (DataContext is ThemeEditorViewModel editor)
             {
-                editor.Attach(Application.Current, _previewView.Resources, (x) => _exportText.Text = x.ToXaml());
+                var defaultThem = editor.GetTheme(_lightTheme);
+                defaultThem.Name = "BaseLight";
+                editor.DefaultTheme = defaultThem;
+                editor.Attach(_previewView.Resources, (x) => _exportText.Text = x.ToXaml());
             }
         }
 

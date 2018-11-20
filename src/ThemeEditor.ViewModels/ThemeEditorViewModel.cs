@@ -482,16 +482,11 @@ namespace ThemeEditor.ViewModels
             }
         }
 
-        public void Attach(IResourceNode node, IResourceDictionary resources, Action<ThemeViewModel> preview = null)
+        public void Attach(IResourceDictionary resources, Action<ThemeViewModel> preview = null)
         {
-            var defaultThem = GetTheme(node);
-            defaultThem.Name = "BaseLight";
-
-            DefaultTheme = defaultThem;
-
             if (Themes == null)
             {
-                CurrentTheme = defaultThem.Clone();
+                CurrentTheme = DefaultTheme.Clone();
 #pragma warning disable CS0618
                 Themes = new ReactiveList<ThemeViewModel>
                 {
