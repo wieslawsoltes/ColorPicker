@@ -10,9 +10,6 @@
              mc:Ignorable="d"
              d:DesignWidth="900" d:DesignHeight="500"
              Classes="themed">
-    <UserControl.Styles>
-        <StyleInclude Source="resm:ThemeEditor.Themes.BaseDark.xaml?assembly=ThemeEditor"/>
-    </UserControl.Styles>
     <Grid ColumnDefinitions="*,8,300" Margin="8">
         <TabControl Grid.Column="0" Classes="main">
             <TabItem Header="Preview" Classes="main">

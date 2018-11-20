@@ -33,6 +33,7 @@ namespace ThemeEditor
             _themeSelector.SelectionChanged += ThemeSelectionChanged;
             _lightTheme = AvaloniaXamlLoader.Parse<StyleInclude>(@"<StyleInclude xmlns='https://github.com/avaloniaui' Source='resm:ThemeEditor.Themes.BaseLight.xaml?assembly=ThemeEditor'/>");
             _darkTheme = AvaloniaXamlLoader.Parse<StyleInclude>(@"<StyleInclude xmlns='https://github.com/avaloniaui' Source='resm:ThemeEditor.Themes.BaseDark.xaml?assembly=ThemeEditor'/>");
+            Styles.Add(_darkTheme);
         }
 
         private void InitializeComponent()
@@ -65,10 +66,10 @@ namespace ThemeEditor
             switch (_themeSelector.SelectedIndex)
             {
                 case 0:
-                    this.Styles[0]  = _lightTheme;
+                    Styles[0]  = _lightTheme;
                     break;
                 case 1:
-                    this.Styles[0]  = _darkTheme;
+                    Styles[0]  = _darkTheme;
                     break;
             }
         }
