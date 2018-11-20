@@ -31,8 +31,8 @@ namespace ThemeEditor
             _colorBlender.DataContext = new ColorMatchViewModel(199, 95, 62);
             _themeSelector = this.Find<DropDown>("themeSelector");
             _themeSelector.SelectionChanged += ThemeSelectionChanged;
-            _lightTheme = AvaloniaXamlLoader.Parse<StyleInclude>(@"<StyleInclude xmlns='https://github.com/avaloniaui' Source='resm:ThemeEditor.Themes.BaseLight.xaml?assembly=ThemeEditor'/>");
-            _darkTheme = AvaloniaXamlLoader.Parse<StyleInclude>(@"<StyleInclude xmlns='https://github.com/avaloniaui' Source='resm:ThemeEditor.Themes.BaseDark.xaml?assembly=ThemeEditor'/>");
+            _lightTheme = AvaloniaXamlLoader.Parse<StyleInclude>(@"<StyleInclude xmlns='https://github.com/avaloniaui' Source='resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default'/>");
+            _darkTheme = AvaloniaXamlLoader.Parse<StyleInclude>(@"<StyleInclude xmlns='https://github.com/avaloniaui' Source='resm:Avalonia.Themes.Default.Accents.BaseDark.xaml?assembly=Avalonia.Themes.Default'/>");
             Styles.Add(_darkTheme);
         }
 
