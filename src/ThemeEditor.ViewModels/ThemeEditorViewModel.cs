@@ -125,8 +125,10 @@ namespace ThemeEditor.ViewModels
                 int index = Themes.IndexOf(CurrentTheme);
                 if (index >= 0)
                 {
+                    string name = CurrentTheme.Name;
                     Themes[index] = theme;
                     CurrentTheme = theme;
+                    CurrentTheme.Name = name;
                 }
             }
         }
