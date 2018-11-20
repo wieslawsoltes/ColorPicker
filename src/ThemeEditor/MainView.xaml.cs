@@ -16,7 +16,7 @@ namespace ThemeEditor
         private ThemeEditorView _editorView = null;
         private ColorPicker _colorPicker = null;
         private ColorBlender _colorBlender = null;
-        private DropDown _themesSelector = null;
+        private DropDown _themeSelector = null;
         private StyleInclude _lightTheme = null;
         private StyleInclude _darkTheme = null;
 
