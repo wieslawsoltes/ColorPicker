@@ -24,7 +24,7 @@
                 <TextBox x:Name="exportText" DataContext="{Binding CurrentTheme}" Classes="export"/>
             </TabItem>
             <TabItem Header="ColorPicker" Classes="main">
-                <!-- NOTE: Value1-Value4 properties is used to initialize control. -->
+                <!-- NOTE: Value1-Value4 properties are used to initialize control. -->
                 <!--<cp:ColorPicker x:Name="colorPicker" Value1="180" Value2="50" Value3="50" Value4="75"/>-->
                 <!-- NOTE: Color property is used to initialize control. -->
                 <cp:ColorPicker x:Name="colorPicker" Color="#CC119EDA"/>
