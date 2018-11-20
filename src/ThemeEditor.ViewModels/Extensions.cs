@@ -9,6 +9,11 @@ namespace ThemeEditor
 {
     public static class Extensions
     {
+        private static string Invariant(double value)
+        {
+            return FormattableString.Invariant($"{value}");
+        }
+
         public static IBrush ToBursh(this Color color)
         {
             return new SolidColorBrush(color);
@@ -72,7 +77,12 @@ namespace ThemeEditor
 
         public static string ToTextString(this ThicknessViewModel thickness)
         {
-            return $"{thickness.ToThickness()}";
+            var t = thickness.ToThickness();
+            if (t.IsUniform)
+                return Invariant(t.Left);
+            else if (t.Left.Equals(t.Right) && t.Top.Equals(t.Bottom))
+                return $"{Invariant(t.Left)} {Invariant(t.Top)}";
+            return $"{Invariant(t.Left)},{Invariant(t.Top)},{Invariant(t.Right)},{Invariant(t.Bottom)}";
         }
 
         public static RgbColorViewModel RgbFromHexString(this string value)
@@ -207,14 +217,14 @@ namespace ThemeEditor
             sb.AppendLine("        <SolidColorBrush x:Key=\"ErrorBrush\" Color=\"{DynamicResource ErrorColor}\"></SolidColorBrush>");
             sb.AppendLine("        <SolidColorBrush x:Key=\"ErrorLowBrush\" Color=\"{DynamicResource ErrorLowColor}\"></SolidColorBrush>");
             sb.AppendLine("");
-            sb.AppendLine($"        <Thickness x:Key=\"ThemeBorderThickness\">{theme.ThemeBorderThickness.ToThickness()}</Thickness>");
-            sb.AppendLine($"        <sys:Double x:Key=\"ThemeDisabledOpacity\">{FormattableString.Invariant($"{theme.ThemeDisabledOpacity}")}</sys:Double>");
+            sb.AppendLine($"        <Thickness x:Key=\"ThemeBorderThickness\">{theme.ThemeBorderThickness.ToTextString()}</Thickness>");
+            sb.AppendLine($"        <sys:Double x:Key=\"ThemeDisabledOpacity\">{Invariant(theme.ThemeDisabledOpacity)}</sys:Double>");
             sb.AppendLine("");
-            sb.AppendLine($"        <sys:Double x:Key=\"FontSizeSmall\">{FormattableString.Invariant($"{theme.FontSizeSmall}")}</sys:Double>");
-            sb.AppendLine($"        <sys:Double x:Key=\"FontSizeNormal\">{FormattableString.Invariant($"{theme.FontSizeNormal}")}</sys:Double>");
-            sb.AppendLine($"        <sys:Double x:Key=\"FontSizeLarge\">{FormattableString.Invariant($"{theme.FontSizeLarge}")}</sys:Double>");
+            sb.AppendLine($"        <sys:Double x:Key=\"FontSizeSmall\">{Invariant(theme.FontSizeSmall)}</sys:Double>");
+            sb.AppendLine($"        <sys:Double x:Key=\"FontSizeNormal\">{Invariant(theme.FontSizeNormal)}</sys:Double>");
+            sb.AppendLine($"        <sys:Double x:Key=\"FontSizeLarge\">{Invariant(theme.FontSizeLarge)}</sys:Double>");
             sb.AppendLine("");
-            sb.AppendLine($"        <sys:Double x:Key=\"ScrollBarThickness\">{FormattableString.Invariant($"{theme.ScrollBarThickness}")}</sys:Double>");
+            sb.AppendLine($"        <sys:Double x:Key=\"ScrollBarThickness\">{Invariant(theme.ScrollBarThickness)}</sys:Double>");
             sb.AppendLine("    </Style.Resources>");
             sb.AppendLine("</Style>");
 
