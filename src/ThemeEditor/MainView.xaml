@@ -9,7 +9,10 @@
              xmlns:cp="clr-namespace:ThemeEditor.Controls.ColorPicker;assembly=ThemeEditor.Controls.ColorPicker"
              mc:Ignorable="d"
              d:DesignWidth="900" d:DesignHeight="500"
-             Classes="Dark">
+             Classes="themed">
+    <UserControl.Styles>
+        <StyleInclude Source="resm:ThemeEditor.Themes.BaseDark.xaml?assembly=ThemeEditor"/>
+    </UserControl.Styles>
     <Grid ColumnDefinitions="*,8,300" Margin="8">
         <TabControl Grid.Column="0" Classes="main">
             <TabItem Header="Preview" Classes="main">
@@ -34,7 +37,7 @@
         </TabControl>
         <GridSplitter Width="8" Grid.Column="1"/>
         <Grid RowDefinitions="Auto,*" Grid.Column="2">
-            <DropDown x:Name="themes" SelectedItem="{Binding $parent[UserControl].Classes, Mode=OneWayToSource}" Classes="themes" Grid.Row="0">
+            <DropDown x:Name="themeSelector" SelectedIndex="1" Classes="themes" Grid.Row="0">
                 <DropDownItem>Light</DropDownItem>
                 <DropDownItem>Dark</DropDownItem>
             </DropDown>
