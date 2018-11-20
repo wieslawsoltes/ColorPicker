@@ -1,6 +1,10 @@
 <Style xmlns="https://github.com/avaloniaui"
        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-       xmlns:sys="clr-namespace:System;assembly=mscorlib">
+       xmlns:sys="clr-namespace:System;assembly=mscorlib"
+       Selector="UserControl.Dark">
+    <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}"/>
+    <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
+    <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}"/>
     <Style.Resources>
 
         <Color x:Key="ThemeAccentColor">#CC119EDA</Color>
