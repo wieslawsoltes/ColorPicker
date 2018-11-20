@@ -16,7 +16,7 @@ namespace ThemeEditor.ViewModels.Serializer.Converters
             switch (value as ThicknessViewModel)
             {
                 case ThicknessViewModel thickness:
-                    writer.WriteValue(thickness.ToThickness().ToString());
+                    writer.WriteValue(thickness.ToTextString());
                     break;
                 default:
                     throw new NotSupportedException($"The {value.GetType()} type is not supported.");

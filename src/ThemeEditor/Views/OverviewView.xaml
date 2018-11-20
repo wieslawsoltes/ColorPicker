@@ -15,7 +15,7 @@
             <local:OverviewThicknessView/>
         </DataTemplate>
     </UserControl.DataTemplates>
-    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
         <!-- Background -->
         <TextBlock Text="Background" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Classes="header"/>
         <TextBlock Text="Color" Grid.Row="1" Grid.Column="0" Classes="overview"/>
@@ -84,5 +84,9 @@
         <TextBox Text="{Binding CurrentTheme.FontSizeNormal}" Grid.Row="32" Grid.Column="1" Classes="overview"/>
         <TextBlock Text="Size Large" Grid.Row="33" Grid.Column="0" Classes="overview"/>
         <TextBox Text="{Binding CurrentTheme.FontSizeLarge}" Grid.Row="33" Grid.Column="1" Classes="overview"/>
+        <!-- ScrollBar -->
+        <TextBlock Text="ScrollBar" Grid.Row="34" Grid.Column="0" Grid.ColumnSpan="2" Classes="header"/>
+        <TextBlock Text="Thickness" Grid.Row="35" Grid.Column="0" Classes="overview"/>
+        <TextBox Text="{Binding CurrentTheme.ScrollBarThickness}" Grid.Row="35" Grid.Column="1" Classes="overview"/>
     </Grid>
 </UserControl>

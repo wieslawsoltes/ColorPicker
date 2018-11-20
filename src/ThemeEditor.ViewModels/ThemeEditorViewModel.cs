@@ -249,7 +249,8 @@ namespace ThemeEditor.ViewModels
                 ThemeDisabledOpacity = GetDoubleResource(node, "ThemeDisabledOpacity"),
                 FontSizeSmall = GetDoubleResource(node, "FontSizeSmall"),
                 FontSizeNormal = GetDoubleResource(node, "FontSizeNormal"),
-                FontSizeLarge = GetDoubleResource(node, "FontSizeLarge")
+                FontSizeLarge = GetDoubleResource(node, "FontSizeLarge"),
+                ScrollBarThickness = GetDoubleResource(node, "ScrollBarThickness")
             };
         }
 
@@ -392,6 +393,11 @@ namespace ThemeEditor.ViewModels
             resources["FontSizeLarge"] = theme.FontSizeLarge;
         }
 
+        private void UpdateUpdateScrollBarThickness(IResourceDictionary resources, ThemeViewModel theme)
+        {
+            resources["ScrollBarThickness"] = theme.ScrollBarThickness;
+        }
+
         public void UpdateTheme(IResourceDictionary resources, ThemeViewModel theme)
         {
             UpdateThemeAccent(resources, theme);
@@ -418,6 +424,7 @@ namespace ThemeEditor.ViewModels
             UpdateFontSizeSmall(resources, theme);
             UpdateFontSizeNormal(resources, theme);
             UpdateUpdateFontSizeLarge(resources, theme);
+            UpdateUpdateScrollBarThickness(resources, theme);
         }
 
         public IDisposable ObserveTheme(IResourceDictionary resources, ThemeViewModel theme, Action<ThemeViewModel> preview = null)

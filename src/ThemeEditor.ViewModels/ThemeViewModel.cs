@@ -31,6 +31,7 @@ namespace ThemeEditor.ViewModels
         private double _fontSizeSmall;
         private double _fontSizeNormal;
         private double _fontSizeLarge;
+        private double _scrollBarThickness;
 
         [DataMember]
         public string Name
@@ -207,6 +208,13 @@ namespace ThemeEditor.ViewModels
             set { this.RaiseAndSetIfChanged(ref _fontSizeLarge, value); }
         }
 
+        [DataMember]
+        public double ScrollBarThickness
+        {
+            get { return _scrollBarThickness; }
+            set { this.RaiseAndSetIfChanged(ref _scrollBarThickness, value); }
+        }
+
         public ThemeViewModel Clone()
         {
             return new ThemeViewModel()
@@ -235,7 +243,8 @@ namespace ThemeEditor.ViewModels
                 ThemeDisabledOpacity = ThemeDisabledOpacity,
                 FontSizeSmall = FontSizeSmall,
                 FontSizeNormal = FontSizeNormal,
-                FontSizeLarge = FontSizeLarge
+                FontSizeLarge = FontSizeLarge,
+                ScrollBarThickness = ScrollBarThickness
             };
         }
     }

@@ -65,10 +65,20 @@
             <Setter Property="Margin" Value="2"/>
         </Style>
         <Style Selector="TabControl.editor">
-            <Setter Property="Margin" Value="2"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
+            <Setter Property="Padding" Value="0,0,0,0"/>
         </Style>
         <Style Selector="TabControl.main">
-            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
+            <Setter Property="Padding" Value="0,0,0,0"/>
+        </Style>
+        <Style Selector="TabItem.editor">
+            <Setter Property="Margin" Value="0,0,0,0"/>
+            <Setter Property="Padding" Value="4,4,4,4"/>
+        </Style>
+        <Style Selector="TabItem.main">
+            <Setter Property="Margin" Value="0,0,0,0"/>
+            <Setter Property="Padding" Value="4,4,4,4"/>
         </Style>
         <Style Selector="TextBlock.left">
             <Setter Property="TextAlignment" Value="Left"/>

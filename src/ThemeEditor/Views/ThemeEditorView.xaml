@@ -9,7 +9,7 @@
              d:DesignWidth="500" d:DesignHeight="400">
     <Grid ColumnDefinitions="*" RowDefinitions="Auto,*">
         <TabControl Grid.Row="0" Classes="editor">
-            <TabItem Header="Themes">
+            <TabItem Header="Themes" Classes="editor">
                 <StackPanel Spacing="2">
                     <DropDown Items="{Binding Themes}" SelectedItem="{Binding CurrentTheme, Mode=TwoWay}" Classes="editor">
                         <DropDown.DataTemplates>
@@ -31,12 +31,12 @@
             </TabItem>
         </TabControl>
         <TabControl Grid.Row="1" Classes="editor">
-            <TabItem Header="Overview">
+            <TabItem Header="Overview" Classes="editor">
                 <ScrollViewer>
                     <local:OverviewView/>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="Edit">
+            <TabItem Header="Edit" Classes="editor">
                 <ScrollViewer>
                     <local:EditView/>
                 </ScrollViewer>

@@ -12,21 +12,21 @@
              Classes="Dark">
     <Grid ColumnDefinitions="*,8,300" Margin="8">
         <TabControl Grid.Column="0" Classes="main">
-            <TabItem Header="Preview">
+            <TabItem Header="Preview" Classes="main">
                 <Border Classes="preview">
                     <views:ThemePreviewView x:Name="previewView"/>
                 </Border>
             </TabItem>
-            <TabItem Header="Export">
+            <TabItem Header="Export" Classes="main">
                 <TextBox x:Name="exportText" DataContext="{Binding CurrentTheme}" Classes="export"/>
             </TabItem>
-            <TabItem Header="ColorPicker">
+            <TabItem Header="ColorPicker" Classes="main">
                 <!-- NOTE: Value1-Value4 properties is used to initialize control. -->
                 <!--<cp:ColorPicker x:Name="colorPicker" Value1="180" Value2="50" Value3="50" Value4="75"/>-->
                 <!-- NOTE: Color property is used to initialize control. -->
                 <cp:ColorPicker x:Name="colorPicker" Color="#CC119EDA"/>
             </TabItem>
-            <TabItem Header="ColorBlender">
+            <TabItem Header="ColorBlender" Classes="main">
                 <Grid>
                     <cb:ColorBlender x:Name="colorBlender"/>
                 </Grid>
