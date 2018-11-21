@@ -8,7 +8,7 @@
     </Style.Resources>
     <Setter Property="Template">
         <ControlTemplate>
-            <Grid ColumnDefinitions="*,Auto">
+            <Grid ColumnDefinitions="*,8,140">
                 <Grid Name="PART_PickerGrid" ColumnDefinitions="*,3,Auto" RowDefinitions="*,3,Auto" Grid.Column="0">
                     <Grid Grid.Column="0" Grid.Row="0">
                         <Grid.Background>
@@ -105,7 +105,8 @@
                         </Canvas>
                     </Grid>
                 </Grid>
-                <Grid Name="PART_PropertiesGrid" RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*" Grid.Column="1">
+                <GridSplitter Width="8" Grid.Column="1"/>
+                <Grid Name="PART_PropertiesGrid" RowDefinitions="Auto,Auto" ColumnDefinitions="*" Grid.Column="2">
                     <Grid.Styles>
                         <Style Selector="NumericUpDown.picker">
                             <Setter Property="ClipValueToMinMax" Value="True"/>
@@ -146,30 +147,8 @@
                         </Style>
                     </Grid.Styles>
                     <TabControl Classes="picker" Grid.Row="0">
-                        <TabItem Header="Hex" Classes="picker">
-                            <Grid RowDefinitions="Auto" ColumnDefinitions="*" Classes="properties">
-                                <TextBox Text="{Binding Hex, Mode=TwoWay}" ToolTip.Tip="Hex value" Classes="picker">
-                                    <TextBox.DataContext>
-                                        <local:HexProperties ColorPicker="{Binding RelativeSource={RelativeSource TemplatedParent}}"/>
-                                    </TextBox.DataContext>
-                                </TextBox>
-                            </Grid>
-                        </TabItem>
-                    </TabControl>
-                    <TabControl Classes="picker" Grid.Row="1">
-                         <TabItem Header="Alpha" Classes="picker">
-                            <Grid RowDefinitions="Auto" ColumnDefinitions="*" Classes="properties">
-                                <NumericUpDown Value="{Binding Alpha, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker">
-                                    <NumericUpDown.DataContext>
-                                        <local:AlphaProperties ColorPicker="{Binding RelativeSource={RelativeSource TemplatedParent}}"/>
-                                    </NumericUpDown.DataContext>
-                                </NumericUpDown>
-                            </Grid>
-                        </TabItem>
-                    </TabControl>
-                    <TabControl Classes="picker" Grid.Row="2">
                         <TabItem Header="RGB" Classes="picker">
-                            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,90" Classes="properties">
+                            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*" Classes="properties">
                                 <Grid.DataContext>
                                     <local:RgbProperties ColorPicker="{Binding RelativeSource={RelativeSource TemplatedParent}}"/>
                                 </Grid.DataContext>
@@ -182,7 +161,7 @@
                             </Grid>
                         </TabItem>
                         <TabItem Header="HSV" Classes="picker">
-                            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,90" Classes="properties">
+                            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*" Classes="properties">
                                 <Grid.DataContext>
                                     <local:HsvProperties ColorPicker="{Binding RelativeSource={RelativeSource TemplatedParent}}"/>
                                 </Grid.DataContext>
@@ -195,7 +174,7 @@
                             </Grid>
                         </TabItem>
                         <TabItem Header="CMYK" Classes="picker">
-                            <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,90" Classes="properties">
+                            <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*" Classes="properties">
                                 <Grid.DataContext>
                                     <local:CmykProperties ColorPicker="{Binding RelativeSource={RelativeSource TemplatedParent}}"/>
                                 </Grid.DataContext>
@@ -207,6 +186,26 @@
                                 <NumericUpDown Value="{Binding Yellow, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="2" Grid.Column="1"/>
                                 <TextBlock Text="K" ToolTip.Tip="Black key" Classes="picker" Grid.Row="3" Grid.Column="0"/>
                                 <NumericUpDown Value="{Binding BlackKey, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="3" Grid.Column="1"/>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                    <TabControl Classes="picker" Grid.Row="1">
+                        <TabItem Header="Hex" Classes="picker">
+                            <Grid RowDefinitions="Auto" ColumnDefinitions="*" Classes="properties">
+                                <TextBox Text="{Binding Hex, Mode=TwoWay}" ToolTip.Tip="Hex value" Classes="picker">
+                                    <TextBox.DataContext>
+                                        <local:HexProperties ColorPicker="{Binding RelativeSource={RelativeSource TemplatedParent}}"/>
+                                    </TextBox.DataContext>
+                                </TextBox>
+                            </Grid>
+                        </TabItem>
+                         <TabItem Header="Alpha" Classes="picker">
+                            <Grid RowDefinitions="Auto" ColumnDefinitions="*" Classes="properties">
+                                <NumericUpDown Value="{Binding Alpha, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker">
+                                    <NumericUpDown.DataContext>
+                                        <local:AlphaProperties ColorPicker="{Binding RelativeSource={RelativeSource TemplatedParent}}"/>
+                                    </NumericUpDown.DataContext>
+                                </NumericUpDown>
                             </Grid>
                         </TabItem>
                     </TabControl>
