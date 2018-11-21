@@ -10,7 +10,7 @@
              mc:Ignorable="d"
              d:DesignWidth="900" d:DesignHeight="500"
              Classes="themed">
-    <Grid ColumnDefinitions="*,8,300" Margin="8">
+    <Grid ColumnDefinitions="*,8,350" Margin="8">
         <TabControl Grid.Column="0" Classes="main">
             <TabItem Header="Preview" Classes="main">
                 <Border Classes="preview">
