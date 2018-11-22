@@ -44,20 +44,6 @@ namespace ThemeEditor.Controls.ColorBlender
         private Swatch _swatch6;
         private bool _updatingSliders = false;
 
-        public IAlgorithm[] Algorithms { get; set; }
-
-        public IAlgorithm CurrentAlgorithm { get; set; }
-
-        public Blend CurrentBlend { get; set; }
-
-        public RGB CurrentRGB { get; set; }
-
-        public HSV CurrentHSV { get; set; }
-
-        public RGB[] VariationsRGB { get; set; }
-
-        public RGB[] VariationsHSV { get; set; }
-
         public ColorBlender()
         {
             this.InitializeComponent();
@@ -106,14 +92,28 @@ namespace ThemeEditor.Controls.ColorBlender
             _hsvvar7.PointerPressed += Rectangle_PointerPressed;
             _hsvvar8.PointerPressed += Rectangle_PointerPressed;
             _hsvvar9.PointerPressed += Rectangle_PointerPressed;
-            _swatch1.col.PointerPressed += Rectangle_PointerPressed;
-            _swatch2.col.PointerPressed += Rectangle_PointerPressed;
-            _swatch3.col.PointerPressed += Rectangle_PointerPressed;
-            _swatch4.col.PointerPressed += Rectangle_PointerPressed;
-            _swatch5.col.PointerPressed += Rectangle_PointerPressed;
-            _swatch6.col.PointerPressed += Rectangle_PointerPressed;
+            _swatch1._col.PointerPressed += Rectangle_PointerPressed;
+            _swatch2._col.PointerPressed += Rectangle_PointerPressed;
+            _swatch3._col.PointerPressed += Rectangle_PointerPressed;
+            _swatch4._col.PointerPressed += Rectangle_PointerPressed;
+            _swatch5._col.PointerPressed += Rectangle_PointerPressed;
+            _swatch6._col.PointerPressed += Rectangle_PointerPressed;
             _algorithm.SelectionChanged += Algorithm_SelectionChanged;
         }
+
+        public IAlgorithm[] Algorithms { get; set; }
+
+        public IAlgorithm CurrentAlgorithm { get; set; }
+
+        public Blend CurrentBlend { get; set; }
+
+        public RGB CurrentRGB { get; set; }
+
+        public HSV CurrentHSV { get; set; }
+
+        public RGB[] VariationsRGB { get; set; }
+
+        public RGB[] VariationsHSV { get; set; }
 
         private void InitializeComponent()
         {
@@ -231,12 +231,12 @@ namespace ThemeEditor.Controls.ColorBlender
 
         private void UpdateSwatches()
         {
-            _swatch1.col.Fill = CurrentBlend.Colors[0].ToSolidColorBrush();
-            _swatch2.col.Fill = CurrentBlend.Colors[1].ToSolidColorBrush();
-            _swatch3.col.Fill = CurrentBlend.Colors[2].ToSolidColorBrush();
-            _swatch4.col.Fill = CurrentBlend.Colors[3].ToSolidColorBrush();
-            _swatch5.col.Fill = CurrentBlend.Colors[4].ToSolidColorBrush();
-            _swatch6.col.Fill = CurrentBlend.Colors[5].ToSolidColorBrush();
+            _swatch1._col.Fill = CurrentBlend.Colors[0].ToSolidColorBrush();
+            _swatch2._col.Fill = CurrentBlend.Colors[1].ToSolidColorBrush();
+            _swatch3._col.Fill = CurrentBlend.Colors[2].ToSolidColorBrush();
+            _swatch4._col.Fill = CurrentBlend.Colors[3].ToSolidColorBrush();
+            _swatch5._col.Fill = CurrentBlend.Colors[4].ToSolidColorBrush();
+            _swatch6._col.Fill = CurrentBlend.Colors[5].ToSolidColorBrush();
         }
 
         private void UpdateSlidersRGB()
