@@ -656,19 +656,19 @@ namespace ThemeEditor.Controls.ColorPicker
 
     public class ColorPicker : TemplatedControl
     {
-        public static readonly StyledProperty<double> Value1Property =
+        internal static readonly StyledProperty<double> Value1Property =
             AvaloniaProperty.Register<ColorPicker, double>(nameof(Value1));
 
-        public static readonly StyledProperty<double> Value2Property =
+        internal static readonly StyledProperty<double> Value2Property =
             AvaloniaProperty.Register<ColorPicker, double>(nameof(Value2));
 
-        public static readonly StyledProperty<double> Value3Property =
+        internal static readonly StyledProperty<double> Value3Property =
             AvaloniaProperty.Register<ColorPicker, double>(nameof(Value3));
 
-        public static readonly StyledProperty<double> Value4Property =
+        internal static readonly StyledProperty<double> Value4Property =
             AvaloniaProperty.Register<ColorPicker, double>(nameof(Value4));
 
-        public static readonly StyledProperty<Color> ColorProperty =
+        internal static readonly StyledProperty<Color> ColorProperty =
             AvaloniaProperty.Register<ColorPicker, Color>(nameof(Color));
 
         private Canvas _colorCanvas;
@@ -692,25 +692,25 @@ namespace ThemeEditor.Controls.ColorPicker
             this.GetObservable(ColorProperty).Subscribe(x => OnColorChange());
         }
 
-        public double Value1
+        internal double Value1
         {
             get { return GetValue(Value1Property); }
             set { SetValue(Value1Property, value); }
         }
 
-        public double Value2
+        internal double Value2
         {
             get { return GetValue(Value2Property); }
             set { SetValue(Value2Property, value); }
         }
 
-        public double Value3
+        internal double Value3
         {
             get { return GetValue(Value3Property); }
             set { SetValue(Value3Property, value); }
         }
 
-        public double Value4
+        internal double Value4
         {
             get { return GetValue(Value4Property); }
             set { SetValue(Value4Property, value); }
