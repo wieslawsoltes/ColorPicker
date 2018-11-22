@@ -807,7 +807,6 @@ namespace ThemeEditor.Controls.ColorPicker
         protected override Size ArrangeOverride(Size finalSize)
         {
             var size = base.ArrangeOverride(finalSize);
-            //OnValueChange();
             OnColorChange();
             return size;
         }
