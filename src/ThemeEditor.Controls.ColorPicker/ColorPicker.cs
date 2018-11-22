@@ -55,7 +55,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    public class HueConverter : IValueConverter
+    internal class HueConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -76,7 +76,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    public class SaturationConverter : IValueConverter
+    internal class SaturationConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -97,7 +97,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    public class ValueConverter : IValueConverter
+    internal class ValueConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -118,7 +118,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    public class AlphaConverter : IValueConverter
+    internal class AlphaConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -139,7 +139,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    public class HsvaToColorConverter : IMultiValueConverter
+    internal class HsvaToColorConverter : IMultiValueConverter
     {
         public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
         {
@@ -152,7 +152,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    public class HueToColorConverter : IValueConverter
+    internal class HueToColorConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -222,7 +222,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    public abstract class ColorPickerProperties : AvaloniaObject
+    internal abstract class ColorPickerProperties : AvaloniaObject
     {
         public static readonly StyledProperty<ColorPicker> ColorPickerProperty =
             AvaloniaProperty.Register<ColorPickerProperties, ColorPicker>(nameof(ColorPicker));
@@ -254,7 +254,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    public class HsvProperties : ColorPickerProperties
+    internal class HsvProperties : ColorPickerProperties
     {
         public static readonly StyledProperty<double> HueProperty =
             AvaloniaProperty.Register<HsvProperties, double>(nameof(Hue), 0.0, validate: ValidateHue);
@@ -344,7 +344,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    public class RgbProperties : ColorPickerProperties
+    internal class RgbProperties : ColorPickerProperties
     {
         public static readonly StyledProperty<byte> RedProperty =
             AvaloniaProperty.Register<RgbProperties, byte>(nameof(Red), 0xFF, validate: ValidateRed);
@@ -438,7 +438,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    public class CmykProperties : ColorPickerProperties
+    internal class CmykProperties : ColorPickerProperties
     {
         public static readonly StyledProperty<double> CyanProperty =
             AvaloniaProperty.Register<CmykProperties, double>(nameof(Cyan), 0.0, validate: ValidateCyan);
@@ -552,7 +552,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    public class HexProperties : ColorPickerProperties
+    internal class HexProperties : ColorPickerProperties
     {
         public static readonly StyledProperty<string> HexProperty =
             AvaloniaProperty.Register<HexProperties, string>(nameof(Hex), "#FFFF0000", validate: ValidateHex);
@@ -606,7 +606,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    public class AlphaProperties : ColorPickerProperties
+    internal class AlphaProperties : ColorPickerProperties
     {
         public static readonly StyledProperty<double> AlphaProperty =
             AvaloniaProperty.Register<AlphaProperties, double>(nameof(Alpha), 100.0, validate: ValidateAlpha);
