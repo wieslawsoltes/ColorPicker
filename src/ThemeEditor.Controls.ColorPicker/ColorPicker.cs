@@ -13,7 +13,7 @@ using ThemeEditor.Colors;
 
 namespace ThemeEditor.Controls.ColorPicker
 {
-    public static class ColorHelpers
+    internal static class ColorHelpers
     {
         private static Regex s_hexRegex = new Regex("^#[a-fA-F0-9]{8}$");
 
