@@ -22,9 +22,4 @@
     <Compile Include="**\*.cs" Exclude="obj\**" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\ThemeEditor.ColorMatch\ThemeEditor.ColorMatch.csproj" />
-    <ProjectReference Include="..\ThemeEditor.Colors\ThemeEditor.Colors.csproj" />
-  </ItemGroup>
-
 </Project>

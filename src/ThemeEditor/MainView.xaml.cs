@@ -28,7 +28,6 @@ namespace ThemeEditor
             _editorView = this.Find<ThemeEditorView>("editorView");
             _colorPicker = this.Find<ColorPicker>("colorPicker");
             _colorBlender = this.Find<ColorBlender>("colorBlender");
-            _colorBlender.DataContext = new ColorMatchViewModel(199, 95, 62);
             _themeSelector = this.Find<DropDown>("themeSelector");
             _themeSelector.SelectionChanged += (sender, e) =>
             {

@@ -5,113 +5,114 @@ using Avalonia.Controls.Shapes;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
+using ThemeEditor.ColorMatch;
+using ThemeEditor.ColorMatch.Algorithms;
 using ThemeEditor.Colors;
-using ThemeEditor.ViewModels;
 
 namespace ThemeEditor.Controls.ColorBlender
 {
     public partial class ColorBlender : UserControl
     {
-        public DropDown algorithm;
-        public Slider sliderR;
-        public Slider sliderG;
-        public Slider sliderB;
-        public Slider sliderH;
-        public Slider sliderS;
-        public Slider sliderV;
-        public Rectangle rgbvar1;
-        public Rectangle rgbvar2;
-        public Rectangle rgbvar3;
-        public Rectangle rgbvar4;
-        public Rectangle rgbvar5;
-        public Rectangle rgbvar6;
-        public Rectangle rgbvar7;
-        public Rectangle hsvvar1;
-        public Rectangle hsvvar2;
-        public Rectangle hsvvar3;
-        public Rectangle hsvvar4;
-        public Rectangle hsvvar5;
-        public Rectangle hsvvar6;
-        public Rectangle hsvvar7;
-        public Rectangle hsvvar8;
-        public Rectangle hsvvar9;
-        public Swatch swatch1;
-        public Swatch swatch2;
-        public Swatch swatch3;
-        public Swatch swatch4;
-        public Swatch swatch5;
-        public Swatch swatch6;
+        private DropDown _algorithm;
+        private Slider _sliderR;
+        private Slider _sliderG;
+        private Slider _sliderB;
+        private Slider _sliderH;
+        private Slider _sliderS;
+        private Slider _sliderV;
+        private Rectangle _rgbvar1;
+        private Rectangle _rgbvar2;
+        private Rectangle _rgbvar3;
+        private Rectangle _rgbvar4;
+        private Rectangle _rgbvar5;
+        private Rectangle _rgbvar6;
+        private Rectangle _rgbvar7;
+        private Rectangle _hsvvar1;
+        private Rectangle _hsvvar2;
+        private Rectangle _hsvvar3;
+        private Rectangle _hsvvar4;
+        private Rectangle _hsvvar5;
+        private Rectangle _hsvvar6;
+        private Rectangle _hsvvar7;
+        private Rectangle _hsvvar8;
+        private Rectangle _hsvvar9;
+        private Swatch _swatch1;
+        private Swatch _swatch2;
+        private Swatch _swatch3;
+        private Swatch _swatch4;
+        private Swatch _swatch5;
+        private Swatch _swatch6;
         private bool _updatingSliders = false;
+
+        public IAlgorithm[] Algorithms { get; set; }
+
+        public IAlgorithm CurrentAlgorithm { get; set; }
+
+        public Blend CurrentBlend { get; set; }
+
+        public RGB CurrentRGB { get; set; }
+
+        public HSV CurrentHSV { get; set; }
+
+        public RGB[] VariationsRGB { get; set; }
+
+        public RGB[] VariationsHSV { get; set; }
 
         public ColorBlender()
         {
             this.InitializeComponent();
-
-            algorithm = this.FindControl<DropDown>("algorithm");
-            sliderR = this.FindControl<Slider>("sliderR");
-            sliderG = this.FindControl<Slider>("sliderG");
-            sliderB = this.FindControl<Slider>("sliderB");
-            sliderH = this.FindControl<Slider>("sliderH");
-            sliderS = this.FindControl<Slider>("sliderS");
-            sliderV = this.FindControl<Slider>("sliderV");
-            rgbvar1 = this.FindControl<Rectangle>("rgbvar1");
-            rgbvar2 = this.FindControl<Rectangle>("rgbvar2");
-            rgbvar3 = this.FindControl<Rectangle>("rgbvar3");
-            rgbvar4 = this.FindControl<Rectangle>("rgbvar4");
-            rgbvar5 = this.FindControl<Rectangle>("rgbvar5");
-            rgbvar6 = this.FindControl<Rectangle>("rgbvar6");
-            rgbvar7 = this.FindControl<Rectangle>("rgbvar7");
-            hsvvar1 = this.FindControl<Rectangle>("hsvvar1");
-            hsvvar2 = this.FindControl<Rectangle>("hsvvar2");
-            hsvvar3 = this.FindControl<Rectangle>("hsvvar3");
-            hsvvar4 = this.FindControl<Rectangle>("hsvvar4");
-            hsvvar5 = this.FindControl<Rectangle>("hsvvar5");
-            hsvvar6 = this.FindControl<Rectangle>("hsvvar6");
-            hsvvar7 = this.FindControl<Rectangle>("hsvvar7");
-            hsvvar8 = this.FindControl<Rectangle>("hsvvar8");
-            hsvvar9 = this.FindControl<Rectangle>("hsvvar9");
-            swatch1 = this.FindControl<Swatch>("swatch1");
-            swatch2 = this.FindControl<Swatch>("swatch2");
-            swatch3 = this.FindControl<Swatch>("swatch3");
-            swatch4 = this.FindControl<Swatch>("swatch4");
-            swatch5 = this.FindControl<Swatch>("swatch5");
-            swatch6 = this.FindControl<Swatch>("swatch6");
-
-            sliderR.GetObservable(Slider.ValueProperty).Subscribe(value => SliderRGB_ValueChanged());
-            sliderG.GetObservable(Slider.ValueProperty).Subscribe(value => SliderRGB_ValueChanged());
-            sliderB.GetObservable(Slider.ValueProperty).Subscribe(value => SliderRGB_ValueChanged());
-            sliderH.GetObservable(Slider.ValueProperty).Subscribe(value => SliderHSV_ValueChanged());
-            sliderS.GetObservable(Slider.ValueProperty).Subscribe(value => SliderHSV_ValueChanged());
-            sliderV.GetObservable(Slider.ValueProperty).Subscribe(value => SliderHSV_ValueChanged());
-
-            rgbvar1.PointerPressed += Rectangle_PointerPressed;
-            rgbvar2.PointerPressed += Rectangle_PointerPressed;
-            rgbvar3.PointerPressed += Rectangle_PointerPressed;
-            rgbvar4.PointerPressed += Rectangle_PointerPressed;
-            rgbvar5.PointerPressed += Rectangle_PointerPressed;
-            rgbvar6.PointerPressed += Rectangle_PointerPressed;
-            rgbvar7.PointerPressed += Rectangle_PointerPressed;
-
-            hsvvar1.PointerPressed += Rectangle_PointerPressed;
-            hsvvar2.PointerPressed += Rectangle_PointerPressed;
-            hsvvar3.PointerPressed += Rectangle_PointerPressed;
-            hsvvar4.PointerPressed += Rectangle_PointerPressed;
-            hsvvar5.PointerPressed += Rectangle_PointerPressed;
-            hsvvar6.PointerPressed += Rectangle_PointerPressed;
-            hsvvar7.PointerPressed += Rectangle_PointerPressed;
-            hsvvar8.PointerPressed += Rectangle_PointerPressed;
-            hsvvar9.PointerPressed += Rectangle_PointerPressed;
-
-            swatch1.col.PointerPressed += Rectangle_PointerPressed;
-            swatch2.col.PointerPressed += Rectangle_PointerPressed;
-            swatch3.col.PointerPressed += Rectangle_PointerPressed;
-            swatch4.col.PointerPressed += Rectangle_PointerPressed;
-            swatch5.col.PointerPressed += Rectangle_PointerPressed;
-            swatch6.col.PointerPressed += Rectangle_PointerPressed;
-
-            algorithm.SelectionChanged += Algorithm_SelectionChanged;
-
-            this.AttachedToVisualTree += UserControl_AttachedToVisualTree;
+            _algorithm = this.FindControl<DropDown>("algorithm");
+            _sliderR = this.FindControl<Slider>("sliderR");
+            _sliderG = this.FindControl<Slider>("sliderG");
+            _sliderB = this.FindControl<Slider>("sliderB");
+            _sliderH = this.FindControl<Slider>("sliderH");
+            _sliderS = this.FindControl<Slider>("sliderS");
+            _sliderV = this.FindControl<Slider>("sliderV");
+            _rgbvar1 = this.FindControl<Rectangle>("rgbvar1");
+            _rgbvar2 = this.FindControl<Rectangle>("rgbvar2");
+            _rgbvar3 = this.FindControl<Rectangle>("rgbvar3");
+            _rgbvar4 = this.FindControl<Rectangle>("rgbvar4");
+            _rgbvar5 = this.FindControl<Rectangle>("rgbvar5");
+            _rgbvar6 = this.FindControl<Rectangle>("rgbvar6");
+            _rgbvar7 = this.FindControl<Rectangle>("rgbvar7");
+            _hsvvar1 = this.FindControl<Rectangle>("hsvvar1");
+            _hsvvar2 = this.FindControl<Rectangle>("hsvvar2");
+            _hsvvar3 = this.FindControl<Rectangle>("hsvvar3");
+            _hsvvar4 = this.FindControl<Rectangle>("hsvvar4");
+            _hsvvar5 = this.FindControl<Rectangle>("hsvvar5");
+            _hsvvar6 = this.FindControl<Rectangle>("hsvvar6");
+            _hsvvar7 = this.FindControl<Rectangle>("hsvvar7");
+            _hsvvar8 = this.FindControl<Rectangle>("hsvvar8");
+            _hsvvar9 = this.FindControl<Rectangle>("hsvvar9");
+            _swatch1 = this.FindControl<Swatch>("swatch1");
+            _swatch2 = this.FindControl<Swatch>("swatch2");
+            _swatch3 = this.FindControl<Swatch>("swatch3");
+            _swatch4 = this.FindControl<Swatch>("swatch4");
+            _swatch5 = this.FindControl<Swatch>("swatch5");
+            _swatch6 = this.FindControl<Swatch>("swatch6");
+            _rgbvar1.PointerPressed += Rectangle_PointerPressed;
+            _rgbvar2.PointerPressed += Rectangle_PointerPressed;
+            _rgbvar3.PointerPressed += Rectangle_PointerPressed;
+            _rgbvar4.PointerPressed += Rectangle_PointerPressed;
+            _rgbvar5.PointerPressed += Rectangle_PointerPressed;
+            _rgbvar6.PointerPressed += Rectangle_PointerPressed;
+            _rgbvar7.PointerPressed += Rectangle_PointerPressed;
+            _hsvvar1.PointerPressed += Rectangle_PointerPressed;
+            _hsvvar2.PointerPressed += Rectangle_PointerPressed;
+            _hsvvar3.PointerPressed += Rectangle_PointerPressed;
+            _hsvvar4.PointerPressed += Rectangle_PointerPressed;
+            _hsvvar5.PointerPressed += Rectangle_PointerPressed;
+            _hsvvar6.PointerPressed += Rectangle_PointerPressed;
+            _hsvvar7.PointerPressed += Rectangle_PointerPressed;
+            _hsvvar8.PointerPressed += Rectangle_PointerPressed;
+            _hsvvar9.PointerPressed += Rectangle_PointerPressed;
+            _swatch1.col.PointerPressed += Rectangle_PointerPressed;
+            _swatch2.col.PointerPressed += Rectangle_PointerPressed;
+            _swatch3.col.PointerPressed += Rectangle_PointerPressed;
+            _swatch4.col.PointerPressed += Rectangle_PointerPressed;
+            _swatch5.col.PointerPressed += Rectangle_PointerPressed;
+            _swatch6.col.PointerPressed += Rectangle_PointerPressed;
+            _algorithm.SelectionChanged += Algorithm_SelectionChanged;
         }
 
         private void InitializeComponent()
@@ -119,88 +120,151 @@ namespace ThemeEditor.Controls.ColorBlender
             AvaloniaXamlLoader.Load(this);
         }
 
-        private void UserControl_AttachedToVisualTree(object sender, VisualTreeAttachmentEventArgs e)
+        private void InitializeProperties()
         {
-            UpdateVariations();
-            UpdateSwatches();
-            UpdateSliderRGB();
-            UpdateSliderHSV();
+            Algorithms = new IAlgorithm[]
+            {
+                new Classic(),
+                new ColorExplorer(),
+                new SingleHue(),
+                new Complementary(),
+                new SplitComplementary(),
+                new Analogue(),
+                new Triadic(),
+                new Square()
+            };
+            CurrentAlgorithm = Algorithms[0];
+            VariationsRGB = new RGB[7];
+            VariationsHSV = new RGB[9];
+            CurrentHSV = new HSV(199, 95, 62);
+            CurrentRGB = new RGB(CurrentHSV);
         }
 
-        private void UpdateVariations()
+        private double AddLimit(double x, double d, double min, double max)
         {
-            if (DataContext is ColorMatchViewModel vm)
-            {
-                rgbvar1.Fill = vm.VariationsRGB[0].ToSolidColorBrush();
-                rgbvar2.Fill = vm.VariationsRGB[1].ToSolidColorBrush();
-                rgbvar3.Fill = vm.VariationsRGB[2].ToSolidColorBrush();
-                rgbvar4.Fill = vm.VariationsRGB[3].ToSolidColorBrush();
-                rgbvar5.Fill = vm.VariationsRGB[4].ToSolidColorBrush();
-                rgbvar6.Fill = vm.VariationsRGB[5].ToSolidColorBrush();
-                rgbvar7.Fill = vm.VariationsRGB[6].ToSolidColorBrush();
+            x = x + d;
+            if (x < min)
+                return min;
+            if (x > max)
+                return max;
+            if ((x >= min) && (x <= max))
+                return x;
+            return double.NaN;
+        }
 
-                hsvvar1.Fill = vm.VariationsHSV[0].ToSolidColorBrush();
-                hsvvar2.Fill = vm.VariationsHSV[1].ToSolidColorBrush();
-                hsvvar3.Fill = vm.VariationsHSV[2].ToSolidColorBrush();
-                hsvvar4.Fill = vm.VariationsHSV[3].ToSolidColorBrush();
-                hsvvar5.Fill = vm.VariationsHSV[4].ToSolidColorBrush();
-                hsvvar6.Fill = vm.VariationsHSV[5].ToSolidColorBrush();
-                hsvvar7.Fill = vm.VariationsHSV[6].ToSolidColorBrush();
-                hsvvar8.Fill = vm.VariationsHSV[7].ToSolidColorBrush();
-                hsvvar9.Fill = vm.VariationsHSV[8].ToSolidColorBrush();
-            }
+        private RGB HsvVariation(HSV hsv, double addsat, double addval)
+        {
+            return new HSV(hsv.H, AddLimit(hsv.S, addsat, 0, 99), AddLimit(hsv.V, addval, 0, 99)).ToRGB();
+        }
+
+        public void UpdateVariationsRGB()
+        {
+            double vv = 20;
+            double vw = 10;
+            VariationsRGB[0] = new RGB(AddLimit(CurrentRGB.R, -vw, 0, 255), AddLimit(CurrentRGB.G, vv, 0, 255), AddLimit(CurrentRGB.B, -vw, 0, 255));
+            VariationsRGB[1] = new RGB(AddLimit(CurrentRGB.R, vw, 0, 255), AddLimit(CurrentRGB.G, vw, 0, 255), AddLimit(CurrentRGB.B, -vv, 0, 255));
+            VariationsRGB[2] = new RGB(AddLimit(CurrentRGB.R, -vv, 0, 255), AddLimit(CurrentRGB.G, vw, 0, 255), AddLimit(CurrentRGB.B, vw, 0, 255));
+            VariationsRGB[3] = new RGB(CurrentRGB.R, CurrentRGB.G, CurrentRGB.B);
+            VariationsRGB[4] = new RGB(AddLimit(CurrentRGB.R, vv, 0, 255), AddLimit(CurrentRGB.G, -vw, 0, 255), AddLimit(CurrentRGB.B, -vw, 0, 255));
+            VariationsRGB[5] = new RGB(AddLimit(CurrentRGB.R, -vw, 0, 255), AddLimit(CurrentRGB.G, -vw, 0, 255), AddLimit(CurrentRGB.B, vv, 0, 255));
+            VariationsRGB[6] = new RGB(AddLimit(CurrentRGB.R, vw, 0, 255), AddLimit(CurrentRGB.G, -vv, 0, 255), AddLimit(CurrentRGB.B, vw, 0, 255));
+        }
+
+        public void UpdateVariationsHSV()
+        {
+            double vv = 10;
+            VariationsHSV[0] = HsvVariation(CurrentHSV, -vv, vv);
+            VariationsHSV[1] = HsvVariation(CurrentHSV, 0, vv);
+            VariationsHSV[2] = HsvVariation(CurrentHSV, vv, vv);
+            VariationsHSV[3] = HsvVariation(CurrentHSV, -vv, 0);
+            VariationsHSV[4] = CurrentHSV.ToRGB();
+            VariationsHSV[5] = HsvVariation(CurrentHSV, vv, 0);
+            VariationsHSV[6] = HsvVariation(CurrentHSV, -vv, -vv);
+            VariationsHSV[7] = HsvVariation(CurrentHSV, 0, -vv);
+            VariationsHSV[8] = HsvVariation(CurrentHSV, vv, -vv);
+        }
+
+        public void Update()
+        {
+            CurrentBlend = CurrentAlgorithm.Match(CurrentHSV);
+            UpdateVariationsRGB();
+            UpdateVariationsHSV();
+        }
+
+        protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+        {
+            base.OnAttachedToVisualTree(e);
+            InitializeProperties();
+            Update();
+            UpdateRectangles();
+            UpdateSwatches();
+            UpdateSlidersRGB();
+            UpdateSlidersHSV();
+            _sliderR.GetObservable(Slider.ValueProperty).Subscribe(value => SliderRGB_ValueChanged());
+            _sliderG.GetObservable(Slider.ValueProperty).Subscribe(value => SliderRGB_ValueChanged());
+            _sliderB.GetObservable(Slider.ValueProperty).Subscribe(value => SliderRGB_ValueChanged());
+            _sliderH.GetObservable(Slider.ValueProperty).Subscribe(value => SliderHSV_ValueChanged());
+            _sliderS.GetObservable(Slider.ValueProperty).Subscribe(value => SliderHSV_ValueChanged());
+            _sliderV.GetObservable(Slider.ValueProperty).Subscribe(value => SliderHSV_ValueChanged());
+            DataContext = this;
+        }
+
+        private void UpdateRectangles()
+        {
+            _rgbvar1.Fill = VariationsRGB[0].ToSolidColorBrush();
+            _rgbvar2.Fill = VariationsRGB[1].ToSolidColorBrush();
+            _rgbvar3.Fill = VariationsRGB[2].ToSolidColorBrush();
+            _rgbvar4.Fill = VariationsRGB[3].ToSolidColorBrush();
+            _rgbvar5.Fill = VariationsRGB[4].ToSolidColorBrush();
+            _rgbvar6.Fill = VariationsRGB[5].ToSolidColorBrush();
+            _rgbvar7.Fill = VariationsRGB[6].ToSolidColorBrush();
+            _hsvvar1.Fill = VariationsHSV[0].ToSolidColorBrush();
+            _hsvvar2.Fill = VariationsHSV[1].ToSolidColorBrush();
+            _hsvvar3.Fill = VariationsHSV[2].ToSolidColorBrush();
+            _hsvvar4.Fill = VariationsHSV[3].ToSolidColorBrush();
+            _hsvvar5.Fill = VariationsHSV[4].ToSolidColorBrush();
+            _hsvvar6.Fill = VariationsHSV[5].ToSolidColorBrush();
+            _hsvvar7.Fill = VariationsHSV[6].ToSolidColorBrush();
+            _hsvvar8.Fill = VariationsHSV[7].ToSolidColorBrush();
+            _hsvvar9.Fill = VariationsHSV[8].ToSolidColorBrush();
         }
 
         private void UpdateSwatches()
         {
-            if (DataContext is ColorMatchViewModel vm)
-            {
-                swatch1.col.Fill = vm.CurrentBlend.Colors[0].ToSolidColorBrush();
-                swatch2.col.Fill = vm.CurrentBlend.Colors[1].ToSolidColorBrush();
-                swatch3.col.Fill = vm.CurrentBlend.Colors[2].ToSolidColorBrush();
-                swatch4.col.Fill = vm.CurrentBlend.Colors[3].ToSolidColorBrush();
-                swatch5.col.Fill = vm.CurrentBlend.Colors[4].ToSolidColorBrush();
-                swatch6.col.Fill = vm.CurrentBlend.Colors[5].ToSolidColorBrush();
-            }
+            _swatch1.col.Fill = CurrentBlend.Colors[0].ToSolidColorBrush();
+            _swatch2.col.Fill = CurrentBlend.Colors[1].ToSolidColorBrush();
+            _swatch3.col.Fill = CurrentBlend.Colors[2].ToSolidColorBrush();
+            _swatch4.col.Fill = CurrentBlend.Colors[3].ToSolidColorBrush();
+            _swatch5.col.Fill = CurrentBlend.Colors[4].ToSolidColorBrush();
+            _swatch6.col.Fill = CurrentBlend.Colors[5].ToSolidColorBrush();
         }
 
-        private void UpdateSliderRGB()
+        private void UpdateSlidersRGB()
         {
             _updatingSliders = true;
-
-            if (DataContext is ColorMatchViewModel vm)
-            {
-                sliderR.Value = vm.CurrentRGB.R;
-                sliderG.Value = vm.CurrentRGB.G;
-                sliderB.Value = vm.CurrentRGB.B;
-            }
-
+            _sliderR.Value = CurrentRGB.R;
+            _sliderG.Value = CurrentRGB.G;
+            _sliderB.Value = CurrentRGB.B;
             _updatingSliders = false;
         }
 
-        private void UpdateSliderHSV()
+        private void UpdateSlidersHSV()
         {
             _updatingSliders = true;
-
-            if (DataContext is ColorMatchViewModel vm)
-            {
-                sliderH.Value = vm.CurrentHSV.H;
-                sliderS.Value = vm.CurrentHSV.S;
-                sliderV.Value = vm.CurrentHSV.V;
-            }
-
+            _sliderH.Value = CurrentHSV.H;
+            _sliderS.Value = CurrentHSV.S;
+            _sliderV.Value = CurrentHSV.V;
             _updatingSliders = false;
         }
 
         private void Algorithm_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (DataContext is ColorMatchViewModel vm)
+            if (_updatingSliders == false)
             {
-                vm.Update();
+                Update();
+                UpdateRectangles();
+                UpdateSwatches();
             }
-
-            UpdateVariations();
-            UpdateSwatches();
         }
 
         private void SliderRGB_ValueChanged()
@@ -226,49 +290,34 @@ namespace ThemeEditor.Controls.ColorBlender
 
         private void HandleRectangleClick(SolidColorBrush b)
         {
-            if (DataContext is ColorMatchViewModel vm)
-            {
-                vm.CurrentRGB = b.Color.ToRGB();
-                vm.CurrentHSV = vm.CurrentRGB.ToHSV();
-
-                vm.Update();
-            }
-
-            UpdateVariations();
+            CurrentRGB = b.Color.ToRGB();
+            CurrentHSV = CurrentRGB.ToHSV();
+            Update();
+            UpdateRectangles();
             UpdateSwatches();
-            UpdateSliderRGB();
-            UpdateSliderHSV();
+            UpdateSlidersRGB();
+            UpdateSlidersHSV();
         }
 
         private void HandleSliderValueChangedRGB()
         {
-            if (DataContext is ColorMatchViewModel vm)
-            {
-                vm.CurrentRGB = new RGB(sliderR.Value, sliderG.Value, sliderB.Value);
-                vm.CurrentHSV = vm.CurrentRGB.ToHSV();
-                vm.CurrentRGB = vm.CurrentHSV.ToRGB();
-
-                vm.Update();
-            }
-
-            UpdateVariations();
+            CurrentRGB = new RGB(_sliderR.Value, _sliderG.Value, _sliderB.Value);
+            CurrentHSV = CurrentRGB.ToHSV();
+            CurrentRGB = CurrentHSV.ToRGB();
+            Update();
+            UpdateRectangles();
             UpdateSwatches();
-            UpdateSliderHSV();
+            UpdateSlidersHSV();
         }
 
         private void HandleSliderValueChangedHSV()
         {
-            if (DataContext is ColorMatchViewModel vm)
-            {
-                vm.CurrentHSV = new HSV(sliderH.Value, sliderS.Value, sliderV.Value);
-                vm.CurrentRGB = vm.CurrentHSV.ToRGB();
-
-                vm.Update();
-            }
-
-            UpdateVariations();
+            CurrentHSV = new HSV(_sliderH.Value, _sliderS.Value, _sliderV.Value);
+            CurrentRGB = CurrentHSV.ToRGB();
+            Update();
+            UpdateRectangles();
             UpdateSwatches();
-            UpdateSliderRGB();
+            UpdateSlidersRGB();
         }
     }
 }
