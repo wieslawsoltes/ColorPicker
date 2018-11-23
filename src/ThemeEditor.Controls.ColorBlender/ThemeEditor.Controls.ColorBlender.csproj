@@ -25,7 +25,6 @@
   <ItemGroup>
     <ProjectReference Include="..\ThemeEditor.ColorMatch\ThemeEditor.ColorMatch.csproj" />
     <ProjectReference Include="..\ThemeEditor.Colors\ThemeEditor.Colors.csproj" />
-    <ProjectReference Include="..\ThemeEditor.ViewModels\ThemeEditor.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>
