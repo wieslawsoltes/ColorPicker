@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
+using Avalonia.Data.Converters;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
@@ -44,6 +48,55 @@ namespace ThemeEditor.Controls.ColorBlender
         public static SolidColorBrush ToSolidColorBrush(this HSV hsv)
         {
             return new SolidColorBrush(ToColor(hsv));
+        }
+
+        public static string ToHexColor(Color color)
+        {
+            return $"#{color.ToUint32():X8}";
+        }
+
+        public static Color FromHexColor(string hex)
+        {
+            return Color.Parse(hex);
+        }
+    }
+
+    internal class ColorToHexConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is Color c && targetType == typeof(string))
+            {
+                try
+                {
+                    return ColorHelpers.ToHexColor(c);
+                }
+                catch (Exception)
+                {
+                    return AvaloniaProperty.UnsetValue;
+                }
+            }
+            return AvaloniaProperty.UnsetValue;
+
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is string s && targetType == typeof(Color))
+            {
+                try
+                {
+                    if (ColorHelpers.IsValidHexColor(s))
+                    {
+                        return ColorHelpers.FromHexColor(s);
+                    }
+                }
+                catch (Exception)
+                {
+                    return AvaloniaProperty.UnsetValue;
+                }
+            }
+            return AvaloniaProperty.UnsetValue;
         }
     }
 

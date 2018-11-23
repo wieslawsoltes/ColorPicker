@@ -3,27 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:converters="clr-namespace:ThemeEditor.Controls.ColorBlender.Converters;assembly=ThemeEditor.Controls.ColorBlender"
+             xmlns:local="clr-namespace:ThemeEditor.Controls.ColorBlender;assembly=ThemeEditor.Controls.ColorBlender"
              mc:Ignorable="d"
              d:DesignWidth="500" d:DesignHeight="400">
     <UserControl.Resources>
-        <converters:RgbToHexConverter x:Key="RgbToHexConverter"/>
+        <local:ColorToHexConverter x:Key="ColorToHexConverter"/>
     </UserControl.Resources>
-    <Grid x:Name="swatch" RowDefinitions="*,Auto,Auto" ColumnDefinitions="*">
+    <Grid RowDefinitions="*,Auto,Auto" ColumnDefinitions="*">
         <Rectangle x:Name="col" Cursor="Hand" Fill="Gray" Grid.Column="0" Grid.Row="0" Margin="2" />
-        <TextBox x:Name="HTML" Grid.Column="0" Grid.Row="1" Margin="2" TextAlignment="Left" IsReadOnly="True" >
-            <TextBox.Text>
-                <MultiBinding Converter="{StaticResource RgbToHexConverter}">
-                    <Binding ElementName="col" Path="Fill.Color.R"/>
-                    <Binding ElementName="col" Path="Fill.Color.G"/>
-                    <Binding ElementName="col" Path="Fill.Color.B"/>
-                </MultiBinding>
-            </TextBox.Text>
-        </TextBox>
+        <TextBox Text="{Binding #col.Fill.Color, Converter={StaticResource ColorToHexConverter}, Mode=OneWay}" Grid.Column="0" Grid.Row="1" Margin="2" TextAlignment="Left" IsReadOnly="True" />
         <Grid Grid.Column="0" ColumnDefinitions="*,*,*" Grid.Row="2">
-            <TextBox x:Name="R" Text="{Binding ElementName=col, Path=Fill.Color.R, Mode=TwoWay}" Grid.Column="0" Margin="2" TextAlignment="Left" IsReadOnly="True" />
-            <TextBox x:Name="G" Text="{Binding ElementName=col, Path=Fill.Color.G, Mode=TwoWay}" Grid.Column="1" Margin="2" TextAlignment="Left" IsReadOnly="True" />
-            <TextBox x:Name="B" Text="{Binding ElementName=col, Path=Fill.Color.B, Mode=TwoWay}" Grid.Column="2" Margin="2" TextAlignment="Left" IsReadOnly="True" />
+            <TextBox Text="{Binding #col.Fill.Color.R, Mode=OneWay}" Grid.Column="0" Margin="2" TextAlignment="Left" IsReadOnly="True" />
+            <TextBox Text="{Binding #col.Fill.Color.G, Mode=OneWay}" Grid.Column="1" Margin="2" TextAlignment="Left" IsReadOnly="True" />
+            <TextBox Text="{Binding #col.Fill.Color.B, Mode=OneWay}" Grid.Column="2" Margin="2" TextAlignment="Left" IsReadOnly="True" />
         </Grid>
     </Grid>
 </UserControl>
