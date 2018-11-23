@@ -117,100 +117,94 @@ namespace ThemeEditor.Controls.ColorBlender
         private Slider _sliderH;
         private Slider _sliderS;
         private Slider _sliderV;
-        private Rectangle _rgbvar1;
-        private Rectangle _rgbvar2;
-        private Rectangle _rgbvar3;
-        private Rectangle _rgbvar4;
-        private Rectangle _rgbvar5;
-        private Rectangle _rgbvar6;
-        private Rectangle _rgbvar7;
-        private Rectangle _hsvvar1;
-        private Rectangle _hsvvar2;
-        private Rectangle _hsvvar3;
-        private Rectangle _hsvvar4;
-        private Rectangle _hsvvar5;
-        private Rectangle _hsvvar6;
-        private Rectangle _hsvvar7;
-        private Rectangle _hsvvar8;
-        private Rectangle _hsvvar9;
-        private Swatch _swatch1;
-        private Swatch _swatch2;
-        private Swatch _swatch3;
-        private Swatch _swatch4;
-        private Swatch _swatch5;
-        private Swatch _swatch6;
+        private Rectangle _rgb1;
+        private Rectangle _rgb2;
+        private Rectangle _rgb3;
+        private Rectangle _rgb4;
+        private Rectangle _rgb5;
+        private Rectangle _rgb6;
+        private Rectangle _rgb7;
+        private Rectangle _hsv1;
+        private Rectangle _hsv2;
+        private Rectangle _hsv3;
+        private Rectangle _hsv4;
+        private Rectangle _hsv5;
+        private Rectangle _hsv6;
+        private Rectangle _hsv7;
+        private Rectangle _hsv8;
+        private Rectangle _hsv9;
+        private Rectangle _swatch1;
+        private Rectangle _swatch2;
+        private Rectangle _swatch3;
+        private Rectangle _swatch4;
+        private Rectangle _swatch5;
+        private Rectangle _swatch6;
         private bool _updatingSliders = false;
 
         public ColorBlender()
         {
             this.InitializeComponent();
             _algorithm = this.FindControl<DropDown>("algorithm");
+            _algorithm.SelectionChanged += Algorithm_SelectionChanged;
             _sliderR = this.FindControl<Slider>("sliderR");
             _sliderG = this.FindControl<Slider>("sliderG");
             _sliderB = this.FindControl<Slider>("sliderB");
             _sliderH = this.FindControl<Slider>("sliderH");
             _sliderS = this.FindControl<Slider>("sliderS");
             _sliderV = this.FindControl<Slider>("sliderV");
-            _rgbvar1 = this.FindControl<Rectangle>("rgbvar1");
-            _rgbvar2 = this.FindControl<Rectangle>("rgbvar2");
-            _rgbvar3 = this.FindControl<Rectangle>("rgbvar3");
-            _rgbvar4 = this.FindControl<Rectangle>("rgbvar4");
-            _rgbvar5 = this.FindControl<Rectangle>("rgbvar5");
-            _rgbvar6 = this.FindControl<Rectangle>("rgbvar6");
-            _rgbvar7 = this.FindControl<Rectangle>("rgbvar7");
-            _hsvvar1 = this.FindControl<Rectangle>("hsvvar1");
-            _hsvvar2 = this.FindControl<Rectangle>("hsvvar2");
-            _hsvvar3 = this.FindControl<Rectangle>("hsvvar3");
-            _hsvvar4 = this.FindControl<Rectangle>("hsvvar4");
-            _hsvvar5 = this.FindControl<Rectangle>("hsvvar5");
-            _hsvvar6 = this.FindControl<Rectangle>("hsvvar6");
-            _hsvvar7 = this.FindControl<Rectangle>("hsvvar7");
-            _hsvvar8 = this.FindControl<Rectangle>("hsvvar8");
-            _hsvvar9 = this.FindControl<Rectangle>("hsvvar9");
-            _swatch1 = this.FindControl<Swatch>("swatch1");
-            _swatch2 = this.FindControl<Swatch>("swatch2");
-            _swatch3 = this.FindControl<Swatch>("swatch3");
-            _swatch4 = this.FindControl<Swatch>("swatch4");
-            _swatch5 = this.FindControl<Swatch>("swatch5");
-            _swatch6 = this.FindControl<Swatch>("swatch6");
-            _rgbvar1.PointerPressed += Rectangle_PointerPressed;
-            _rgbvar2.PointerPressed += Rectangle_PointerPressed;
-            _rgbvar3.PointerPressed += Rectangle_PointerPressed;
-            _rgbvar4.PointerPressed += Rectangle_PointerPressed;
-            _rgbvar5.PointerPressed += Rectangle_PointerPressed;
-            _rgbvar6.PointerPressed += Rectangle_PointerPressed;
-            _rgbvar7.PointerPressed += Rectangle_PointerPressed;
-            _hsvvar1.PointerPressed += Rectangle_PointerPressed;
-            _hsvvar2.PointerPressed += Rectangle_PointerPressed;
-            _hsvvar3.PointerPressed += Rectangle_PointerPressed;
-            _hsvvar4.PointerPressed += Rectangle_PointerPressed;
-            _hsvvar5.PointerPressed += Rectangle_PointerPressed;
-            _hsvvar6.PointerPressed += Rectangle_PointerPressed;
-            _hsvvar7.PointerPressed += Rectangle_PointerPressed;
-            _hsvvar8.PointerPressed += Rectangle_PointerPressed;
-            _hsvvar9.PointerPressed += Rectangle_PointerPressed;
-            _swatch1._col.PointerPressed += Rectangle_PointerPressed;
-            _swatch2._col.PointerPressed += Rectangle_PointerPressed;
-            _swatch3._col.PointerPressed += Rectangle_PointerPressed;
-            _swatch4._col.PointerPressed += Rectangle_PointerPressed;
-            _swatch5._col.PointerPressed += Rectangle_PointerPressed;
-            _swatch6._col.PointerPressed += Rectangle_PointerPressed;
-            _algorithm.SelectionChanged += Algorithm_SelectionChanged;
+            _rgb1 = this.FindControl<Rectangle>("rgb1");
+            _rgb2 = this.FindControl<Rectangle>("rgb2");
+            _rgb3 = this.FindControl<Rectangle>("rgb3");
+            _rgb4 = this.FindControl<Rectangle>("rgb4");
+            _rgb5 = this.FindControl<Rectangle>("rgb5");
+            _rgb6 = this.FindControl<Rectangle>("rgb6");
+            _rgb7 = this.FindControl<Rectangle>("rgb7");
+            _hsv1 = this.FindControl<Rectangle>("hsv1");
+            _hsv2 = this.FindControl<Rectangle>("hsv2");
+            _hsv3 = this.FindControl<Rectangle>("hsv3");
+            _hsv4 = this.FindControl<Rectangle>("hsv4");
+            _hsv5 = this.FindControl<Rectangle>("hsv5");
+            _hsv6 = this.FindControl<Rectangle>("hsv6");
+            _hsv7 = this.FindControl<Rectangle>("hsv7");
+            _hsv8 = this.FindControl<Rectangle>("hsv8");
+            _hsv9 = this.FindControl<Rectangle>("hsv9");
+            _swatch1 = this.FindControl<Rectangle>("swatch1");
+            _swatch2 = this.FindControl<Rectangle>("swatch2");
+            _swatch3 = this.FindControl<Rectangle>("swatch3");
+            _swatch4 = this.FindControl<Rectangle>("swatch4");
+            _swatch5 = this.FindControl<Rectangle>("swatch5");
+            _swatch6 = this.FindControl<Rectangle>("swatch6");
+            _rgb1.PointerPressed += Rectangle_PointerPressed;
+            _rgb2.PointerPressed += Rectangle_PointerPressed;
+            _rgb3.PointerPressed += Rectangle_PointerPressed;
+            _rgb4.PointerPressed += Rectangle_PointerPressed;
+            _rgb5.PointerPressed += Rectangle_PointerPressed;
+            _rgb6.PointerPressed += Rectangle_PointerPressed;
+            _rgb7.PointerPressed += Rectangle_PointerPressed;
+            _hsv1.PointerPressed += Rectangle_PointerPressed;
+            _hsv2.PointerPressed += Rectangle_PointerPressed;
+            _hsv3.PointerPressed += Rectangle_PointerPressed;
+            _hsv4.PointerPressed += Rectangle_PointerPressed;
+            _hsv5.PointerPressed += Rectangle_PointerPressed;
+            _hsv6.PointerPressed += Rectangle_PointerPressed;
+            _hsv7.PointerPressed += Rectangle_PointerPressed;
+            _hsv8.PointerPressed += Rectangle_PointerPressed;
+            _hsv9.PointerPressed += Rectangle_PointerPressed;
+            _swatch1.PointerPressed += Rectangle_PointerPressed;
+            _swatch2.PointerPressed += Rectangle_PointerPressed;
+            _swatch3.PointerPressed += Rectangle_PointerPressed;
+            _swatch4.PointerPressed += Rectangle_PointerPressed;
+            _swatch5.PointerPressed += Rectangle_PointerPressed;
+            _swatch6.PointerPressed += Rectangle_PointerPressed;
         }
 
         public IAlgorithm[] Algorithms { get; set; }
 
         public IAlgorithm CurrentAlgorithm { get; set; }
 
-        public Blend CurrentBlend { get; set; }
-
         public RGB CurrentRGB { get; set; }
 
         public HSV CurrentHSV { get; set; }
-
-        public RGB[] VariationsRGB { get; set; }
-
-        public RGB[] VariationsHSV { get; set; }
 
         private void InitializeComponent()
         {
@@ -231,109 +225,78 @@ namespace ThemeEditor.Controls.ColorBlender
                 new Square()
             };
             CurrentAlgorithm = Algorithms[0];
-            VariationsRGB = new RGB[7];
-            VariationsHSV = new RGB[9];
             CurrentHSV = new HSV(199, 95, 62);
-            CurrentRGB = new RGB(CurrentHSV);
-        }
-
-        private double AddLimit(double x, double d, double min, double max)
-        {
-            x = x + d;
-            if (x < min)
-                return min;
-            if (x > max)
-                return max;
-            if ((x >= min) && (x <= max))
-                return x;
-            return double.NaN;
-        }
-
-        private RGB HsvVariation(HSV hsv, double addsat, double addval)
-        {
-            return new HSV(hsv.H, AddLimit(hsv.S, addsat, 0, 99), AddLimit(hsv.V, addval, 0, 99)).ToRGB();
-        }
-
-        public void UpdateVariationsRGB()
-        {
-            double vv = 20;
-            double vw = 10;
-            VariationsRGB[0] = new RGB(AddLimit(CurrentRGB.R, -vw, 0, 255), AddLimit(CurrentRGB.G, vv, 0, 255), AddLimit(CurrentRGB.B, -vw, 0, 255));
-            VariationsRGB[1] = new RGB(AddLimit(CurrentRGB.R, vw, 0, 255), AddLimit(CurrentRGB.G, vw, 0, 255), AddLimit(CurrentRGB.B, -vv, 0, 255));
-            VariationsRGB[2] = new RGB(AddLimit(CurrentRGB.R, -vv, 0, 255), AddLimit(CurrentRGB.G, vw, 0, 255), AddLimit(CurrentRGB.B, vw, 0, 255));
-            VariationsRGB[3] = new RGB(CurrentRGB.R, CurrentRGB.G, CurrentRGB.B);
-            VariationsRGB[4] = new RGB(AddLimit(CurrentRGB.R, vv, 0, 255), AddLimit(CurrentRGB.G, -vw, 0, 255), AddLimit(CurrentRGB.B, -vw, 0, 255));
-            VariationsRGB[5] = new RGB(AddLimit(CurrentRGB.R, -vw, 0, 255), AddLimit(CurrentRGB.G, -vw, 0, 255), AddLimit(CurrentRGB.B, vv, 0, 255));
-            VariationsRGB[6] = new RGB(AddLimit(CurrentRGB.R, vw, 0, 255), AddLimit(CurrentRGB.G, -vv, 0, 255), AddLimit(CurrentRGB.B, vw, 0, 255));
-        }
-
-        public void UpdateVariationsHSV()
-        {
-            double vv = 10;
-            VariationsHSV[0] = HsvVariation(CurrentHSV, -vv, vv);
-            VariationsHSV[1] = HsvVariation(CurrentHSV, 0, vv);
-            VariationsHSV[2] = HsvVariation(CurrentHSV, vv, vv);
-            VariationsHSV[3] = HsvVariation(CurrentHSV, -vv, 0);
-            VariationsHSV[4] = CurrentHSV.ToRGB();
-            VariationsHSV[5] = HsvVariation(CurrentHSV, vv, 0);
-            VariationsHSV[6] = HsvVariation(CurrentHSV, -vv, -vv);
-            VariationsHSV[7] = HsvVariation(CurrentHSV, 0, -vv);
-            VariationsHSV[8] = HsvVariation(CurrentHSV, vv, -vv);
-        }
-
-        public void Update()
-        {
-            CurrentBlend = CurrentAlgorithm.Match(CurrentHSV);
-            UpdateVariationsRGB();
-            UpdateVariationsHSV();
-        }
-
-        protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
-        {
-            base.OnAttachedToVisualTree(e);
-            InitializeProperties();
-            Update();
-            UpdateRectangles();
-            UpdateSwatches();
-            UpdateSlidersRGB();
-            UpdateSlidersHSV();
-            _sliderR.GetObservable(Slider.ValueProperty).Subscribe(value => SliderRGB_ValueChanged());
-            _sliderG.GetObservable(Slider.ValueProperty).Subscribe(value => SliderRGB_ValueChanged());
-            _sliderB.GetObservable(Slider.ValueProperty).Subscribe(value => SliderRGB_ValueChanged());
-            _sliderH.GetObservable(Slider.ValueProperty).Subscribe(value => SliderHSV_ValueChanged());
-            _sliderS.GetObservable(Slider.ValueProperty).Subscribe(value => SliderHSV_ValueChanged());
-            _sliderV.GetObservable(Slider.ValueProperty).Subscribe(value => SliderHSV_ValueChanged());
-            DataContext = this;
+            CurrentRGB = CurrentHSV.ToRGB();
         }
 
         private void UpdateRectangles()
         {
-            _rgbvar1.Fill = VariationsRGB[0].ToSolidColorBrush();
-            _rgbvar2.Fill = VariationsRGB[1].ToSolidColorBrush();
-            _rgbvar3.Fill = VariationsRGB[2].ToSolidColorBrush();
-            _rgbvar4.Fill = VariationsRGB[3].ToSolidColorBrush();
-            _rgbvar5.Fill = VariationsRGB[4].ToSolidColorBrush();
-            _rgbvar6.Fill = VariationsRGB[5].ToSolidColorBrush();
-            _rgbvar7.Fill = VariationsRGB[6].ToSolidColorBrush();
-            _hsvvar1.Fill = VariationsHSV[0].ToSolidColorBrush();
-            _hsvvar2.Fill = VariationsHSV[1].ToSolidColorBrush();
-            _hsvvar3.Fill = VariationsHSV[2].ToSolidColorBrush();
-            _hsvvar4.Fill = VariationsHSV[3].ToSolidColorBrush();
-            _hsvvar5.Fill = VariationsHSV[4].ToSolidColorBrush();
-            _hsvvar6.Fill = VariationsHSV[5].ToSolidColorBrush();
-            _hsvvar7.Fill = VariationsHSV[6].ToSolidColorBrush();
-            _hsvvar8.Fill = VariationsHSV[7].ToSolidColorBrush();
-            _hsvvar9.Fill = VariationsHSV[8].ToSolidColorBrush();
-        }
+            Blend blend = CurrentAlgorithm.Match(CurrentHSV);
+            RGB[] variationsRGB = new RGB[7];
+            RGB[] variationsHSV = new RGB[9];
+            double vv = 20;
+            double vw = 10;
+            double vx = 10;
 
-        private void UpdateSwatches()
-        {
-            _swatch1._col.Fill = CurrentBlend.Colors[0].ToSolidColorBrush();
-            _swatch2._col.Fill = CurrentBlend.Colors[1].ToSolidColorBrush();
-            _swatch3._col.Fill = CurrentBlend.Colors[2].ToSolidColorBrush();
-            _swatch4._col.Fill = CurrentBlend.Colors[3].ToSolidColorBrush();
-            _swatch5._col.Fill = CurrentBlend.Colors[4].ToSolidColorBrush();
-            _swatch6._col.Fill = CurrentBlend.Colors[5].ToSolidColorBrush();
+            variationsRGB[0] = new RGB(AddLimit(CurrentRGB.R, -vw, 0, 255), AddLimit(CurrentRGB.G, vv, 0, 255), AddLimit(CurrentRGB.B, -vw, 0, 255));
+            variationsRGB[1] = new RGB(AddLimit(CurrentRGB.R, vw, 0, 255), AddLimit(CurrentRGB.G, vw, 0, 255), AddLimit(CurrentRGB.B, -vv, 0, 255));
+            variationsRGB[2] = new RGB(AddLimit(CurrentRGB.R, -vv, 0, 255), AddLimit(CurrentRGB.G, vw, 0, 255), AddLimit(CurrentRGB.B, vw, 0, 255));
+            variationsRGB[3] = new RGB(CurrentRGB.R, CurrentRGB.G, CurrentRGB.B);
+            variationsRGB[4] = new RGB(AddLimit(CurrentRGB.R, vv, 0, 255), AddLimit(CurrentRGB.G, -vw, 0, 255), AddLimit(CurrentRGB.B, -vw, 0, 255));
+            variationsRGB[5] = new RGB(AddLimit(CurrentRGB.R, -vw, 0, 255), AddLimit(CurrentRGB.G, -vw, 0, 255), AddLimit(CurrentRGB.B, vv, 0, 255));
+            variationsRGB[6] = new RGB(AddLimit(CurrentRGB.R, vw, 0, 255), AddLimit(CurrentRGB.G, -vv, 0, 255), AddLimit(CurrentRGB.B, vw, 0, 255));
+
+            variationsHSV[0] = HsvVariation(CurrentHSV, -vx, vx);
+            variationsHSV[1] = HsvVariation(CurrentHSV, 0, vx);
+            variationsHSV[2] = HsvVariation(CurrentHSV, vx, vx);
+            variationsHSV[3] = HsvVariation(CurrentHSV, -vx, 0);
+            variationsHSV[4] = CurrentHSV.ToRGB();
+            variationsHSV[5] = HsvVariation(CurrentHSV, vx, 0);
+            variationsHSV[6] = HsvVariation(CurrentHSV, -vx, -vx);
+            variationsHSV[7] = HsvVariation(CurrentHSV, 0, -vx);
+            variationsHSV[8] = HsvVariation(CurrentHSV, vx, -vx);
+
+            double AddLimit(double x, double d, double min, double max)
+            {
+                x = x + d;
+                if (x < min)
+                    return min;
+                if (x > max)
+                    return max;
+                if ((x >= min) && (x <= max))
+                    return x;
+                return double.NaN;
+            }
+
+            RGB HsvVariation(HSV hsv, double addsat, double addval)
+            {
+                return new HSV(hsv.H, AddLimit(hsv.S, addsat, 0, 99), AddLimit(hsv.V, addval, 0, 99)).ToRGB();
+            }
+
+            _rgb1.Fill = variationsRGB[0].ToSolidColorBrush();
+            _rgb2.Fill = variationsRGB[1].ToSolidColorBrush();
+            _rgb3.Fill = variationsRGB[2].ToSolidColorBrush();
+            _rgb4.Fill = variationsRGB[3].ToSolidColorBrush();
+            _rgb5.Fill = variationsRGB[4].ToSolidColorBrush();
+            _rgb6.Fill = variationsRGB[5].ToSolidColorBrush();
+            _rgb7.Fill = variationsRGB[6].ToSolidColorBrush();
+
+            _hsv1.Fill = variationsHSV[0].ToSolidColorBrush();
+            _hsv2.Fill = variationsHSV[1].ToSolidColorBrush();
+            _hsv3.Fill = variationsHSV[2].ToSolidColorBrush();
+            _hsv4.Fill = variationsHSV[3].ToSolidColorBrush();
+            _hsv5.Fill = variationsHSV[4].ToSolidColorBrush();
+            _hsv6.Fill = variationsHSV[5].ToSolidColorBrush();
+            _hsv7.Fill = variationsHSV[6].ToSolidColorBrush();
+            _hsv8.Fill = variationsHSV[7].ToSolidColorBrush();
+            _hsv9.Fill = variationsHSV[8].ToSolidColorBrush();
+
+            _swatch1.Fill = blend.Colors[0].ToSolidColorBrush();
+            _swatch2.Fill = blend.Colors[1].ToSolidColorBrush();
+            _swatch3.Fill = blend.Colors[2].ToSolidColorBrush();
+            _swatch4.Fill = blend.Colors[3].ToSolidColorBrush();
+            _swatch5.Fill = blend.Colors[4].ToSolidColorBrush();
+            _swatch6.Fill = blend.Colors[5].ToSolidColorBrush();
         }
 
         private void UpdateSlidersRGB()
@@ -354,13 +317,27 @@ namespace ThemeEditor.Controls.ColorBlender
             _updatingSliders = false;
         }
 
+        protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+        {
+            base.OnAttachedToVisualTree(e);
+            InitializeProperties();
+            UpdateRectangles();
+            UpdateSlidersRGB();
+            UpdateSlidersHSV();
+            _sliderR.GetObservable(Slider.ValueProperty).Subscribe(value => SliderRGB_ValueChanged());
+            _sliderG.GetObservable(Slider.ValueProperty).Subscribe(value => SliderRGB_ValueChanged());
+            _sliderB.GetObservable(Slider.ValueProperty).Subscribe(value => SliderRGB_ValueChanged());
+            _sliderH.GetObservable(Slider.ValueProperty).Subscribe(value => SliderHSV_ValueChanged());
+            _sliderS.GetObservable(Slider.ValueProperty).Subscribe(value => SliderHSV_ValueChanged());
+            _sliderV.GetObservable(Slider.ValueProperty).Subscribe(value => SliderHSV_ValueChanged());
+            DataContext = this;
+        }
+
         private void Algorithm_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (_updatingSliders == false)
             {
-                Update();
                 UpdateRectangles();
-                UpdateSwatches();
             }
         }
 
@@ -368,7 +345,10 @@ namespace ThemeEditor.Controls.ColorBlender
         {
             if (_updatingSliders == false)
             {
-                HandleSliderValueChangedRGB();
+                CurrentRGB = new RGB(_sliderR.Value, _sliderG.Value, _sliderB.Value);
+                CurrentHSV = CurrentRGB.ToHSV();
+                UpdateRectangles();
+                UpdateSlidersHSV();
             }
         }
 
@@ -376,45 +356,24 @@ namespace ThemeEditor.Controls.ColorBlender
         {
             if (_updatingSliders == false)
             {
-                HandleSliderValueChangedHSV();
+                CurrentHSV = new HSV(_sliderH.Value, _sliderS.Value, _sliderV.Value);
+                CurrentRGB = CurrentHSV.ToRGB();
+                UpdateRectangles();
+                UpdateSlidersRGB();
             }
         }
 
         private void Rectangle_PointerPressed(object sender, PointerPressedEventArgs e)
         {
-            HandleRectangleClick((sender as Rectangle).Fill as SolidColorBrush);
-        }
-
-        private void HandleRectangleClick(SolidColorBrush b)
-        {
-            CurrentRGB = b.Color.ToRGB();
-            CurrentHSV = CurrentRGB.ToHSV();
-            Update();
-            UpdateRectangles();
-            UpdateSwatches();
-            UpdateSlidersRGB();
-            UpdateSlidersHSV();
-        }
-
-        private void HandleSliderValueChangedRGB()
-        {
-            CurrentRGB = new RGB(_sliderR.Value, _sliderG.Value, _sliderB.Value);
-            CurrentHSV = CurrentRGB.ToHSV();
-            CurrentRGB = CurrentHSV.ToRGB();
-            Update();
-            UpdateRectangles();
-            UpdateSwatches();
-            UpdateSlidersHSV();
-        }
-
-        private void HandleSliderValueChangedHSV()
-        {
-            CurrentHSV = new HSV(_sliderH.Value, _sliderS.Value, _sliderV.Value);
-            CurrentRGB = CurrentHSV.ToRGB();
-            Update();
-            UpdateRectangles();
-            UpdateSwatches();
-            UpdateSlidersRGB();
+            if (_updatingSliders == false)
+            {
+                SolidColorBrush b = (sender as Rectangle).Fill as SolidColorBrush;
+                CurrentRGB = b.Color.ToRGB();
+                CurrentHSV = CurrentRGB.ToHSV();
+                UpdateRectangles();
+                UpdateSlidersRGB();
+                UpdateSlidersHSV();
+            }
         }
     }
 }
