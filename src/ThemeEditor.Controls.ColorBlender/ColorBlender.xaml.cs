@@ -211,24 +211,6 @@ namespace ThemeEditor.Controls.ColorBlender
             AvaloniaXamlLoader.Load(this);
         }
 
-        private void InitializeProperties()
-        {
-            Algorithms = new IAlgorithm[]
-            {
-                new Classic(),
-                new ColorExplorer(),
-                new SingleHue(),
-                new Complementary(),
-                new SplitComplementary(),
-                new Analogue(),
-                new Triadic(),
-                new Square()
-            };
-            CurrentAlgorithm = Algorithms[0];
-            CurrentHSV = new HSV(199, 95, 62);
-            CurrentRGB = CurrentHSV.ToRGB();
-        }
-
         private void UpdateRectangles()
         {
             Blend blend = CurrentAlgorithm.Match(CurrentHSV);
@@ -320,16 +302,34 @@ namespace ThemeEditor.Controls.ColorBlender
         protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
         {
             base.OnAttachedToVisualTree(e);
-            InitializeProperties();
+
+            Algorithms = new IAlgorithm[]
+            {
+                new Classic(),
+                new ColorExplorer(),
+                new SingleHue(),
+                new Complementary(),
+                new SplitComplementary(),
+                new Analogue(),
+                new Triadic(),
+                new Square()
+            };
+
+            CurrentAlgorithm = Algorithms[0];
+            CurrentHSV = new HSV(199, 95, 62);
+            CurrentRGB = CurrentHSV.ToRGB();
+
             UpdateRectangles();
             UpdateSlidersRGB();
             UpdateSlidersHSV();
+
             _sliderR.GetObservable(Slider.ValueProperty).Subscribe(value => SliderRGB_ValueChanged());
             _sliderG.GetObservable(Slider.ValueProperty).Subscribe(value => SliderRGB_ValueChanged());
             _sliderB.GetObservable(Slider.ValueProperty).Subscribe(value => SliderRGB_ValueChanged());
             _sliderH.GetObservable(Slider.ValueProperty).Subscribe(value => SliderHSV_ValueChanged());
             _sliderS.GetObservable(Slider.ValueProperty).Subscribe(value => SliderHSV_ValueChanged());
             _sliderV.GetObservable(Slider.ValueProperty).Subscribe(value => SliderHSV_ValueChanged());
+
             DataContext = this;
         }
 
@@ -338,6 +338,19 @@ namespace ThemeEditor.Controls.ColorBlender
             if (_updatingSliders == false)
             {
                 UpdateRectangles();
+            }
+        }
+
+        private void Rectangle_PointerPressed(object sender, PointerPressedEventArgs e)
+        {
+            if (_updatingSliders == false)
+            {
+                SolidColorBrush b = (sender as Rectangle).Fill as SolidColorBrush;
+                CurrentRGB = b.Color.ToRGB();
+                CurrentHSV = CurrentRGB.ToHSV();
+                UpdateRectangles();
+                UpdateSlidersRGB();
+                UpdateSlidersHSV();
             }
         }
 
@@ -360,19 +373,6 @@ namespace ThemeEditor.Controls.ColorBlender
                 CurrentRGB = CurrentHSV.ToRGB();
                 UpdateRectangles();
                 UpdateSlidersRGB();
-            }
-        }
-
-        private void Rectangle_PointerPressed(object sender, PointerPressedEventArgs e)
-        {
-            if (_updatingSliders == false)
-            {
-                SolidColorBrush b = (sender as Rectangle).Fill as SolidColorBrush;
-                CurrentRGB = b.Color.ToRGB();
-                CurrentHSV = CurrentRGB.ToHSV();
-                UpdateRectangles();
-                UpdateSlidersRGB();
-                UpdateSlidersHSV();
             }
         }
     }
