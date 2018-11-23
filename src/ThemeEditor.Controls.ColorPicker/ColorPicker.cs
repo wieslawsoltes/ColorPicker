@@ -668,7 +668,7 @@ namespace ThemeEditor.Controls.ColorPicker
         internal static readonly StyledProperty<double> Value4Property =
             AvaloniaProperty.Register<ColorPicker, double>(nameof(Value4));
 
-        internal static readonly StyledProperty<Color> ColorProperty =
+        public static readonly StyledProperty<Color> ColorProperty =
             AvaloniaProperty.Register<ColorPicker, Color>(nameof(Color));
 
         private Canvas _colorCanvas;
