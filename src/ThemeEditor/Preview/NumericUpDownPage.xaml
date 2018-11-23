@@ -7,7 +7,6 @@
              d:DesignWidth="700" d:DesignHeight="500">
     <StackPanel Orientation="Vertical" Spacing="4">
         <TextBlock Margin="2" Classes="h1">Numeric up-down control</TextBlock>
-        <TextBlock Margin="2" Classes="h2" TextWrapping="Wrap">Numeric up-down control provides a TextBox with button spinners that allow incrementing and decrementing numeric values by using the spinner buttons, keyboard up/down arrows, or mouse wheel.</TextBlock>
         <TextBlock Margin="2,5,2,2" FontSize="14" FontWeight="Bold">Features:</TextBlock>
         <Grid Margin="2" ColumnDefinitions="Auto,Auto,Auto,Auto" RowDefinitions="Auto,Auto">
             <Grid Grid.Row="0" Grid.Column="0" ColumnDefinitions="Auto, Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto">

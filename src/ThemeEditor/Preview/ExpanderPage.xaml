@@ -7,7 +7,6 @@
              d:DesignWidth="700" d:DesignHeight="500">
     <StackPanel Orientation="Vertical" Spacing="4">
         <TextBlock Classes="h1">Expander</TextBlock>
-        <TextBlock Classes="h2">Expands to show nested content</TextBlock>
         <StackPanel Orientation="Vertical"
                     Margin="0,16,0,0"
                     HorizontalAlignment="Center"

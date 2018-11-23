@@ -7,7 +7,6 @@
              d:DesignWidth="700" d:DesignHeight="500">
     <StackPanel Orientation="Vertical" Spacing="4">
         <TextBlock Classes="h1">Button</TextBlock>
-        <TextBlock Classes="h2">A button control</TextBlock>
         <StackPanel Orientation="Horizontal"
                     Margin="0,16,0,0"
                     HorizontalAlignment="Center"

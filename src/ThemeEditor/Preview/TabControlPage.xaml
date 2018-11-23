@@ -12,12 +12,6 @@
             Text="TabControl"
             Margin="4">
         </TextBlock>
-        <TextBlock
-            DockPanel.Dock="Top"
-            Classes="h2"
-            Text="A tab control that displays a tab strip along with the content of the selected tab"
-            Margin="4">
-        </TextBlock>
         <Grid
             ColumnDefinitions="*,*"
             RowDefinitions="*,100">

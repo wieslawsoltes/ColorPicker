@@ -7,7 +7,6 @@
              d:DesignWidth="700" d:DesignHeight="500">
     <StackPanel Orientation="Vertical" Spacing="4">
         <TextBlock Classes="h1">DropDown</TextBlock>
-        <TextBlock Classes="h2">A drop-down list.</TextBlock>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 16 0 0" Spacing="8">
             <DropDown SelectedIndex="0">
                 <DropDownItem>Inline Items</DropDownItem>

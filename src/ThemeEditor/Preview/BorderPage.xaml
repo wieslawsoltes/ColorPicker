@@ -7,7 +7,6 @@
              d:DesignWidth="700" d:DesignHeight="500">
     <StackPanel Orientation="Vertical" Spacing="4">
         <TextBlock Classes="h1">Border</TextBlock>
-        <TextBlock Classes="h2">A control which decorates a child with a border and background</TextBlock>
         <StackPanel Orientation="Vertical"
                     Margin="0,16,0,0"
                     HorizontalAlignment="Center"
