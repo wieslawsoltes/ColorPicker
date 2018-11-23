@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
@@ -17,6 +18,23 @@ namespace ThemeEditor.Controls.ColorBlender
 {
     internal static class ColorHelpers
     {
+        private static Regex s_hexRegex = new Regex("^#[a-fA-F0-9]{8}$");
+
+        public static bool IsValidHexColor(string hex)
+        {
+            return !string.IsNullOrWhiteSpace(hex) && s_hexRegex.Match(hex).Success;
+        }
+
+        public static string ToHexColor(Color color)
+        {
+            return $"#{color.ToUint32():X8}";
+        }
+
+        public static Color FromHexColor(string hex)
+        {
+            return Color.Parse(hex);
+        }
+
         public static RGB ToRGB(this Color c)
         {
             return new RGB(c.R, c.G, c.B);
@@ -48,16 +66,6 @@ namespace ThemeEditor.Controls.ColorBlender
         public static SolidColorBrush ToSolidColorBrush(this HSV hsv)
         {
             return new SolidColorBrush(ToColor(hsv));
-        }
-
-        public static string ToHexColor(Color color)
-        {
-            return $"#{color.ToUint32():X8}";
-        }
-
-        public static Color FromHexColor(string hex)
-        {
-            return Color.Parse(hex);
         }
     }
 
