@@ -24,7 +24,7 @@
                 <cp:ColorPicker x:Name="colorPicker" Color="#CC119EDA"/>
             </TabItem>
             <TabItem Header="ColorBlender" Classes="main">
-                <cb:ColorBlender x:Name="colorBlender"/>
+                <cb:ColorBlender x:Name="colorBlender" Color="#CC119EDA"/>
             </TabItem>
         </TabControl>
         <GridSplitter Width="8" Grid.Column="1"/>

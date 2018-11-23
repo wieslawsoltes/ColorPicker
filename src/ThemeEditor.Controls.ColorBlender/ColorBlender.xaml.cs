@@ -110,6 +110,9 @@ namespace ThemeEditor.Controls.ColorBlender
 
     public partial class ColorBlender : UserControl
     {
+        public static readonly StyledProperty<Color> ColorProperty =
+            AvaloniaProperty.Register<ColorBlender, Color>(nameof(Color));
+
         private DropDown _algorithm;
         private Slider _sliderR;
         private Slider _sliderG;
@@ -139,11 +142,26 @@ namespace ThemeEditor.Controls.ColorBlender
         private Rectangle _swatch4;
         private Rectangle _swatch5;
         private Rectangle _swatch6;
-        private bool _updatingSliders = false;
+        private bool _updating = false;
 
         public ColorBlender()
         {
             this.InitializeComponent();
+
+            Algorithms = new IAlgorithm[]
+            {
+                new Classic(),
+                new ColorExplorer(),
+                new SingleHue(),
+                new Complementary(),
+                new SplitComplementary(),
+                new Analogue(),
+                new Triadic(),
+                new Square()
+            };
+
+            CurrentAlgorithm = Algorithms[0];
+
             _algorithm = this.FindControl<DropDown>("algorithm");
             _algorithm.SelectionChanged += Algorithm_SelectionChanged;
             _sliderR = this.FindControl<Slider>("sliderR");
@@ -196,15 +214,28 @@ namespace ThemeEditor.Controls.ColorBlender
             _swatch4.PointerPressed += Rectangle_PointerPressed;
             _swatch5.PointerPressed += Rectangle_PointerPressed;
             _swatch6.PointerPressed += Rectangle_PointerPressed;
+
+            _sliderR.GetObservable(Slider.ValueProperty).Subscribe(value => OnRgbChange());
+            _sliderG.GetObservable(Slider.ValueProperty).Subscribe(value => OnRgbChange());
+            _sliderB.GetObservable(Slider.ValueProperty).Subscribe(value => OnRgbChange());
+            _sliderH.GetObservable(Slider.ValueProperty).Subscribe(value => OnHsvChange());
+            _sliderS.GetObservable(Slider.ValueProperty).Subscribe(value => OnHsvChange());
+            _sliderV.GetObservable(Slider.ValueProperty).Subscribe(value => OnHsvChange());
+
+            this.GetObservable(ColorProperty).Subscribe(x => OnColorChange());
+
+            DataContext = this;
+        }
+
+        public Color Color
+        {
+            get { return GetValue(ColorProperty); }
+            set { SetValue(ColorProperty, value); }
         }
 
         public IAlgorithm[] Algorithms { get; set; }
 
         public IAlgorithm CurrentAlgorithm { get; set; }
-
-        public RGB CurrentRGB { get; set; }
-
-        public HSV CurrentHSV { get; set; }
 
         private void InitializeComponent()
         {
@@ -213,47 +244,32 @@ namespace ThemeEditor.Controls.ColorBlender
 
         private void UpdateRectangles()
         {
-            Blend blend = CurrentAlgorithm.Match(CurrentHSV);
+            RGB rgb = Color.ToRGB();
+            HSV hsv = rgb.ToHSV();
+            Blend blend = CurrentAlgorithm.Match(hsv);
             RGB[] variationsRGB = new RGB[7];
             RGB[] variationsHSV = new RGB[9];
             double vv = 20;
             double vw = 10;
             double vx = 10;
 
-            variationsRGB[0] = new RGB(AddLimit(CurrentRGB.R, -vw, 0, 255), AddLimit(CurrentRGB.G, vv, 0, 255), AddLimit(CurrentRGB.B, -vw, 0, 255));
-            variationsRGB[1] = new RGB(AddLimit(CurrentRGB.R, vw, 0, 255), AddLimit(CurrentRGB.G, vw, 0, 255), AddLimit(CurrentRGB.B, -vv, 0, 255));
-            variationsRGB[2] = new RGB(AddLimit(CurrentRGB.R, -vv, 0, 255), AddLimit(CurrentRGB.G, vw, 0, 255), AddLimit(CurrentRGB.B, vw, 0, 255));
-            variationsRGB[3] = new RGB(CurrentRGB.R, CurrentRGB.G, CurrentRGB.B);
-            variationsRGB[4] = new RGB(AddLimit(CurrentRGB.R, vv, 0, 255), AddLimit(CurrentRGB.G, -vw, 0, 255), AddLimit(CurrentRGB.B, -vw, 0, 255));
-            variationsRGB[5] = new RGB(AddLimit(CurrentRGB.R, -vw, 0, 255), AddLimit(CurrentRGB.G, -vw, 0, 255), AddLimit(CurrentRGB.B, vv, 0, 255));
-            variationsRGB[6] = new RGB(AddLimit(CurrentRGB.R, vw, 0, 255), AddLimit(CurrentRGB.G, -vv, 0, 255), AddLimit(CurrentRGB.B, vw, 0, 255));
+            variationsRGB[0] = new RGB(AddLimit(rgb.R, -vw, 0, 255), AddLimit(rgb.G, vv, 0, 255), AddLimit(rgb.B, -vw, 0, 255));
+            variationsRGB[1] = new RGB(AddLimit(rgb.R, vw, 0, 255), AddLimit(rgb.G, vw, 0, 255), AddLimit(rgb.B, -vv, 0, 255));
+            variationsRGB[2] = new RGB(AddLimit(rgb.R, -vv, 0, 255), AddLimit(rgb.G, vw, 0, 255), AddLimit(rgb.B, vw, 0, 255));
+            variationsRGB[3] = new RGB(rgb.R, rgb.G, rgb.B);
+            variationsRGB[4] = new RGB(AddLimit(rgb.R, vv, 0, 255), AddLimit(rgb.G, -vw, 0, 255), AddLimit(rgb.B, -vw, 0, 255));
+            variationsRGB[5] = new RGB(AddLimit(rgb.R, -vw, 0, 255), AddLimit(rgb.G, -vw, 0, 255), AddLimit(rgb.B, vv, 0, 255));
+            variationsRGB[6] = new RGB(AddLimit(rgb.R, vw, 0, 255), AddLimit(rgb.G, -vv, 0, 255), AddLimit(rgb.B, vw, 0, 255));
 
-            variationsHSV[0] = HsvVariation(CurrentHSV, -vx, vx);
-            variationsHSV[1] = HsvVariation(CurrentHSV, 0, vx);
-            variationsHSV[2] = HsvVariation(CurrentHSV, vx, vx);
-            variationsHSV[3] = HsvVariation(CurrentHSV, -vx, 0);
-            variationsHSV[4] = CurrentHSV.ToRGB();
-            variationsHSV[5] = HsvVariation(CurrentHSV, vx, 0);
-            variationsHSV[6] = HsvVariation(CurrentHSV, -vx, -vx);
-            variationsHSV[7] = HsvVariation(CurrentHSV, 0, -vx);
-            variationsHSV[8] = HsvVariation(CurrentHSV, vx, -vx);
-
-            double AddLimit(double x, double d, double min, double max)
-            {
-                x = x + d;
-                if (x < min)
-                    return min;
-                if (x > max)
-                    return max;
-                if ((x >= min) && (x <= max))
-                    return x;
-                return double.NaN;
-            }
-
-            RGB HsvVariation(HSV hsv, double addsat, double addval)
-            {
-                return new HSV(hsv.H, AddLimit(hsv.S, addsat, 0, 99), AddLimit(hsv.V, addval, 0, 99)).ToRGB();
-            }
+            variationsHSV[0] = HsvVariation(hsv, -vx, vx);
+            variationsHSV[1] = HsvVariation(hsv, 0, vx);
+            variationsHSV[2] = HsvVariation(hsv, vx, vx);
+            variationsHSV[3] = HsvVariation(hsv, -vx, 0);
+            variationsHSV[4] = hsv.ToRGB();
+            variationsHSV[5] = HsvVariation(hsv, vx, 0);
+            variationsHSV[6] = HsvVariation(hsv, -vx, -vx);
+            variationsHSV[7] = HsvVariation(hsv, 0, -vx);
+            variationsHSV[8] = HsvVariation(hsv, vx, -vx);
 
             _rgb1.Fill = variationsRGB[0].ToSolidColorBrush();
             _rgb2.Fill = variationsRGB[1].ToSolidColorBrush();
@@ -279,100 +295,98 @@ namespace ThemeEditor.Controls.ColorBlender
             _swatch4.Fill = blend.Colors[3].ToSolidColorBrush();
             _swatch5.Fill = blend.Colors[4].ToSolidColorBrush();
             _swatch6.Fill = blend.Colors[5].ToSolidColorBrush();
+
+            double AddLimit(double x, double d, double min, double max)
+            {
+                x = x + d;
+                if (x < min)
+                    return min;
+                if (x > max)
+                    return max;
+                if ((x >= min) && (x <= max))
+                    return x;
+                return double.NaN;
+            }
+
+            RGB HsvVariation(HSV hsv, double addsat, double addval)
+            {
+                return new HSV(hsv.H, AddLimit(hsv.S, addsat, 0, 99), AddLimit(hsv.V, addval, 0, 99)).ToRGB();
+            }
         }
 
         private void UpdateSlidersRGB()
         {
-            _updatingSliders = true;
-            _sliderR.Value = CurrentRGB.R;
-            _sliderG.Value = CurrentRGB.G;
-            _sliderB.Value = CurrentRGB.B;
-            _updatingSliders = false;
+            RGB rgb = Color.ToRRGB();
+            _sliderR.Value = rgb.R;
+            _sliderG.Value = rgb.G;
+            _sliderB.Value = rgb.B;
         }
 
         private void UpdateSlidersHSV()
         {
-            _updatingSliders = true;
-            _sliderH.Value = CurrentHSV.H;
-            _sliderS.Value = CurrentHSV.S;
-            _sliderV.Value = CurrentHSV.V;
-            _updatingSliders = false;
+            HSV hsv = Color.ToHSV();
+            _sliderH.Value = hsv.H;
+            _sliderS.Value = hsv.S;
+            _sliderV.Value = hsv.V;
         }
 
-        protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+        private void OnColorChange()
         {
-            base.OnAttachedToVisualTree(e);
-
-            Algorithms = new IAlgorithm[]
+            if (_updating == false)
             {
-                new Classic(),
-                new ColorExplorer(),
-                new SingleHue(),
-                new Complementary(),
-                new SplitComplementary(),
-                new Analogue(),
-                new Triadic(),
-                new Square()
-            };
+                _updating = true;
+                UpdateRectangles();
+                UpdateSlidersRGB();
+                UpdateSlidersHSV();
+                _updating = false;
+            }
+        }
 
-            CurrentAlgorithm = Algorithms[0];
-            CurrentHSV = new HSV(199, 95, 62);
-            CurrentRGB = CurrentHSV.ToRGB();
+        private void OnRgbChange()
+        {
+            if (_updating == false)
+            {
+                _updating = true;
+                Color = new RGB(_sliderR.Value, _sliderG.Value, _sliderB.Value).ToColor();
+                UpdateRectangles();
+                UpdateSlidersHSV();
+                _updating = false;
+            }
+        }
 
-            UpdateRectangles();
-            UpdateSlidersRGB();
-            UpdateSlidersHSV();
-
-            _sliderR.GetObservable(Slider.ValueProperty).Subscribe(value => SliderRGB_ValueChanged());
-            _sliderG.GetObservable(Slider.ValueProperty).Subscribe(value => SliderRGB_ValueChanged());
-            _sliderB.GetObservable(Slider.ValueProperty).Subscribe(value => SliderRGB_ValueChanged());
-            _sliderH.GetObservable(Slider.ValueProperty).Subscribe(value => SliderHSV_ValueChanged());
-            _sliderS.GetObservable(Slider.ValueProperty).Subscribe(value => SliderHSV_ValueChanged());
-            _sliderV.GetObservable(Slider.ValueProperty).Subscribe(value => SliderHSV_ValueChanged());
-
-            DataContext = this;
+        private void OnHsvChange()
+        {
+            if (_updating == false)
+            {
+                _updating = true;
+                Color = new HSV(_sliderH.Value, _sliderS.Value, _sliderV.Value).ToColor();
+                UpdateRectangles();
+                UpdateSlidersRGB();
+                _updating = false;
+            }
         }
 
         private void Algorithm_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (_updatingSliders == false)
+            if (_updating == false)
             {
+                _updating = true;
                 UpdateRectangles();
+                _updating = false;
             }
         }
 
         private void Rectangle_PointerPressed(object sender, PointerPressedEventArgs e)
         {
-            if (_updatingSliders == false)
+            if (_updating == false)
             {
+                _updating = true;
                 SolidColorBrush b = (sender as Rectangle).Fill as SolidColorBrush;
-                CurrentRGB = b.Color.ToRGB();
-                CurrentHSV = CurrentRGB.ToHSV();
+                Color = new Color(b.Color.A, b.Color.R, b.Color.G, b.Color.B);;
                 UpdateRectangles();
                 UpdateSlidersRGB();
                 UpdateSlidersHSV();
-            }
-        }
-
-        private void SliderRGB_ValueChanged()
-        {
-            if (_updatingSliders == false)
-            {
-                CurrentRGB = new RGB(_sliderR.Value, _sliderG.Value, _sliderB.Value);
-                CurrentHSV = CurrentRGB.ToHSV();
-                UpdateRectangles();
-                UpdateSlidersHSV();
-            }
-        }
-
-        private void SliderHSV_ValueChanged()
-        {
-            if (_updatingSliders == false)
-            {
-                CurrentHSV = new HSV(_sliderH.Value, _sliderS.Value, _sliderV.Value);
-                CurrentRGB = CurrentHSV.ToRGB();
-                UpdateRectangles();
-                UpdateSlidersRGB();
+                _updating = false;
             }
         }
     }
