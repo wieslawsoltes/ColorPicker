@@ -254,9 +254,20 @@ namespace ThemeEditor.Controls.ColorBlender
             return double.NaN;
         }
 
-        private RGB HsvVariation(HSV hsv, double addsat, double addval)
+        private RGB RgbVariation(RGB rgb, double addred, double addgreen, double addblue)
         {
-            return new HSV(hsv.H, AddLimit(hsv.S, addsat, 0, 99), AddLimit(hsv.V, addval, 0, 99)).ToRGB();
+            return new RGB(
+                AddLimit(rgb.R, addred, 0, 255),
+                AddLimit(rgb.G, addgreen, 0, 255),
+                AddLimit(rgb.B, addblue, 0, 255));
+        }
+
+        private HSV HsvVariation(HSV hsv, double addsat, double addval)
+        {
+            return new HSV(
+                hsv.H,
+                AddLimit(hsv.S, addsat, 0, 99),
+                AddLimit(hsv.V, addval, 0, 99));
         }
 
         private void UpdateRectangles()
@@ -265,18 +276,18 @@ namespace ThemeEditor.Controls.ColorBlender
             HSV hsv = rgb.ToHSV();
             Blend blend = CurrentAlgorithm.Match(hsv);
             RGB[] variationsRGB = new RGB[7];
-            RGB[] variationsHSV = new RGB[9];
+            HSV[] variationsHSV = new HSV[9];
             double vv = 20;
             double vw = 10;
             double vx = 10;
 
-            variationsRGB[0] = new RGB(AddLimit(rgb.R, -vw, 0, 255), AddLimit(rgb.G, vv, 0, 255), AddLimit(rgb.B, -vw, 0, 255));
-            variationsRGB[1] = new RGB(AddLimit(rgb.R, vw, 0, 255), AddLimit(rgb.G, vw, 0, 255), AddLimit(rgb.B, -vv, 0, 255));
-            variationsRGB[2] = new RGB(AddLimit(rgb.R, -vv, 0, 255), AddLimit(rgb.G, vw, 0, 255), AddLimit(rgb.B, vw, 0, 255));
+            variationsRGB[0] = RgbVariation(rgb, -vw, vv, -vw);
+            variationsRGB[1] = RgbVariation(rgb, vw, vw, -vv);
+            variationsRGB[2] = RgbVariation(rgb, -vv, vw, vw);
             variationsRGB[3] = new RGB(rgb.R, rgb.G, rgb.B);
-            variationsRGB[4] = new RGB(AddLimit(rgb.R, vv, 0, 255), AddLimit(rgb.G, -vw, 0, 255), AddLimit(rgb.B, -vw, 0, 255));
-            variationsRGB[5] = new RGB(AddLimit(rgb.R, -vw, 0, 255), AddLimit(rgb.G, -vw, 0, 255), AddLimit(rgb.B, vv, 0, 255));
-            variationsRGB[6] = new RGB(AddLimit(rgb.R, vw, 0, 255), AddLimit(rgb.G, -vv, 0, 255), AddLimit(rgb.B, vw, 0, 255));
+            variationsRGB[4] = RgbVariation(rgb, vv, -vw, -vw);
+            variationsRGB[5] = RgbVariation(rgb, -vw, -vw, vv);
+            variationsRGB[6] = RgbVariation(rgb, vw, -vv, vw);
 
             variationsHSV[0] = HsvVariation(hsv, -vx, vx);
             variationsHSV[1] = HsvVariation(hsv, 0, vx);
