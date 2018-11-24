@@ -293,7 +293,7 @@ namespace ThemeEditor.Controls.ColorBlender
             variationsHSV[1] = HsvVariation(hsv, 0, vx);
             variationsHSV[2] = HsvVariation(hsv, vx, vx);
             variationsHSV[3] = HsvVariation(hsv, -vx, 0);
-            variationsHSV[4] = hsv.ToRGB();
+            variationsHSV[4] = new HSV(hsv.H, hsv.S, hsv.V);
             variationsHSV[5] = HsvVariation(hsv, vx, 0);
             variationsHSV[6] = HsvVariation(hsv, -vx, -vx);
             variationsHSV[7] = HsvVariation(hsv, 0, -vx);
