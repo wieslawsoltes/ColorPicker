@@ -242,6 +242,23 @@ namespace ThemeEditor.Controls.ColorBlender
             AvaloniaXamlLoader.Load(this);
         }
 
+        private double AddLimit(double x, double d, double min, double max)
+        {
+            x = x + d;
+            if (x < min)
+                return min;
+            if (x > max)
+                return max;
+            if ((x >= min) && (x <= max))
+                return x;
+            return double.NaN;
+        }
+
+        private RGB HsvVariation(HSV hsv, double addsat, double addval)
+        {
+            return new HSV(hsv.H, AddLimit(hsv.S, addsat, 0, 99), AddLimit(hsv.V, addval, 0, 99)).ToRGB();
+        }
+
         private void UpdateRectangles()
         {
             RGB rgb = Color.ToRGB();
@@ -295,28 +312,11 @@ namespace ThemeEditor.Controls.ColorBlender
             _swatch4.Fill = blend.Colors[3].ToSolidColorBrush();
             _swatch5.Fill = blend.Colors[4].ToSolidColorBrush();
             _swatch6.Fill = blend.Colors[5].ToSolidColorBrush();
-
-            double AddLimit(double x, double d, double min, double max)
-            {
-                x = x + d;
-                if (x < min)
-                    return min;
-                if (x > max)
-                    return max;
-                if ((x >= min) && (x <= max))
-                    return x;
-                return double.NaN;
-            }
-
-            RGB HsvVariation(HSV hsv, double addsat, double addval)
-            {
-                return new HSV(hsv.H, AddLimit(hsv.S, addsat, 0, 99), AddLimit(hsv.V, addval, 0, 99)).ToRGB();
-            }
         }
 
         private void UpdateSlidersRGB()
         {
-            RGB rgb = Color.ToRRGB();
+            RGB rgb = Color.ToRGB();
             _sliderR.Value = rgb.R;
             _sliderG.Value = rgb.G;
             _sliderB.Value = rgb.B;
