@@ -12,10 +12,10 @@
 
 | Platform              | Version    | Download                                                                                                                                     |
 |-----------------------|------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| win7-x64              | 0.0.2      | [ThemeEditor-win7-x64.zip](https://github.com/wieslawsoltes/ThemeEditor/releases/download/0.0.2/ThemeEditor-win7-x64.zip)                    |
-| ubuntu.14.04-x64      | 0.0.2      | [ThemeEditor-ubuntu.14.04-x64.zip](https://github.com/wieslawsoltes/ThemeEditor/releases/download/0.0.2/ThemeEditor-ubuntu.14.04-x64.zip)    |
-| debian.8-x64          | 0.0.2      | [ThemeEditor-debian.8-x64.zip](https://github.com/wieslawsoltes/ThemeEditor/releases/download/0.0.2/ThemeEditor-debian.8-x64.zip)            |
-| osx.10.12-x64         | 0.0.2      | [ThemeEditor-osx.10.12-x64.zip](https://github.com/wieslawsoltes/ThemeEditor/releases/download/0.0.2/ThemeEditor-osx.10.12-x64.zip)          |
+| win7-x64              | 0.0.1      | [ThemeEditor-win7-x64.zip](https://github.com/wieslawsoltes/ThemeEditor/releases/download/0.0.1/ThemeEditor-win7-x64.zip)                    |
+| ubuntu.14.04-x64      | 0.0.1      | [ThemeEditor-ubuntu.14.04-x64.zip](https://github.com/wieslawsoltes/ThemeEditor/releases/download/0.0.1/ThemeEditor-ubuntu.14.04-x64.zip)    |
+| debian.8-x64          | 0.0.1      | [ThemeEditor-debian.8-x64.zip](https://github.com/wieslawsoltes/ThemeEditor/releases/download/0.0.1/ThemeEditor-debian.8-x64.zip)            |
+| osx.10.12-x64         | 0.0.1      | [ThemeEditor-osx.10.12-x64.zip](https://github.com/wieslawsoltes/ThemeEditor/releases/download/0.0.1/ThemeEditor-osx.10.12-x64.zip)          |
 
 # About
 
