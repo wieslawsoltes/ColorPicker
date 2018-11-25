@@ -117,31 +117,6 @@ namespace ThemeEditor.Controls.ColorBlender
         public static readonly StyledProperty<AvaloniaList<IAlgorithm>> AlgorithmsProperty =
             AvaloniaProperty.Register<ColorBlender, AvaloniaList<IAlgorithm>>(nameof(Algorithms));
 
-        private DropDown _algorithms;
-        private Rectangle _rgb1;
-        private Rectangle _rgb2;
-        private Rectangle _rgb3;
-        private Rectangle _rgb4;
-        private Rectangle _rgb5;
-        private Rectangle _rgb6;
-        private Rectangle _rgb7;
-        private Rectangle _hsv1;
-        private Rectangle _hsv2;
-        private Rectangle _hsv3;
-        private Rectangle _hsv4;
-        private Rectangle _hsv5;
-        private Rectangle _hsv6;
-        private Rectangle _hsv7;
-        private Rectangle _hsv8;
-        private Rectangle _hsv9;
-        private Rectangle _swatch1;
-        private Rectangle _swatch2;
-        private Rectangle _swatch3;
-        private Rectangle _swatch4;
-        private Rectangle _swatch5;
-        private Rectangle _swatch6;
-        private bool _updating = false;
-
         public ColorBlender()
         {
             this.InitializeComponent();
@@ -159,61 +134,33 @@ namespace ThemeEditor.Controls.ColorBlender
                     new Square()
                 });
 
-            _algorithms = this.FindControl<DropDown>("PART_Algorithms");
-            _algorithms.Items = Algorithms;
-            _algorithms.SelectedIndex = 0;
-            _algorithms.SelectionChanged += Algorithms_SelectionChanged;
+            var algorithms = this.FindControl<DropDown>("PART_Algorithms");
+            var swatch1 = this.FindControl<Rectangle>("PART_Swatch1");
+            var swatch2 = this.FindControl<Rectangle>("PART_Swatch2");
+            var swatch3 = this.FindControl<Rectangle>("PART_Swatch3");
+            var swatch4 = this.FindControl<Rectangle>("PART_Swatch4");
+            var swatch5 = this.FindControl<Rectangle>("PART_Swatch5");
+            var swatch6 = this.FindControl<Rectangle>("PART_Swatch6");
 
-            _rgb1 = this.FindControl<Rectangle>("PART_RGB1");
-            _rgb2 = this.FindControl<Rectangle>("PART_RGB2");
-            _rgb3 = this.FindControl<Rectangle>("PART_RGB3");
-            _rgb4 = this.FindControl<Rectangle>("PART_RGB4");
-            _rgb5 = this.FindControl<Rectangle>("PART_RGB5");
-            _rgb6 = this.FindControl<Rectangle>("PART_RGB6");
-            _rgb7 = this.FindControl<Rectangle>("PART_RGB7");
+            algorithms.Items = Algorithms;
+            algorithms.SelectedIndex = 0;
+            algorithms.SelectionChanged += (sender, e) => Update();
 
-            _hsv1 = this.FindControl<Rectangle>("PART_HSV1");
-            _hsv2 = this.FindControl<Rectangle>("PART_HSV2");
-            _hsv3 = this.FindControl<Rectangle>("PART_HSV3");
-            _hsv4 = this.FindControl<Rectangle>("PART_HSV4");
-            _hsv5 = this.FindControl<Rectangle>("PART_HSV5");
-            _hsv6 = this.FindControl<Rectangle>("PART_HSV6");
-            _hsv7 = this.FindControl<Rectangle>("PART_HSV7");
-            _hsv8 = this.FindControl<Rectangle>("PART_HSV8");
-            _hsv9 = this.FindControl<Rectangle>("PART_HSV9");
+            this.GetObservable(ColorProperty).Subscribe(x => Update());
 
-            _swatch1 = this.FindControl<Rectangle>("PART_Swatch1");
-            _swatch2 = this.FindControl<Rectangle>("PART_Swatch2");
-            _swatch3 = this.FindControl<Rectangle>("PART_Swatch3");
-            _swatch4 = this.FindControl<Rectangle>("PART_Swatch4");
-            _swatch5 = this.FindControl<Rectangle>("PART_Swatch5");
-            _swatch6 = this.FindControl<Rectangle>("PART_Swatch6");
-
-            _rgb1.PointerPressed += Rectangle_PointerPressed;
-            _rgb2.PointerPressed += Rectangle_PointerPressed;
-            _rgb3.PointerPressed += Rectangle_PointerPressed;
-            _rgb4.PointerPressed += Rectangle_PointerPressed;
-            _rgb5.PointerPressed += Rectangle_PointerPressed;
-            _rgb6.PointerPressed += Rectangle_PointerPressed;
-            _rgb7.PointerPressed += Rectangle_PointerPressed;
-            _hsv1.PointerPressed += Rectangle_PointerPressed;
-            _hsv2.PointerPressed += Rectangle_PointerPressed;
-            _hsv3.PointerPressed += Rectangle_PointerPressed;
-            _hsv4.PointerPressed += Rectangle_PointerPressed;
-            _hsv5.PointerPressed += Rectangle_PointerPressed;
-            _hsv6.PointerPressed += Rectangle_PointerPressed;
-            _hsv7.PointerPressed += Rectangle_PointerPressed;
-            _hsv8.PointerPressed += Rectangle_PointerPressed;
-            _hsv9.PointerPressed += Rectangle_PointerPressed;
-
-            _swatch1.PointerPressed += Rectangle_PointerPressed;
-            _swatch2.PointerPressed += Rectangle_PointerPressed;
-            _swatch3.PointerPressed += Rectangle_PointerPressed;
-            _swatch4.PointerPressed += Rectangle_PointerPressed;
-            _swatch5.PointerPressed += Rectangle_PointerPressed;
-            _swatch6.PointerPressed += Rectangle_PointerPressed;
-
-            this.GetObservable(ColorProperty).Subscribe(x => OnColorChange());
+            void Update()
+            {
+                if (algorithms?.SelectedItem is IAlgorithm algorithm)
+                {
+                    Blend blend = algorithm.Match(Color.ToHSV());
+                    swatch1.Fill = blend.Colors[0].ToSolidColorBrush();
+                    swatch2.Fill = blend.Colors[1].ToSolidColorBrush();
+                    swatch3.Fill = blend.Colors[2].ToSolidColorBrush();
+                    swatch4.Fill = blend.Colors[3].ToSolidColorBrush();
+                    swatch5.Fill = blend.Colors[4].ToSolidColorBrush();
+                    swatch6.Fill = blend.Colors[5].ToSolidColorBrush();
+                }
+            }
         }
 
         public Color Color
@@ -231,121 +178,6 @@ namespace ThemeEditor.Controls.ColorBlender
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-        }
-
-        private double AddLimit(double x, double d, double min, double max)
-        {
-            x = x + d;
-            if (x < min)
-                return min;
-            if (x > max)
-                return max;
-            if ((x >= min) && (x <= max))
-                return x;
-            return double.NaN;
-        }
-
-        private RGB RgbVariation(RGB rgb, double addred, double addgreen, double addblue)
-        {
-            return new RGB(
-                AddLimit(rgb.R, addred, 0, 255),
-                AddLimit(rgb.G, addgreen, 0, 255),
-                AddLimit(rgb.B, addblue, 0, 255));
-        }
-
-        private HSV HsvVariation(HSV hsv, double addsat, double addval)
-        {
-            return new HSV(
-                hsv.H,
-                AddLimit(hsv.S, addsat, 0, 99),
-                AddLimit(hsv.V, addval, 0, 99));
-        }
-
-        private void UpdateRectangles(IAlgorithm algorithm, Color color)
-        {
-            RGB rgb = color.ToRGB();
-            HSV hsv = rgb.ToHSV();
-            Blend blend = algorithm.Match(hsv);
-            RGB[] variationsRGB = new RGB[7];
-            HSV[] variationsHSV = new HSV[9];
-            double vv = 20;
-            double vw = 10;
-            double vx = 10;
-
-            variationsRGB[0] = RgbVariation(rgb, -vw, vv, -vw);
-            variationsRGB[1] = RgbVariation(rgb, vw, vw, -vv);
-            variationsRGB[2] = RgbVariation(rgb, -vv, vw, vw);
-            variationsRGB[3] = new RGB(rgb.R, rgb.G, rgb.B);
-            variationsRGB[4] = RgbVariation(rgb, vv, -vw, -vw);
-            variationsRGB[5] = RgbVariation(rgb, -vw, -vw, vv);
-            variationsRGB[6] = RgbVariation(rgb, vw, -vv, vw);
-
-            variationsHSV[0] = HsvVariation(hsv, -vx, vx);
-            variationsHSV[1] = HsvVariation(hsv, 0, vx);
-            variationsHSV[2] = HsvVariation(hsv, vx, vx);
-            variationsHSV[3] = HsvVariation(hsv, -vx, 0);
-            variationsHSV[4] = new HSV(hsv.H, hsv.S, hsv.V);
-            variationsHSV[5] = HsvVariation(hsv, vx, 0);
-            variationsHSV[6] = HsvVariation(hsv, -vx, -vx);
-            variationsHSV[7] = HsvVariation(hsv, 0, -vx);
-            variationsHSV[8] = HsvVariation(hsv, vx, -vx);
-
-            _rgb1.Fill = variationsRGB[0].ToSolidColorBrush();
-            _rgb2.Fill = variationsRGB[1].ToSolidColorBrush();
-            _rgb3.Fill = variationsRGB[2].ToSolidColorBrush();
-            _rgb4.Fill = variationsRGB[3].ToSolidColorBrush();
-            _rgb5.Fill = variationsRGB[4].ToSolidColorBrush();
-            _rgb6.Fill = variationsRGB[5].ToSolidColorBrush();
-            _rgb7.Fill = variationsRGB[6].ToSolidColorBrush();
-
-            _hsv1.Fill = variationsHSV[0].ToSolidColorBrush();
-            _hsv2.Fill = variationsHSV[1].ToSolidColorBrush();
-            _hsv3.Fill = variationsHSV[2].ToSolidColorBrush();
-            _hsv4.Fill = variationsHSV[3].ToSolidColorBrush();
-            _hsv5.Fill = variationsHSV[4].ToSolidColorBrush();
-            _hsv6.Fill = variationsHSV[5].ToSolidColorBrush();
-            _hsv7.Fill = variationsHSV[6].ToSolidColorBrush();
-            _hsv8.Fill = variationsHSV[7].ToSolidColorBrush();
-            _hsv9.Fill = variationsHSV[8].ToSolidColorBrush();
-
-            _swatch1.Fill = blend.Colors[0].ToSolidColorBrush();
-            _swatch2.Fill = blend.Colors[1].ToSolidColorBrush();
-            _swatch3.Fill = blend.Colors[2].ToSolidColorBrush();
-            _swatch4.Fill = blend.Colors[3].ToSolidColorBrush();
-            _swatch5.Fill = blend.Colors[4].ToSolidColorBrush();
-            _swatch6.Fill = blend.Colors[5].ToSolidColorBrush();
-        }
-
-        private void OnColorChange()
-        {
-            if (_updating == false && _algorithms?.SelectedItem is IAlgorithm algorithm)
-            {
-                _updating = true;
-                UpdateRectangles(algorithm, Color);
-                _updating = false;
-            }
-        }
-
-        private void Algorithms_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (_updating == false && _algorithms?.SelectedItem is IAlgorithm algorithm)
-            {
-                _updating = true;
-                UpdateRectangles(algorithm, Color);
-                _updating = false;
-            }
-        }
-
-        private void Rectangle_PointerPressed(object sender, PointerPressedEventArgs e)
-        {
-            if (_updating == false && _algorithms?.SelectedItem is IAlgorithm algorithm)
-            {
-                _updating = true;
-                SolidColorBrush b = (sender as Rectangle).Fill as SolidColorBrush;
-                Color = new Color(b.Color.A, b.Color.R, b.Color.G, b.Color.B);;
-                UpdateRectangles(algorithm, Color);
-                _updating = false;
-            }
         }
     }
 }
