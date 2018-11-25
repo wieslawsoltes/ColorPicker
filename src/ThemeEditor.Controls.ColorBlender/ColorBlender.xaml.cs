@@ -166,9 +166,9 @@ namespace ThemeEditor.Controls.ColorBlender
                 });
 
             _algorithms = this.FindControl<DropDown>("PART_Algorithms");
-            _algorithms.SelectionChanged += Algorithms_SelectionChanged;
             _algorithms.Items = Algorithms;
             _algorithms.SelectedIndex = 0;
+            _algorithms.SelectionChanged += Algorithms_SelectionChanged;
 
             _sliderR = this.FindControl<Slider>("PART_SliderR");
             _sliderG = this.FindControl<Slider>("PART_SliderG");
