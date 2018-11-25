@@ -118,12 +118,6 @@ namespace ThemeEditor.Controls.ColorBlender
             AvaloniaProperty.Register<ColorBlender, AvaloniaList<IAlgorithm>>(nameof(Algorithms));
 
         private DropDown _algorithms;
-        private Slider _sliderR;
-        private Slider _sliderG;
-        private Slider _sliderB;
-        private Slider _sliderH;
-        private Slider _sliderS;
-        private Slider _sliderV;
         private Rectangle _rgb1;
         private Rectangle _rgb2;
         private Rectangle _rgb3;
@@ -152,7 +146,7 @@ namespace ThemeEditor.Controls.ColorBlender
         {
             this.InitializeComponent();
 
-            Algorithms =  new AvaloniaList<IAlgorithm>(
+            Algorithms = new AvaloniaList<IAlgorithm>(
                 new IAlgorithm[]
                 {
                     new Classic(),
@@ -169,13 +163,6 @@ namespace ThemeEditor.Controls.ColorBlender
             _algorithms.Items = Algorithms;
             _algorithms.SelectedIndex = 0;
             _algorithms.SelectionChanged += Algorithms_SelectionChanged;
-
-            _sliderR = this.FindControl<Slider>("PART_SliderR");
-            _sliderG = this.FindControl<Slider>("PART_SliderG");
-            _sliderB = this.FindControl<Slider>("PART_SliderB");
-            _sliderH = this.FindControl<Slider>("PART_SliderH");
-            _sliderS = this.FindControl<Slider>("PART_SliderS");
-            _sliderV = this.FindControl<Slider>("PART_SliderV");
 
             _rgb1 = this.FindControl<Rectangle>("PART_RGB1");
             _rgb2 = this.FindControl<Rectangle>("PART_RGB2");
@@ -225,13 +212,6 @@ namespace ThemeEditor.Controls.ColorBlender
             _swatch4.PointerPressed += Rectangle_PointerPressed;
             _swatch5.PointerPressed += Rectangle_PointerPressed;
             _swatch6.PointerPressed += Rectangle_PointerPressed;
-
-            _sliderR.GetObservable(Slider.ValueProperty).Subscribe(value => OnRgbChange());
-            _sliderG.GetObservable(Slider.ValueProperty).Subscribe(value => OnRgbChange());
-            _sliderB.GetObservable(Slider.ValueProperty).Subscribe(value => OnRgbChange());
-            _sliderH.GetObservable(Slider.ValueProperty).Subscribe(value => OnHsvChange());
-            _sliderS.GetObservable(Slider.ValueProperty).Subscribe(value => OnHsvChange());
-            _sliderV.GetObservable(Slider.ValueProperty).Subscribe(value => OnHsvChange());
 
             this.GetObservable(ColorProperty).Subscribe(x => OnColorChange());
         }
@@ -336,22 +316,6 @@ namespace ThemeEditor.Controls.ColorBlender
             _swatch6.Fill = blend.Colors[5].ToSolidColorBrush();
         }
 
-        private void UpdateSlidersRGB(Color color)
-        {
-            RGB rgb = color.ToRGB();
-            _sliderR.Value = rgb.R;
-            _sliderG.Value = rgb.G;
-            _sliderB.Value = rgb.B;
-        }
-
-        private void UpdateSlidersHSV(Color color)
-        {
-            HSV hsv = color.ToHSV();
-            _sliderH.Value = hsv.H;
-            _sliderS.Value = hsv.S;
-            _sliderV.Value = hsv.V;
-        }
-
         private void OnColorChange()
         {
             if (_updating == false && _algorithms?.SelectedItem is IAlgorithm algorithm)
@@ -360,30 +324,6 @@ namespace ThemeEditor.Controls.ColorBlender
                 UpdateRectangles(algorithm, Color);
                 UpdateSlidersRGB(Color);
                 UpdateSlidersHSV(Color);
-                _updating = false;
-            }
-        }
-
-        private void OnRgbChange()
-        {
-            if (_updating == false && _algorithms?.SelectedItem is IAlgorithm algorithm)
-            {
-                _updating = true;
-                Color = new RGB(_sliderR.Value, _sliderG.Value, _sliderB.Value).ToColor();
-                UpdateRectangles(algorithm, Color);
-                UpdateSlidersHSV(Color);
-                _updating = false;
-            }
-        }
-
-        private void OnHsvChange()
-        {
-            if (_updating == false && _algorithms?.SelectedItem is IAlgorithm algorithm)
-            {
-                _updating = true;
-                Color = new HSV(_sliderH.Value, _sliderS.Value, _sliderV.Value).ToColor();
-                UpdateRectangles(algorithm, Color);
-                UpdateSlidersRGB(Color);
                 _updating = false;
             }
         }

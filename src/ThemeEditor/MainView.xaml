@@ -24,10 +24,10 @@
                 <cp:ColorPicker x:Name="colorPicker" Color="#CC119EDA"/>
             </TabItem>
             <TabItem Header="ColorBlender" Classes="main">
-                <Grid ColumnDefinitions="*,8,350">
-                    <cb:ColorBlender x:Name="colorBlender" Color="#CC119EDA" Grid.Column="0"/>
-                    <GridSplitter Width="8" Grid.Column="1"/>
-                    <cp:ColorPicker x:Name="colorPickerBlend" Color="{Binding #colorBlender.Color, Mode=TwoWay}" Grid.Column="2"/>
+                <Grid RowDefinitions="*,8,*">
+                    <cb:ColorBlender x:Name="colorBlender" Color="#CC119EDA" Grid.Row="0"/>
+                    <GridSplitter Height="8" Grid.Row="1"/>
+                    <cp:ColorPicker x:Name="colorPickerBlend" Color="{Binding #colorBlender.Color, Mode=TwoWay}" Grid.Row="2"/>
                 </Grid>
             </TabItem>
         </TabControl>

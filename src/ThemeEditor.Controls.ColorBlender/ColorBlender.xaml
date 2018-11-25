@@ -19,12 +19,6 @@
             <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="IsReadOnly" Value="True"/>
         </Style>
-        <Style Selector="TextBox.edit">
-            <Setter Property="Margin" Value="5,2,5,2"/>
-            <Setter Property="TextAlignment" Value="Left"/>
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
     </UserControl.Styles>
     <Grid Name="layout" ColumnDefinitions="*,*,*,*,*,*" RowDefinitions="Auto,10,*,10,Auto,10,Auto">
         <TextBlock Text="Blend" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,2,0,2" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" />
@@ -36,102 +30,52 @@
                 </DataTemplate>
             </DropDown.DataTemplates>
         </DropDown>
-        <Grid ColumnDefinitions="*,*,*,*,*,*" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="2">
-            <Grid RowDefinitions="*,Auto,Auto" ColumnDefinitions="*" Grid.Column="0" Margin="2">
+        <Grid ColumnDefinitions="*,*,*,*,*,*,*" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="2">
+            <Grid RowDefinitions="*,Auto" Grid.Column="0" Margin="2">
                 <Rectangle x:Name="PART_Swatch1" Classes="color" Margin="2" Grid.Column="0" Grid.Row="0" />
                 <TextBox Text="{Binding #PART_Swatch1.Fill.Color, Converter={StaticResource ColorToHexConverter}, Mode=OneWay}" Classes="color" Grid.Column="0" Grid.Row="1" />
-                <Grid Grid.Column="0" ColumnDefinitions="*,*,*" Grid.Row="2">
-                    <TextBox Text="{Binding #PART_Swatch1.Fill.Color.R, Mode=OneWay}" Classes="color" Grid.Column="0" />
-                    <TextBox Text="{Binding #PART_Swatch1.Fill.Color.G, Mode=OneWay}" Classes="color" Grid.Column="1" />
-                    <TextBox Text="{Binding #PART_Swatch1.Fill.Color.B, Mode=OneWay}" Classes="color" Grid.Column="2" />
-                </Grid>
             </Grid>
-            <Grid RowDefinitions="*,Auto,Auto" ColumnDefinitions="*" Margin="2" Grid.Column="1">
+            <Grid RowDefinitions="*,Auto" Margin="2" Grid.Column="1">
                 <Rectangle x:Name="PART_Swatch2" Classes="color" Margin="2" Grid.Column="0" Grid.Row="0" />
                 <TextBox Text="{Binding #PART_Swatch2.Fill.Color, Converter={StaticResource ColorToHexConverter}, Mode=OneWay}" Classes="color" Grid.Column="0" Grid.Row="1" />
-                <Grid Grid.Column="0" ColumnDefinitions="*,*,*" Grid.Row="2">
-                    <TextBox Text="{Binding #PART_Swatch2.Fill.Color.R, Mode=OneWay}" Classes="color" Grid.Column="0" />
-                    <TextBox Text="{Binding #PART_Swatch2.Fill.Color.G, Mode=OneWay}" Classes="color" Grid.Column="1" />
-                    <TextBox Text="{Binding #PART_Swatch2.Fill.Color.B, Mode=OneWay}" Classes="color" Grid.Column="2" />
-                </Grid>
             </Grid>
-            <Grid RowDefinitions="*,Auto,Auto" ColumnDefinitions="*" Margin="2" Grid.Column="2">
+            <Grid RowDefinitions="*,Auto" Margin="2" Grid.Column="2">
                 <Rectangle x:Name="PART_Swatch3" Classes="color" Margin="2" Grid.Column="0" Grid.Row="0" />
                 <TextBox Text="{Binding #PART_Swatch3.Fill.Color, Converter={StaticResource ColorToHexConverter}, Mode=OneWay}" Classes="color" Grid.Column="0" Grid.Row="1" />
-                <Grid Grid.Column="0" ColumnDefinitions="*,*,*" Grid.Row="2">
-                    <TextBox Text="{Binding #PART_Swatch3.Fill.Color.R, Mode=OneWay}" Classes="color" Grid.Column="0" />
-                    <TextBox Text="{Binding #PART_Swatch3.Fill.Color.G, Mode=OneWay}" Classes="color" Grid.Column="1" />
-                    <TextBox Text="{Binding #PART_Swatch3.Fill.Color.B, Mode=OneWay}" Classes="color" Grid.Column="2" />
-                </Grid>
             </Grid>
-            <Grid RowDefinitions="*,Auto,Auto" ColumnDefinitions="*" Margin="2" Grid.Column="3">
+            <Grid RowDefinitions="*,Auto" Margin="2" Grid.Column="3">
                 <Rectangle x:Name="PART_Swatch4" Classes="color" Margin="2" Grid.Column="0" Grid.Row="0" />
                 <TextBox Text="{Binding #PART_Swatch4.Fill.Color, Converter={StaticResource ColorToHexConverter}, Mode=OneWay}" Classes="color" Grid.Column="0" Grid.Row="1" />
-                <Grid Grid.Column="0" ColumnDefinitions="*,*,*" Grid.Row="2">
-                    <TextBox Text="{Binding #PART_Swatch4.Fill.Color.R, Mode=OneWay}" Classes="color" Grid.Column="0" />
-                    <TextBox Text="{Binding #PART_Swatch4.Fill.Color.G, Mode=OneWay}" Classes="color" Grid.Column="1" />
-                    <TextBox Text="{Binding #PART_Swatch4.Fill.Color.B, Mode=OneWay}" Classes="color" Grid.Column="2" />
-                </Grid>
             </Grid>
-            <Grid RowDefinitions="*,Auto,Auto" ColumnDefinitions="*" Margin="2" Grid.Column="4">
+            <Grid RowDefinitions="*,Auto" Margin="2" Grid.Column="4">
                 <Rectangle x:Name="PART_Swatch5" Classes="color" Margin="2" Grid.Column="0" Grid.Row="0" />
                 <TextBox Text="{Binding #PART_Swatch5.Fill.Color, Converter={StaticResource ColorToHexConverter}, Mode=OneWay}" Classes="color" Grid.Column="0" Grid.Row="1" />
-                <Grid Grid.Column="0" ColumnDefinitions="*,*,*" Grid.Row="2">
-                    <TextBox Text="{Binding #PART_Swatch5.Fill.Color.R, Mode=OneWay}" Classes="color" Grid.Column="0" />
-                    <TextBox Text="{Binding #PART_Swatch5.Fill.Color.G, Mode=OneWay}" Classes="color" Grid.Column="1" />
-                    <TextBox Text="{Binding #PART_Swatch5.Fill.Color.B, Mode=OneWay}" Classes="color" Grid.Column="2" />
-                </Grid>
             </Grid>
-            <Grid RowDefinitions="*,Auto,Auto" ColumnDefinitions="*" Margin="2" Grid.Column="5">
+            <Grid RowDefinitions="*,Auto" Margin="2" Grid.Column="5">
                 <Rectangle x:Name="PART_Swatch6" Classes="color" Margin="2" Grid.Column="0" Grid.Row="0" />
                 <TextBox Text="{Binding #PART_Swatch6.Fill.Color, Converter={StaticResource ColorToHexConverter}, Mode=OneWay}" Classes="color" Grid.Column="0" Grid.Row="1" />
-                <Grid Grid.Column="0" ColumnDefinitions="*,*,*" Grid.Row="2">
-                    <TextBox Text="{Binding #PART_Swatch6.Fill.Color.R, Mode=OneWay}" Classes="color" Grid.Column="0" />
-                    <TextBox Text="{Binding #PART_Swatch6.Fill.Color.G, Mode=OneWay}" Classes="color" Grid.Column="1" />
-                    <TextBox Text="{Binding #PART_Swatch6.Fill.Color.B, Mode=OneWay}" Classes="color" Grid.Column="2" />
+            </Grid>
+            <Grid x:Name="PART_Variations" RowDefinitions="*,*" Margin="2" Grid.Column="6">
+                <Grid x:Name="PART_VariationsRGB" RowDefinitions="*,*,*" ColumnDefinitions="*,*,*" Grid.Row="0">
+                    <Rectangle x:Name="PART_RGB1" Classes="color" Margin="22,2,22,2" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" />
+                    <Rectangle x:Name="PART_RGB2" Classes="color" Margin="22,2,22,2" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" />
+                    <Rectangle x:Name="PART_RGB3" Classes="color" Margin="2" Grid.Column="0" Grid.Row="1" />
+                    <Rectangle x:Name="PART_RGB4" Classes="color" Margin="2" Grid.Column="1" Grid.Row="1" />
+                    <Rectangle x:Name="PART_RGB5" Classes="color" Margin="2" Grid.Column="2" Grid.Row="1" />
+                    <Rectangle x:Name="PART_RGB6" Classes="color" Margin="22,2,22,2" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" />
+                    <Rectangle x:Name="PART_RGB7" Classes="color" Margin="22,2,22,2" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" />
                 </Grid>
-            </Grid>
-        </Grid>
-        <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="70,40*,60,20,120,20" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="4">
-            <TextBlock Text="Red" Margin="5,2,5,2" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" />
-            <TextBlock Text="Green" Margin="5,2,5,2" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" />
-            <TextBlock Text="Blue" Margin="5,2,5,2" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" />
-            <Slider x:Name="PART_SliderR" Margin="5,2,5,2" Value="0" Maximum="255" LargeChange="1" SmallChange="1" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Column="1" Grid.Row="0" />
-            <Slider x:Name="PART_SliderG" Margin="5,2,5,2" Value="0" Maximum="255" LargeChange="1" SmallChange="1" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Column="1" Grid.Row="1" />
-            <Slider x:Name="PART_SliderB" Margin="5,2,5,2" Value="0" Maximum="255" LargeChange="1" SmallChange="1" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Column="1" Grid.Row="2" />
-            <TextBox Text="{Binding #PART_SliderR.Value, Mode=TwoWay}" Classes="edit" Grid.Column="2" Grid.Row="0" />
-            <TextBox Text="{Binding #PART_SliderG.Value, Mode=TwoWay}" Classes="edit" Grid.Column="2" Grid.Row="1" />
-            <TextBox Text="{Binding #PART_SliderB.Value, Mode=TwoWay}" Classes="edit" Grid.Column="2" Grid.Row="2" />
-            <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*,*" Grid.Row="0" Grid.Column="4" Grid.RowSpan="3">
-                <Rectangle x:Name="PART_RGB1" Classes="color" Margin="22,2,22,2" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" />
-                <Rectangle x:Name="PART_RGB2" Classes="color" Margin="22,2,22,2" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" />
-                <Rectangle x:Name="PART_RGB3" Classes="color" Margin="2" Grid.Column="0" Grid.Row="1" />
-                <Rectangle x:Name="PART_RGB4" Classes="color" Margin="2" Grid.Column="1" Grid.Row="1" />
-                <Rectangle x:Name="PART_RGB5" Classes="color" Margin="2" Grid.Column="2" Grid.Row="1" />
-                <Rectangle x:Name="PART_RGB6" Classes="color" Margin="22,2,22,2" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" />
-                <Rectangle x:Name="PART_RGB7" Classes="color" Margin="22,2,22,2" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" />
-            </Grid>
-        </Grid>
-        <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="70,40*,60,20,120,20" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="6">
-            <TextBlock Text="Hue" Margin="5,2,5,2" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" />
-            <TextBlock Text="Saturation" Margin="5,2,5,2" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" />
-            <TextBlock Text="Value" Margin="5,2,5,2" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" />
-            <Slider x:Name="PART_SliderH" Margin="5,2,5,2" Value="0" Maximum="360" LargeChange="1" SmallChange="1" TickFrequency="0.5" IsSnapToTickEnabled="False" Grid.Column="1" Grid.Row="0" />
-            <Slider x:Name="PART_SliderS" Margin="5,2,5,2" Value="0" Maximum="100" LargeChange="1" SmallChange="1" TickFrequency="0.5" IsSnapToTickEnabled="False" Grid.Column="1" Grid.Row="1" />
-            <Slider x:Name="PART_SliderV" Margin="5,2,5,2" Value="0" Maximum="100" LargeChange="1" SmallChange="1" TickFrequency="0.5" IsSnapToTickEnabled="False" Grid.Column="1" Grid.Row="2" />
-            <TextBox Text="{Binding #PART_SliderH.Value, Mode=TwoWay}" Classes="edit" Grid.Column="2" Grid.Row="0" />
-            <TextBox Text="{Binding #PART_SliderS.Value, Mode=TwoWay}" Classes="edit" Grid.Column="2" Grid.Row="1" />
-            <TextBox Text="{Binding #PART_SliderV.Value, Mode=TwoWay}" Classes="edit" Grid.Column="2" Grid.Row="2" />
-            <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*,*" Grid.Row="0" Grid.Column="4" Grid.RowSpan="3">
-                <Rectangle x:Name="PART_HSV1" Classes="color" Margin="2" Grid.Column="0" Grid.Row="0" />
-                <Rectangle x:Name="PART_HSV2" Classes="color" Margin="2" Grid.Column="1" Grid.Row="0" />
-                <Rectangle x:Name="PART_HSV3" Classes="color" Margin="2" Grid.Column="2" Grid.Row="0" />
-                <Rectangle x:Name="PART_HSV4" Classes="color" Margin="2" Grid.Column="0" Grid.Row="1" />
-                <Rectangle x:Name="PART_HSV5" Classes="color" Margin="2" Grid.Column="1" Grid.Row="1" />
-                <Rectangle x:Name="PART_HSV6" Classes="color" Margin="2" Grid.Column="2" Grid.Row="1" />
-                <Rectangle x:Name="PART_HSV7" Classes="color" Margin="2" Grid.Column="0" Grid.Row="2" />
-                <Rectangle x:Name="PART_HSV8" Classes="color" Margin="2" Grid.Column="1" Grid.Row="2" />
-                <Rectangle x:Name="PART_HSV9" Classes="color" Margin="2" Grid.Column="2" Grid.Row="2" />
+                <Grid x:Name="PART_VariationsHSV" RowDefinitions="*,*,*" ColumnDefinitions="*,*,*" Grid.Row="11">
+                    <Rectangle x:Name="PART_HSV1" Classes="color" Margin="2" Grid.Column="0" Grid.Row="0" />
+                    <Rectangle x:Name="PART_HSV2" Classes="color" Margin="2" Grid.Column="1" Grid.Row="0" />
+                    <Rectangle x:Name="PART_HSV3" Classes="color" Margin="2" Grid.Column="2" Grid.Row="0" />
+                    <Rectangle x:Name="PART_HSV4" Classes="color" Margin="2" Grid.Column="0" Grid.Row="1" />
+                    <Rectangle x:Name="PART_HSV5" Classes="color" Margin="2" Grid.Column="1" Grid.Row="1" />
+                    <Rectangle x:Name="PART_HSV6" Classes="color" Margin="2" Grid.Column="2" Grid.Row="1" />
+                    <Rectangle x:Name="PART_HSV7" Classes="color" Margin="2" Grid.Column="0" Grid.Row="2" />
+                    <Rectangle x:Name="PART_HSV8" Classes="color" Margin="2" Grid.Column="1" Grid.Row="2" />
+                    <Rectangle x:Name="PART_HSV9" Classes="color" Margin="2" Grid.Column="2" Grid.Row="2" />
+                </Grid>
             </Grid>
         </Grid>
     </Grid>
