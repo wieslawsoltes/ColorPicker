@@ -12,7 +12,6 @@ using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using ThemeEditor.ColorMatch;
-using ThemeEditor.ColorMatch.Algorithms;
 using ThemeEditor.Colors;
 
 namespace ThemeEditor.Controls.ColorBlender
@@ -114,27 +113,13 @@ namespace ThemeEditor.Controls.ColorBlender
         public static readonly StyledProperty<Color> ColorProperty =
             AvaloniaProperty.Register<ColorBlender, Color>(nameof(Color));
 
-        public static readonly StyledProperty<AvaloniaList<IAlgorithm>> AlgorithmsProperty =
-            AvaloniaProperty.Register<ColorBlender, AvaloniaList<IAlgorithm>>(nameof(Algorithms));
+        public static readonly StyledProperty<IAlgorithm> AlgorithmProperty =
+            AvaloniaProperty.Register<ColorBlender, IAlgorithm>(nameof(Algorithm));
 
         public ColorBlender()
         {
             this.InitializeComponent();
 
-            Algorithms = new AvaloniaList<IAlgorithm>(
-                new IAlgorithm[]
-                {
-                    new Classic(),
-                    new ColorExplorer(),
-                    new SingleHue(),
-                    new Complementary(),
-                    new SplitComplementary(),
-                    new Analogue(),
-                    new Triadic(),
-                    new Square()
-                });
-
-            var algorithms = this.FindControl<DropDown>("PART_Algorithms");
             var swatch1 = this.FindControl<Rectangle>("PART_Swatch1");
             var swatch2 = this.FindControl<Rectangle>("PART_Swatch2");
             var swatch3 = this.FindControl<Rectangle>("PART_Swatch3");
@@ -142,17 +127,14 @@ namespace ThemeEditor.Controls.ColorBlender
             var swatch5 = this.FindControl<Rectangle>("PART_Swatch5");
             var swatch6 = this.FindControl<Rectangle>("PART_Swatch6");
 
-            algorithms.Items = Algorithms;
-            algorithms.SelectedIndex = 0;
-            algorithms.SelectionChanged += (sender, e) => Update();
-
             this.GetObservable(ColorProperty).Subscribe(x => Update());
+            this.GetObservable(AlgorithmProperty).Subscribe(x => Update());
 
             void Update()
             {
-                if (algorithms?.SelectedItem is IAlgorithm algorithm)
+                if (Algorithm != null)
                 {
-                    Blend blend = algorithm.Match(Color.ToHSV());
+                    Blend blend = Algorithm.Match(Color.ToHSV());
                     swatch1.Fill = blend.Colors[0].ToSolidColorBrush();
                     swatch2.Fill = blend.Colors[1].ToSolidColorBrush();
                     swatch3.Fill = blend.Colors[2].ToSolidColorBrush();
@@ -169,10 +151,10 @@ namespace ThemeEditor.Controls.ColorBlender
             set { SetValue(ColorProperty, value); }
         }
 
-        public AvaloniaList<IAlgorithm> Algorithms
+        public IAlgorithm Algorithm
         {
-            get { return GetValue(AlgorithmsProperty); }
-            set { SetValue(AlgorithmsProperty, value); }
+            get { return GetValue(AlgorithmProperty); }
+            set { SetValue(AlgorithmProperty, value); }
         }
 
         private void InitializeComponent()

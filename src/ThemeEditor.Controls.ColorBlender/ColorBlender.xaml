@@ -22,13 +22,7 @@
         </Style>
     </UserControl.Styles>
     <Grid ColumnDefinitions="*,*,*,*,*,*" RowDefinitions="Auto,*">
-        <DropDown x:Name="PART_Algorithms" Margin="2" Grid.Column="4" Grid.Row="0" Grid.ColumnSpan="2">
-            <DropDown.DataTemplates>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}"/>
-                </DataTemplate>
-            </DropDown.DataTemplates>
-        </DropDown>
+        <TextBlock Text="{Binding Algorithm.Name}" Margin="2" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6"/>
         <Grid ColumnDefinitions="*,*,*,*,*,*" Margin="2" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="1">
             <Grid RowDefinitions="*,Auto" Grid.Column="0">
                 <Rectangle x:Name="PART_Swatch1" Classes="color" Grid.Column="0" Grid.Row="0" />
