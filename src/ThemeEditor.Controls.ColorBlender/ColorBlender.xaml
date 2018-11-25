@@ -15,14 +15,21 @@
             <Setter Property="Cursor" Value="Hand"/>
         </Style>
         <Style Selector="TextBox.color">
+            <Setter Property="Margin" Value="2"/>
             <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="IsReadOnly" Value="True"/>
         </Style>
+        <Style Selector="TextBox.edit">
+            <Setter Property="Margin" Value="5,2,5,2"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
     </UserControl.Styles>
     <Grid Name="layout" ColumnDefinitions="*,*,*,*,*,*" RowDefinitions="Auto,10,*,10,Auto,10,Auto">
-        <TextBlock Text="Current Blend" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="5,2,0,2" HorizontalAlignment="Left" VerticalAlignment="Center" />
-        <TextBlock Text="algorithm:" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="2" Margin="5,2,5,2" HorizontalAlignment="Right" VerticalAlignment="Center" />
-        <DropDown x:Name="algorithm" Grid.Column="4" Grid.Row="0" Grid.ColumnSpan="2" Margin="4,0,4,0" Items="{Binding Algorithms}" SelectedItem="{Binding CurrentAlgorithm}">
+        <TextBlock Text="Blend" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,2,0,2" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" />
+        <TextBlock Text="algorithm:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5,2,5,2" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="2" />
+        <DropDown x:Name="algorithm" Items="{Binding Algorithms}" SelectedItem="{Binding CurrentAlgorithm}" Margin="4,0,4,0" Grid.Column="4" Grid.Row="0" Grid.ColumnSpan="2">
             <DropDown.DataTemplates>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}"/>
@@ -31,90 +38,90 @@
         </DropDown>
         <Grid ColumnDefinitions="*,*,*,*,*,*" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="2">
             <Grid RowDefinitions="*,Auto,Auto" ColumnDefinitions="*" Grid.Column="0" Margin="2">
-                <Rectangle x:Name="swatch1" Classes="color" Grid.Column="0" Grid.Row="0" Margin="2" />
-                <TextBox Text="{Binding #swatch1.Fill.Color, Converter={StaticResource ColorToHexConverter}, Mode=OneWay}" Grid.Column="0" Grid.Row="1" Margin="2" Classes="color" />
+                <Rectangle x:Name="swatch1" Classes="color" Margin="2" Grid.Column="0" Grid.Row="0" />
+                <TextBox Text="{Binding #swatch1.Fill.Color, Converter={StaticResource ColorToHexConverter}, Mode=OneWay}" Classes="color" Grid.Column="0" Grid.Row="1" />
                 <Grid Grid.Column="0" ColumnDefinitions="*,*,*" Grid.Row="2">
-                    <TextBox Text="{Binding #swatch1.Fill.Color.R, Mode=OneWay}" Classes="color" Grid.Column="0" Margin="2" />
-                    <TextBox Text="{Binding #swatch1.Fill.Color.G, Mode=OneWay}" Classes="color" Grid.Column="1" Margin="2" />
-                    <TextBox Text="{Binding #swatch1.Fill.Color.B, Mode=OneWay}" Classes="color" Grid.Column="2" Margin="2" />
+                    <TextBox Text="{Binding #swatch1.Fill.Color.R, Mode=OneWay}" Classes="color" Grid.Column="0" />
+                    <TextBox Text="{Binding #swatch1.Fill.Color.G, Mode=OneWay}" Classes="color" Grid.Column="1" />
+                    <TextBox Text="{Binding #swatch1.Fill.Color.B, Mode=OneWay}" Classes="color" Grid.Column="2" />
                 </Grid>
             </Grid>
-            <Grid RowDefinitions="*,Auto,Auto" ColumnDefinitions="*" Grid.Column="1" Margin="2">
-                <Rectangle x:Name="swatch2" Classes="color" Grid.Column="0" Grid.Row="0" Margin="2" />
-                <TextBox Text="{Binding #swatch2.Fill.Color, Converter={StaticResource ColorToHexConverter}, Mode=OneWay}" Grid.Column="0" Grid.Row="1" Margin="2" Classes="color" />
+            <Grid RowDefinitions="*,Auto,Auto" ColumnDefinitions="*" Margin="2" Grid.Column="1">
+                <Rectangle x:Name="swatch2" Classes="color" Margin="2" Grid.Column="0" Grid.Row="0" />
+                <TextBox Text="{Binding #swatch2.Fill.Color, Converter={StaticResource ColorToHexConverter}, Mode=OneWay}" Classes="color" Grid.Column="0" Grid.Row="1" />
                 <Grid Grid.Column="0" ColumnDefinitions="*,*,*" Grid.Row="2">
-                    <TextBox Text="{Binding #swatch2.Fill.Color.R, Mode=OneWay}" Classes="color" Grid.Column="0" Margin="2" />
-                    <TextBox Text="{Binding #swatch2.Fill.Color.G, Mode=OneWay}" Classes="color" Grid.Column="1" Margin="2" />
-                    <TextBox Text="{Binding #swatch2.Fill.Color.B, Mode=OneWay}" Classes="color" Grid.Column="2" Margin="2" />
+                    <TextBox Text="{Binding #swatch2.Fill.Color.R, Mode=OneWay}" Classes="color" Grid.Column="0" />
+                    <TextBox Text="{Binding #swatch2.Fill.Color.G, Mode=OneWay}" Classes="color" Grid.Column="1" />
+                    <TextBox Text="{Binding #swatch2.Fill.Color.B, Mode=OneWay}" Classes="color" Grid.Column="2" />
                 </Grid>
             </Grid>
-            <Grid RowDefinitions="*,Auto,Auto" ColumnDefinitions="*" Grid.Column="2" Margin="2">
-                <Rectangle x:Name="swatch3" Classes="color" Grid.Column="0" Grid.Row="0" Margin="2" />
-                <TextBox Text="{Binding #swatch3.Fill.Color, Converter={StaticResource ColorToHexConverter}, Mode=OneWay}" Grid.Column="0" Grid.Row="1" Margin="2" Classes="color" />
+            <Grid RowDefinitions="*,Auto,Auto" ColumnDefinitions="*" Margin="2" Grid.Column="2">
+                <Rectangle x:Name="swatch3" Classes="color" Margin="2" Grid.Column="0" Grid.Row="0" />
+                <TextBox Text="{Binding #swatch3.Fill.Color, Converter={StaticResource ColorToHexConverter}, Mode=OneWay}" Classes="color" Grid.Column="0" Grid.Row="1" />
                 <Grid Grid.Column="0" ColumnDefinitions="*,*,*" Grid.Row="2">
-                    <TextBox Text="{Binding #swatch3.Fill.Color.R, Mode=OneWay}" Classes="color" Grid.Column="0" Margin="2" />
-                    <TextBox Text="{Binding #swatch3.Fill.Color.G, Mode=OneWay}" Classes="color" Grid.Column="1" Margin="2" />
-                    <TextBox Text="{Binding #swatch3.Fill.Color.B, Mode=OneWay}" Classes="color" Grid.Column="2" Margin="2" />
+                    <TextBox Text="{Binding #swatch3.Fill.Color.R, Mode=OneWay}" Classes="color" Grid.Column="0" />
+                    <TextBox Text="{Binding #swatch3.Fill.Color.G, Mode=OneWay}" Classes="color" Grid.Column="1" />
+                    <TextBox Text="{Binding #swatch3.Fill.Color.B, Mode=OneWay}" Classes="color" Grid.Column="2" />
                 </Grid>
             </Grid>
-            <Grid RowDefinitions="*,Auto,Auto" ColumnDefinitions="*" Grid.Column="3" Margin="2">
-                <Rectangle x:Name="swatch4" Classes="color" Grid.Column="0" Grid.Row="0" Margin="2" />
-                <TextBox Text="{Binding #swatch4.Fill.Color, Converter={StaticResource ColorToHexConverter}, Mode=OneWay}" Grid.Column="0" Grid.Row="1" Margin="2" Classes="color" />
+            <Grid RowDefinitions="*,Auto,Auto" ColumnDefinitions="*" Margin="2" Grid.Column="3">
+                <Rectangle x:Name="swatch4" Classes="color" Margin="2" Grid.Column="0" Grid.Row="0" />
+                <TextBox Text="{Binding #swatch4.Fill.Color, Converter={StaticResource ColorToHexConverter}, Mode=OneWay}" Classes="color" Grid.Column="0" Grid.Row="1" />
                 <Grid Grid.Column="0" ColumnDefinitions="*,*,*" Grid.Row="2">
-                    <TextBox Text="{Binding #swatch4.Fill.Color.R, Mode=OneWay}" Classes="color" Grid.Column="0" Margin="2" />
-                    <TextBox Text="{Binding #swatch4.Fill.Color.G, Mode=OneWay}" Classes="color" Grid.Column="1" Margin="2" />
-                    <TextBox Text="{Binding #swatch4.Fill.Color.B, Mode=OneWay}" Classes="color" Grid.Column="2" Margin="2" />
+                    <TextBox Text="{Binding #swatch4.Fill.Color.R, Mode=OneWay}" Classes="color" Grid.Column="0" />
+                    <TextBox Text="{Binding #swatch4.Fill.Color.G, Mode=OneWay}" Classes="color" Grid.Column="1" />
+                    <TextBox Text="{Binding #swatch4.Fill.Color.B, Mode=OneWay}" Classes="color" Grid.Column="2" />
                 </Grid>
             </Grid>
-            <Grid RowDefinitions="*,Auto,Auto" ColumnDefinitions="*" Grid.Column="4" Margin="2">
-                <Rectangle x:Name="swatch5" Classes="color" Grid.Column="0" Grid.Row="0" Margin="2" />
-                <TextBox Text="{Binding #swatch5.Fill.Color, Converter={StaticResource ColorToHexConverter}, Mode=OneWay}" Grid.Column="0" Grid.Row="1" Margin="2" Classes="color" />
+            <Grid RowDefinitions="*,Auto,Auto" ColumnDefinitions="*" Margin="2" Grid.Column="4">
+                <Rectangle x:Name="swatch5" Classes="color" Margin="2" Grid.Column="0" Grid.Row="0" />
+                <TextBox Text="{Binding #swatch5.Fill.Color, Converter={StaticResource ColorToHexConverter}, Mode=OneWay}" Classes="color" Grid.Column="0" Grid.Row="1" />
                 <Grid Grid.Column="0" ColumnDefinitions="*,*,*" Grid.Row="2">
-                    <TextBox Text="{Binding #swatch5.Fill.Color.R, Mode=OneWay}" Classes="color" Grid.Column="0" Margin="2" />
-                    <TextBox Text="{Binding #swatch5.Fill.Color.G, Mode=OneWay}" Classes="color" Grid.Column="1" Margin="2" />
-                    <TextBox Text="{Binding #swatch5.Fill.Color.B, Mode=OneWay}" Classes="color" Grid.Column="2" Margin="2" />
+                    <TextBox Text="{Binding #swatch5.Fill.Color.R, Mode=OneWay}" Classes="color" Grid.Column="0" />
+                    <TextBox Text="{Binding #swatch5.Fill.Color.G, Mode=OneWay}" Classes="color" Grid.Column="1" />
+                    <TextBox Text="{Binding #swatch5.Fill.Color.B, Mode=OneWay}" Classes="color" Grid.Column="2" />
                 </Grid>
             </Grid>
-            <Grid RowDefinitions="*,Auto,Auto" ColumnDefinitions="*" Grid.Column="5" Margin="2">
-                <Rectangle x:Name="swatch6" Classes="color" Grid.Column="0" Grid.Row="0" Margin="2" />
-                <TextBox Text="{Binding #swatch6.Fill.Color, Converter={StaticResource ColorToHexConverter}, Mode=OneWay}" Grid.Column="0" Grid.Row="1" Margin="2" Classes="color" />
+            <Grid RowDefinitions="*,Auto,Auto" ColumnDefinitions="*" Margin="2" Grid.Column="5">
+                <Rectangle x:Name="swatch6" Classes="color" Margin="2" Grid.Column="0" Grid.Row="0" />
+                <TextBox Text="{Binding #swatch6.Fill.Color, Converter={StaticResource ColorToHexConverter}, Mode=OneWay}" Classes="color" Grid.Column="0" Grid.Row="1" />
                 <Grid Grid.Column="0" ColumnDefinitions="*,*,*" Grid.Row="2">
-                    <TextBox Text="{Binding #swatch6.Fill.Color.R, Mode=OneWay}" Classes="color" Grid.Column="0" Margin="2" />
-                    <TextBox Text="{Binding #swatch6.Fill.Color.G, Mode=OneWay}" Classes="color" Grid.Column="1" Margin="2" />
-                    <TextBox Text="{Binding #swatch6.Fill.Color.B, Mode=OneWay}" Classes="color" Grid.Column="2" Margin="2" />
+                    <TextBox Text="{Binding #swatch6.Fill.Color.R, Mode=OneWay}" Classes="color" Grid.Column="0" />
+                    <TextBox Text="{Binding #swatch6.Fill.Color.G, Mode=OneWay}" Classes="color" Grid.Column="1" />
+                    <TextBox Text="{Binding #swatch6.Fill.Color.B, Mode=OneWay}" Classes="color" Grid.Column="2" />
                 </Grid>
             </Grid>
         </Grid>
         <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="70,40*,60,20,120,20" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="4">
-            <TextBlock Text="Red" Grid.Column="0" Grid.Row="0" Margin="5,2,5,2" HorizontalAlignment="Left" VerticalAlignment="Center" />
-            <TextBlock Text="Green" Grid.Column="0" Grid.Row="1" Margin="5,2,5,2" HorizontalAlignment="Left" VerticalAlignment="Center" />
-            <TextBlock Text="Blue" Grid.Column="0" Grid.Row="2" Margin="5,2,5,2" HorizontalAlignment="Left" VerticalAlignment="Center" />
-            <Slider x:Name="sliderR" Grid.Column="1" Grid.Row="0" Margin="5,2,5,2" Value="0" Maximum="255" LargeChange="1" SmallChange="1" TickFrequency="1" IsSnapToTickEnabled="True" />
-            <Slider x:Name="sliderG" Grid.Column="1" Grid.Row="1" Margin="5,2,5,2" Value="0" Maximum="255" LargeChange="1" SmallChange="1" TickFrequency="1" IsSnapToTickEnabled="True" />
-            <Slider x:Name="sliderB" Grid.Column="1" Grid.Row="2" Margin="5,2,5,2" Value="0" Maximum="255" LargeChange="1" SmallChange="1" TickFrequency="1" IsSnapToTickEnabled="True" />
-            <TextBox Text="{Binding ElementName=sliderR, Path=Value, Mode=TwoWay}" Grid.Column="2" Grid.Row="0" Margin="5,2,5,2" TextAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-            <TextBox Text="{Binding ElementName=sliderG, Path=Value, Mode=TwoWay}" Grid.Column="2" Grid.Row="1" Margin="5,2,5,2" TextAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-            <TextBox Text="{Binding ElementName=sliderB, Path=Value, Mode=TwoWay}" Grid.Column="2" Grid.Row="2" Margin="5,2,5,2" TextAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+            <TextBlock Text="Red" Margin="5,2,5,2" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" />
+            <TextBlock Text="Green" Margin="5,2,5,2" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" />
+            <TextBlock Text="Blue" Margin="5,2,5,2" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" />
+            <Slider x:Name="sliderR" Margin="5,2,5,2" Value="0" Maximum="255" LargeChange="1" SmallChange="1" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Column="1" Grid.Row="0" />
+            <Slider x:Name="sliderG" Margin="5,2,5,2" Value="0" Maximum="255" LargeChange="1" SmallChange="1" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Column="1" Grid.Row="1" />
+            <Slider x:Name="sliderB" Margin="5,2,5,2" Value="0" Maximum="255" LargeChange="1" SmallChange="1" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Column="1" Grid.Row="2" />
+            <TextBox Text="{Binding ElementName=sliderR, Path=Value, Mode=TwoWay}" Classes="edit" Grid.Column="2" Grid.Row="0" />
+            <TextBox Text="{Binding ElementName=sliderG, Path=Value, Mode=TwoWay}" Classes="edit" Grid.Column="2" Grid.Row="1" />
+            <TextBox Text="{Binding ElementName=sliderB, Path=Value, Mode=TwoWay}" Classes="edit" Grid.Column="2" Grid.Row="2" />
             <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*,*" Grid.Row="0" Grid.Column="4" Grid.RowSpan="3">
-                <Rectangle x:Name="rgb1" Classes="color" Grid.Column="0" Grid.Row="0" Margin="22,2,22,2" Grid.ColumnSpan="2" />
-                <Rectangle x:Name="rgb2" Classes="color" Grid.Column="1" Grid.Row="0" Margin="22,2,22,2" Grid.ColumnSpan="2" />
-                <Rectangle x:Name="rgb3" Classes="color" Grid.Column="0" Grid.Row="1" Margin="2" />
-                <Rectangle x:Name="rgb4" Classes="color" Grid.Column="1" Grid.Row="1" Margin="2" />
-                <Rectangle x:Name="rgb5" Classes="color" Grid.Column="2" Grid.Row="1" Margin="2" />
-                <Rectangle x:Name="rgb6" Classes="color" Grid.Column="0" Grid.Row="2" Margin="22,2,22,2" Grid.ColumnSpan="2" />
-                <Rectangle x:Name="rgb7" Classes="color" Grid.Column="1" Grid.Row="2" Margin="22,2,22,2" Grid.ColumnSpan="2" />
+                <Rectangle x:Name="rgb1" Classes="color" Margin="22,2,22,2" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" />
+                <Rectangle x:Name="rgb2" Classes="color" Margin="22,2,22,2" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" />
+                <Rectangle x:Name="rgb3" Classes="color" Margin="2" Grid.Column="0" Grid.Row="1" />
+                <Rectangle x:Name="rgb4" Classes="color" Margin="2" Grid.Column="1" Grid.Row="1" />
+                <Rectangle x:Name="rgb5" Classes="color" Margin="2" Grid.Column="2" Grid.Row="1" />
+                <Rectangle x:Name="rgb6" Classes="color" Margin="22,2,22,2" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" />
+                <Rectangle x:Name="rgb7" Classes="color" Margin="22,2,22,2" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" />
             </Grid>
         </Grid>
         <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="70,40*,60,20,120,20" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="6">
-            <TextBlock Text="Hue" Grid.Column="0" Grid.Row="0" Margin="5,2,5,2" HorizontalAlignment="Left" VerticalAlignment="Center" />
-            <TextBlock Text="Saturation" Grid.Column="0" Grid.Row="1" Margin="5,2,5,2" HorizontalAlignment="Left" VerticalAlignment="Center" />
-            <TextBlock Text="Lightness" Grid.Column="0" Grid.Row="2" Margin="5,2,5,2" HorizontalAlignment="Left" VerticalAlignment="Center" />
-            <Slider x:Name="sliderH" Grid.Column="1" Grid.Row="0" Margin="5,2,5,2" Value="0" Maximum="360" LargeChange="1" SmallChange="1" TickFrequency="0.5" IsSnapToTickEnabled="False" />
-            <Slider x:Name="sliderS" Grid.Column="1" Grid.Row="1" Margin="5,2,5,2" Value="0" Maximum="100" LargeChange="1" SmallChange="1" TickFrequency="0.5" IsSnapToTickEnabled="False" />
-            <Slider x:Name="sliderV" Grid.Column="1" Grid.Row="2" Margin="5,2,5,2" Value="0" Maximum="100" LargeChange="1" SmallChange="1" TickFrequency="0.5" IsSnapToTickEnabled="False" />
-            <TextBox Text="{Binding ElementName=sliderH, Path=Value, Mode=TwoWay}" Grid.Column="2" Grid.Row="0" Margin="5,2,5,2" TextAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-            <TextBox Text="{Binding ElementName=sliderS, Path=Value, Mode=TwoWay}" Grid.Column="2" Grid.Row="1" Margin="5,2,5,2" TextAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-            <TextBox Text="{Binding ElementName=sliderV, Path=Value, Mode=TwoWay}" Grid.Column="2" Grid.Row="2" Margin="5,2,5,2" TextAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+            <TextBlock Text="Hue" Margin="5,2,5,2" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" />
+            <TextBlock Text="Saturation" Margin="5,2,5,2" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" />
+            <TextBlock Text="Value" Margin="5,2,5,2" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" />
+            <Slider x:Name="sliderH" Margin="5,2,5,2" Value="0" Maximum="360" LargeChange="1" SmallChange="1" TickFrequency="0.5" IsSnapToTickEnabled="False" Grid.Column="1" Grid.Row="0" />
+            <Slider x:Name="sliderS" Margin="5,2,5,2" Value="0" Maximum="100" LargeChange="1" SmallChange="1" TickFrequency="0.5" IsSnapToTickEnabled="False" Grid.Column="1" Grid.Row="1" />
+            <Slider x:Name="sliderV" Margin="5,2,5,2" Value="0" Maximum="100" LargeChange="1" SmallChange="1" TickFrequency="0.5" IsSnapToTickEnabled="False" Grid.Column="1" Grid.Row="2" />
+            <TextBox Text="{Binding ElementName=sliderH, Path=Value, Mode=TwoWay}" Classes="edit" Grid.Column="2" Grid.Row="0" />
+            <TextBox Text="{Binding ElementName=sliderS, Path=Value, Mode=TwoWay}" Classes="edit" Grid.Column="2" Grid.Row="1" />
+            <TextBox Text="{Binding ElementName=sliderV, Path=Value, Mode=TwoWay}" Classes="edit" Grid.Column="2" Grid.Row="2" />
             <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*,*" Grid.Row="0" Grid.Column="4" Grid.RowSpan="3">
                 <Rectangle x:Name="hsv1" Classes="color" Grid.Column="0" Grid.Row="0" Margin="2" />
                 <Rectangle x:Name="hsv2" Classes="color" Grid.Column="1" Grid.Row="0" Margin="2" />
