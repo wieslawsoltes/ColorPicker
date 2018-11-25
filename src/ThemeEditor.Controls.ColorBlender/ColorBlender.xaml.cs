@@ -113,7 +113,7 @@ namespace ThemeEditor.Controls.ColorBlender
         public static readonly StyledProperty<Color> ColorProperty =
             AvaloniaProperty.Register<ColorBlender, Color>(nameof(Color));
 
-        private DropDown _algorithm;
+        private DropDown _algorithms;
         private Slider _sliderR;
         private Slider _sliderG;
         private Slider _sliderB;
@@ -148,50 +148,36 @@ namespace ThemeEditor.Controls.ColorBlender
         {
             this.InitializeComponent();
 
-            Algorithms = new IAlgorithm[]
-            {
-                new Classic(),
-                new ColorExplorer(),
-                new SingleHue(),
-                new Complementary(),
-                new SplitComplementary(),
-                new Analogue(),
-                new Triadic(),
-                new Square()
-            };
-
-            CurrentAlgorithm = Algorithms[0];
-
-            _algorithm = this.FindControl<DropDown>("algorithm");
-            _algorithm.SelectionChanged += Algorithm_SelectionChanged;
-            _sliderR = this.FindControl<Slider>("sliderR");
-            _sliderG = this.FindControl<Slider>("sliderG");
-            _sliderB = this.FindControl<Slider>("sliderB");
-            _sliderH = this.FindControl<Slider>("sliderH");
-            _sliderS = this.FindControl<Slider>("sliderS");
-            _sliderV = this.FindControl<Slider>("sliderV");
-            _rgb1 = this.FindControl<Rectangle>("rgb1");
-            _rgb2 = this.FindControl<Rectangle>("rgb2");
-            _rgb3 = this.FindControl<Rectangle>("rgb3");
-            _rgb4 = this.FindControl<Rectangle>("rgb4");
-            _rgb5 = this.FindControl<Rectangle>("rgb5");
-            _rgb6 = this.FindControl<Rectangle>("rgb6");
-            _rgb7 = this.FindControl<Rectangle>("rgb7");
-            _hsv1 = this.FindControl<Rectangle>("hsv1");
-            _hsv2 = this.FindControl<Rectangle>("hsv2");
-            _hsv3 = this.FindControl<Rectangle>("hsv3");
-            _hsv4 = this.FindControl<Rectangle>("hsv4");
-            _hsv5 = this.FindControl<Rectangle>("hsv5");
-            _hsv6 = this.FindControl<Rectangle>("hsv6");
-            _hsv7 = this.FindControl<Rectangle>("hsv7");
-            _hsv8 = this.FindControl<Rectangle>("hsv8");
-            _hsv9 = this.FindControl<Rectangle>("hsv9");
-            _swatch1 = this.FindControl<Rectangle>("swatch1");
-            _swatch2 = this.FindControl<Rectangle>("swatch2");
-            _swatch3 = this.FindControl<Rectangle>("swatch3");
-            _swatch4 = this.FindControl<Rectangle>("swatch4");
-            _swatch5 = this.FindControl<Rectangle>("swatch5");
-            _swatch6 = this.FindControl<Rectangle>("swatch6");
+            _algorithms = this.FindControl<DropDown>("PART_Algorithms");
+            _algorithms.SelectionChanged += Algorithm_SelectionChanged;
+            _sliderR = this.FindControl<Slider>("PART_SliderR");
+            _sliderG = this.FindControl<Slider>("PART_SliderG");
+            _sliderB = this.FindControl<Slider>("PART_SliderB");
+            _sliderH = this.FindControl<Slider>("PART_SliderH");
+            _sliderS = this.FindControl<Slider>("PART_SliderS");
+            _sliderV = this.FindControl<Slider>("PART_SliderV");
+            _rgb1 = this.FindControl<Rectangle>("PART_RGB1");
+            _rgb2 = this.FindControl<Rectangle>("PART_RGB2");
+            _rgb3 = this.FindControl<Rectangle>("PART_RGB3");
+            _rgb4 = this.FindControl<Rectangle>("PART_RGB4");
+            _rgb5 = this.FindControl<Rectangle>("PART_RGB5");
+            _rgb6 = this.FindControl<Rectangle>("PART_RGB6");
+            _rgb7 = this.FindControl<Rectangle>("PART_RGB7");
+            _hsv1 = this.FindControl<Rectangle>("PART_HSV1");
+            _hsv2 = this.FindControl<Rectangle>("PART_HSV2");
+            _hsv3 = this.FindControl<Rectangle>("PART_HSV3");
+            _hsv4 = this.FindControl<Rectangle>("PART_HSV4");
+            _hsv5 = this.FindControl<Rectangle>("PART_HSV5");
+            _hsv6 = this.FindControl<Rectangle>("PART_HSV6");
+            _hsv7 = this.FindControl<Rectangle>("PART_HSV7");
+            _hsv8 = this.FindControl<Rectangle>("PART_HSV8");
+            _hsv9 = this.FindControl<Rectangle>("PART_HSV9");
+            _swatch1 = this.FindControl<Rectangle>("PART_Swatch1");
+            _swatch2 = this.FindControl<Rectangle>("PART_Swatch2");
+            _swatch3 = this.FindControl<Rectangle>("PART_Swatch3");
+            _swatch4 = this.FindControl<Rectangle>("PART_Swatch4");
+            _swatch5 = this.FindControl<Rectangle>("PART_Swatch5");
+            _swatch6 = this.FindControl<Rectangle>("PART_Swatch6");
             _rgb1.PointerPressed += Rectangle_PointerPressed;
             _rgb2.PointerPressed += Rectangle_PointerPressed;
             _rgb3.PointerPressed += Rectangle_PointerPressed;
@@ -223,6 +209,20 @@ namespace ThemeEditor.Controls.ColorBlender
             _sliderV.GetObservable(Slider.ValueProperty).Subscribe(value => OnHsvChange());
 
             this.GetObservable(ColorProperty).Subscribe(x => OnColorChange());
+
+            Algorithms = new IAlgorithm[]
+            {
+                new Classic(),
+                new ColorExplorer(),
+                new SingleHue(),
+                new Complementary(),
+                new SplitComplementary(),
+                new Analogue(),
+                new Triadic(),
+                new Square()
+            };
+
+            CurrentAlgorithm = Algorithms[0];
 
             DataContext = this;
         }
