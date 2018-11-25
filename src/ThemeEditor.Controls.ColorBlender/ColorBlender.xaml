@@ -11,13 +11,14 @@
     </UserControl.Resources>
     <UserControl.Styles>
         <Style Selector="Rectangle.color">
-            <Setter Property="Margin" Value="2"/>
+            <Setter Property="Margin" Value="0"/>
             <Setter Property="Fill" Value="Gray"/>
         </Style>
         <Style Selector="TextBox.color">
-            <Setter Property="Margin" Value="2"/>
+            <Setter Property="Margin" Value="0"/>
             <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
         </Style>
     </UserControl.Styles>
     <Grid ColumnDefinitions="*,*,*,*,*,*" RowDefinitions="Auto,*">
@@ -28,7 +29,7 @@
                 </DataTemplate>
             </DropDown.DataTemplates>
         </DropDown>
-        <Grid ColumnDefinitions="*,*,*,*,*,*" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="1">
+        <Grid ColumnDefinitions="*,*,*,*,*,*" Margin="2" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="1">
             <Grid RowDefinitions="*,Auto" Grid.Column="0">
                 <Rectangle x:Name="PART_Swatch1" Classes="color" Grid.Column="0" Grid.Row="0" />
                 <TextBox Text="{Binding #PART_Swatch1.Fill.Color, Converter={StaticResource ColorToHexConverter}, Mode=OneWay}" Classes="color" Grid.Column="0" Grid.Row="1" />
