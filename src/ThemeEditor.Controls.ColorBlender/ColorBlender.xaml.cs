@@ -322,8 +322,6 @@ namespace ThemeEditor.Controls.ColorBlender
             {
                 _updating = true;
                 UpdateRectangles(algorithm, Color);
-                UpdateSlidersRGB(Color);
-                UpdateSlidersHSV(Color);
                 _updating = false;
             }
         }
@@ -346,8 +344,6 @@ namespace ThemeEditor.Controls.ColorBlender
                 SolidColorBrush b = (sender as Rectangle).Fill as SolidColorBrush;
                 Color = new Color(b.Color.A, b.Color.R, b.Color.G, b.Color.B);;
                 UpdateRectangles(algorithm, Color);
-                UpdateSlidersRGB(Color);
-                UpdateSlidersHSV(Color);
                 _updating = false;
             }
         }
