@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:ThemeEditor.Controls.ColorBlender;assembly=ThemeEditor.Controls.ColorBlender"
+             xmlns:local="clr-namespace:ThemeEditor.Controls.ColorBlender"
              mc:Ignorable="d"
              d:DesignWidth="700" d:DesignHeight="500">
     <UserControl.Resources>
@@ -16,13 +16,14 @@
         </Style>
         <Style Selector="TextBox.color">
             <Setter Property="Margin" Value="0"/>
+            <Setter Property="FontSize" Value="11"/>
             <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="IsReadOnly" Value="True"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
         </Style>
     </UserControl.Styles>
     <Grid ColumnDefinitions="*,*,*,*,*,*" RowDefinitions="Auto,*">
-        <TextBlock Text="{Binding Algorithm.Name}" Margin="2" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6"/>
+        <TextBlock Text="{Binding $parent[UserControl].Algorithm.Name}" Margin="2" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="0" />
         <Grid ColumnDefinitions="*,*,*,*,*,*" Margin="2" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="1">
             <Grid RowDefinitions="*,Auto" Grid.Column="0">
                 <Rectangle x:Name="PART_Swatch1" Classes="color" Grid.Column="0" Grid.Row="0" />

@@ -3,13 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:ThemeEditor;assembly=ThemeEditor"
-             xmlns:views="clr-namespace:ThemeEditor.Views;assembly=ThemeEditor"
+             xmlns:local="clr-namespace:ThemeEditor"
+             xmlns:views="clr-namespace:ThemeEditor.Views"
              xmlns:cb="clr-namespace:ThemeEditor.Controls.ColorBlender;assembly=ThemeEditor.Controls.ColorBlender"
              xmlns:cp="clr-namespace:ThemeEditor.Controls.ColorPicker;assembly=ThemeEditor.Controls.ColorPicker"
              xmlns:cma="clr-namespace:ThemeEditor.ColorMatch.Algorithms;assembly=ThemeEditor.ColorMatch"
              mc:Ignorable="d"
-             d:DesignWidth="900" d:DesignHeight="500"
+             d:DesignWidth="1200" d:DesignHeight="800"
              Classes="themed">
     <UserControl.Resources>
         <cma:Classic x:Key="ClassicAlgorithm"/>
@@ -32,7 +32,7 @@
                 <TextBox x:Name="exportText" DataContext="{Binding CurrentTheme}" Classes="export"/>
             </TabItem>
             <TabItem Header="Blend" Classes="main">
-                <Grid RowDefinitions="40*,8,60*">
+                <Grid RowDefinitions="60*,8,40*">
                     <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*,*" Grid.Row="0">
                         <cb:ColorBlender Algorithm="{StaticResource ClassicAlgorithm}" Color="{Binding #colorPicker.Color, Mode=OneWay}" Grid.Row="0" Grid.Column="0"/>
                         <cb:ColorBlender Algorithm="{StaticResource ColorExplorerAlgorithm}" Color="{Binding #colorPicker.Color, Mode=OneWay}" Grid.Row="0" Grid.Column="1"/>

@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Text.RegularExpressions;
 using Avalonia;
-using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
 using Avalonia.Data.Converters;
-using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using ThemeEditor.ColorMatch;
@@ -116,33 +112,26 @@ namespace ThemeEditor.Controls.ColorBlender
         public static readonly StyledProperty<IAlgorithm> AlgorithmProperty =
             AvaloniaProperty.Register<ColorBlender, IAlgorithm>(nameof(Algorithm));
 
+        private Rectangle _swatch1;
+        private Rectangle _swatch2;
+        private Rectangle _swatch3;
+        private Rectangle _swatch4;
+        private Rectangle _swatch5;
+        private Rectangle _swatch6;
+
         public ColorBlender()
         {
             this.InitializeComponent();
 
-            var swatch1 = this.FindControl<Rectangle>("PART_Swatch1");
-            var swatch2 = this.FindControl<Rectangle>("PART_Swatch2");
-            var swatch3 = this.FindControl<Rectangle>("PART_Swatch3");
-            var swatch4 = this.FindControl<Rectangle>("PART_Swatch4");
-            var swatch5 = this.FindControl<Rectangle>("PART_Swatch5");
-            var swatch6 = this.FindControl<Rectangle>("PART_Swatch6");
+            _swatch1 = this.FindControl<Rectangle>("PART_Swatch1");
+            _swatch2 = this.FindControl<Rectangle>("PART_Swatch2");
+            _swatch3 = this.FindControl<Rectangle>("PART_Swatch3");
+            _swatch4 = this.FindControl<Rectangle>("PART_Swatch4");
+            _swatch5 = this.FindControl<Rectangle>("PART_Swatch5");
+            _swatch6 = this.FindControl<Rectangle>("PART_Swatch6");
 
             this.GetObservable(ColorProperty).Subscribe(x => Update());
             this.GetObservable(AlgorithmProperty).Subscribe(x => Update());
-
-            void Update()
-            {
-                if (Algorithm != null)
-                {
-                    Blend blend = Algorithm.Match(Color.ToHSV());
-                    swatch1.Fill = blend.Colors[0].ToSolidColorBrush();
-                    swatch2.Fill = blend.Colors[1].ToSolidColorBrush();
-                    swatch3.Fill = blend.Colors[2].ToSolidColorBrush();
-                    swatch4.Fill = blend.Colors[3].ToSolidColorBrush();
-                    swatch5.Fill = blend.Colors[4].ToSolidColorBrush();
-                    swatch6.Fill = blend.Colors[5].ToSolidColorBrush();
-                }
-            }
         }
 
         public Color Color
@@ -160,6 +149,21 @@ namespace ThemeEditor.Controls.ColorBlender
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
+        }
+
+        private void Update()
+        {
+            System.Diagnostics.Debug.WriteLine($"Update: {ColorHelpers.ToHexColor(Color)}");
+            if (Algorithm != null)
+            {
+                var blend = Algorithm.Match(Color.ToHSV());
+                _swatch1.Fill = blend.Colors[0].ToSolidColorBrush();
+                _swatch2.Fill = blend.Colors[1].ToSolidColorBrush();
+                _swatch3.Fill = blend.Colors[2].ToSolidColorBrush();
+                _swatch4.Fill = blend.Colors[3].ToSolidColorBrush();
+                _swatch5.Fill = blend.Colors[4].ToSolidColorBrush();
+                _swatch6.Fill = blend.Colors[5].ToSolidColorBrush();
+            }
         }
     }
 }

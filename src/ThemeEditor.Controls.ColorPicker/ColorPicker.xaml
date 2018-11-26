@@ -1,6 +1,6 @@
 ﻿<Style xmlns="https://github.com/avaloniaui"
        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-       xmlns:local="clr-namespace:ThemeEditor.Controls.ColorPicker;assembly=ThemeEditor.Controls.ColorPicker"
+       xmlns:local="clr-namespace:ThemeEditor.Controls.ColorPicker"
        Selector="local|ColorPicker">
     <Style.Resources>
         <local:HueToColorConverter x:Key="HueToColorConverter"/>
