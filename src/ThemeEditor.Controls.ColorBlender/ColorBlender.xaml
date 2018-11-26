@@ -16,7 +16,7 @@
         </Style>
         <Style Selector="TextBox.color">
             <Setter Property="Margin" Value="0"/>
-            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontSize" Value="10"/>
             <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="IsReadOnly" Value="True"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
@@ -24,28 +24,28 @@
     </UserControl.Styles>
     <Grid ColumnDefinitions="*,*,*,*,*,*" RowDefinitions="Auto,*">
         <TextBlock Text="{Binding $parent[UserControl].Algorithm.Name}" Margin="2" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="0" />
-        <Grid ColumnDefinitions="*,*,*,*,*,*" Margin="2" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="1">
-            <Grid RowDefinitions="*,Auto" Grid.Column="0">
+        <Grid ColumnDefinitions="*,*,*,*,*,*" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="1">
+            <Grid RowDefinitions="*,Auto" Margin="2" Grid.Column="0">
                 <Rectangle x:Name="PART_Swatch1" Classes="color" Grid.Column="0" Grid.Row="0" />
                 <TextBox Text="{Binding #PART_Swatch1.Fill.Color, Converter={StaticResource ColorToHexConverter}, Mode=OneWay}" Classes="color" Grid.Column="0" Grid.Row="1" />
             </Grid>
-            <Grid RowDefinitions="*,Auto" Grid.Column="1">
+            <Grid RowDefinitions="*,Auto" Margin="2" Grid.Column="1">
                 <Rectangle x:Name="PART_Swatch2" Classes="color" Grid.Column="0" Grid.Row="0" />
                 <TextBox Text="{Binding #PART_Swatch2.Fill.Color, Converter={StaticResource ColorToHexConverter}, Mode=OneWay}" Classes="color" Grid.Column="0" Grid.Row="1" />
             </Grid>
-            <Grid RowDefinitions="*,Auto" Grid.Column="2">
+            <Grid RowDefinitions="*,Auto" Margin="2" Grid.Column="2">
                 <Rectangle x:Name="PART_Swatch3" Classes="color" Grid.Column="0" Grid.Row="0" />
                 <TextBox Text="{Binding #PART_Swatch3.Fill.Color, Converter={StaticResource ColorToHexConverter}, Mode=OneWay}" Classes="color" Grid.Column="0" Grid.Row="1" />
             </Grid>
-            <Grid RowDefinitions="*,Auto" Grid.Column="3">
+            <Grid RowDefinitions="*,Auto" Margin="2" Grid.Column="3">
                 <Rectangle x:Name="PART_Swatch4" Classes="color" Grid.Column="0" Grid.Row="0" />
                 <TextBox Text="{Binding #PART_Swatch4.Fill.Color, Converter={StaticResource ColorToHexConverter}, Mode=OneWay}" Classes="color" Grid.Column="0" Grid.Row="1" />
             </Grid>
-            <Grid RowDefinitions="*,Auto" Grid.Column="4">
+            <Grid RowDefinitions="*,Auto" Margin="2" Grid.Column="4">
                 <Rectangle x:Name="PART_Swatch5" Classes="color" Grid.Column="0" Grid.Row="0" />
                 <TextBox Text="{Binding #PART_Swatch5.Fill.Color, Converter={StaticResource ColorToHexConverter}, Mode=OneWay}" Classes="color" Grid.Column="0" Grid.Row="1" />
             </Grid>
-            <Grid RowDefinitions="*,Auto" Grid.Column="5">
+            <Grid RowDefinitions="*,Auto" Margin="2" Grid.Column="5">
                 <Rectangle x:Name="PART_Swatch6" Classes="color" Grid.Column="0" Grid.Row="0" />
                 <TextBox Text="{Binding #PART_Swatch6.Fill.Color, Converter={StaticResource ColorToHexConverter}, Mode=OneWay}" Classes="color" Grid.Column="0" Grid.Row="1" />
             </Grid>
