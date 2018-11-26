@@ -33,15 +33,15 @@
             </TabItem>
             <TabItem Header="Blend" Classes="main">
                 <Grid RowDefinitions="60*,8,40*">
-                    <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*,*" Grid.Row="0">
-                        <cb:ColorBlender Algorithm="{StaticResource ClassicAlgorithm}" Color="{Binding #colorPicker.Color, Mode=OneWay}" Grid.Row="0" Grid.Column="0"/>
-                        <cb:ColorBlender Algorithm="{StaticResource ColorExplorerAlgorithm}" Color="{Binding #colorPicker.Color, Mode=OneWay}" Grid.Row="0" Grid.Column="1"/>
-                        <cb:ColorBlender Algorithm="{StaticResource SingleHueAlgorithm}" Color="{Binding #colorPicker.Color, Mode=OneWay}" Grid.Row="1" Grid.Column="0"/>
-                        <cb:ColorBlender Algorithm="{StaticResource ComplementaryAlgorithm}" Color="{Binding #colorPicker.Color, Mode=OneWay}" Grid.Row="1" Grid.Column="1"/>
-                        <cb:ColorBlender Algorithm="{StaticResource SplitComplementaryAlgorithm}" Color="{Binding #colorPicker.Color, Mode=OneWay}" Grid.Row="2" Grid.Column="0"/>
-                        <cb:ColorBlender Algorithm="{StaticResource AnalogueAlgorithm}" Color="{Binding #colorPicker.Color, Mode=OneWay}" Grid.Row="2" Grid.Column="1"/>
-                        <cb:ColorBlender Algorithm="{StaticResource TriadicAlgorithm}" Color="{Binding #colorPicker.Color, Mode=OneWay}" Grid.Row="3" Grid.Column="0"/>
-                        <cb:ColorBlender Algorithm="{StaticResource SquareAlgorithm}" Color="{Binding #colorPicker.Color, Mode=OneWay}" Grid.Row="3" Grid.Column="1"/>
+                    <Grid DataContext="{Binding #colorPicker}" ColumnDefinitions="*,*" RowDefinitions="*,*,*,*" Grid.Row="0">
+                        <cb:ColorBlender Algorithm="{StaticResource ClassicAlgorithm}" Color="{Binding Color, Mode=OneWay}" Grid.Row="0" Grid.Column="0"/>
+                        <cb:ColorBlender Algorithm="{StaticResource ColorExplorerAlgorithm}" Color="{Binding Color, Mode=OneWay}" Grid.Row="0" Grid.Column="1"/>
+                        <cb:ColorBlender Algorithm="{StaticResource SingleHueAlgorithm}" Color="{Binding Color, Mode=OneWay}" Grid.Row="1" Grid.Column="0"/>
+                        <cb:ColorBlender Algorithm="{StaticResource ComplementaryAlgorithm}" Color="{Binding Color, Mode=OneWay}" Grid.Row="1" Grid.Column="1"/>
+                        <cb:ColorBlender Algorithm="{StaticResource SplitComplementaryAlgorithm}" Color="{Binding Color, Mode=OneWay}" Grid.Row="2" Grid.Column="0"/>
+                        <cb:ColorBlender Algorithm="{StaticResource AnalogueAlgorithm}" Color="{Binding Color, Mode=OneWay}" Grid.Row="2" Grid.Column="1"/>
+                        <cb:ColorBlender Algorithm="{StaticResource TriadicAlgorithm}" Color="{Binding Color, Mode=OneWay}" Grid.Row="3" Grid.Column="0"/>
+                        <cb:ColorBlender Algorithm="{StaticResource SquareAlgorithm}" Color="{Binding Color, Mode=OneWay}" Grid.Row="3" Grid.Column="1"/>
                     </Grid>
                     <GridSplitter Height="8" Grid.Row="1"/>
                     <cp:ColorPicker x:Name="colorPicker" Color="#CC119EDA" Grid.Row="2"/>
