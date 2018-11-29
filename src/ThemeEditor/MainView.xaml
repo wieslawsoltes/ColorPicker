@@ -5,22 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:ThemeEditor"
              xmlns:views="clr-namespace:ThemeEditor.Views"
-             xmlns:cb="clr-namespace:ThemeEditor.Controls.ColorBlender;assembly=ThemeEditor.Controls.ColorBlender"
-             xmlns:cp="clr-namespace:ThemeEditor.Controls.ColorPicker;assembly=ThemeEditor.Controls.ColorPicker"
-             xmlns:cma="clr-namespace:ThemeEditor.ColorMatch.Algorithms;assembly=ThemeEditor.ColorMatch"
              mc:Ignorable="d"
              d:DesignWidth="1200" d:DesignHeight="800"
              Classes="themed">
-    <UserControl.Resources>
-        <cma:Classic x:Key="ClassicAlgorithm"/>
-        <cma:ColorExplorer x:Key="ColorExplorerAlgorithm"/>
-        <cma:SingleHue x:Key="SingleHueAlgorithm"/>
-        <cma:Complementary x:Key="ComplementaryAlgorithm"/>
-        <cma:SplitComplementary x:Key="SplitComplementaryAlgorithm"/>
-        <cma:Analogue x:Key="AnalogueAlgorithm"/>
-        <cma:Triadic x:Key="TriadicAlgorithm"/>
-        <cma:Square x:Key="SquareAlgorithm"/>
-    </UserControl.Resources>
     <Grid ColumnDefinitions="*,8,350" Margin="8">
         <TabControl Grid.Column="0" Classes="main">
             <TabItem Header="Preview" Classes="main">
@@ -30,22 +17,6 @@
             </TabItem>
             <TabItem Header="Export" Classes="main">
                 <TextBox x:Name="exportText" DataContext="{Binding CurrentTheme}" Classes="export"/>
-            </TabItem>
-            <TabItem Header="Blend" Classes="main">
-                <Grid RowDefinitions="60*,8,40*">
-                    <Grid DataContext="{Binding #colorPicker}" ColumnDefinitions="*,*" RowDefinitions="*,*,*,*" Grid.Row="0">
-                        <cb:ColorBlender Algorithm="{StaticResource ClassicAlgorithm}" Color="{Binding Color, Mode=OneWay}" Grid.Row="0" Grid.Column="0"/>
-                        <cb:ColorBlender Algorithm="{StaticResource ColorExplorerAlgorithm}" Color="{Binding Color, Mode=OneWay}" Grid.Row="0" Grid.Column="1"/>
-                        <cb:ColorBlender Algorithm="{StaticResource SingleHueAlgorithm}" Color="{Binding Color, Mode=OneWay}" Grid.Row="1" Grid.Column="0"/>
-                        <cb:ColorBlender Algorithm="{StaticResource ComplementaryAlgorithm}" Color="{Binding Color, Mode=OneWay}" Grid.Row="1" Grid.Column="1"/>
-                        <cb:ColorBlender Algorithm="{StaticResource SplitComplementaryAlgorithm}" Color="{Binding Color, Mode=OneWay}" Grid.Row="2" Grid.Column="0"/>
-                        <cb:ColorBlender Algorithm="{StaticResource AnalogueAlgorithm}" Color="{Binding Color, Mode=OneWay}" Grid.Row="2" Grid.Column="1"/>
-                        <cb:ColorBlender Algorithm="{StaticResource TriadicAlgorithm}" Color="{Binding Color, Mode=OneWay}" Grid.Row="3" Grid.Column="0"/>
-                        <cb:ColorBlender Algorithm="{StaticResource SquareAlgorithm}" Color="{Binding Color, Mode=OneWay}" Grid.Row="3" Grid.Column="1"/>
-                    </Grid>
-                    <GridSplitter Height="8" Grid.Row="1"/>
-                    <cp:ColorPicker x:Name="colorPicker" Color="#CC119EDA" Grid.Row="2"/>
-                </Grid>
             </TabItem>
         </TabControl>
         <GridSplitter Width="8" Grid.Column="1"/>

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ThemeEditor.Colors
+namespace ThemeEditor.Controls.ColorPicker.Colors
 {
     public readonly struct CMYK
     {

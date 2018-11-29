@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace ThemeEditor.Colors.UnitTests
+namespace ThemeEditor.Controls.ColorPicker.Colors.UnitTests
 {
     public class HSVTests
     {

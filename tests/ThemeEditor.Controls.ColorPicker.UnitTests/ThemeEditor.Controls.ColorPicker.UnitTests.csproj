@@ -6,12 +6,10 @@
     <IsPackable>False</IsPackable>
   </PropertyGroup>
 
-  <Import Project="..\..\build\Rx.props" />
   <Import Project="..\..\build\XUnit.props" />
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ThemeEditor.ColorMatch\ThemeEditor.ColorMatch.csproj" />
-    <ProjectReference Include="..\..\src\ThemeEditor.Colors\ThemeEditor.Colors.csproj" />
+    <ProjectReference Include="..\..\src\ThemeEditor.Controls.ColorPicker\ThemeEditor.Controls.ColorPicker.csproj" />
   </ItemGroup>
 
 </Project>
