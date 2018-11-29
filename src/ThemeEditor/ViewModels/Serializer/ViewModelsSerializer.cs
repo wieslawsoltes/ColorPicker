@@ -14,7 +14,7 @@ namespace ThemeEditor.ViewModels.Serializer
                 Formatting = Formatting.Indented,
                 Converters =
                 {
-                    new IColorConverter(),
+                    new ColorConverter(),
                     new RgbColorViewModelConverter(),
                     new ArgbColorViewModelConverter(),
                     new ThicknessViewModelConverter()

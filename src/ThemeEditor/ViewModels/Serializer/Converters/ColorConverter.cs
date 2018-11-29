@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace ThemeEditor.ViewModels.Serializer.Converters
 {
-    public class IColorConverter : JsonConverter
+    public class ColorConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {
