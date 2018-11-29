@@ -22,8 +22,4 @@
 
   <Import Project="..\..\build\EmbedXaml.props" />
 
-  <ItemGroup>
-    <ProjectReference Include="..\ThemeEditor.Colors\ThemeEditor.Colors.csproj" />
-  </ItemGroup>
-
 </Project>
