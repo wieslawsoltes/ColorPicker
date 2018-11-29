@@ -34,9 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ThemeEditor.ColorMatch\ThemeEditor.ColorMatch.csproj" />
     <ProjectReference Include="..\ThemeEditor.Colors\ThemeEditor.Colors.csproj" />
-    <ProjectReference Include="..\ThemeEditor.Controls.ColorBlender\ThemeEditor.Controls.ColorBlender.csproj" />
     <ProjectReference Include="..\ThemeEditor.Controls.ColorPicker\ThemeEditor.Controls.ColorPicker.csproj" />
     <ProjectReference Include="..\ThemeEditor.ViewModels\ThemeEditor.ViewModels.csproj" />
   </ItemGroup>
