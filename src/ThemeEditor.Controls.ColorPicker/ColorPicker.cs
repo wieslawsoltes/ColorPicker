@@ -654,6 +654,25 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
+    public interface IValueConverters
+    {
+        IValueConverter Value1Converter { get; }
+        IValueConverter Value2Converter { get; }
+        IValueConverter Value3Converter { get; }
+        IValueConverter Value4Converter { get; }
+    }
+
+    public class HsvValueConverters : IValueConverters
+    {
+        public IValueConverter Value1Converter { get; } = new HueConverter();
+
+        public IValueConverter Value2Converter { get; } = new SaturationConverter();
+
+        public IValueConverter Value3Converter { get; } = new ValueConverter();
+
+        public IValueConverter Value4Converter { get; } = new AlphaConverter();
+    }
+
     public class ColorPicker : TemplatedControl
     {
         internal static readonly StyledProperty<double> Value1Property =
@@ -678,10 +697,7 @@ namespace ThemeEditor.Controls.ColorPicker
         private Canvas _alphaCanvas;
         private Thumb _alphaThumb;
         private bool _updating = false;
-        private IValueConverter _value1Converter = new HueConverter();
-        private IValueConverter _value2Converter = new SaturationConverter();
-        private IValueConverter _value3Converter = new ValueConverter();
-        private IValueConverter _value4Converter = new AlphaConverter();
+        private IValueConverters _converters = new HsvValueConverters();
 
         public ColorPicker()
         {
@@ -855,10 +871,10 @@ namespace ThemeEditor.Controls.ColorPicker
         private void UpdateThumbsFromColor()
         {
             ColorHelpers.FromColor(Color, out double h, out double s, out double v, out double a);
-            double hueY = Convert(_value1Converter, h, GetValue1Range());
-            double colorX = Convert(_value2Converter, s, GetValue2Range());
-            double colorY = Convert(_value3Converter, v, GetValue3Range());
-            double alphaX = Convert(_value4Converter, a, GetValue4Range());
+            double hueY = Convert(_converters.Value1Converter, h, GetValue1Range());
+            double colorX = Convert(_converters.Value2Converter, s, GetValue2Range());
+            double colorY = Convert(_converters.Value3Converter, v, GetValue3Range());
+            double alphaX = Convert(_converters.Value4Converter, a, GetValue4Range());
             MoveThumb(_hueCanvas, _hueThumb, 0, hueY);
             MoveThumb(_colorCanvas, _colorThumb, colorX, colorY);
             MoveThumb(_alphaCanvas, _alphaThumb, alphaX, 0);
@@ -866,10 +882,10 @@ namespace ThemeEditor.Controls.ColorPicker
 
         private void UpdateThumbsFromValues()
         {
-            double hueY = Convert(_value1Converter, Value1, GetValue1Range());
-            double colorX = Convert(_value2Converter, Value2, GetValue2Range());
-            double colorY = Convert(_value3Converter, Value3, GetValue3Range());
-            double alphaX = Convert(_value4Converter, Value4, GetValue4Range());
+            double hueY = Convert(_converters.Value1Converter, Value1, GetValue1Range());
+            double colorX = Convert(_converters.Value2Converter, Value2, GetValue2Range());
+            double colorY = Convert(_converters.Value3Converter, Value3, GetValue3Range());
+            double alphaX = Convert(_converters.Value4Converter, Value4, GetValue4Range());
             MoveThumb(_hueCanvas, _hueThumb, 0, hueY);
             MoveThumb(_colorCanvas, _colorThumb, colorX, colorY);
             MoveThumb(_alphaCanvas, _alphaThumb, alphaX, 0);
@@ -881,10 +897,10 @@ namespace ThemeEditor.Controls.ColorPicker
             double colorX = Canvas.GetLeft(_colorThumb);
             double colorY = Canvas.GetTop(_colorThumb);
             double alphaX = Canvas.GetLeft(_alphaThumb);
-            Value1 = ConvertBack(_value1Converter, hueY, GetValue1Range());
-            Value2 = ConvertBack(_value2Converter, colorX, GetValue2Range());
-            Value3 = ConvertBack(_value3Converter, colorY, GetValue3Range());
-            Value4 = ConvertBack(_value4Converter, alphaX, GetValue4Range());
+            Value1 = ConvertBack(_converters.Value1Converter, hueY, GetValue1Range());
+            Value2 = ConvertBack(_converters.Value2Converter, colorX, GetValue2Range());
+            Value3 = ConvertBack(_converters.Value3Converter, colorY, GetValue3Range());
+            Value4 = ConvertBack(_converters.Value4Converter, alphaX, GetValue4Range());
             Color = ColorHelpers.FromHSVA(Value1, Value2, Value3, Value4);
         }
 
@@ -894,10 +910,10 @@ namespace ThemeEditor.Controls.ColorPicker
             double colorX = Canvas.GetLeft(_colorThumb);
             double colorY = Canvas.GetTop(_colorThumb);
             double alphaX = Canvas.GetLeft(_alphaThumb);
-            double h = ConvertBack(_value1Converter, hueY, GetValue1Range());
-            double s = ConvertBack(_value2Converter, colorX, GetValue2Range());
-            double v = ConvertBack(_value3Converter, colorY, GetValue3Range());
-            double a = ConvertBack(_value4Converter, alphaX, GetValue4Range());
+            double h = ConvertBack(_converters.Value1Converter, hueY, GetValue1Range());
+            double s = ConvertBack(_converters.Value2Converter, colorX, GetValue2Range());
+            double v = ConvertBack(_converters.Value3Converter, colorY, GetValue3Range());
+            double a = ConvertBack(_converters.Value4Converter, alphaX, GetValue4Range());
             Color = ColorHelpers.FromHSVA(h, s, v, a);
         }
 
