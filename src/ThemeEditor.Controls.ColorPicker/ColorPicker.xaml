@@ -9,7 +9,7 @@
     <Setter Property="Template">
         <ControlTemplate>
             <Grid ColumnDefinitions="*,8,140">
-                <Grid Name="PART_PickerGrid" ColumnDefinitions="*,3,Auto" RowDefinitions="*,3,Auto" Grid.Column="0">
+                <Grid x:Name="PART_PickerGrid" ColumnDefinitions="*,3,Auto" RowDefinitions="*,3,Auto" Grid.Column="0">
                     <Grid Grid.Column="0" Grid.Row="0">
                         <Grid.Background>
                             <LinearGradientBrush StartPoint="0%,50%" EndPoint="100%,50%">
@@ -24,8 +24,8 @@
                                     <GradientStop Offset="1" Color="#FF000000"/>
                                 </LinearGradientBrush>
                             </Grid.Background>
-                            <Canvas Name="PART_ColorCanvas" Background="Transparent">
-                                <Thumb Name="PART_ColorThumb" Canvas.Left="0" Canvas.Top="0" Margin="-5.5,-5.5,0,0">
+                            <Canvas x:Name="PART_ColorCanvas" Background="Transparent">
+                                <Thumb x:Name="PART_ColorThumb" Canvas.Left="0" Canvas.Top="0" Margin="-5.5,-5.5,0,0">
                                     <Thumb.Template>
                                         <ControlTemplate>
                                             <Grid Background="Transparent">
@@ -50,8 +50,8 @@
                                 <GradientStop Color="#FFFF0000" Offset="1.0"/>
                             </LinearGradientBrush>
                         </Grid.Background>
-                        <Canvas Name="PART_HueCanvas" Background="Transparent" Width="20">
-                            <Thumb Name="PART_HueThumb" Width="20" Canvas.Left="0" Canvas.Top="0" Margin="0,-5,0,-5">
+                        <Canvas x:Name="PART_HueCanvas" Background="Transparent" Width="20">
+                            <Thumb x:Name="PART_HueThumb" Width="20" Canvas.Left="0" Canvas.Top="0" Margin="0,-5,0,-5">
                                 <Thumb.Template>
                                     <ControlTemplate>
                                         <Grid Background="Transparent">
@@ -80,7 +80,7 @@
                                 </VisualBrush.Visual>
                             </VisualBrush>
                         </Grid.Background>
-                        <Canvas Name="PART_AlphaCanvas" Height="20">
+                        <Canvas x:Name="PART_AlphaCanvas" Height="20">
                             <Canvas.Background>
                                 <SolidColorBrush>
                                     <SolidColorBrush.Color>
@@ -93,7 +93,7 @@
                                     </SolidColorBrush.Color>
                                 </SolidColorBrush>
                             </Canvas.Background>
-                            <Thumb Name="PART_AlphaThumb" Height="20" Canvas.Left="0" Canvas.Top="0" Margin="-5,0,-5,0">
+                            <Thumb x:Name="PART_AlphaThumb" Height="20" Canvas.Left="0" Canvas.Top="0" Margin="-5,0,-5,0">
                                 <Thumb.Template>
                                     <ControlTemplate>
                                         <Grid Background="Transparent">
@@ -105,8 +105,8 @@
                         </Canvas>
                     </Grid>
                 </Grid>
-                <GridSplitter Width="8" Grid.Column="1"/>
-                <Grid Name="PART_PropertiesGrid" RowDefinitions="Auto,Auto" ColumnDefinitions="*" Grid.Column="2">
+                <GridSplitter x:Name="PART_GridSplitter" Width="8" Grid.Column="1"/>
+                <Grid x:Name="PART_PropertiesGrid" RowDefinitions="Auto,Auto" ColumnDefinitions="*" Grid.Column="2">
                     <Grid.Styles>
                         <Style Selector="NumericUpDown.picker">
                             <Setter Property="ClipValueToMinMax" Value="True"/>
