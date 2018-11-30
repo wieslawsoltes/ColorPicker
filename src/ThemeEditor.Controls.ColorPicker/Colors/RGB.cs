@@ -5,7 +5,9 @@ namespace ThemeEditor.Controls.ColorPicker.Colors
     public readonly struct RGB
     {
         public double R { get; }
+
         public double G { get; }
+
         public double B { get; }
 
         public RGB(double r, double g, double b)

@@ -5,7 +5,9 @@ namespace ThemeEditor.Controls.ColorPicker.Colors
     public readonly struct HSV
     {
         public double H { get; }
+
         public double S { get; }
+
         public double V { get; }
 
         public HSV(double h, double s, double v)
