@@ -654,7 +654,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    public interface IValueConverters
+    internal interface IValueConverters
     {
         IValueConverter Value1Converter { get; }
         IValueConverter Value2Converter { get; }
@@ -662,7 +662,7 @@ namespace ThemeEditor.Controls.ColorPicker
         IValueConverter Value4Converter { get; }
     }
 
-    public class HsvValueConverters : IValueConverters
+    internal class HsvValueConverters : IValueConverters
     {
         public IValueConverter Value1Converter { get; } = new HueConverter();
 
