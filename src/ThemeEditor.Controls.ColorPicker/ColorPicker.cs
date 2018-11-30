@@ -850,14 +850,14 @@ namespace ThemeEditor.Controls.ColorPicker
             Canvas.SetTop(thumb, top);
         }
 
-        private T Convert<T>(IValueConverter converter, T value, T param)
+        private T Convert<T>(IValueConverter converter, T value, T range)
         {
-            return (T)converter.Convert(value, typeof(T), param, CultureInfo.CurrentCulture);
+            return (T)converter.Convert(value, typeof(T), range, CultureInfo.CurrentCulture);
         }
 
-        private T ConvertBack<T>(IValueConverter converter, T value, T param)
+        private T ConvertBack<T>(IValueConverter converter, T value, T range)
         {
-            return (T)converter.ConvertBack(value, typeof(T), param, CultureInfo.CurrentCulture);
+            return (T)converter.ConvertBack(value, typeof(T), range, CultureInfo.CurrentCulture);
         }
 
         private double GetValue1Range() => _hueCanvas.Bounds.Height;
