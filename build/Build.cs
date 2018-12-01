@@ -43,6 +43,11 @@ class Build : NukeBuild
         Framework = Framework ?? "netcoreapp2.1";
         Runtime = Runtime ?? "win7-x64";
         VersionSuffix = VersionSuffix ?? "";
+        // TODO: https://github.com/nuke-build/nuke/issues/188
+        if (!string.IsNullOrWhiteSpace(VersionSuffix))
+        {
+            VersionSuffix = "-" + VersionSuffix;
+        }
     }
 
     Target Clean => _ => _
