@@ -11,17 +11,39 @@ using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
 class Build : NukeBuild
 {
-    public static int Main () => Execute<Build>(x => x.Compile);
+    public static int Main() => Execute<Build>(x => x.Compile);
 
-    [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
-    readonly string Configuration = IsLocalBuild ? "Debug" : "Release";
+    [Parameter("configuration")]
+    public string Configuration { get; set; }
 
-    [Solution("ThemeEditor.sln")] readonly Solution Solution;
-    [GitRepository] readonly GitRepository GitRepository;
+    [Parameter("framework")]
+    public string Framework { get; set; }
+
+    [Parameter("runtime")]
+    public string Runtime { get; set; }
+
+    [Parameter("version-suffix")]
+    public string VersionSuffix { get; set; }
+
+    [Solution("ThemeEditor.sln")]
+    readonly Solution Solution;
+
+    [GitRepository]
+    readonly GitRepository GitRepository;
 
     AbsolutePath SourceDirectory => RootDirectory / "src";
+
     AbsolutePath TestsDirectory => RootDirectory / "tests";
+
     AbsolutePath ArtifactsDirectory => RootDirectory / "artifacts";
+
+    protected override void OnBuildInitialized()
+    {
+        Configuration = Configuration ?? "Release";
+        Framework = Framework ?? "netcoreapp2.1";
+        Runtime = Runtime ?? "win7-x64";
+        VersionSuffix = VersionSuffix ?? "";
+    }
 
     Target Clean => _ => _
         .Executes(() =>
@@ -67,6 +89,7 @@ class Build : NukeBuild
             DotNetPack(s => s
                 .SetProject(Solution)
                 .SetConfiguration(Configuration)
+                .SetVersionSuffix(VersionSuffix)
                 .SetOutputDirectory(ArtifactsDirectory / "NuGet")
                 .EnableNoBuild()
                 .EnableNoRestore());
@@ -79,8 +102,8 @@ class Build : NukeBuild
             DotNetPublish(s => s
                 .SetProject(Solution.GetProject("ThemeEditor"))
                 .SetConfiguration(Configuration)
-                .SetFramework("netcoreapp2.1")
-                .SetRuntime("win7-x64")
-                .SetOutput(ArtifactsDirectory / "Publish" / "ThemeEditor-win7-x64"));
+                .SetFramework(Framework)
+                .SetRuntime(Runtime)
+                .SetOutput(ArtifactsDirectory / "Publish" / "ThemeEditor-" + Runtime));
         });
 }
