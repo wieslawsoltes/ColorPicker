@@ -48,6 +48,7 @@ class Build : NukeBuild
         {
             VersionSuffix = "-" + VersionSuffix;
         }
+        Logger.Info("Building {0}, {1}", Configuration, VersionSuffix);
     }
 
     Target Clean => _ => _
