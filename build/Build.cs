@@ -73,6 +73,7 @@ class Build : NukeBuild
             DotNetBuild(s => s
                 .SetProjectFile(Solution)
                 .SetConfiguration(Configuration)
+                .SetVersionSuffix(VersionSuffix)
                 .EnableNoRestore());
         });
 
@@ -107,6 +108,7 @@ class Build : NukeBuild
             DotNetPublish(s => s
                 .SetProject(Solution.GetProject("ThemeEditor"))
                 .SetConfiguration(Configuration)
+                .SetVersionSuffix(VersionSuffix)
                 .SetFramework(Framework)
                 .SetRuntime(Runtime)
                 .SetOutput(ArtifactsDirectory / "Publish" / "ThemeEditor-" + Runtime));
