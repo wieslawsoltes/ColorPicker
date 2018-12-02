@@ -13,6 +13,12 @@ class Build : NukeBuild
 {
     public static int Main() => Execute<Build>(x => x.Compile);
 
+    [Solution("ThemeEditor.sln")]
+    readonly Solution Solution;
+
+    [GitRepository]
+    readonly GitRepository GitRepository;
+
     [Parameter("configuration")]
     public string Configuration { get; set; }
 
@@ -28,12 +34,6 @@ class Build : NukeBuild
     [Parameter("publish-project")]
     public string PublishProject { get; set; }
 
-    [Solution("ThemeEditor.sln")]
-    readonly Solution Solution;
-
-    [GitRepository]
-    readonly GitRepository GitRepository;
-
     AbsolutePath SourceDirectory => RootDirectory / "src";
 
     AbsolutePath TestsDirectory => RootDirectory / "tests";
@@ -44,9 +44,6 @@ class Build : NukeBuild
     {
         Configuration = Configuration ?? "Release";
         VersionSuffix = VersionSuffix ?? "";
-        PublishFramework = PublishFramework ?? "netcoreapp2.1";
-        PublishRuntime = PublishRuntime ?? "win7-x64";
-        PublishProject = PublishProject ?? "ThemeEditor";
     }
 
     Target Clean => _ => _
@@ -67,6 +64,8 @@ class Build : NukeBuild
 
     Target Compile => _ => _
         .DependsOn(Restore)
+        .Requires(() => Configuration)
+        .Requires(() => VersionSuffix)
         .Executes(() =>
         {
             DotNetBuild(s => s
@@ -78,6 +77,7 @@ class Build : NukeBuild
 
     Target Test => _ => _
         .DependsOn(Compile)
+        .Requires(() => Configuration)
         .Executes(() =>
         {
             DotNetTest(s => s
@@ -91,6 +91,8 @@ class Build : NukeBuild
 
     Target Pack => _ => _
         .DependsOn(Test)
+        .Requires(() => Configuration)
+        .Requires(() => VersionSuffix)
         .Executes(() =>
         {
             DotNetPack(s => s
@@ -104,6 +106,11 @@ class Build : NukeBuild
 
     Target Publish => _ => _
         .DependsOn(Test)
+        .Requires(() => Configuration)
+        .Requires(() => VersionSuffix)
+        .Requires(() => PublishRuntime)
+        .Requires(() => PublishFramework)
+        .Requires(() => PublishProject)
         .Executes(() =>
         {
             DotNetPublish(s => s
