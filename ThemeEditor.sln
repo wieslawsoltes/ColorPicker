@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{3353FD4A-FE9B-4670-86C9-09EF0F7CEDB2}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		.nuke = .nuke
 		build.ps1 = build.ps1
 		build.sh = build.sh
 	EndProjectSection
