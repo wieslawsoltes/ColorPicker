@@ -83,6 +83,8 @@ class Build : NukeBuild
             DotNetTest(s => s
                 .SetProjectFile(Solution)
                 .SetConfiguration(Configuration)
+                .SetLogger("trx")
+                .SetResultsDirectory(ArtifactsDirectory / "TestResults")
                 .EnableNoBuild()
                 .EnableNoRestore());
         });
@@ -110,6 +112,6 @@ class Build : NukeBuild
                 .SetVersionSuffix(VersionSuffix)
                 .SetFramework(PublishFramework)
                 .SetRuntime(PublishRuntime)
-                .SetOutput(ArtifactsDirectory / PublishProject + "-" + PublishRuntime));
+                .SetOutput(ArtifactsDirectory / "Publish" / PublishProject + "-" + PublishRuntime));
         });
 }
