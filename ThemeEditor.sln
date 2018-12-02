@@ -51,7 +51,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F2D7C825
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThemeEditor.Controls.ColorPicker.UnitTests", "tests\ThemeEditor.Controls.ColorPicker.UnitTests\ThemeEditor.Controls.ColorPicker.UnitTests.csproj", "{A8EB278A-149D-4BE4-8388-86EFB0D9030F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{DD390F62-BC92-4012-9C09-B2ED62CBFAA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\build\_build.csproj", "{DD390F62-BC92-4012-9C09-B2ED62CBFAA4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
