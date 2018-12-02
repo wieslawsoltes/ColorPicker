@@ -16,14 +16,17 @@ class Build : NukeBuild
     [Parameter("configuration")]
     public string Configuration { get; set; }
 
-    [Parameter("framework")]
-    public string Framework { get; set; }
-
-    [Parameter("runtime")]
-    public string Runtime { get; set; }
-
     [Parameter("version-suffix")]
     public string VersionSuffix { get; set; }
+
+    [Parameter("publish-framework")]
+    public string PublishFramework { get; set; }
+
+    [Parameter("publish-runtime")]
+    public string PublishRuntime { get; set; }
+
+    [Parameter("publish-project")]
+    public string PublishProject { get; set; }
 
     [Solution("ThemeEditor.sln")]
     readonly Solution Solution;
@@ -40,15 +43,10 @@ class Build : NukeBuild
     protected override void OnBuildInitialized()
     {
         Configuration = Configuration ?? "Release";
-        Framework = Framework ?? "netcoreapp2.1";
-        Runtime = Runtime ?? "win7-x64";
         VersionSuffix = VersionSuffix ?? "";
-        // TODO: https://github.com/nuke-build/nuke/issues/188
-        if (!string.IsNullOrWhiteSpace(VersionSuffix))
-        {
-            VersionSuffix = "-" + VersionSuffix;
-        }
-        Logger.Info("Building {0}, {1}", Configuration, VersionSuffix);
+        PublishFramework = PublishFramework ?? "netcoreapp2.1";
+        PublishRuntime = PublishRuntime ?? "win7-x64";
+        PublishProject = PublishProject ?? "ThemeEditor";
     }
 
     Target Clean => _ => _
@@ -107,11 +105,11 @@ class Build : NukeBuild
         .Executes(() =>
         {
             DotNetPublish(s => s
-                .SetProject(Solution.GetProject("ThemeEditor"))
+                .SetProject(Solution.GetProject(PublishProject))
                 .SetConfiguration(Configuration)
                 .SetVersionSuffix(VersionSuffix)
-                .SetFramework(Framework)
-                .SetRuntime(Runtime)
-                .SetOutput(ArtifactsDirectory / "Publish" / "ThemeEditor-" + Runtime));
+                .SetFramework(PublishFramework)
+                .SetRuntime(PublishRuntime)
+                .SetOutput(ArtifactsDirectory / "Publish" / PublishProject + "-" + Runtime));
         });
 }
