@@ -64,8 +64,6 @@ class Build : NukeBuild
 
     Target Compile => _ => _
         .DependsOn(Restore)
-        .Requires(() => Configuration)
-        .Requires(() => VersionSuffix)
         .Executes(() =>
         {
             DotNetBuild(s => s
@@ -77,7 +75,6 @@ class Build : NukeBuild
 
     Target Test => _ => _
         .DependsOn(Compile)
-        .Requires(() => Configuration)
         .Executes(() =>
         {
             DotNetTest(s => s
@@ -91,8 +88,6 @@ class Build : NukeBuild
 
     Target Pack => _ => _
         .DependsOn(Test)
-        .Requires(() => Configuration)
-        .Requires(() => VersionSuffix)
         .Executes(() =>
         {
             DotNetPack(s => s
@@ -106,8 +101,6 @@ class Build : NukeBuild
 
     Target Publish => _ => _
         .DependsOn(Test)
-        .Requires(() => Configuration)
-        .Requires(() => VersionSuffix)
         .Requires(() => PublishRuntime)
         .Requires(() => PublishFramework)
         .Requires(() => PublishProject)
