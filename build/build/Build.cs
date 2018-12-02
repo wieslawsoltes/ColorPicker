@@ -110,6 +110,6 @@ class Build : NukeBuild
                 .SetVersionSuffix(VersionSuffix)
                 .SetFramework(PublishFramework)
                 .SetRuntime(PublishRuntime)
-                .SetOutput(ArtifactsDirectory / PublishProject + "-" + Runtime));
+                .SetOutput(ArtifactsDirectory / PublishProject + "-" + PublishRuntime));
         });
 }
