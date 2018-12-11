@@ -1,6 +1,6 @@
 # Avalonia Theme Editor
 
-[![Build Status](https://dev.azure.com/wieslawsoltes/GitHub/_apis/build/status/Sources/ThemeEditor?branchName=master)](https://dev.azure.com/wieslawsoltes/GitHub/_build/latest?definitionId=61?branchName=master)
+[![Build status](https://dev.azure.com/wieslawsoltes/GitHub/_apis/build/status/Sources/ThemeEditor)](https://dev.azure.com/wieslawsoltes/GitHub/_build/latest?definitionId=61)
 
 [![NuGet](https://img.shields.io/nuget/v/ThemeEditor.Controls.ColorPicker.svg)](https://www.nuget.org/packages/ThemeEditor.Controls.ColorPicker) [![MyGet](https://img.shields.io/myget/themeeditor-nightly/vpre/ThemeEditor.Controls.ColorPicker.svg?label=myget)](https://www.myget.org/gallery/themeeditor-nightly)
 
