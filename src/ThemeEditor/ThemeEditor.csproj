@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
-    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <OutputType>WinExe</OutputType>
     <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
     <LangVersion>latest</LangVersion>
     <IsPackable>False</IsPackable>
@@ -20,7 +20,6 @@
   <Import Project="..\..\build\Avalonia.Desktop.props" />
   <Import Project="..\..\build\Avalonia.ReactiveUI.props" />
   <Import Project="..\..\build\Newtonsoft.Json.props" />
-  <!--<Import Project="..\..\build\NSubsys.props" />-->
   <Import Project="..\..\build\Linker.props" />
 
   <ItemGroup>
