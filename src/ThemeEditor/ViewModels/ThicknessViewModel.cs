@@ -37,8 +37,8 @@ namespace ThemeEditor.ViewModels
         public double Left
         {
             get { return _left; }
-            set 
-            { 
+            set
+            {
                 this.RaiseAndSetIfChanged(ref _left, value);
                 this.RaisePropertyChanged(nameof(Text));
             }
@@ -48,8 +48,8 @@ namespace ThemeEditor.ViewModels
         public double Top
         {
             get { return _top; }
-            set 
-            { 
+            set
+            {
                 this.RaiseAndSetIfChanged(ref _top, value);
                 this.RaisePropertyChanged(nameof(Text));
             }
@@ -59,8 +59,8 @@ namespace ThemeEditor.ViewModels
         public double Right
         {
             get { return _right; }
-            set 
-            { 
+            set
+            {
                 this.RaiseAndSetIfChanged(ref _right, value);
                 this.RaisePropertyChanged(nameof(Text));
             }
@@ -70,8 +70,8 @@ namespace ThemeEditor.ViewModels
         public double Bottom
         {
             get { return _bottom; }
-            set 
-            { 
+            set
+            {
                 this.RaiseAndSetIfChanged(ref _bottom, value);
                 this.RaisePropertyChanged(nameof(Text));
             }
