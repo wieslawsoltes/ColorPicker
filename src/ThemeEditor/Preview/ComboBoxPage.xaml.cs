@@ -3,9 +3,9 @@ using Avalonia.Markup.Xaml;
 
 namespace ThemeEditor.Preview
 {
-    public class DropDownPage : UserControl
+    public class ComboBoxPage : UserControl
     {
-        public DropDownPage()
+        public ComboBoxPage()
         {
             this.InitializeComponent();
         }

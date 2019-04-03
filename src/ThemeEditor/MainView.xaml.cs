@@ -12,7 +12,7 @@ namespace ThemeEditor
         private ThemePreviewView _previewView = null;
         private TextBox _exportText = null;
         private ThemeEditorView _editorView = null;
-        private DropDown _themeSelector = null;
+        private ComboBox _themeSelector = null;
         private StyleInclude _lightTheme = null;
         private StyleInclude _darkTheme = null;
 
@@ -22,7 +22,7 @@ namespace ThemeEditor
             _previewView = this.Find<ThemePreviewView>("previewView");
             _exportText = this.Find<TextBox>("exportText");
             _editorView = this.Find<ThemeEditorView>("editorView");
-            _themeSelector = this.Find<DropDown>("themeSelector");
+            _themeSelector = this.Find<ComboBox>("themeSelector");
             _themeSelector.SelectionChanged += (sender, e) =>
             {
                 switch (_themeSelector.SelectedIndex)

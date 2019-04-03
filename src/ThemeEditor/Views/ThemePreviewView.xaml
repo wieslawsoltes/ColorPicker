@@ -34,7 +34,7 @@
             <preview:ContextMenuPage/>
             <preview:DatePickerPage/>
             <preview:DragAndDropPage/>
-            <preview:DropDownPage/>
+            <preview:ComboBoxPage/>
             <preview:ExpanderPage/>
             <preview:ListBoxPage/>
             <preview:MenuPage/>

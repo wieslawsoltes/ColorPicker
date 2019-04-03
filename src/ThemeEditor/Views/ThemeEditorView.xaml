@@ -11,13 +11,13 @@
         <TabControl Grid.Row="0" Classes="editor">
             <TabItem Header="Themes" Classes="editor">
                 <StackPanel Spacing="2">
-                    <DropDown Items="{Binding Themes}" SelectedItem="{Binding CurrentTheme, Mode=TwoWay}" Classes="editor">
-                        <DropDown.DataTemplates>
+                    <ComboBox Items="{Binding Themes}" SelectedItem="{Binding CurrentTheme, Mode=TwoWay}" Classes="editor">
+                        <ComboBox.DataTemplates>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Name}"/>
                             </DataTemplate>
-                        </DropDown.DataTemplates>
-                    </DropDown>
+                        </ComboBox.DataTemplates>
+                    </ComboBox>
                     <TextBox Text="{Binding CurrentTheme.Name, Mode=TwoWay}" Classes="left"/>
                     <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto">
                         <Button Content="Reset" Command="{Binding ResetThemeCommand}" Grid.Column="0" Grid.Row="0" Classes="editor"/>

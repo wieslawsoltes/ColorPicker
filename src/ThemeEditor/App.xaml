@@ -47,10 +47,10 @@
         <Style Selector="ContentControl.overview">
             <Setter Property="Margin" Value="2"/>
         </Style>
-        <Style Selector="DropDown.editor">
+        <Style Selector="ComboBox.editor">
             <Setter Property="Margin" Value="2"/>
         </Style>
-        <Style Selector="DropDown.themes">
+        <Style Selector="ComboBox.themes">
             <Setter Property="Margin" Value="2"/>
         </Style>
         <Style Selector="Expander.editor">
