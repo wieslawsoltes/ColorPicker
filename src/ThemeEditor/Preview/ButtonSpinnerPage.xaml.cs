@@ -16,7 +16,7 @@ namespace ThemeEditor.Preview
             AvaloniaXamlLoader.Load(this);
         }
 
-        private void OnSpin(object sender, SpinEventArgs e)
+        public void OnSpin(object sender, SpinEventArgs e)
         {
             var spinner = (ButtonSpinner)sender;
             var txtBox = (TextBlock)spinner.Content;
