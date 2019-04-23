@@ -1,4 +1,5 @@
-﻿using Avalonia;
+﻿using System;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.Styling;
@@ -9,20 +10,14 @@ namespace ThemeEditor
 {
     public class MainView : UserControl
     {
-        private ThemePreviewView _previewView = null;
-        private TextBox _exportText = null;
-        private ThemeEditorView _editorView = null;
-        private ComboBox _themeSelector = null;
         private StyleInclude _lightTheme = null;
         private StyleInclude _darkTheme = null;
 
         public MainView()
         {
             this.InitializeComponent();
-            _previewView = this.Find<ThemePreviewView>("previewView");
-            _exportText = this.Find<TextBox>("exportText");
-            _editorView = this.Find<ThemeEditorView>("editorView");
-            _themeSelector = this.Find<ComboBox>("themeSelector");
+
+            var _themeSelector = this.Find<ComboBox>("themeSelector");
             _themeSelector.SelectionChanged += (sender, e) =>
             {
                 switch (_themeSelector.SelectedIndex)
@@ -35,10 +30,17 @@ namespace ThemeEditor
                         break;
                 }
             };
-            _lightTheme = AvaloniaXamlLoader.Parse<StyleInclude>(@"<StyleInclude xmlns='https://github.com/avaloniaui' Source='avares://Avalonia.Themes.Default/Accents/BaseLight.xaml'/>");
-            _darkTheme = AvaloniaXamlLoader.Parse<StyleInclude>(@"<StyleInclude xmlns='https://github.com/avaloniaui' Source='avares://Avalonia.Themes.Default/Accents/BaseDark.xaml'/>");
+            _lightTheme = new StyleInclude(new Uri("resm:Styles?assembly=ThemeEditor"))
+            {
+                Source = new Uri("resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default")
+            };
+            _darkTheme = new StyleInclude(new Uri("resm:Styles?assembly=ThemeEditor"))
+            {
+                Source = new Uri("resm:Avalonia.Themes.Default.Accents.BaseDark.xaml?assembly=Avalonia.Themes.Default")
+            };
             Styles.Add(_darkTheme);
         }
+
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
@@ -50,10 +52,12 @@ namespace ThemeEditor
 
             if (DataContext is ThemeEditorViewModel editor)
             {
+                var previewView = this.Find<ThemePreviewView>("previewView");
+                var exportText = this.Find<TextBox>("exportText");
                 var defaultThem = editor.GetTheme(_lightTheme);
                 defaultThem.Name = "BaseLight";
                 editor.DefaultTheme = defaultThem;
-                editor.Attach(_previewView.Resources, (x) => _exportText.Text = x.ToXaml());
+                editor.Attach(previewView.Resources, (x) => exportText.Text = x.ToXaml());
             }
         }
 
