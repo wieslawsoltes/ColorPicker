@@ -9,6 +9,9 @@
         Width="1200" Height="720"
         UseLayoutRounding="True"
         WindowState="Normal" WindowStartupLocation="CenterScreen"
-        Title="Avalonia Theme Editor">
+        Title="Avalonia Theme Editor"
+        Background="{DynamicResource ThemeBackgroundBrush}"
+        Foreground="{DynamicResource ThemeForegroundBrush}"
+        FontSize="{DynamicResource FontSizeNormal}">
     <local:MainView/>
 </Window>

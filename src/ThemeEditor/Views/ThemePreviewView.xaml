@@ -6,7 +6,7 @@
              xmlns:preview="clr-namespace:ThemeEditor.Preview"
              mc:Ignorable="d"
              d:DesignWidth="900" d:DesignHeight="700"
-             Classes="themed">
+             Foreground="{DynamicResource ThemeForegroundBrush}">
     <UserControl.Styles>
         <Style Selector="ScrollViewer.preview">
             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>

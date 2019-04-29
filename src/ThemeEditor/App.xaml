@@ -21,11 +21,6 @@
         <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>
         <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>
         <StyleInclude Source="avares://ThemeEditor.Controls.ColorPicker/ColorPicker.xaml"/>
-        <Style Selector="UserControl.themed">
-            <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}"/>
-            <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
-            <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}"/>
-        </Style>
         <Style Selector="Border.color">
             <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>

@@ -7,7 +7,9 @@
              xmlns:views="clr-namespace:ThemeEditor.Views"
              mc:Ignorable="d"
              d:DesignWidth="1200" d:DesignHeight="800"
-             Classes="themed">
+             Background="{DynamicResource ThemeBackgroundBrush}"
+             Foreground="{DynamicResource ThemeForegroundBrush}"
+             FontSize="{DynamicResource FontSizeNormal}">
     <Grid ColumnDefinitions="*,8,350" Margin="8">
         <TabControl Grid.Column="0" Classes="main">
             <TabItem Header="Preview" Classes="main">
