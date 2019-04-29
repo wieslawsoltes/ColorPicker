@@ -15,20 +15,27 @@ namespace ThemeEditor
         [STAThread]
         static void Main(string[] args)
         {
-            ThemeEditorViewModel vm = default;
+            BuildAvaloniaApp().Start(AppMain, args);
+        }
 
-            BuildAvaloniaApp().BeforeStarting(builder =>
+        static void AppMain(Application app, string[] args)
+        {
+            var vm = new ThemeEditorViewModel();
+            if (File.Exists(s_ThemesPath))
             {
-                vm = new ThemeEditorViewModel();
-                if (File.Exists(s_ThemesPath))
-                {
-                    vm.LoadFromFile(s_ThemesPath);
-                }
-                else
-                {
-                    vm.LoadFromResource<App>(s_ThemesResource);
-                }
-            }).Start<MainWindow>(() => vm);
+                vm.LoadFromFile(s_ThemesPath);
+            }
+            else
+            {
+                vm.LoadFromResource<App>(s_ThemesResource);
+            }
+
+            var window = new MainWindow
+            {
+                DataContext = vm,
+            };
+
+            app.Run(window);
 
             vm.SaveAsFile(s_ThemesPath);
         }
