@@ -177,7 +177,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    internal class HsvaToColorConverter : IMultiValueConverter
+    public class HsvaToColorConverter : IMultiValueConverter
     {
         public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
         {
@@ -190,7 +190,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    internal class HueToColorConverter : IValueConverter
+    public class HueToColorConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
