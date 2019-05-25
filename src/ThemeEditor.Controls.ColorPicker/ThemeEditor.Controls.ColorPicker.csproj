@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <PackageId>ThemeEditor.Controls.ColorPicker</PackageId>
     <Description>An avalonia color picker control.</Description>
     <PackageTags>color-picker;controls;avalonia;avaloniaui;xaml</PackageTags>
   </PropertyGroup>
