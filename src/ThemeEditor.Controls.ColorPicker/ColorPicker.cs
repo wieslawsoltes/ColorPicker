@@ -13,7 +13,7 @@ using ThemeEditor.Controls.ColorPicker.Colors;
 
 namespace ThemeEditor.Controls.ColorPicker
 {
-    internal static class ColorHelpers
+    public static class ColorHelpers
     {
         private static Regex s_hexRegex = new Regex("^#[a-fA-F0-9]{8}$");
 
@@ -93,7 +93,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    internal class HueConverter : IValueConverter
+    public class HueConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -114,7 +114,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    internal class SaturationConverter : IValueConverter
+    public class SaturationConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -135,7 +135,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    internal class ValueConverter : IValueConverter
+    public class ValueConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -156,7 +156,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    internal class AlphaConverter : IValueConverter
+    public class AlphaConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -222,7 +222,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    internal abstract class ColorPickerProperties : AvaloniaObject
+    public abstract class ColorPickerProperties : AvaloniaObject
     {
         public static readonly StyledProperty<ColorPicker> ColorPickerProperty =
             AvaloniaProperty.Register<ColorPickerProperties, ColorPicker>(nameof(ColorPicker));
@@ -254,7 +254,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    internal class HsvProperties : ColorPickerProperties
+    public class HsvProperties : ColorPickerProperties
     {
         public static readonly StyledProperty<double> HueProperty =
             AvaloniaProperty.Register<HsvProperties, double>(nameof(Hue), 0.0, validate: ValidateHue);
@@ -344,7 +344,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    internal class RgbProperties : ColorPickerProperties
+    public class RgbProperties : ColorPickerProperties
     {
         public static readonly StyledProperty<byte> RedProperty =
             AvaloniaProperty.Register<RgbProperties, byte>(nameof(Red), 0xFF, validate: ValidateRed);
@@ -438,7 +438,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    internal class CmykProperties : ColorPickerProperties
+    public class CmykProperties : ColorPickerProperties
     {
         public static readonly StyledProperty<double> CyanProperty =
             AvaloniaProperty.Register<CmykProperties, double>(nameof(Cyan), 0.0, validate: ValidateCyan);
@@ -552,7 +552,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    internal class HexProperties : ColorPickerProperties
+    public class HexProperties : ColorPickerProperties
     {
         public static readonly StyledProperty<string> HexProperty =
             AvaloniaProperty.Register<HexProperties, string>(nameof(Hex), "#FFFF0000", validate: ValidateHex);
@@ -606,7 +606,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    internal class AlphaProperties : ColorPickerProperties
+    public class AlphaProperties : ColorPickerProperties
     {
         public static readonly StyledProperty<double> AlphaProperty =
             AvaloniaProperty.Register<AlphaProperties, double>(nameof(Alpha), 100.0, validate: ValidateAlpha);
@@ -654,7 +654,7 @@ namespace ThemeEditor.Controls.ColorPicker
         }
     }
 
-    internal interface IValueConverters
+    public interface IValueConverters
     {
         IValueConverter Value1Converter { get; }
         IValueConverter Value2Converter { get; }
@@ -662,7 +662,7 @@ namespace ThemeEditor.Controls.ColorPicker
         IValueConverter Value4Converter { get; }
     }
 
-    internal class HsvValueConverters : IValueConverters
+    public class HsvValueConverters : IValueConverters
     {
         public IValueConverter Value1Converter { get; } = new HueConverter();
 
@@ -675,16 +675,16 @@ namespace ThemeEditor.Controls.ColorPicker
 
     public class ColorPicker : TemplatedControl
     {
-        internal static readonly StyledProperty<double> Value1Property =
+        public static readonly StyledProperty<double> Value1Property =
             AvaloniaProperty.Register<ColorPicker, double>(nameof(Value1));
 
-        internal static readonly StyledProperty<double> Value2Property =
+        public static readonly StyledProperty<double> Value2Property =
             AvaloniaProperty.Register<ColorPicker, double>(nameof(Value2));
 
-        internal static readonly StyledProperty<double> Value3Property =
+        public static readonly StyledProperty<double> Value3Property =
             AvaloniaProperty.Register<ColorPicker, double>(nameof(Value3));
 
-        internal static readonly StyledProperty<double> Value4Property =
+        public static readonly StyledProperty<double> Value4Property =
             AvaloniaProperty.Register<ColorPicker, double>(nameof(Value4));
 
         public static readonly StyledProperty<Color> ColorProperty =
@@ -708,25 +708,25 @@ namespace ThemeEditor.Controls.ColorPicker
             this.GetObservable(ColorProperty).Subscribe(x => OnColorChange());
         }
 
-        internal double Value1
+        public double Value1
         {
             get { return GetValue(Value1Property); }
             set { SetValue(Value1Property, value); }
         }
 
-        internal double Value2
+        public double Value2
         {
             get { return GetValue(Value2Property); }
             set { SetValue(Value2Property, value); }
         }
 
-        internal double Value3
+        public double Value3
         {
             get { return GetValue(Value3Property); }
             set { SetValue(Value3Property, value); }
         }
 
-        internal double Value4
+        public double Value4
         {
             get { return GetValue(Value4Property); }
             set { SetValue(Value4Property, value); }
