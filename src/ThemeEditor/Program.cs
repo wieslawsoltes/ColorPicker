@@ -2,7 +2,6 @@ using System;
 using System.IO;
 using Avalonia;
 using Avalonia.Logging.Serilog;
-using Avalonia.ReactiveUI;
 using ThemeEditor.ViewModels;
 
 namespace ThemeEditor
