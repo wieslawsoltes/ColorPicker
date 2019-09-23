@@ -70,7 +70,7 @@ namespace ThemeEditor.Preview
     {
         public MenuPageViewModel()
         {
-            OpenCommand = ReactiveCommand.CreateFromTask(Open);
+            OpenCommand = ReactiveCommand.Create(Open);
             SaveCommand = ReactiveCommand.Create(Save);
             OpenRecentCommand = ReactiveCommand.Create<string>(OpenRecent);
         }
@@ -80,18 +80,9 @@ namespace ThemeEditor.Preview
         public ReactiveCommand<Unit, Unit> SaveCommand { get; }
         public ReactiveCommand<string, Unit> OpenRecentCommand { get; }
 
-        public async Task Open()
+        public void Open()
         {
-            var dialog = new OpenFileDialog();
-            var result = await dialog.ShowAsync(App.Current.MainWindow);
-
-            if (result != null)
-            {
-                foreach (var path in result)
-                {
-                    System.Diagnostics.Debug.WriteLine($"Opened: {path}");
-                }
-            }
+            System.Diagnostics.Debug.WriteLine("Open");
         }
 
         public void Save()

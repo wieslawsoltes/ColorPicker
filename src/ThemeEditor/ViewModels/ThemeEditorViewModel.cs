@@ -8,6 +8,7 @@ using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Media;
 using Avalonia.Threading;
 using ReactiveUI;
@@ -170,7 +171,7 @@ namespace ThemeEditor.ViewModels
             var dlg = new OpenFileDialog() { Title = "Load" };
             dlg.Filters.Add(new FileDialogFilter() { Name = "Themes", Extensions = { "themes" } });
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-            var result = await dlg.ShowAsync(Application.Current.Windows.FirstOrDefault());
+            var result = await dlg.ShowAsync(GetWindow());
             if (result != null)
             {
                 var path = result.FirstOrDefault();
@@ -188,7 +189,7 @@ namespace ThemeEditor.ViewModels
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
             dlg.InitialFileName = "Themes";
             dlg.DefaultExtension = "themes";
-            var result = await dlg.ShowAsync(Application.Current.Windows.FirstOrDefault());
+            var result = await dlg.ShowAsync(GetWindow());
             if (result != null)
             {
                 SaveAsFile(result);
@@ -202,7 +203,7 @@ namespace ThemeEditor.ViewModels
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
             dlg.InitialFileName = CurrentTheme.Name;
             dlg.DefaultExtension = "xaml";
-            var result = await dlg.ShowAsync(Application.Current.Windows.FirstOrDefault());
+            var result = await dlg.ShowAsync(GetWindow());
             if (result != null)
             {
                 ExportAsFile(result, CurrentTheme);
@@ -518,6 +519,15 @@ namespace ThemeEditor.ViewModels
         {
             _themeObservable?.Dispose();
             _editorObservable?.Dispose();
+        }
+
+        private Window GetWindow()
+        {
+            if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktopLifetime)
+            {
+                return desktopLifetime.MainWindow;
+            }
+            return null;
         }
     }
 }

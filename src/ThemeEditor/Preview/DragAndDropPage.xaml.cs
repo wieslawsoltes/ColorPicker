@@ -27,7 +27,7 @@ namespace ThemeEditor.Preview
             DataObject dragData = new DataObject();
             dragData.Set(DataFormats.Text, $"You have dragged text {++DragCount} times");
 
-            var result = await DragDrop.DoDragDrop(dragData, DragDropEffects.Copy);
+            var result = await DragDrop.DoDragDrop(e, dragData, DragDropEffects.Copy);
             switch (result)
             {
                 case DragDropEffects.Copy:
