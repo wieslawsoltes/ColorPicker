@@ -54,7 +54,7 @@ namespace ThemeEditor.Preview
         {
             private Dock _tabPlacement;
 
-            public TabItemViewModel[] Tabs { get; set; }
+            public TabItemViewModel[]? Tabs { get; set; }
 
             public Dock TabPlacement
             {
@@ -65,8 +65,8 @@ namespace ThemeEditor.Preview
 
         private class TabItemViewModel
         {
-            public string Header { get; set; }
-            public string Text { get; set; }
+            public string? Header { get; set; }
+            public string? Text { get; set; }
             public bool IsEnabled { get; set; } = true;
         }
     }

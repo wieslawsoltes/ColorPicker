@@ -21,17 +21,17 @@ namespace ThemeEditor.ViewModels
     public class ThemeEditorViewModel : ReactiveObject
     {
 #pragma warning disable CS0618
-        private IReactiveList<ThemeViewModel> _themes;
+        private IReactiveList<ThemeViewModel>? _themes;
 #pragma warning restore CS0618
-        private ThemeViewModel _currentTheme;
-        private ThemeViewModel _defaultTheme;
-        private IDisposable _themeObservable;
-        private IDisposable _editorObservable;
-        private ViewModelsSerializer _serializer;
+        private ThemeViewModel? _currentTheme;
+        private ThemeViewModel? _defaultTheme;
+        private IDisposable? _themeObservable;
+        private IDisposable? _editorObservable;
+        private ViewModelsSerializer? _serializer;
 
 #pragma warning disable CS0618
         [DataMember]
-        public IReactiveList<ThemeViewModel> Themes
+        public IReactiveList<ThemeViewModel>? Themes
         {
             get { return _themes; }
             set { this.RaiseAndSetIfChanged(ref _themes, value); }
@@ -39,14 +39,14 @@ namespace ThemeEditor.ViewModels
 #pragma warning restore CS0618
 
         [IgnoreDataMember]
-        public ThemeViewModel CurrentTheme
+        public ThemeViewModel? CurrentTheme
         {
             get { return _currentTheme; }
             set { this.RaiseAndSetIfChanged(ref _currentTheme, value); }
         }
 
         [IgnoreDataMember]
-        public ThemeViewModel DefaultTheme
+        public ThemeViewModel? DefaultTheme
         {
             get { return _defaultTheme; }
             set { this.RaiseAndSetIfChanged(ref _defaultTheme, value); }
@@ -75,30 +75,37 @@ namespace ThemeEditor.ViewModels
             ExportThemeCommand = ReactiveCommand.CreateFromTask(ExportTheme);
         }
 
-        public string GetResource<T>(string name)
+        public string? GetResource<T>(string name)
         {
             var assembly = typeof(T).GetTypeInfo().Assembly;
             string[] resources = assembly.GetManifestResourceNames();
             var stream = assembly.GetManifestResourceStream(name);
-            using (var reader = new StreamReader(stream))
+            if (stream != null)
             {
-                return reader.ReadToEnd();
+                using (var reader = new StreamReader(stream))
+                {
+                    return reader.ReadToEnd();
+                } 
             }
+            return null;
         }
 
         public void LoadFromJson(string json)
         {
 #pragma warning disable CS0618
-            var themes = _serializer.Deserialize<ReactiveList<ThemeViewModel>>(json);
+            var themes = _serializer?.Deserialize<ReactiveList<ThemeViewModel>>(json);
 #pragma warning restore CS0618
             Themes = themes;
-            CurrentTheme = themes.FirstOrDefault();
+            CurrentTheme = themes?.FirstOrDefault();
         }
 
         public void LoadFromResource<T>(string name)
         {
             var json = GetResource<T>(name);
-            LoadFromJson(json);
+            if (json != null)
+            {
+                LoadFromJson(json);
+            }
         }
 
         public void LoadFromFile(string path)
@@ -109,8 +116,11 @@ namespace ThemeEditor.ViewModels
 
         public void SaveAsFile(string path)
         {
-            var json = _serializer.Serialize(Themes);
-            File.WriteAllText(path, json);
+            var json = _serializer?.Serialize(Themes);
+            if (json != null)
+            {
+                File.WriteAllText(path, json); 
+            }
         }
 
         public void ExportAsFile(string path, ThemeViewModel theme)
@@ -121,7 +131,7 @@ namespace ThemeEditor.ViewModels
 
         public void ResetTheme(ThemeViewModel theme)
         {
-            if (CurrentTheme != null)
+            if (Themes != null && CurrentTheme != null)
             {
                 int index = Themes.IndexOf(CurrentTheme);
                 if (index >= 0)
@@ -136,34 +146,53 @@ namespace ThemeEditor.ViewModels
 
         public void RemoveTheme(ThemeViewModel theme)
         {
-            Themes.Remove(theme);
-            CurrentTheme = Themes.FirstOrDefault();
+            if (Themes != null)
+            {
+                Themes.Remove(theme);
+                CurrentTheme = Themes.FirstOrDefault(); 
+            }
         }
 
         public void AddTheme(ThemeViewModel theme)
         {
-            Themes.Add(theme);
-            CurrentTheme = theme;
+            if (Themes != null)
+            {
+                Themes.Add(theme);
+                CurrentTheme = theme; 
+            }
         }
 
         public void ResetTheme()
         {
-            ResetTheme(DefaultTheme.Clone());
+            var clone = DefaultTheme?.Clone();
+            if (clone != null)
+            {
+                ResetTheme();
+            }
         }
 
         public void RemoveTheme()
         {
-            RemoveTheme(CurrentTheme);
+            if (CurrentTheme != null)
+            {
+                RemoveTheme(CurrentTheme); 
+            }
         }
 
         public void AddTheme()
         {
-            var theme = Themes.Count == 0 || CurrentTheme == null ? DefaultTheme.Clone() : CurrentTheme.Clone();
-            if (Themes.Count > 0 && Themes.Count(x => x.Name == theme.Name) > 0)
+            if (Themes != null)
             {
-                theme.Name += "-copy";
+                var theme = Themes.Count == 0 || CurrentTheme == null ? DefaultTheme?.Clone() : CurrentTheme?.Clone();
+                if (theme != null)
+                {
+                    if (Themes.Count > 0 && Themes.Count(x => x.Name == theme.Name) > 0)
+                    {
+                        theme.Name += "-copy";
+                    }
+                    AddTheme(theme); 
+                }
             }
-            AddTheme(theme);
         }
 
         public async Task LoadThemes()
@@ -198,15 +227,18 @@ namespace ThemeEditor.ViewModels
 
         public async Task ExportTheme()
         {
-            var dlg = new SaveFileDialog() { Title = "Save" };
-            dlg.Filters.Add(new FileDialogFilter() { Name = "Xaml", Extensions = { "xaml" } });
-            dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-            dlg.InitialFileName = CurrentTheme.Name;
-            dlg.DefaultExtension = "xaml";
-            var result = await dlg.ShowAsync(GetWindow());
-            if (result != null)
+            if (CurrentTheme != null)
             {
-                ExportAsFile(result, CurrentTheme);
+                var dlg = new SaveFileDialog() { Title = "Save" };
+                dlg.Filters.Add(new FileDialogFilter() { Name = "Xaml", Extensions = { "xaml" } });
+                dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+                dlg.InitialFileName = CurrentTheme.Name;
+                dlg.DefaultExtension = "xaml";
+                var result = await dlg.ShowAsync(GetWindow());
+                if (result != null)
+                {
+                    ExportAsFile(result, CurrentTheme);
+                } 
             }
         }
 
@@ -259,121 +291,181 @@ namespace ThemeEditor.ViewModels
 
         private void UpdateThemeAccent(IResourceDictionary resources, ThemeViewModel theme)
         {
-            resources["ThemeAccentColor"] = theme.ThemeAccentColor.ToColor();
-            resources["ThemeAccentBrush"] = theme.ThemeAccentColor.ToBrush();
+            if (theme.ThemeAccentColor != null)
+            {
+                resources["ThemeAccentColor"] = theme.ThemeAccentColor.ToColor();
+                resources["ThemeAccentBrush"] = theme.ThemeAccentColor.ToBrush(); 
+            }
         }
 
         private void UpdateThemeAccent2(IResourceDictionary resources, ThemeViewModel theme)
         {
-            resources["ThemeAccentColor2"] = theme.ThemeAccentColor2.ToColor();
-            resources["ThemeAccentBrush2"] = theme.ThemeAccentColor2.ToBrush();
+            if (theme.ThemeAccentColor2 != null)
+            {
+                resources["ThemeAccentColor2"] = theme.ThemeAccentColor2.ToColor();
+                resources["ThemeAccentBrush2"] = theme.ThemeAccentColor2.ToBrush(); 
+            }
         }
 
         private void UpdateThemeAccent3(IResourceDictionary resources, ThemeViewModel theme)
         {
-            resources["ThemeAccentColor3"] = theme.ThemeAccentColor3.ToColor();
-            resources["ThemeAccentBrush3"] = theme.ThemeAccentColor3.ToBrush();
+            if (theme.ThemeAccentColor3 != null)
+            {
+                resources["ThemeAccentColor3"] = theme.ThemeAccentColor3.ToColor();
+                resources["ThemeAccentBrush3"] = theme.ThemeAccentColor3.ToBrush(); 
+            }
         }
 
         private void UpdateThemeAccent4(IResourceDictionary resources, ThemeViewModel theme)
         {
-            resources["ThemeAccentColor4"] = theme.ThemeAccentColor4.ToColor();
-            resources["ThemeAccentBrush4"] = theme.ThemeAccentColor4.ToBrush();
+            if (theme.ThemeAccentColor4 != null)
+            {
+                resources["ThemeAccentColor4"] = theme.ThemeAccentColor4.ToColor();
+                resources["ThemeAccentBrush4"] = theme.ThemeAccentColor4.ToBrush(); 
+            }
         }
 
         private void UpdateThemeBackground(IResourceDictionary resources, ThemeViewModel theme)
         {
-            resources["ThemeBackgroundColor"] = theme.ThemeBackgroundColor.ToColor();
-            resources["ThemeBackgroundBrush"] = theme.ThemeBackgroundColor.ToBrush();
+            if (theme.ThemeBackgroundColor != null)
+            {
+                resources["ThemeBackgroundColor"] = theme.ThemeBackgroundColor.ToColor();
+                resources["ThemeBackgroundBrush"] = theme.ThemeBackgroundColor.ToBrush(); 
+            }
         }
 
         private void UpdateThemeBorderLow(IResourceDictionary resources, ThemeViewModel theme)
         {
-            resources["ThemeBorderLowColor"] = theme.ThemeBorderLowColor.ToColor();
-            resources["ThemeBorderLowBrush"] = theme.ThemeBorderLowColor.ToBrush();
+            if (theme.ThemeBorderLowColor != null)
+            {
+                resources["ThemeBorderLowColor"] = theme.ThemeBorderLowColor.ToColor();
+                resources["ThemeBorderLowBrush"] = theme.ThemeBorderLowColor.ToBrush(); 
+            }
         }
 
         private void UpdateThemeBorderMid(IResourceDictionary resources, ThemeViewModel theme)
         {
-            resources["ThemeBorderMidColor"] = theme.ThemeBorderMidColor.ToColor();
-            resources["ThemeBorderMidBrush"] = theme.ThemeBorderMidColor.ToBrush();
+            if (theme.ThemeBorderMidColor != null)
+            {
+                resources["ThemeBorderMidColor"] = theme.ThemeBorderMidColor.ToColor();
+                resources["ThemeBorderMidBrush"] = theme.ThemeBorderMidColor.ToBrush(); 
+            }
         }
 
         private void UpdateThemeBorderHigh(IResourceDictionary resources, ThemeViewModel theme)
         {
-            resources["ThemeBorderHighColor"] = theme.ThemeBorderHighColor.ToColor();
-            resources["ThemeBorderHighBrush"] = theme.ThemeBorderHighColor.ToBrush();
+            if (theme.ThemeBorderHighColor != null)
+            {
+                resources["ThemeBorderHighColor"] = theme.ThemeBorderHighColor.ToColor();
+                resources["ThemeBorderHighBrush"] = theme.ThemeBorderHighColor.ToBrush(); 
+            }
         }
 
         private void UpdateThemeControlLow(IResourceDictionary resources, ThemeViewModel theme)
         {
-            resources["ThemeControlLowColor"] = theme.ThemeControlLowColor.ToColor();
-            resources["ThemeControlLowBrush"] = theme.ThemeControlLowColor.ToBrush();
+            if (theme.ThemeControlLowColor != null)
+            {
+                resources["ThemeControlLowColor"] = theme.ThemeControlLowColor.ToColor();
+                resources["ThemeControlLowBrush"] = theme.ThemeControlLowColor.ToBrush(); 
+            }
         }
 
         private void UpdateThemeControlMid(IResourceDictionary resources, ThemeViewModel theme)
         {
-            resources["ThemeControlMidColor"] = theme.ThemeControlMidColor.ToColor();
-            resources["ThemeControlMidBrush"] = theme.ThemeControlMidColor.ToBrush();
+            if (theme.ThemeControlMidColor != null)
+            {
+                resources["ThemeControlMidColor"] = theme.ThemeControlMidColor.ToColor();
+                resources["ThemeControlMidBrush"] = theme.ThemeControlMidColor.ToBrush(); 
+            }
         }
 
         private void UpdateThemeControlHigh(IResourceDictionary resources, ThemeViewModel theme)
         {
-            resources["ThemeControlHighColor"] = theme.ThemeControlHighColor.ToColor();
-            resources["ThemeControlHighBrush"] = theme.ThemeControlHighColor.ToBrush();
+            if (theme.ThemeControlHighColor != null)
+            {
+                resources["ThemeControlHighColor"] = theme.ThemeControlHighColor.ToColor();
+                resources["ThemeControlHighBrush"] = theme.ThemeControlHighColor.ToBrush(); 
+            }
         }
 
         private void UpdateThemeControlHighlightLow(IResourceDictionary resources, ThemeViewModel theme)
         {
-            resources["ThemeControlHighlightLowColor"] = theme.ThemeControlHighlightLowColor.ToColor();
-            resources["ThemeControlHighlightLowBrush"] = theme.ThemeControlHighlightLowColor.ToBrush();
+            if (theme.ThemeControlHighlightLowColor != null)
+            {
+                resources["ThemeControlHighlightLowColor"] = theme.ThemeControlHighlightLowColor.ToColor();
+                resources["ThemeControlHighlightLowBrush"] = theme.ThemeControlHighlightLowColor.ToBrush(); 
+            }
         }
 
         private void UpdateThemeControlHighlightMid(IResourceDictionary resources, ThemeViewModel theme)
         {
-            resources["ThemeControlHighlightMidColor"] = theme.ThemeControlHighlightMidColor.ToColor();
-            resources["ThemeControlHighlightMidBrush"] = theme.ThemeControlHighlightMidColor.ToBrush();
+            if (theme.ThemeControlHighlightMidColor != null)
+            {
+                resources["ThemeControlHighlightMidColor"] = theme.ThemeControlHighlightMidColor.ToColor();
+                resources["ThemeControlHighlightMidBrush"] = theme.ThemeControlHighlightMidColor.ToBrush(); 
+            }
         }
 
         private void UpdateThemeControlHighlightHigh(IResourceDictionary resources, ThemeViewModel theme)
         {
-            resources["ThemeControlHighlightHighColor"] = theme.ThemeControlHighlightHighColor.ToColor();
-            resources["ThemeControlHighlightHighBrush"] = theme.ThemeControlHighlightHighColor.ToBrush();
+            if (theme.ThemeControlHighlightHighColor != null)
+            {
+                resources["ThemeControlHighlightHighColor"] = theme.ThemeControlHighlightHighColor.ToColor();
+                resources["ThemeControlHighlightHighBrush"] = theme.ThemeControlHighlightHighColor.ToBrush(); 
+            }
         }
 
         private void UpdateThemeForeground(IResourceDictionary resources, ThemeViewModel theme)
         {
-            resources["ThemeForegroundColor"] = theme.ThemeForegroundColor.ToColor();
-            resources["ThemeForegroundBrush"] = theme.ThemeForegroundColor.ToBrush();
+            if (theme.ThemeForegroundColor != null)
+            {
+                resources["ThemeForegroundColor"] = theme.ThemeForegroundColor.ToColor();
+                resources["ThemeForegroundBrush"] = theme.ThemeForegroundColor.ToBrush(); 
+            }
         }
 
         private void UpdateThemeForegroundLow(IResourceDictionary resources, ThemeViewModel theme)
         {
-            resources["ThemeForegroundLowColor"] = theme.ThemeForegroundLowColor.ToColor();
-            resources["ThemeForegroundLowBrush"] = theme.ThemeForegroundLowColor.ToBrush();
+            if (theme.ThemeForegroundLowColor != null)
+            {
+                resources["ThemeForegroundLowColor"] = theme.ThemeForegroundLowColor.ToColor();
+                resources["ThemeForegroundLowBrush"] = theme.ThemeForegroundLowColor.ToBrush(); 
+            }
         }
 
         private void UpdateHighlight(IResourceDictionary resources, ThemeViewModel theme)
         {
-            resources["HighlightColor"] = theme.HighlightColor.ToColor();
-            resources["HighlightBrush"] = theme.HighlightColor.ToBrush();
+            if (theme.HighlightColor != null)
+            {
+                resources["HighlightColor"] = theme.HighlightColor.ToColor();
+                resources["HighlightBrush"] = theme.HighlightColor.ToBrush(); 
+            }
         }
 
         private void UpdateError(IResourceDictionary resources, ThemeViewModel theme)
         {
-            resources["ErrorColor"] = theme.ErrorColor.ToColor();
-            resources["ErrorBrush"] = theme.ErrorColor.ToBrush();
+            if (theme.ErrorColor != null)
+            {
+                resources["ErrorColor"] = theme.ErrorColor.ToColor();
+                resources["ErrorBrush"] = theme.ErrorColor.ToBrush(); 
+            }
         }
 
         private void UpdateErrorLow(IResourceDictionary resources, ThemeViewModel theme)
         {
-            resources["ErrorLowColor"] = theme.ErrorLowColor.ToColor();
-            resources["ErrorLowBrush"] = theme.ErrorLowColor.ToBrush();
+            if (theme.ErrorLowColor != null)
+            {
+                resources["ErrorLowColor"] = theme.ErrorLowColor.ToColor();
+                resources["ErrorLowBrush"] = theme.ErrorLowColor.ToBrush(); 
+            }
         }
 
         private void UpdateThemeBorderThickness(IResourceDictionary resources, ThemeViewModel theme)
         {
-            resources["ThemeBorderThickness"] = theme.ThemeBorderThickness.ToThickness();
+            if (theme.ThemeBorderThickness != null)
+            {
+                resources["ThemeBorderThickness"] = theme.ThemeBorderThickness.ToThickness(); 
+            }
         }
 
         private void UpdateThemeDisabledOpacity(IResourceDictionary resources, ThemeViewModel theme)
@@ -430,7 +522,7 @@ namespace ThemeEditor.ViewModels
             UpdateUpdateScrollBarThickness(resources, theme);
         }
 
-        public IDisposable ObserveTheme(IResourceDictionary resources, ThemeViewModel theme, Action<ThemeViewModel> preview = null)
+        public IDisposable ObserveTheme(IResourceDictionary resources, ThemeViewModel theme, Action<ThemeViewModel>? preview = null)
         {
             var disposable = new CompositeDisposable();
 
@@ -464,7 +556,7 @@ namespace ThemeEditor.ViewModels
 
             return disposable;
 
-            void Observe(IReactiveNotifyPropertyChanged<IReactiveObject> value, Action<IResourceDictionary, ThemeViewModel> update)
+            void Observe(IReactiveNotifyPropertyChanged<IReactiveObject>? value, Action<IResourceDictionary, ThemeViewModel> update)
             {
                 if (value != null)
                 {
@@ -483,36 +575,40 @@ namespace ThemeEditor.ViewModels
             }
         }
 
-        public void Attach(IResourceDictionary resources, Action<ThemeViewModel> preview = null)
+        public void Attach(IResourceDictionary resources, Action<ThemeViewModel>? preview = null)
         {
             if (Themes == null)
             {
-                CurrentTheme = DefaultTheme.Clone();
+                CurrentTheme = DefaultTheme?.Clone();
 #pragma warning disable CS0618
-                Themes = new ReactiveList<ThemeViewModel>
-                {
-                    CurrentTheme
-                };
+                Themes = new ReactiveList<ThemeViewModel>();
 #pragma warning restore CS0618
+                if (CurrentTheme != null)
+                {
+                    Themes.Add(CurrentTheme);
+                }
             }
             else
             {
                 CurrentTheme = Themes.FirstOrDefault();
             }
 
-            _themeObservable = ObserveTheme(resources, CurrentTheme, preview);
-
-            _editorObservable = Changed.Subscribe(x =>
+            if (CurrentTheme != null)
             {
-                if (x.PropertyName == nameof(CurrentTheme))
+                _themeObservable = ObserveTheme(resources, CurrentTheme, preview);
+
+                _editorObservable = Changed.Subscribe(x =>
                 {
-                    _themeObservable?.Dispose();
-                    if (CurrentTheme != null)
+                    if (x.PropertyName == nameof(CurrentTheme))
                     {
-                        _themeObservable = ObserveTheme(resources, CurrentTheme, preview);
+                        _themeObservable?.Dispose();
+                        if (CurrentTheme != null)
+                        {
+                            _themeObservable = ObserveTheme(resources, CurrentTheme, preview);
+                        }
                     }
-                }
-            });
+                }); 
+            }
         }
 
         public void Detach()
@@ -521,7 +617,7 @@ namespace ThemeEditor.ViewModels
             _editorObservable?.Dispose();
         }
 
-        private Window GetWindow()
+        private Window? GetWindow()
         {
             if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktopLifetime)
             {

@@ -20,8 +20,8 @@ namespace ThemeEditor.Preview
 
         public class Node
         {
-            private IList<Node> _children;
-            public string Header { get; private set; }
+            private IList<Node>? _children;
+            public string? Header { get; private set; }
             public IList<Node> Children
             {
                 get

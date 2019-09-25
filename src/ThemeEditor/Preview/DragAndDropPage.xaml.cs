@@ -7,22 +7,23 @@ namespace ThemeEditor.Preview
 {
     public class DragAndDropPage : UserControl
     {
-        private TextBlock _DropState;
-        private TextBlock _DragState;
-        private Border _DragMe;
+        private TextBlock? _DropState;
+        private TextBlock? _DragState;
+        private Border? _DragMe;
         private int DragCount = 0;
 
         public DragAndDropPage()
         {
             this.InitializeComponent();
-
-            _DragMe.PointerPressed += DoDrag;
-
+            if (_DragMe != null)
+            {
+                _DragMe.PointerPressed += DoDrag; 
+            }
             AddHandler(DragDrop.DropEvent, Drop);
             AddHandler(DragDrop.DragOverEvent, DragOver);
         }
 
-        private async void DoDrag(object sender, Avalonia.Input.PointerPressedEventArgs e)
+        private async void DoDrag(object? sender, Avalonia.Input.PointerPressedEventArgs e)
         {
             DataObject dragData = new DataObject();
             dragData.Set(DataFormats.Text, $"You have dragged text {++DragCount} times");
@@ -31,18 +32,27 @@ namespace ThemeEditor.Preview
             switch (result)
             {
                 case DragDropEffects.Copy:
-                    _DragState.Text = "The text was copied";
+                    if (_DragState != null)
+                    {
+                        _DragState.Text = "The text was copied"; 
+                    }
                     break;
                 case DragDropEffects.Link:
-                    _DragState.Text = "The text was linked";
+                    if (_DragState != null)
+                    {
+                        _DragState.Text = "The text was linked"; 
+                    }
                     break;
                 case DragDropEffects.None:
-                    _DragState.Text = "The drag operation was canceled";
+                    if (_DragState != null)
+                    {
+                        _DragState.Text = "The drag operation was canceled"; 
+                    }
                     break;
             }
         }
 
-        private void DragOver(object sender, DragEventArgs e)
+        private void DragOver(object? sender, DragEventArgs e)
         {
             // Only allow Copy or Link as Drop Operations.
             e.DragEffects = e.DragEffects & (DragDropEffects.Copy | DragDropEffects.Link);
@@ -52,12 +62,22 @@ namespace ThemeEditor.Preview
                 e.DragEffects = DragDropEffects.None;
         }
 
-        private void Drop(object sender, DragEventArgs e)
+        private void Drop(object? sender, DragEventArgs e)
         {
             if (e.Data.Contains(DataFormats.Text))
-                _DropState.Text = e.Data.GetText();
+            {
+                if (_DropState != null)
+                {
+                    _DropState.Text = e.Data.GetText(); 
+                }
+            }
             else if (e.Data.Contains(DataFormats.FileNames))
-                _DropState.Text = string.Join(Environment.NewLine, e.Data.GetFileNames());
+            {
+                if (_DropState != null)
+                {
+                    _DropState.Text = string.Join(Environment.NewLine, e.Data.GetFileNames()); 
+                }
+            }
         }
 
         private void InitializeComponent()

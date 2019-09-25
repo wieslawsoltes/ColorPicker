@@ -75,7 +75,7 @@ namespace ThemeEditor.Preview
             OpenRecentCommand = ReactiveCommand.Create<string>(OpenRecent);
         }
 
-        public IReadOnlyList<MenuItemViewModel> MenuItems { get; set; }
+        public IReadOnlyList<MenuItemViewModel>? MenuItems { get; set; }
         public ReactiveCommand<Unit, Unit> OpenCommand { get; }
         public ReactiveCommand<Unit, Unit> SaveCommand { get; }
         public ReactiveCommand<string, Unit> OpenRecentCommand { get; }
@@ -98,9 +98,9 @@ namespace ThemeEditor.Preview
 
     public class MenuItemViewModel
     {
-        public string Header { get; set; }
-        public ICommand Command { get; set; }
-        public object CommandParameter { get; set; }
-        public IList<MenuItemViewModel> Items { get; set; }
+        public string? Header { get; set; }
+        public ICommand? Command { get; set; }
+        public object? CommandParameter { get; set; }
+        public IList<MenuItemViewModel>? Items { get; set; }
     }
 }

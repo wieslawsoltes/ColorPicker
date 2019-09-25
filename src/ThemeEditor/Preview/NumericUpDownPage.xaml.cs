@@ -25,9 +25,9 @@ namespace ThemeEditor.Preview
 
     public class NumbersPageViewModel : ReactiveObject
     {
-        private IList<FormatObject> _formats;
-        private FormatObject _selectedFormat;
-        private IList<Location> _spinnerLocations;
+        private IList<FormatObject>? _formats;
+        private FormatObject? _selectedFormat;
+        private IList<Location>? _spinnerLocations;
 
         public NumbersPageViewModel()
         {
@@ -57,9 +57,12 @@ namespace ThemeEditor.Preview
                 if (_spinnerLocations == null)
                 {
                     _spinnerLocations = new List<Location>();
-                    foreach (Location value in Enum.GetValues(typeof(Location)))
+                    foreach (Location? value in Enum.GetValues(typeof(Location)))
                     {
-                        _spinnerLocations.Add(value);
+                        if (value != null)
+                        {
+                            _spinnerLocations.Add(value.Value);
+                        }
                     }
                 }
                 return _spinnerLocations;
@@ -76,7 +79,7 @@ namespace ThemeEditor.Preview
             new CultureInfo("cs-CZ")
         };
 
-        public FormatObject SelectedFormat
+        public FormatObject? SelectedFormat
         {
             get { return _selectedFormat; }
             set { this.RaiseAndSetIfChanged(ref _selectedFormat, value); }
@@ -85,7 +88,7 @@ namespace ThemeEditor.Preview
 
     public class FormatObject
     {
-        public string Value { get; set; }
-        public string Name { get; set; }
+        public string? Value { get; set; }
+        public string? Name { get; set; }
     }
 }

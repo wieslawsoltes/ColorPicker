@@ -10,8 +10,8 @@ namespace ThemeEditor
 {
     public class MainView : UserControl
     {
-        private StyleInclude _lightTheme = null;
-        private StyleInclude _darkTheme = null;
+        private StyleInclude _lightTheme;
+        private StyleInclude _darkTheme;
 
         public MainView()
         {

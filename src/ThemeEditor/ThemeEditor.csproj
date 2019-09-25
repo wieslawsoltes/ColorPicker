@@ -4,8 +4,8 @@
     <TargetFrameworks>netcoreapp3.0;net461</TargetFrameworks>
     <OutputType>WinExe</OutputType>
     <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
-    <LangVersion>latest</LangVersion>
     <IsPackable>False</IsPackable>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup>
