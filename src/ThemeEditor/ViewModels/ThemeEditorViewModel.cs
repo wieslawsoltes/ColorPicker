@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reactive;
@@ -12,7 +14,6 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Media;
 using Avalonia.Threading;
 using ReactiveUI;
-using ReactiveUI.Legacy;
 using ThemeEditor.ViewModels.Serializer;
 
 namespace ThemeEditor.ViewModels
@@ -20,23 +21,19 @@ namespace ThemeEditor.ViewModels
     [DataContract]
     public class ThemeEditorViewModel : ReactiveObject
     {
-#pragma warning disable CS0618
-        private IReactiveList<ThemeViewModel>? _themes;
-#pragma warning restore CS0618
+        private IList<ThemeViewModel>? _themes;
         private ThemeViewModel? _currentTheme;
         private ThemeViewModel? _defaultTheme;
         private IDisposable? _themeObservable;
         private IDisposable? _editorObservable;
         private ViewModelsSerializer? _serializer;
 
-#pragma warning disable CS0618
         [DataMember]
-        public IReactiveList<ThemeViewModel>? Themes
+        public IList<ThemeViewModel>? Themes
         {
             get { return _themes; }
             set { this.RaiseAndSetIfChanged(ref _themes, value); }
         }
-#pragma warning restore CS0618
 
         [IgnoreDataMember]
         public ThemeViewModel? CurrentTheme
@@ -92,9 +89,7 @@ namespace ThemeEditor.ViewModels
 
         public void LoadFromJson(string json)
         {
-#pragma warning disable CS0618
-            var themes = _serializer?.Deserialize<ReactiveList<ThemeViewModel>>(json);
-#pragma warning restore CS0618
+            var themes = _serializer?.Deserialize<ObservableCollection<ThemeViewModel>>(json);
             Themes = themes;
             CurrentTheme = themes?.FirstOrDefault();
         }
@@ -580,9 +575,7 @@ namespace ThemeEditor.ViewModels
             if (Themes == null)
             {
                 CurrentTheme = DefaultTheme?.Clone();
-#pragma warning disable CS0618
-                Themes = new ReactiveList<ThemeViewModel>();
-#pragma warning restore CS0618
+                Themes = new ObservableCollection<ThemeViewModel>();
                 if (CurrentTheme != null)
                 {
                     Themes.Add(CurrentTheme);
