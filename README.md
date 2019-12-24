@@ -31,6 +31,23 @@ ThemeEditor is an [Avalonia UI Framework](http://avaloniaui.net/) theme editor.
 
 [Build instructions](https://github.com/wieslawsoltes/ThemeEditor/wiki/Build).
 
+## NuGet
+
+ThemeEditor color picker control is delivered as a NuGet package.
+
+You can find the packages here [NuGet](https://www.nuget.org/packages/ThemeEditor.Controls.ColorPicker/) and install the package like this:
+
+`Install-Package ThemeEditor.Controls.ColorPicker`
+
+or by using nightly build feed:
+* Add `https://www.myget.org/F/themeeditor-nightly/api/v2` to your package sources
+* Alternative nightly build feed `https://pkgs.dev.azure.com/wieslawsoltes/GitHub/_packaging/CI/nuget/v3/index.json`
+* Update your package using `ThemeEditor.Controls.ColorPicker` feed
+
+and install the package like this:
+
+`Install-Package ThemeEditor.Controls.ColorPicker -Pre`
+
 # Resources
 
 * [GitHub source code repository.](https://github.com/wieslawsoltes/ThemeEditor)
