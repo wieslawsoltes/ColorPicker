@@ -9,6 +9,7 @@
              Foreground="{DynamicResource ThemeForegroundBrush}">
     <UserControl.Styles>
         <Style Selector="ScrollViewer.preview">
+            <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
             <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
         </Style>
