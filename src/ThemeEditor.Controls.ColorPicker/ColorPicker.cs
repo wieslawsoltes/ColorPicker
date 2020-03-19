@@ -265,31 +265,31 @@ namespace ThemeEditor.Controls.ColorPicker
         public static readonly StyledProperty<double> ValueProperty =
             AvaloniaProperty.Register<HsvProperties, double>(nameof(Value), 100.0, validate: ValidateValue);
 
-        private static double ValidateHue(HsvProperties cp, double hue)
+        private static bool ValidateHue(double hue)
         {
             if (hue < 0.0 || hue > 360.0)
             {
                 throw new ArgumentException("Invalid Hue value.");
             }
-            return hue;
+            return true;
         }
 
-        private static double ValidateSaturation(HsvProperties cp, double saturation)
+        private static bool ValidateSaturation(double saturation)
         {
             if (saturation < 0.0 || saturation > 100.0)
             {
                 throw new ArgumentException("Invalid Saturation value.");
             }
-            return saturation;
+            return true;
         }
 
-        private static double ValidateValue(HsvProperties cp, double value)
+        private static bool ValidateValue(double value)
         {
             if (value < 0.0 || value > 100.0)
             {
                 throw new ArgumentException("Invalid Value value.");
             }
-            return value;
+            return true;
         }
 
         private bool _updating = false;
@@ -355,31 +355,31 @@ namespace ThemeEditor.Controls.ColorPicker
         public static readonly StyledProperty<byte> BlueProperty =
             AvaloniaProperty.Register<RgbProperties, byte>(nameof(Blue), 0x00, validate: ValidateBlue);
 
-        private static byte ValidateRed(RgbProperties cp, byte red)
+        private static bool ValidateRed(byte red)
         {
             if (red < 0 || red > 255)
             {
                 throw new ArgumentException("Invalid Red value.");
             }
-            return red;
+            return true;
         }
 
-        private static byte ValidateGreen(RgbProperties cp, byte green)
+        private static bool ValidateGreen(byte green)
         {
             if (green < 0 || green > 255)
             {
                 throw new ArgumentException("Invalid Green value.");
             }
-            return green;
+            return true;
         }
 
-        private static byte ValidateBlue(RgbProperties cp, byte blue)
+        private static bool ValidateBlue(byte blue)
         {
             if (blue < 0 || blue > 255)
             {
                 throw new ArgumentException("Invalid Blue value.");
             }
-            return blue;
+            return true;
         }
 
         private bool _updating = false;
@@ -452,40 +452,40 @@ namespace ThemeEditor.Controls.ColorPicker
         public static readonly StyledProperty<double> BlackKeyProperty =
             AvaloniaProperty.Register<CmykProperties, double>(nameof(BlackKey), 0.0, validate: ValidateBlackKey);
 
-        private static double ValidateCyan(CmykProperties cp, double cyan)
+        private static bool ValidateCyan(double cyan)
         {
             if (cyan < 0.0 || cyan > 100.0)
             {
                 throw new ArgumentException("Invalid Cyan value.");
             }
-            return cyan;
+            return true;
         }
 
-        private static double ValidateMagenta(CmykProperties cp, double magenta)
+        private static bool ValidateMagenta(double magenta)
         {
             if (magenta < 0.0 || magenta > 100.0)
             {
                 throw new ArgumentException("Invalid Magenta value.");
             }
-            return magenta;
+            return true;
         }
 
-        private static double ValidateYellow(CmykProperties cp, double yellow)
+        private static bool ValidateYellow(double yellow)
         {
             if (yellow < 0.0 || yellow > 100.0)
             {
                 throw new ArgumentException("Invalid Yellow value.");
             }
-            return yellow;
+            return true;
         }
 
-        private static double ValidateBlackKey(CmykProperties cp, double blackKey)
+        private static bool ValidateBlackKey(double blackKey)
         {
             if (blackKey < 0.0 || blackKey > 100.0)
             {
                 throw new ArgumentException("Invalid BlackKey value.");
             }
-            return blackKey;
+            return true;
         }
 
         private bool _updating = false;
@@ -557,13 +557,13 @@ namespace ThemeEditor.Controls.ColorPicker
         public static readonly StyledProperty<string> HexProperty =
             AvaloniaProperty.Register<HexProperties, string>(nameof(Hex), "#FFFF0000", validate: ValidateHex);
 
-        private static string ValidateHex(HexProperties cp, string hex)
+        private static bool ValidateHex(string hex)
         {
             if (!ColorHelpers.IsValidHexColor(hex))
             {
                 throw new ArgumentException("Invalid Hex value.");
             }
-            return hex;
+            return true;
         }
 
         private bool _updating = false;
@@ -611,13 +611,13 @@ namespace ThemeEditor.Controls.ColorPicker
         public static readonly StyledProperty<double> AlphaProperty =
             AvaloniaProperty.Register<AlphaProperties, double>(nameof(Alpha), 100.0, validate: ValidateAlpha);
 
-        private static double ValidateAlpha(AlphaProperties cp, double alpha)
+        private static bool ValidateAlpha(double alpha)
         {
             if (alpha < 0.0 || alpha > 100.0)
             {
                 throw new ArgumentException("Invalid Alpha value.");
             }
-            return alpha;
+            return true;
         }
 
         private bool _updating = false;
