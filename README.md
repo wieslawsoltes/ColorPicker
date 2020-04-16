@@ -2,7 +2,9 @@
 
 [![Build status](https://dev.azure.com/wieslawsoltes/GitHub/_apis/build/status/Sources/ThemeEditor)](https://dev.azure.com/wieslawsoltes/GitHub/_build/latest?definitionId=61)
 
-[![NuGet](https://img.shields.io/nuget/v/ThemeEditor.Controls.ColorPicker.svg)](https://www.nuget.org/packages/ThemeEditor.Controls.ColorPicker) [![MyGet](https://img.shields.io/myget/themeeditor-nightly/vpre/ThemeEditor.Controls.ColorPicker.svg?label=myget)](https://www.myget.org/gallery/themeeditor-nightly)
+[![NuGet](https://img.shields.io/nuget/v/ThemeEditor.Controls.ColorPicker.svg)](https://www.nuget.org/packages/ThemeEditor.Controls.ColorPicker)
+[![NuGet](https://img.shields.io/nuget/dt/ThemeEditor.Controls.ColorPicker.svg)](https://www.nuget.org/packages/ThemeEditor.Controls.ColorPicker)
+[![MyGet](https://img.shields.io/myget/themeeditor-nightly/vpre/ThemeEditor.Controls.ColorPicker.svg?label=myget)](https://www.myget.org/gallery/themeeditor-nightly)
 
 [![Github All Releases](https://img.shields.io/github/downloads/wieslawsoltes/themeeditor/total.svg)](https://github.com/wieslawsoltes/ThemeEditor/releases)
 [![GitHub Release](https://img.shields.io/github/release/wieslawsoltes/themeeditor.svg)](https://github.com/wieslawsoltes/ThemeEditor/releases/latest)
