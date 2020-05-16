@@ -12,12 +12,7 @@
 
 ## Download
 
-| Platform              | Version    | Download                                                                                                                                                                 |
-|-----------------------|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| win7-x64              | 0.8.2.1    | [ThemeEditor-netcoreapp3.0-win7-x64.zip](https://github.com/wieslawsoltes/ThemeEditor/releases/download/0.8.2.1/ThemeEditor-netcoreapp3.0-win7-x64.zip)                  |
-| ubuntu.14.04-x64      | 0.8.2.1    | [ThemeEditor-netcoreapp3.0-ubuntu.14.04-x64.zip](https://github.com/wieslawsoltes/ThemeEditor/releases/download/0.8.2.1/ThemeEditor-netcoreapp3.0-ubuntu.14.04-x64.zip)  |
-| debian.8-x64          | 0.8.2.1    | [ThemeEditor-netcoreapp3.0-debian.8-x64.zip](https://github.com/wieslawsoltes/ThemeEditor/releases/download/0.8.2.1/ThemeEditor-netcoreapp3.0-debian.8-x64.zip)          |
-| osx.10.12-x64         | 0.8.2.1    | [ThemeEditor-netcoreapp3.0-osx.10.12-x64.zip](https://github.com/wieslawsoltes/ThemeEditor/releases/download/0.8.2.1/ThemeEditor-netcoreapp3.0-osx.10.12-x64.zip)        |
+[The latest downloads are available in the release section.](https://github.com/wieslawsoltes/ThemeEditor/releases/latest)
 
 # About
 
