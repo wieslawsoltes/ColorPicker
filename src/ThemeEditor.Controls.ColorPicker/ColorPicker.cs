@@ -15,7 +15,7 @@ namespace ThemeEditor.Controls.ColorPicker
 {
     public static class ColorHelpers
     {
-        private static Regex s_hexRegex = new Regex("^#[a-fA-F0-9]{8}$");
+        private static readonly Regex s_hexRegex = new Regex("^#[a-fA-F0-9]{8}$");
 
         public static bool IsValidHexColor(string hex)
         {
@@ -599,7 +599,7 @@ namespace ThemeEditor.Controls.ColorPicker
             if (_updating == false && ColorPicker != null)
             {
                 _updating = true;
-                Color color = ColorHelpers.FromHSVA(ColorPicker.Value1, ColorPicker.Value2, ColorPicker.Value3, ColorPicker.Value4);
+                var color = ColorHelpers.FromHSVA(ColorPicker.Value1, ColorPicker.Value2, ColorPicker.Value3, ColorPicker.Value4);
                 Hex = ColorHelpers.ToHexColor(color);
                 _updating = false;
             }
@@ -698,7 +698,7 @@ namespace ThemeEditor.Controls.ColorPicker
         private Thumb? _alphaThumb;
         private bool _updating = false;
         private bool _captured = false;
-        private IValueConverters _converters = new HsvValueConverters();
+        private readonly IValueConverters _converters = new HsvValueConverters();
 
         public ColorPicker()
         {
@@ -739,7 +739,7 @@ namespace ThemeEditor.Controls.ColorPicker
             set { SetValue(ColorProperty, value); }
         }
 
-        protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
+        protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
         {
             if (_colorCanvas != null)
             {

@@ -1,11 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿#nullable disable
+using Newtonsoft.Json;
 using ThemeEditor.ViewModels.Serializer.Converters;
 
 namespace ThemeEditor.ViewModels.Serializer
 {
     public class ViewModelsSerializer
     {
-        private JsonSerializerSettings _settings;
+        private readonly JsonSerializerSettings _settings;
 
         public ViewModelsSerializer()
         {

@@ -26,7 +26,7 @@ namespace ThemeEditor.ViewModels
         private ThemeViewModel? _defaultTheme;
         private IDisposable? _themeObservable;
         private IDisposable? _editorObservable;
-        private ViewModelsSerializer? _serializer;
+        private readonly ViewModelsSerializer? _serializer;
 
         [DataMember]
         public IList<ThemeViewModel>? Themes
@@ -75,14 +75,11 @@ namespace ThemeEditor.ViewModels
         public string? GetResource<T>(string name)
         {
             var assembly = typeof(T).GetTypeInfo().Assembly;
-            string[] resources = assembly.GetManifestResourceNames();
             var stream = assembly.GetManifestResourceStream(name);
             if (stream != null)
             {
-                using (var reader = new StreamReader(stream))
-                {
-                    return reader.ReadToEnd();
-                } 
+                using var reader = new StreamReader(stream);
+                return reader.ReadToEnd();
             }
             return null;
         }
@@ -237,19 +234,31 @@ namespace ThemeEditor.ViewModels
             }
         }
 
-        private ArgbColorViewModel GetColorResource(IResourceNode node, string key)
+        private ArgbColorViewModel? GetColorResource(IResourceNode node, string key)
         {
-            return ((Color)node.FindResource(key)).ArgbFromColor();
+            if (node.TryGetResource(key, out var resource) && resource is Color color)
+            {
+                return color.ArgbFromColor();
+            }
+            return null;
         }
 
-        private ThicknessViewModel GetThicknessResource(IResourceNode node, string key)
+        private ThicknessViewModel? GetThicknessResource(IResourceNode node, string key)
         {
-            return ((Thickness)node.FindResource(key)).FromThickness();
+            if (node.TryGetResource(key, out var resource) && resource is Thickness thickness)
+            {
+                return thickness.FromThickness();
+            }
+            return null;
         }
 
         private double GetDoubleResource(IResourceNode node, string key)
         {
-            return (double)node.FindResource(key);
+            if (node.TryGetResource(key, out var resource) && resource is double value)
+            {
+                return value;
+            }
+            return default;
         }
 
         public ThemeViewModel GetTheme(IResourceNode node)

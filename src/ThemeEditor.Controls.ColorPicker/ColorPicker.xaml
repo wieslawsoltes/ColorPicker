@@ -2,7 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:ThemeEditor.Controls.ColorPicker">
     <Design.PreviewWith>
-        <Border Padding="5" Width="400" Height="300">
+        <Border Padding="5" Width="400" Height="250">
             <local:ColorPicker Color="#5F1F001F"/>
         </Border>
     </Design.PreviewWith>

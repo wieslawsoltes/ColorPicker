@@ -49,6 +49,12 @@
             <Setter Property="Margin" Value="2"/>
         </Style>
         <Style Selector="Expander.editor">
+            <Setter Property="ContentTransition" Value="{x:Null}"/>
+        </Style>
+        <Style Selector="Expander.editor /template/ ToggleButton#PART_toggle /template/ Grid">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+        <Style Selector="Expander.editor">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="IsExpanded" Value="False"/>
         </Style>
