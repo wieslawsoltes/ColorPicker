@@ -13,7 +13,7 @@
         </Style.Resources>
         <Setter Property="Template">
             <ControlTemplate>
-                <Grid ColumnDefinitions="*,8,140">
+                <Grid ColumnDefinitions="*,8,Auto">
                     <Grid x:Name="PART_PickerGrid" ColumnDefinitions="*,3,Auto" RowDefinitions="*,3,Auto" Grid.Column="0">
                         <Grid Grid.Column="0" Grid.Row="0">
                             <Grid.Background>
