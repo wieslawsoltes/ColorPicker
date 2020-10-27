@@ -75,7 +75,11 @@ namespace ThemeEditor.Preview
             {
                 if (_DropState != null)
                 {
-                    _DropState.Text = string.Join(Environment.NewLine, e.Data.GetFileNames()); 
+                    var values = e.Data.GetFileNames();
+                    if (values is { })
+                    {
+                        _DropState.Text = string.Join(Environment.NewLine, values);
+                    }
                 }
             }
         }
