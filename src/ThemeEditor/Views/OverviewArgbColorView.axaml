@@ -3,24 +3,53 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:cp="clr-namespace:ThemeEditor.Controls.ColorPicker;assembly=ThemeEditor.Controls.ColorPicker"
              xmlns:converters="clr-namespace:ThemeEditor.Converters"
              mc:Ignorable="d"
              d:DesignWidth="500" d:DesignHeight="400">
     <UserControl.Resources>
         <converters:ColorViewModelToBrushConverter x:Key="ColorViewModelToBrushConverter"/>
+        <cp:HexToColorConverter x:Key="HexToColorConverter"/>
     </UserControl.Resources>
     <Grid RowDefinitions="Auto" ColumnDefinitions="100,*">
         <TextBox Text="{Binding Hex, Mode=TwoWay}" IsReadOnly="False" Classes="left" Grid.Row="0" Grid.Column="0"/>
-        <Border Classes="color" Background="{DynamicResource ColorCheckerBoard}" Margin="2" Grid.Row="0" Grid.Column="1"/>
-        <Border Classes="color" Margin="2" Grid.Row="0" Grid.Column="1">
-            <Border.Background>
-                <MultiBinding Mode="OneWay" Converter="{StaticResource ColorViewModelToBrushConverter}">
-                    <Binding Path="A"/>
-                    <Binding Path="R"/>
-                    <Binding Path="G"/>
-                    <Binding Path="B"/>
-                </MultiBinding>
-            </Border.Background>
-        </Border>
+        <Grid Grid.Row="0" Grid.Column="1" Margin="2">
+            <ToggleButton Name="PopupButton" BorderThickness="0" Background="Transparent" Padding="0" Height="30" HorizontalAlignment="Stretch" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <ToggleButton.Styles>
+                    <Style Selector="ToggleButton">
+                        <Setter Property="RenderTransform" Value="none" />
+                        <Setter Property="Transitions" Value="{x:Null}" />
+                    </Style>
+                    <Style Selector="ToggleButton:pressed">
+                        <Setter Property="RenderTransform" Value="none" />
+                    </Style>
+                    <Style Selector="ToggleButton:checked /template/ ContentPresenter, ToggleButton:pressed /template/ ContentPresenter">
+                        <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
+                    </Style>
+                    <Style Selector="ToggleButton:checked /template/ ContentPresenter">
+                        <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderHighBrush}" />
+                    </Style>
+                </ToggleButton.Styles>
+                <Panel Height="30" DockPanel.Dock="Top">
+                    <Border BorderThickness="0" CornerRadius="0" Background="DarkGray" />
+                    <Border BorderThickness="0" CornerRadius="0" Background="{DynamicResource ColorCheckerBoard}" />
+                    <Border BorderThickness="0" CornerRadius="0">
+                        <Border.Background>
+                            <MultiBinding Mode="OneWay" Converter="{StaticResource ColorViewModelToBrushConverter}">
+                                <Binding Path="A"/>
+                                <Binding Path="R"/>
+                                <Binding Path="G"/>
+                                <Binding Path="B"/>
+                            </MultiBinding>
+                        </Border.Background>
+                    </Border>
+                </Panel>
+            </ToggleButton>
+            <Popup IsOpen="{Binding #PopupButton.IsChecked, Mode=TwoWay}" IsLightDismissEnabled="True" PlacementMode="AnchorAndGravity" PlacementGravity="BottomLeft" PlacementAnchor="BottomLeft">
+                <Border Background="{DynamicResource SystemChromeMediumColor}" CornerRadius="0">
+                    <cp:ColorPicker Color="{Binding Hex, Mode=TwoWay, Converter={StaticResource HexToColorConverter}}" Margin="8" />
+                </Border>
+            </Popup>
+        </Grid>
     </Grid>
 </UserControl>
