@@ -20,7 +20,7 @@
     <Application.Styles>
         <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>
         <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>
-        <StyleInclude Source="avares://ThemeEditor.Controls.ColorPicker/ColorPicker.xaml"/>
+        <StyleInclude Source="avares://ThemeEditor.Controls.ColorPicker/ColorPicker.axaml"/>
         <Style Selector="Border.color">
             <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
