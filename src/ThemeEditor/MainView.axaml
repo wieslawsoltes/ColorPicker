@@ -21,7 +21,7 @@
                 <TextBox x:Name="exportText" DataContext="{Binding CurrentTheme}" Classes="export"/>
             </TabItem>
         </TabControl>
-        <GridSplitter Width="8" Grid.Column="1"/>
+        <GridSplitter Background="Transparent" Width="8" Grid.Column="1"/>
         <Grid RowDefinitions="Auto,*" Grid.Column="2">
             <ComboBox x:Name="themeSelector" SelectedIndex="1" Classes="themes" Grid.Row="0">
                 <ComboBoxItem>Light</ComboBoxItem>
