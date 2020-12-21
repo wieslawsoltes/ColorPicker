@@ -171,7 +171,7 @@ namespace ThemeEditor
 
             sb.AppendLine("<Style xmlns=\"https://github.com/avaloniaui\"");
             sb.AppendLine("       xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"");
-            sb.AppendLine("       xmlns:sys=\"clr-namespace:System;assembly=mscorlib\">");
+            sb.AppendLine("       xmlns:sys=\"using:System;assembly=mscorlib\">");
             sb.AppendLine("    <Style.Resources>");
             sb.AppendLine("");
             sb.AppendLine($"        <Color x:Key=\"ThemeAccentColor\">{theme.ThemeAccentColor?.ToHexString()}</Color>");
