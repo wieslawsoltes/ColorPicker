@@ -45,7 +45,6 @@
             <preview:SliderPage/>
             <preview:TabControlPage/>
             <preview:TextBoxPage/>
-            <preview:ToolTipPage/>
             <preview:TreeViewPage/>
         </StackPanel>
     </ScrollViewer>
