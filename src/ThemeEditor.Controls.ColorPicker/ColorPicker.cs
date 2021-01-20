@@ -945,7 +945,7 @@ namespace ThemeEditor.Controls.ColorPicker
             }
         }
 
-        private void ColorCanvas_PointerPressed(object sender, PointerPressedEventArgs e)
+        private void ColorCanvas_PointerPressed(object? sender, PointerPressedEventArgs e)
         {
             var position = e.GetPosition(_colorCanvas);
             _updating = true;
@@ -956,7 +956,7 @@ namespace ThemeEditor.Controls.ColorPicker
             _captured = true;
         }
 
-        private void ColorCanvas_PointerReleased(object sender, PointerReleasedEventArgs e)
+        private void ColorCanvas_PointerReleased(object? sender, PointerReleasedEventArgs e)
         {
             if (_captured == true)
             {
@@ -964,7 +964,7 @@ namespace ThemeEditor.Controls.ColorPicker
             }
         }
 
-        private void ColorCanvas_PointerMoved(object sender, PointerEventArgs e)
+        private void ColorCanvas_PointerMoved(object? sender, PointerEventArgs e)
         {
             if (_captured == true)
             {
@@ -977,7 +977,7 @@ namespace ThemeEditor.Controls.ColorPicker
             }
         }
 
-        private void ColorThumb_DragDelta(object sender, VectorEventArgs e)
+        private void ColorThumb_DragDelta(object? sender, VectorEventArgs e)
         {
             double left = Canvas.GetLeft(_colorThumb);
             double top = Canvas.GetTop(_colorThumb);
@@ -988,7 +988,7 @@ namespace ThemeEditor.Controls.ColorPicker
             _updating = false;
         }
 
-        private void HueCanvas_PointerPressed(object sender, PointerPressedEventArgs e)
+        private void HueCanvas_PointerPressed(object? sender, PointerPressedEventArgs e)
         {
             var position = e.GetPosition(_hueCanvas);
             _updating = true;
@@ -999,7 +999,7 @@ namespace ThemeEditor.Controls.ColorPicker
             _captured = true;
         }
 
-        private void HueCanvas_PointerReleased(object sender, PointerReleasedEventArgs e)
+        private void HueCanvas_PointerReleased(object? sender, PointerReleasedEventArgs e)
         {
             if (_captured == true)
             {
@@ -1007,7 +1007,7 @@ namespace ThemeEditor.Controls.ColorPicker
             }
         }
 
-        private void HueCanvas_PointerMoved(object sender, PointerEventArgs e)
+        private void HueCanvas_PointerMoved(object? sender, PointerEventArgs e)
         {
             if (_captured == true)
             {
@@ -1020,7 +1020,7 @@ namespace ThemeEditor.Controls.ColorPicker
             }
         }
 
-        private void HueThumb_DragDelta(object sender, VectorEventArgs e)
+        private void HueThumb_DragDelta(object? sender, VectorEventArgs e)
         {
             double top = Canvas.GetTop(_hueThumb);
             _updating = true;
@@ -1030,7 +1030,7 @@ namespace ThemeEditor.Controls.ColorPicker
             _updating = false;
         }
 
-        private void AlphaCanvas_PointerPressed(object sender, PointerPressedEventArgs e)
+        private void AlphaCanvas_PointerPressed(object? sender, PointerPressedEventArgs e)
         {
             var position = e.GetPosition(_alphaCanvas);
             _updating = true;
@@ -1041,7 +1041,7 @@ namespace ThemeEditor.Controls.ColorPicker
             _captured = true;
         }
 
-        private void AlphaCanvas_PointerReleased(object sender, PointerReleasedEventArgs e)
+        private void AlphaCanvas_PointerReleased(object? sender, PointerReleasedEventArgs e)
         {
             if (_captured == true)
             {
@@ -1049,7 +1049,7 @@ namespace ThemeEditor.Controls.ColorPicker
             }
         }
 
-        private void AlphaCanvas_PointerMoved(object sender, PointerEventArgs e)
+        private void AlphaCanvas_PointerMoved(object? sender, PointerEventArgs e)
         {
             if (_captured == true)
             {
@@ -1062,7 +1062,7 @@ namespace ThemeEditor.Controls.ColorPicker
             }
         }
 
-        private void AlphaThumb_DragDelta(object sender, VectorEventArgs e)
+        private void AlphaThumb_DragDelta(object? sender, VectorEventArgs e)
         {
             double left = Canvas.GetLeft(_alphaThumb);
             _updating = true;

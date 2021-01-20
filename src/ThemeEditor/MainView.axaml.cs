@@ -10,34 +10,44 @@ namespace ThemeEditor
 {
     public class MainView : UserControl
     {
-        private StyleInclude _lightTheme;
-        private StyleInclude _darkTheme;
+        private readonly StyleInclude? _lightTheme;
+        private readonly StyleInclude? _darkTheme;
 
         public MainView()
         {
             this.InitializeComponent();
 
-            var _themeSelector = this.Find<ComboBox>("themeSelector");
-            _themeSelector.SelectionChanged += (sender, e) =>
+            var themeSelector = this.Find<ComboBox>("themeSelector");
+
+            themeSelector.SelectionChanged += (sender, e) =>
             {
-                switch (_themeSelector.SelectedIndex)
+                switch (themeSelector.SelectedIndex)
                 {
                     case 0:
-                        Styles[0] = _lightTheme;
+                        if (_lightTheme is not null)
+                        {
+                            Styles[0] = _lightTheme;
+                        }
                         break;
                     case 1:
-                        Styles[0] = _darkTheme;
+                        if (_darkTheme is not null)
+                        {
+                            Styles[0] = _darkTheme;
+                        }
                         break;
                 }
             };
+            
             _lightTheme = new StyleInclude(new Uri("resm:Styles?assembly=ThemeEditor"))
             {
                 Source = new Uri("resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default")
             };
+            
             _darkTheme = new StyleInclude(new Uri("resm:Styles?assembly=ThemeEditor"))
             {
                 Source = new Uri("resm:Avalonia.Themes.Default.Accents.BaseDark.xaml?assembly=Avalonia.Themes.Default")
             };
+            
             Styles.Add(_darkTheme);
         }
 
