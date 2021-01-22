@@ -64,9 +64,12 @@ namespace ThemeEditor
             {
                 var previewView = this.Find<ThemePreviewView>("previewView");
                 var exportText = this.Find<TextBox>("exportText");
-                var defaultThem = editor.GetTheme(_lightTheme);
-                defaultThem.Name = "BaseLight";
-                editor.DefaultTheme = defaultThem;
+                if (_lightTheme is not null)
+                {
+                    var defaultThem = editor.GetTheme(_lightTheme);
+                    defaultThem.Name = "BaseLight";
+                    editor.DefaultTheme = defaultThem;
+                }
                 editor.Attach(previewView.Resources, (x) => exportText.Text = x.ToXaml());
             }
         }
