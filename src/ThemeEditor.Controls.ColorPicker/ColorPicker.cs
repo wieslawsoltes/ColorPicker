@@ -952,6 +952,11 @@ namespace ThemeEditor.Controls.ColorPicker
             MoveThumb(_colorCanvas, _colorThumb, position.X, position.Y);
             UpdateValuesFromThumbs();
             UpdateColorFromThumbs();
+            if (_colorCanvas is { } && _colorThumb is { })
+            {
+                _colorCanvas.Cursor = new Cursor(StandardCursorType.None);
+                _colorThumb.Cursor = new Cursor(StandardCursorType.None);
+            }
             _updating = false;
             _captured = true;
         }
@@ -960,6 +965,11 @@ namespace ThemeEditor.Controls.ColorPicker
         {
             if (_captured == true)
             {
+                if (_colorCanvas is { } && _colorThumb is { })
+                {
+                    _colorCanvas.Cursor = Cursor.Default;
+                    _colorThumb.Cursor = Cursor.Default;
+                }
                 _captured = false;
             }
         }
@@ -995,6 +1005,11 @@ namespace ThemeEditor.Controls.ColorPicker
             MoveThumb(_hueCanvas, _hueThumb, 0, position.Y);
             UpdateValuesFromThumbs();
             UpdateColorFromThumbs();
+            if (_hueCanvas is { } && _hueThumb is { })
+            {
+                _hueCanvas.Cursor = new Cursor(StandardCursorType.SizeNorthSouth);
+                _hueThumb.Cursor = new Cursor(StandardCursorType.SizeNorthSouth);
+            }
             _updating = false;
             _captured = true;
         }
@@ -1003,6 +1018,11 @@ namespace ThemeEditor.Controls.ColorPicker
         {
             if (_captured == true)
             {
+                if (_hueCanvas is { } && _hueThumb is { })
+                {
+                    _hueCanvas.Cursor = Cursor.Default;
+                    _hueThumb.Cursor = Cursor.Default;
+                }
                 _captured = false;
             }
         }
@@ -1037,6 +1057,11 @@ namespace ThemeEditor.Controls.ColorPicker
             MoveThumb(_alphaCanvas, _alphaThumb, position.X, 0);
             UpdateValuesFromThumbs();
             UpdateColorFromThumbs();
+            if (_alphaCanvas is { } && _alphaThumb is { })
+            {
+                _alphaCanvas.Cursor = new Cursor(StandardCursorType.SizeWestEast);
+                _alphaThumb.Cursor = new Cursor(StandardCursorType.SizeWestEast);
+            }
             _updating = false;
             _captured = true;
         }
@@ -1045,6 +1070,11 @@ namespace ThemeEditor.Controls.ColorPicker
         {
             if (_captured == true)
             {
+                if (_alphaCanvas is { } && _alphaThumb is { })
+                {
+                    _alphaCanvas.Cursor = Cursor.Default;
+                    _alphaThumb.Cursor = Cursor.Default;
+                }
                 _captured = false;
             }
         }
