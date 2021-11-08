@@ -6,11 +6,11 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{3353FD4A-FE9B-4670-86C9-09EF0F7CEDB2}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		.nuke = .nuke
 		build.ps1 = build.ps1
 		build.sh = build.sh
 		global.json = global.json
 		build\themeeditor.public.snk = build\themeeditor.public.snk
+		azure-pipelines.yml = azure-pipelines.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{2134CB05-065F-4694-83B7-3DF4E9CAFD0E}"
@@ -77,6 +77,8 @@ Global
 		{A8EB278A-149D-4BE4-8388-86EFB0D9030F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DD390F62-BC92-4012-9C09-B2ED62CBFAA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DD390F62-BC92-4012-9C09-B2ED62CBFAA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD390F62-BC92-4012-9C09-B2ED62CBFAA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD390F62-BC92-4012-9C09-B2ED62CBFAA4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
