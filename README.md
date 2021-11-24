@@ -1,6 +1,6 @@
 # Avalonia Theme Editor
 
-[![Build Status](https://dev.azure.com/wieslawsoltes/GitHub/_apis/build/status/wieslawsoltes.ThemeEditor?branchName=master)](https://dev.azure.com/wieslawsoltes/GitHub/_build/latest?definitionId=96&branchName=master)
+[![Build Status](https://dev.azure.com/wieslawsoltes/GitHub/_apis/build/status/wieslawsoltes.ColorPicker?repoName=wieslawsoltes%2FColorPicker&branchName=release%2F0.10.11-rc.1)](https://dev.azure.com/wieslawsoltes/GitHub/_build/latest?definitionId=106&repoName=wieslawsoltes%2FColorPicker&branchName=release%2F0.10.11-rc.1)
 [![CI](https://github.com/wieslawsoltes/ThemeEditor/actions/workflows/build.yml/badge.svg)](https://github.com/wieslawsoltes/ThemeEditor/actions/workflows/build.yml)
 
 [![NuGet](https://img.shields.io/nuget/v/ThemeEditor.Controls.ColorPicker.svg)](https://www.nuget.org/packages/ThemeEditor.Controls.ColorPicker)
