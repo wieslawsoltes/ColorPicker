@@ -192,7 +192,12 @@ namespace ThemeEditor.ViewModels
             var dlg = new OpenFileDialog() { Title = "Load" };
             dlg.Filters.Add(new FileDialogFilter() { Name = "Themes", Extensions = { "themes" } });
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-            var result = await dlg.ShowAsync(GetWindow());
+            var window = GetWindow();
+            if (window is null)
+            {
+                return;
+            }
+            var result = await dlg.ShowAsync(window);
             if (result != null)
             {
                 var path = result.FirstOrDefault();
@@ -210,7 +215,12 @@ namespace ThemeEditor.ViewModels
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
             dlg.InitialFileName = "Themes";
             dlg.DefaultExtension = "themes";
-            var result = await dlg.ShowAsync(GetWindow());
+            var window = GetWindow();
+            if (window is null)
+            {
+                return;
+            }
+            var result = await dlg.ShowAsync(window);
             if (result != null)
             {
                 SaveAsFile(result);
@@ -226,7 +236,12 @@ namespace ThemeEditor.ViewModels
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
                 dlg.InitialFileName = CurrentTheme.Name;
                 dlg.DefaultExtension = "xaml";
-                var result = await dlg.ShowAsync(GetWindow());
+                var window = GetWindow();
+                if (window is null)
+                {
+                    return;
+                }
+                var result = await dlg.ShowAsync(window);
                 if (result != null)
                 {
                     ExportAsFile(result, CurrentTheme);
