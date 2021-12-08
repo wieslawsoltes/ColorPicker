@@ -2,20 +2,19 @@
 using Avalonia;
 using Avalonia.ReactiveUI;
 
-namespace ThemeEditor
-{
-    internal class Program
-    {
-        [STAThread]
-        private static void Main(string[] args)
-        {
-            BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
-        }
+namespace ThemeEditor;
 
-        public static AppBuilder BuildAvaloniaApp()
-            => AppBuilder.Configure<App>()
-                         .UsePlatformDetect()
-                         .UseReactiveUI()
-                         .LogToTrace();
+internal class Program
+{
+    [STAThread]
+    private static void Main(string[] args)
+    {
+        BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
     }
+
+    public static AppBuilder BuildAvaloniaApp()
+        => AppBuilder.Configure<App>()
+            .UsePlatformDetect()
+            .UseReactiveUI()
+            .LogToTrace();
 }

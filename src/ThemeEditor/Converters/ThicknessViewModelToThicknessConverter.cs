@@ -5,28 +5,27 @@ using System.Linq;
 using Avalonia;
 using Avalonia.Data.Converters;
 
-namespace ThemeEditor.Converters
+namespace ThemeEditor.Converters;
+
+public class ThicknessViewModelToThicknessConverter : IMultiValueConverter
 {
-    public class ThicknessViewModelToThicknessConverter : IMultiValueConverter
+    public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
     {
-        public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
+        if (values != null && values.Count() == 4)
         {
-            if (values != null && values.Count() == 4)
+            for (int i = 0; i < 4; i++)
             {
-                for (int i = 0; i < 4; i++)
+                if (values[i].GetType() != typeof(double))
                 {
-                    if (values[i].GetType() != typeof(double))
-                    {
-                        return AvaloniaProperty.UnsetValue;
-                    }
+                    return AvaloniaProperty.UnsetValue;
                 }
-                return new Thickness(
-                    (double)values[0],
-                    (double)values[1],
-                    (double)values[2],
-                    (double)values[3]);
             }
-            return AvaloniaProperty.UnsetValue;
+            return new Thickness(
+                (double)values[0],
+                (double)values[1],
+                (double)values[2],
+                (double)values[3]);
         }
+        return AvaloniaProperty.UnsetValue;
     }
 }

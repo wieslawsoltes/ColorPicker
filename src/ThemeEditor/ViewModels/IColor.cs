@@ -1,9 +1,8 @@
 ﻿using ReactiveUI;
 
-namespace ThemeEditor.ViewModels
+namespace ThemeEditor.ViewModels;
+
+public interface IColor : IReactiveNotifyPropertyChanged<IReactiveObject>, IReactiveObject
 {
-    public interface IColor : IReactiveNotifyPropertyChanged<IReactiveObject>, IReactiveObject
-    {
-        IColor Clone();
-    }
+    IColor Clone();
 }

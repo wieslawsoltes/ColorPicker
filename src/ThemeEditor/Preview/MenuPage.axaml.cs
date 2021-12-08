@@ -6,101 +6,100 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using ReactiveUI;
 
-namespace ThemeEditor.Preview
+namespace ThemeEditor.Preview;
+
+public class MenuPage : UserControl
 {
-    public class MenuPage : UserControl
+    public MenuPage()
     {
-        public MenuPage()
-        {
-            this.InitializeComponent();
-            var vm = new MenuPageViewModel();
+        this.InitializeComponent();
+        var vm = new MenuPageViewModel();
 
-            vm.MenuItems = new[]
+        vm.MenuItems = new[]
+        {
+            new MenuItemViewModel
             {
-                new MenuItemViewModel
+                Header = "_File",
+                Items = new[]
                 {
-                    Header = "_File",
-                    Items = new[]
+                    new MenuItemViewModel { Header = "_Open...", Command = vm.OpenCommand },
+                    new MenuItemViewModel { Header = "Save", Command = vm.SaveCommand },
+                    new MenuItemViewModel { Header = "-" },
+                    new MenuItemViewModel
                     {
-                        new MenuItemViewModel { Header = "_Open...", Command = vm.OpenCommand },
-                        new MenuItemViewModel { Header = "Save", Command = vm.SaveCommand },
-                        new MenuItemViewModel { Header = "-" },
-                        new MenuItemViewModel
+                        Header = "Recent",
+                        Items = new[]
                         {
-                            Header = "Recent",
-                            Items = new[]
+                            new MenuItemViewModel
                             {
-                                new MenuItemViewModel
-                                {
-                                    Header = "File1.txt",
-                                    Command = vm.OpenRecentCommand,
-                                    CommandParameter = @"c:\foo\File1.txt"
-                                },
-                                new MenuItemViewModel
-                                {
-                                    Header = "File2.txt",
-                                    Command = vm.OpenRecentCommand,
-                                    CommandParameter = @"c:\foo\File2.txt"
-                                },
-                            }
-                        },
-                    }
-                },
-                new MenuItemViewModel
-                {
-                    Header = "_Edit",
-                    Items = new[]
-                    {
-                        new MenuItemViewModel { Header = "_Copy" },
-                        new MenuItemViewModel { Header = "_Paste" },
-                    }
+                                Header = "File1.txt",
+                                Command = vm.OpenRecentCommand,
+                                CommandParameter = @"c:\foo\File1.txt"
+                            },
+                            new MenuItemViewModel
+                            {
+                                Header = "File2.txt",
+                                Command = vm.OpenRecentCommand,
+                                CommandParameter = @"c:\foo\File2.txt"
+                            },
+                        }
+                    },
                 }
-            };
+            },
+            new MenuItemViewModel
+            {
+                Header = "_Edit",
+                Items = new[]
+                {
+                    new MenuItemViewModel { Header = "_Copy" },
+                    new MenuItemViewModel { Header = "_Paste" },
+                }
+            }
+        };
 
-            DataContext = vm;
-        }
-
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+        DataContext = vm;
     }
 
-    public class MenuPageViewModel
+    private void InitializeComponent()
     {
-        public MenuPageViewModel()
-        {
-            OpenCommand = ReactiveCommand.Create(Open);
-            SaveCommand = ReactiveCommand.Create(Save);
-            OpenRecentCommand = ReactiveCommand.Create<string>(OpenRecent);
-        }
-
-        public IReadOnlyList<MenuItemViewModel>? MenuItems { get; set; }
-        public ReactiveCommand<Unit, Unit> OpenCommand { get; }
-        public ReactiveCommand<Unit, Unit> SaveCommand { get; }
-        public ReactiveCommand<string, Unit> OpenRecentCommand { get; }
-
-        public void Open()
-        {
-            System.Diagnostics.Debug.WriteLine("Open");
-        }
-
-        public void Save()
-        {
-            System.Diagnostics.Debug.WriteLine("Save");
-        }
-
-        public void OpenRecent(string path)
-        {
-            System.Diagnostics.Debug.WriteLine($"Open recent: {path}");
-        }
+        AvaloniaXamlLoader.Load(this);
     }
+}
 
-    public class MenuItemViewModel
+public class MenuPageViewModel
+{
+    public MenuPageViewModel()
     {
-        public string? Header { get; set; }
-        public ICommand? Command { get; set; }
-        public object? CommandParameter { get; set; }
-        public IList<MenuItemViewModel>? Items { get; set; }
+        OpenCommand = ReactiveCommand.Create(Open);
+        SaveCommand = ReactiveCommand.Create(Save);
+        OpenRecentCommand = ReactiveCommand.Create<string>(OpenRecent);
     }
+
+    public IReadOnlyList<MenuItemViewModel>? MenuItems { get; set; }
+    public ReactiveCommand<Unit, Unit> OpenCommand { get; }
+    public ReactiveCommand<Unit, Unit> SaveCommand { get; }
+    public ReactiveCommand<string, Unit> OpenRecentCommand { get; }
+
+    public void Open()
+    {
+        System.Diagnostics.Debug.WriteLine("Open");
+    }
+
+    public void Save()
+    {
+        System.Diagnostics.Debug.WriteLine("Save");
+    }
+
+    public void OpenRecent(string path)
+    {
+        System.Diagnostics.Debug.WriteLine($"Open recent: {path}");
+    }
+}
+
+public class MenuItemViewModel
+{
+    public string? Header { get; set; }
+    public ICommand? Command { get; set; }
+    public object? CommandParameter { get; set; }
+    public IList<MenuItemViewModel>? Items { get; set; }
 }

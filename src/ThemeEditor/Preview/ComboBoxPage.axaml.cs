@@ -1,18 +1,17 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace ThemeEditor.Preview
-{
-    public class ComboBoxPage : UserControl
-    {
-        public ComboBoxPage()
-        {
-            this.InitializeComponent();
-        }
+namespace ThemeEditor.Preview;
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+public class ComboBoxPage : UserControl
+{
+    public ComboBoxPage()
+    {
+        this.InitializeComponent();
+    }
+
+    private void InitializeComponent()
+    {
+        AvaloniaXamlLoader.Load(this);
     }
 }

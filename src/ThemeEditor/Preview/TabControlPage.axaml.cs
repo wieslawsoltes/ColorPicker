@@ -6,68 +6,67 @@ using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using ReactiveUI;
 
-namespace ThemeEditor.Preview
+namespace ThemeEditor.Preview;
+
+public class TabControlPage : UserControl
 {
-    public class TabControlPage : UserControl
+    public TabControlPage()
     {
-        public TabControlPage()
-        {
-            InitializeComponent();
+        InitializeComponent();
 
-            DataContext = new PageViewModel
+        DataContext = new PageViewModel
+        {
+            Tabs = new[]
             {
-                Tabs = new[]
+                new TabItemViewModel
                 {
-                    new TabItemViewModel
-                    {
-                        Header = "Arch",
-                        Text = "This is the first templated tab page."
-                    },
-                    new TabItemViewModel
-                    {
-                        Header = "Leaf",
-                        Text = "This is the second templated tab page."
-                    },
-                    new TabItemViewModel
-                    {
-                        Header = "Disabled",
-                        Text = "You should not see this.",
-                        IsEnabled = false,
-                    },
+                    Header = "Arch",
+                    Text = "This is the first templated tab page."
                 },
-                TabPlacement = Dock.Top,
-            };
-        }
+                new TabItemViewModel
+                {
+                    Header = "Leaf",
+                    Text = "This is the second templated tab page."
+                },
+                new TabItemViewModel
+                {
+                    Header = "Disabled",
+                    Text = "You should not see this.",
+                    IsEnabled = false,
+                },
+            },
+            TabPlacement = Dock.Top,
+        };
+    }
 
-        private void InitializeComponent()
+    private void InitializeComponent()
+    {
+        AvaloniaXamlLoader.Load(this);
+    }
+
+    private IBitmap LoadBitmap(string uri)
+    {
+        var assets = AvaloniaLocator.Current.GetService<IAssetLoader>();
+        return new Bitmap(assets.Open(new Uri(uri)));
+    }
+
+    private class PageViewModel : ReactiveObject
+    {
+        private Dock _tabPlacement;
+
+        public TabItemViewModel[]? Tabs { get; set; }
+
+        public Dock TabPlacement
         {
-            AvaloniaXamlLoader.Load(this);
+            get { return _tabPlacement; }
+            set { this.RaiseAndSetIfChanged(ref _tabPlacement, value); }
         }
+    }
 
-        private IBitmap LoadBitmap(string uri)
-        {
-            var assets = AvaloniaLocator.Current.GetService<IAssetLoader>();
-            return new Bitmap(assets.Open(new Uri(uri)));
-        }
-
-        private class PageViewModel : ReactiveObject
-        {
-            private Dock _tabPlacement;
-
-            public TabItemViewModel[]? Tabs { get; set; }
-
-            public Dock TabPlacement
-            {
-                get { return _tabPlacement; }
-                set { this.RaiseAndSetIfChanged(ref _tabPlacement, value); }
-            }
-        }
-
-        private class TabItemViewModel
-        {
-            public string? Header { get; set; }
-            public string? Text { get; set; }
-            public bool IsEnabled { get; set; } = true;
-        }
+    private class TabItemViewModel
+    {
+        public string? Header { get; set; }
+        public string? Text { get; set; }
+        public bool IsEnabled { get; set; } = true;
     }
 }
