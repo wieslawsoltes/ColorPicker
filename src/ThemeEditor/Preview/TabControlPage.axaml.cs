@@ -47,7 +47,7 @@ public class TabControlPage : UserControl
     private IBitmap LoadBitmap(string uri)
     {
         var assets = AvaloniaLocator.Current.GetService<IAssetLoader>();
-        return new Bitmap(assets.Open(new Uri(uri)));
+        return new Bitmap(assets?.Open(new Uri(uri)));
     }
 
     private class PageViewModel : ReactiveObject

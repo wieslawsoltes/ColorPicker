@@ -636,7 +636,7 @@ public class ThemeEditorViewModel : ReactiveObject
 
     private Window? GetWindow()
     {
-        if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktopLifetime)
+        if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktopLifetime)
         {
             return desktopLifetime.MainWindow;
         }
