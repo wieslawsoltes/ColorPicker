@@ -34,30 +34,32 @@ public static class ColorHelpers
 
     public static void FromColor(Color color, out double h, out double s, out double v, out double a)
     {
-        HSV hsv = new RGB(color.R, color.G, color.B).ToHSV();
+        var hsv = new RGB(color.R, color.G, color.B).ToHSV();
         h = hsv.H;
         s = hsv.S;
         v = hsv.V;
         a = color.A * 100.0 / 255.0;
     }
 
+    // ReSharper disable once InconsistentNaming
     public static Color FromHSVA(double h, double s, double v, double a)
     {
-        RGB rgb = new HSV(h, s, v).ToRGB();
-        byte A = (byte)(a * 255.0 / 100.0);
+        var rgb = new HSV(h, s, v).ToRGB();
+        var A = (byte)(a * 255.0 / 100.0);
         return new Color(A, (byte)rgb.R, (byte)rgb.G, (byte)rgb.B);
     }
 
+    // ReSharper disable once InconsistentNaming
     public static Color FromRGBA(byte r, byte g, byte b, double a)
     {
-        byte A = (byte)(a * 255.0 / 100.0);
+        var A = (byte)(a * 255.0 / 100.0);
         return new Color(A, r, g, b);
     }
 }
 
 public class HexToColorConverter : IValueConverter
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (value is string s && targetType == typeof(Color))
         {
@@ -76,7 +78,7 @@ public class HexToColorConverter : IValueConverter
         return AvaloniaProperty.UnsetValue;
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (value is Color c && targetType == typeof(string))
         {
@@ -95,7 +97,7 @@ public class HexToColorConverter : IValueConverter
 
 public class HueConverter : IValueConverter
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (value is double v && parameter is double range && targetType == typeof(double))
         {
@@ -104,7 +106,7 @@ public class HueConverter : IValueConverter
         return AvaloniaProperty.UnsetValue;
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (value is double v && parameter is double range && targetType == typeof(double))
         {
@@ -116,7 +118,7 @@ public class HueConverter : IValueConverter
 
 public class SaturationConverter : IValueConverter
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (value is double v && parameter is double range && targetType == typeof(double))
         {
@@ -125,7 +127,7 @@ public class SaturationConverter : IValueConverter
         return AvaloniaProperty.UnsetValue;
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (value is double v && parameter is double range && targetType == typeof(double))
         {
@@ -137,7 +139,7 @@ public class SaturationConverter : IValueConverter
 
 public class ValueConverter : IValueConverter
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (value is double v && parameter is double range && targetType == typeof(double))
         {
@@ -146,7 +148,7 @@ public class ValueConverter : IValueConverter
         return AvaloniaProperty.UnsetValue;
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (value is double v && parameter is double range && targetType == typeof(double))
         {
@@ -158,7 +160,7 @@ public class ValueConverter : IValueConverter
 
 public class AlphaConverter : IValueConverter
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (value is double v && parameter is double range && targetType == typeof(double))
         {
@@ -167,7 +169,7 @@ public class AlphaConverter : IValueConverter
         return AvaloniaProperty.UnsetValue;
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (value is double v && parameter is double range && targetType == typeof(double))
         {
@@ -179,12 +181,15 @@ public class AlphaConverter : IValueConverter
 
 public class HsvaToColorConverter : IMultiValueConverter
 {
-    public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
+    public object Convert(IList<object?>? values, Type targetType, object? parameter, CultureInfo culture)
     {
-        double[] v = values.OfType<double>().ToArray();
-        if (v.Length == values.Count)
+        if (values is { })
         {
-            return ColorHelpers.FromHSVA(v[0], v[1], v[2], v[3]);
+            var v = values.OfType<double>().ToArray();
+            if (v.Length == values.Count)
+            {
+                return ColorHelpers.FromHSVA(v[0], v[1], v[2], v[3]);
+            }
         }
         return AvaloniaProperty.UnsetValue;
     }
@@ -192,7 +197,7 @@ public class HsvaToColorConverter : IMultiValueConverter
 
 public class HueToColorConverter : IValueConverter
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (value is double h && targetType == typeof(Color))
         {
@@ -201,7 +206,7 @@ public class HueToColorConverter : IValueConverter
         return AvaloniaProperty.UnsetValue;
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (value is string s && targetType == typeof(double))
         {
@@ -209,7 +214,7 @@ public class HueToColorConverter : IValueConverter
             {
                 if (ColorHelpers.IsValidHexColor(s))
                 {
-                    ColorHelpers.FromColor(ColorHelpers.FromHexColor(s), out double h, out _, out _, out _);
+                    ColorHelpers.FromColor(ColorHelpers.FromHexColor(s), out var h, out _, out _, out _);
                     return h;
                 }
             }
@@ -224,15 +229,15 @@ public class HueToColorConverter : IValueConverter
 
 public abstract class ColorPickerProperties : AvaloniaObject
 {
-    public static readonly StyledProperty<ColorPicker> ColorPickerProperty =
-        AvaloniaProperty.Register<ColorPickerProperties, ColorPicker>(nameof(ColorPicker));
+    public static readonly StyledProperty<ColorPicker?> ColorPickerProperty =
+        AvaloniaProperty.Register<ColorPickerProperties, ColorPicker?>(nameof(ColorPicker));
 
     public ColorPickerProperties()
     {
-        this.GetObservable(ColorPickerProperty).Subscribe(x => OnColorPickerChange());
+        this.GetObservable(ColorPickerProperty).Subscribe(_ => OnColorPickerChange());
     }
 
-    public ColorPicker ColorPicker
+    public ColorPicker? ColorPicker
     {
         get { return GetValue(ColorPickerProperty); }
         set { SetValue(ColorPickerProperty, value); }
@@ -244,13 +249,10 @@ public abstract class ColorPickerProperties : AvaloniaObject
 
     public virtual void OnColorPickerChange()
     {
-        if (ColorPicker != null)
-        {
-            ColorPicker.GetObservable(ColorPicker.Value1Property).Subscribe(x => UpdatePropertyValues());
-            ColorPicker.GetObservable(ColorPicker.Value2Property).Subscribe(x => UpdatePropertyValues());
-            ColorPicker.GetObservable(ColorPicker.Value3Property).Subscribe(x => UpdatePropertyValues());
-            ColorPicker.GetObservable(ColorPicker.Value4Property).Subscribe(x => UpdatePropertyValues());
-        }
+        ColorPicker?.GetObservable(ColorPicker.Value1Property).Subscribe(_ => UpdatePropertyValues());
+        ColorPicker?.GetObservable(ColorPicker.Value2Property).Subscribe(_ => UpdatePropertyValues());
+        ColorPicker?.GetObservable(ColorPicker.Value3Property).Subscribe(_ => UpdatePropertyValues());
+        ColorPicker?.GetObservable(ColorPicker.Value4Property).Subscribe(_ => UpdatePropertyValues());
     }
 }
 
@@ -292,13 +294,13 @@ public class HsvProperties : ColorPickerProperties
         return true;
     }
 
-    private bool _updating = false;
+    private bool _updating;
 
-    public HsvProperties() : base()
+    public HsvProperties()
     {
-        this.GetObservable(HueProperty).Subscribe(x => UpdateColorPickerValues());
-        this.GetObservable(SaturationProperty).Subscribe(x => UpdateColorPickerValues());
-        this.GetObservable(ValueProperty).Subscribe(x => UpdateColorPickerValues());
+        this.GetObservable(HueProperty).Subscribe(_ => UpdateColorPickerValues());
+        this.GetObservable(SaturationProperty).Subscribe(_ => UpdateColorPickerValues());
+        this.GetObservable(ValueProperty).Subscribe(_ => UpdateColorPickerValues());
     }
 
     public double Hue
@@ -357,7 +359,8 @@ public class RgbProperties : ColorPickerProperties
 
     private static bool ValidateRed(byte red)
     {
-        if (red < 0 || red > 255)
+        // ReSharper disable ConditionIsAlwaysTrueOrFalse
+        if (red < 0 || red > 255) // ReSharper restore ConditionIsAlwaysTrueOrFalse
         {
             throw new ArgumentException("Invalid Red value.");
         }
@@ -366,7 +369,9 @@ public class RgbProperties : ColorPickerProperties
 
     private static bool ValidateGreen(byte green)
     {
+        // ReSharper disable ConditionIsAlwaysTrueOrFalse
         if (green < 0 || green > 255)
+            // ReSharper restore ConditionIsAlwaysTrueOrFalse
         {
             throw new ArgumentException("Invalid Green value.");
         }
@@ -375,20 +380,22 @@ public class RgbProperties : ColorPickerProperties
 
     private static bool ValidateBlue(byte blue)
     {
+        // ReSharper disable ConditionIsAlwaysTrueOrFalse
         if (blue < 0 || blue > 255)
+            // ReSharper restore ConditionIsAlwaysTrueOrFalse
         {
             throw new ArgumentException("Invalid Blue value.");
         }
         return true;
     }
 
-    private bool _updating = false;
+    private bool _updating;
 
-    public RgbProperties() : base()
+    public RgbProperties()
     {
-        this.GetObservable(RedProperty).Subscribe(x => UpdateColorPickerValues());
-        this.GetObservable(GreenProperty).Subscribe(x => UpdateColorPickerValues());
-        this.GetObservable(BlueProperty).Subscribe(x => UpdateColorPickerValues());
+        this.GetObservable(RedProperty).Subscribe(_ => UpdateColorPickerValues());
+        this.GetObservable(GreenProperty).Subscribe(_ => UpdateColorPickerValues());
+        this.GetObservable(BlueProperty).Subscribe(_ => UpdateColorPickerValues());
     }
 
     public byte Red
@@ -414,8 +421,8 @@ public class RgbProperties : ColorPickerProperties
         if (_updating == false && ColorPicker != null)
         {
             _updating = true;
-            RGB rgb = new RGB(Red, Green, Blue);
-            HSV hsv = rgb.ToHSV();
+            var rgb = new RGB(Red, Green, Blue);
+            var hsv = rgb.ToHSV();
             ColorPicker.Value1 = hsv.H;
             ColorPicker.Value2 = hsv.S;
             ColorPicker.Value3 = hsv.V;
@@ -428,8 +435,8 @@ public class RgbProperties : ColorPickerProperties
         if (_updating == false && ColorPicker != null)
         {
             _updating = true;
-            HSV hsv = new HSV(ColorPicker.Value1, ColorPicker.Value2, ColorPicker.Value3);
-            RGB rgb = hsv.ToRGB();
+            var hsv = new HSV(ColorPicker.Value1, ColorPicker.Value2, ColorPicker.Value3);
+            var rgb = hsv.ToRGB();
             Red = (byte)rgb.R;
             Green = (byte)rgb.G;
             Blue = (byte)rgb.B;
@@ -488,14 +495,14 @@ public class CmykProperties : ColorPickerProperties
         return true;
     }
 
-    private bool _updating = false;
+    private bool _updating;
 
-    public CmykProperties() : base()
+    public CmykProperties()
     {
-        this.GetObservable(CyanProperty).Subscribe(x => UpdateColorPickerValues());
-        this.GetObservable(MagentaProperty).Subscribe(x => UpdateColorPickerValues());
-        this.GetObservable(YellowProperty).Subscribe(x => UpdateColorPickerValues());
-        this.GetObservable(BlackKeyProperty).Subscribe(x => UpdateColorPickerValues());
+        this.GetObservable(CyanProperty).Subscribe(_ => UpdateColorPickerValues());
+        this.GetObservable(MagentaProperty).Subscribe(_ => UpdateColorPickerValues());
+        this.GetObservable(YellowProperty).Subscribe(_ => UpdateColorPickerValues());
+        this.GetObservable(BlackKeyProperty).Subscribe(_ => UpdateColorPickerValues());
     }
 
     public double Cyan
@@ -527,8 +534,8 @@ public class CmykProperties : ColorPickerProperties
         if (_updating == false && ColorPicker != null)
         {
             _updating = true;
-            CMYK cmyk = new CMYK(Cyan, Magenta, Yellow, BlackKey);
-            HSV hsv = cmyk.ToHSV();
+            var cmyk = new CMYK(Cyan, Magenta, Yellow, BlackKey);
+            var hsv = cmyk.ToHSV();
             ColorPicker.Value1 = hsv.H;
             ColorPicker.Value2 = hsv.S;
             ColorPicker.Value3 = hsv.V;
@@ -541,8 +548,8 @@ public class CmykProperties : ColorPickerProperties
         if (_updating == false && ColorPicker != null)
         {
             _updating = true;
-            HSV hsv = new HSV(ColorPicker.Value1, ColorPicker.Value2, ColorPicker.Value3);
-            CMYK cmyk = hsv.ToCMYK();
+            var hsv = new HSV(ColorPicker.Value1, ColorPicker.Value2, ColorPicker.Value3);
+            var cmyk = hsv.ToCMYK();
             Cyan = cmyk.C;
             Magenta = cmyk.M;
             Yellow = cmyk.Y;
@@ -566,11 +573,12 @@ public class HexProperties : ColorPickerProperties
         return true;
     }
 
-    private bool _updating = false;
+    private bool _updating;
 
-    public HexProperties() : base()
+    public HexProperties()
     {
-        this.GetObservable(HexProperty).Subscribe(x => UpdateColorPickerValues());
+        _updating = false;
+        this.GetObservable(HexProperty).Subscribe(_ => UpdateColorPickerValues());
     }
 
     public string Hex
@@ -584,8 +592,8 @@ public class HexProperties : ColorPickerProperties
         if (_updating == false && ColorPicker != null)
         {
             _updating = true;
-            Color color = Color.Parse(Hex);
-            ColorHelpers.FromColor(color, out double h, out double s, out double v, out double a);
+            var color = Color.Parse(Hex);
+            ColorHelpers.FromColor(color, out var h, out var s, out var v, out var a);
             ColorPicker.Value1 = h;
             ColorPicker.Value2 = s;
             ColorPicker.Value3 = v;
@@ -620,11 +628,12 @@ public class AlphaProperties : ColorPickerProperties
         return true;
     }
 
-    private bool _updating = false;
+    private bool _updating;
 
-    public AlphaProperties() : base()
+    public AlphaProperties()
     {
-        this.GetObservable(AlphaProperty).Subscribe(x => UpdateColorPickerValues());
+        _updating = false;
+        this.GetObservable(AlphaProperty).Subscribe(_ => UpdateColorPickerValues());
     }
 
     public double Alpha
@@ -696,17 +705,17 @@ public class ColorPicker : TemplatedControl
     private Thumb? _hueThumb;
     private Canvas? _alphaCanvas;
     private Thumb? _alphaThumb;
-    private bool _updating = false;
-    private bool _captured = false;
+    private bool _updating;
+    private bool _captured;
     private readonly IValueConverters _converters = new HsvValueConverters();
 
     public ColorPicker()
     {
-        this.GetObservable(Value1Property).Subscribe(x => OnValueChange());
-        this.GetObservable(Value2Property).Subscribe(x => OnValueChange());
-        this.GetObservable(Value3Property).Subscribe(x => OnValueChange());
-        this.GetObservable(Value4Property).Subscribe(x => OnValueChange());
-        this.GetObservable(ColorProperty).Subscribe(x => OnColorChange());
+        this.GetObservable(Value1Property).Subscribe(_ => OnValueChange());
+        this.GetObservable(Value2Property).Subscribe(_ => OnValueChange());
+        this.GetObservable(Value3Property).Subscribe(_ => OnValueChange());
+        this.GetObservable(Value4Property).Subscribe(_ => OnValueChange());
+        this.GetObservable(ColorProperty).Subscribe(_ => OnColorChange());
     }
 
     public double Value1
@@ -847,21 +856,21 @@ public class ColorPicker : TemplatedControl
     {
         if (canvas != null && thumb != null)
         {
-            double left = Clamp(x, 0, canvas.Bounds.Width);
-            double top = Clamp(y, 0, canvas.Bounds.Height);
+            var left = Clamp(x, 0, canvas.Bounds.Width);
+            var top = Clamp(y, 0, canvas.Bounds.Height);
             Canvas.SetLeft(thumb, left);
             Canvas.SetTop(thumb, top); 
         }
     }
 
-    private T Convert<T>(IValueConverter converter, T value, T range)
+    private T? Convert<T>(IValueConverter converter, T? value, T? range)
     {
-        return (T)converter.Convert(value, typeof(T), range, CultureInfo.CurrentCulture);
+        return (T?)converter.Convert(value, typeof(T), range, CultureInfo.CurrentCulture);
     }
 
-    private T ConvertBack<T>(IValueConverter converter, T value, T range)
+    private T? ConvertBack<T>(IValueConverter converter, T? value, T? range)
     {
-        return (T)converter.ConvertBack(value, typeof(T), range, CultureInfo.CurrentCulture);
+        return (T?)converter.ConvertBack(value, typeof(T), range, CultureInfo.CurrentCulture);
     }
 
     private double GetValue1Range() => _hueCanvas?.Bounds.Height ?? 0.0;
@@ -874,11 +883,11 @@ public class ColorPicker : TemplatedControl
 
     private void UpdateThumbsFromColor()
     {
-        ColorHelpers.FromColor(Color, out double h, out double s, out double v, out double a);
-        double hueY = Convert(_converters.Value1Converter, h, GetValue1Range());
-        double colorX = Convert(_converters.Value2Converter, s, GetValue2Range());
-        double colorY = Convert(_converters.Value3Converter, v, GetValue3Range());
-        double alphaX = Convert(_converters.Value4Converter, a, GetValue4Range());
+        ColorHelpers.FromColor(Color, out var h, out var s, out var v, out var a);
+        var hueY = Convert(_converters.Value1Converter, h, GetValue1Range());
+        var colorX = Convert(_converters.Value2Converter, s, GetValue2Range());
+        var colorY = Convert(_converters.Value3Converter, v, GetValue3Range());
+        var alphaX = Convert(_converters.Value4Converter, a, GetValue4Range());
         MoveThumb(_hueCanvas, _hueThumb, 0, hueY);
         MoveThumb(_colorCanvas, _colorThumb, colorX, colorY);
         MoveThumb(_alphaCanvas, _alphaThumb, alphaX, 0);
@@ -886,10 +895,10 @@ public class ColorPicker : TemplatedControl
 
     private void UpdateThumbsFromValues()
     {
-        double hueY = Convert(_converters.Value1Converter, Value1, GetValue1Range());
-        double colorX = Convert(_converters.Value2Converter, Value2, GetValue2Range());
-        double colorY = Convert(_converters.Value3Converter, Value3, GetValue3Range());
-        double alphaX = Convert(_converters.Value4Converter, Value4, GetValue4Range());
+        var hueY = Convert(_converters.Value1Converter, Value1, GetValue1Range());
+        var colorX = Convert(_converters.Value2Converter, Value2, GetValue2Range());
+        var colorY = Convert(_converters.Value3Converter, Value3, GetValue3Range());
+        var alphaX = Convert(_converters.Value4Converter, Value4, GetValue4Range());
         MoveThumb(_hueCanvas, _hueThumb, 0, hueY);
         MoveThumb(_colorCanvas, _colorThumb, colorX, colorY);
         MoveThumb(_alphaCanvas, _alphaThumb, alphaX, 0);
@@ -897,10 +906,10 @@ public class ColorPicker : TemplatedControl
 
     private void UpdateValuesFromThumbs()
     {
-        double hueY = Canvas.GetTop(_hueThumb);
-        double colorX = Canvas.GetLeft(_colorThumb);
-        double colorY = Canvas.GetTop(_colorThumb);
-        double alphaX = Canvas.GetLeft(_alphaThumb);
+        var hueY = Canvas.GetTop(_hueThumb);
+        var colorX = Canvas.GetLeft(_colorThumb);
+        var colorY = Canvas.GetTop(_colorThumb);
+        var alphaX = Canvas.GetLeft(_alphaThumb);
         Value1 = ConvertBack(_converters.Value1Converter, hueY, GetValue1Range());
         Value2 = ConvertBack(_converters.Value2Converter, colorX, GetValue2Range());
         Value3 = ConvertBack(_converters.Value3Converter, colorY, GetValue3Range());
@@ -910,14 +919,14 @@ public class ColorPicker : TemplatedControl
 
     private void UpdateColorFromThumbs()
     {
-        double hueY = Canvas.GetTop(_hueThumb);
-        double colorX = Canvas.GetLeft(_colorThumb);
-        double colorY = Canvas.GetTop(_colorThumb);
-        double alphaX = Canvas.GetLeft(_alphaThumb);
-        double h = ConvertBack(_converters.Value1Converter, hueY, GetValue1Range());
-        double s = ConvertBack(_converters.Value2Converter, colorX, GetValue2Range());
-        double v = ConvertBack(_converters.Value3Converter, colorY, GetValue3Range());
-        double a = ConvertBack(_converters.Value4Converter, alphaX, GetValue4Range());
+        var hueY = Canvas.GetTop(_hueThumb);
+        var colorX = Canvas.GetLeft(_colorThumb);
+        var colorY = Canvas.GetTop(_colorThumb);
+        var alphaX = Canvas.GetLeft(_alphaThumb);
+        var h = ConvertBack(_converters.Value1Converter, hueY, GetValue1Range());
+        var s = ConvertBack(_converters.Value2Converter, colorX, GetValue2Range());
+        var v = ConvertBack(_converters.Value3Converter, colorY, GetValue3Range());
+        var a = ConvertBack(_converters.Value4Converter, alphaX, GetValue4Range());
         Color = ColorHelpers.FromHSVA(h, s, v, a);
     }
 
@@ -963,7 +972,7 @@ public class ColorPicker : TemplatedControl
 
     private void ColorCanvas_PointerReleased(object? sender, PointerReleasedEventArgs e)
     {
-        if (_captured == true)
+        if (_captured)
         {
             if (_colorCanvas is { } && _colorThumb is { })
             {
@@ -976,7 +985,7 @@ public class ColorPicker : TemplatedControl
 
     private void ColorCanvas_PointerMoved(object? sender, PointerEventArgs e)
     {
-        if (_captured == true)
+        if (_captured)
         {
             var position = e.GetPosition(_colorCanvas);
             _updating = true;
@@ -989,8 +998,8 @@ public class ColorPicker : TemplatedControl
 
     private void ColorThumb_DragDelta(object? sender, VectorEventArgs e)
     {
-        double left = Canvas.GetLeft(_colorThumb);
-        double top = Canvas.GetTop(_colorThumb);
+        var left = Canvas.GetLeft(_colorThumb);
+        var top = Canvas.GetTop(_colorThumb);
         _updating = true;
         MoveThumb(_colorCanvas, _colorThumb, left + e.Vector.X, top + e.Vector.Y);
         UpdateValuesFromThumbs();
@@ -1016,7 +1025,7 @@ public class ColorPicker : TemplatedControl
 
     private void HueCanvas_PointerReleased(object? sender, PointerReleasedEventArgs e)
     {
-        if (_captured == true)
+        if (_captured)
         {
             if (_hueCanvas is { } && _hueThumb is { })
             {
@@ -1029,7 +1038,7 @@ public class ColorPicker : TemplatedControl
 
     private void HueCanvas_PointerMoved(object? sender, PointerEventArgs e)
     {
-        if (_captured == true)
+        if (_captured)
         {
             var position = e.GetPosition(_hueCanvas);
             _updating = true;
@@ -1042,7 +1051,7 @@ public class ColorPicker : TemplatedControl
 
     private void HueThumb_DragDelta(object? sender, VectorEventArgs e)
     {
-        double top = Canvas.GetTop(_hueThumb);
+        var top = Canvas.GetTop(_hueThumb);
         _updating = true;
         MoveThumb(_hueCanvas, _hueThumb, 0, top + e.Vector.Y);
         UpdateValuesFromThumbs();
@@ -1068,7 +1077,7 @@ public class ColorPicker : TemplatedControl
 
     private void AlphaCanvas_PointerReleased(object? sender, PointerReleasedEventArgs e)
     {
-        if (_captured == true)
+        if (_captured)
         {
             if (_alphaCanvas is { } && _alphaThumb is { })
             {
@@ -1081,7 +1090,7 @@ public class ColorPicker : TemplatedControl
 
     private void AlphaCanvas_PointerMoved(object? sender, PointerEventArgs e)
     {
-        if (_captured == true)
+        if (_captured)
         {
             var position = e.GetPosition(_alphaCanvas);
             _updating = true;
@@ -1094,7 +1103,7 @@ public class ColorPicker : TemplatedControl
 
     private void AlphaThumb_DragDelta(object? sender, VectorEventArgs e)
     {
-        double left = Canvas.GetLeft(_alphaThumb);
+        var left = Canvas.GetLeft(_alphaThumb);
         _updating = true;
         MoveThumb(_alphaCanvas, _alphaThumb, left + e.Vector.X, 0);
         UpdateValuesFromThumbs();
