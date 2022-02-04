@@ -12,7 +12,7 @@ variables:
   BuildConfiguration: 'Release'
   BuildPlatform: 'Any CPU'
   PublishFramework: 'net6.0'
-  PublishProject: 'ThemeEditor'
+  PublishProject: 'ThemeEditor.Desktop'
   PublishRuntime: ''
 
 jobs:

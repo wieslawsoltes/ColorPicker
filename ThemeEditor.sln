@@ -43,11 +43,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{A88815F2
 		build\XUnit.props = build\XUnit.props
 		build\SourceLink.props = build\SourceLink.props
 		build\SignAssembly.props = build\SignAssembly.props
+		build\Avalonia.Web.Blazor.props = build\Avalonia.Web.Blazor.props
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{219954C4-6A40-4D94-914E-148B7EBB718E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThemeEditor", "src\ThemeEditor\ThemeEditor.csproj", "{683D24E2-5AE0-468F-8A2B-4B1936DAB7FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThemeEditor.Base", "src\ThemeEditor.Base\ThemeEditor.Base.csproj", "{683D24E2-5AE0-468F-8A2B-4B1936DAB7FB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThemeEditor.Controls.ColorPicker", "src\ThemeEditor.Controls.ColorPicker\ThemeEditor.Controls.ColorPicker.csproj", "{DA3A88E9-BB02-4ED7-9760-7FF14257F23D}"
 EndProject
@@ -56,6 +57,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThemeEditor.Controls.ColorPicker.UnitTests", "tests\ThemeEditor.Controls.ColorPicker.UnitTests\ThemeEditor.Controls.ColorPicker.UnitTests.csproj", "{A8EB278A-149D-4BE4-8388-86EFB0D9030F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\build\_build.csproj", "{DD390F62-BC92-4012-9C09-B2ED62CBFAA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThemeEditor.Desktop", "src\ThemeEditor.Desktop\ThemeEditor.Desktop.csproj", "{F5DB7435-DCE2-4CC1-8673-054BC0013325}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThemeEditor.Web", "src\ThemeEditor.Web\ThemeEditor.Web.csproj", "{67D52AF3-AA89-4F2A-9942-4DD1ED149292}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,6 +84,14 @@ Global
 		{DD390F62-BC92-4012-9C09-B2ED62CBFAA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD390F62-BC92-4012-9C09-B2ED62CBFAA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD390F62-BC92-4012-9C09-B2ED62CBFAA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5DB7435-DCE2-4CC1-8673-054BC0013325}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5DB7435-DCE2-4CC1-8673-054BC0013325}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5DB7435-DCE2-4CC1-8673-054BC0013325}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5DB7435-DCE2-4CC1-8673-054BC0013325}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67D52AF3-AA89-4F2A-9942-4DD1ED149292}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67D52AF3-AA89-4F2A-9942-4DD1ED149292}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67D52AF3-AA89-4F2A-9942-4DD1ED149292}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67D52AF3-AA89-4F2A-9942-4DD1ED149292}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,6 +104,8 @@ Global
 		{DA3A88E9-BB02-4ED7-9760-7FF14257F23D} = {219954C4-6A40-4D94-914E-148B7EBB718E}
 		{A8EB278A-149D-4BE4-8388-86EFB0D9030F} = {F2D7C825-1AC1-45FF-A221-CEE80E2F2374}
 		{DD390F62-BC92-4012-9C09-B2ED62CBFAA4} = {3353FD4A-FE9B-4670-86C9-09EF0F7CEDB2}
+		{F5DB7435-DCE2-4CC1-8673-054BC0013325} = {219954C4-6A40-4D94-914E-148B7EBB718E}
+		{67D52AF3-AA89-4F2A-9942-4DD1ED149292} = {219954C4-6A40-4D94-914E-148B7EBB718E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CF676549-9409-4598-8229-80E04B51ADC5}

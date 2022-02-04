@@ -5,10 +5,11 @@
     <OutputType>WinExe</OutputType>
     <IsPackable>False</IsPackable>
     <Nullable>enable</Nullable>
+    <RootNamespace>ThemeEditor.Desktop</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageId>ThemeEditor</PackageId>
+    <PackageId>ThemeEditor.Desktop</PackageId>
     <Description>An Avalonia UI Framework theme editor application.</Description>
     <PackageTags>avalonia;avaloniaui;themes;theme-editor;xaml;csharp</PackageTags>
   </PropertyGroup>
@@ -19,21 +20,13 @@
     <PublishReadyToRun>False</PublishReadyToRun>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ThemeEditor.Base\ThemeEditor.Base.csproj" />
+  </ItemGroup>
+
   <Import Project="..\..\build\Base.props" />
   <Import Project="..\..\build\ReferenceAssemblies.props" />
-  <Import Project="..\..\build\ReactiveUI.props" />
-  <Import Project="..\..\build\Avalonia.props" />
   <Import Project="..\..\build\Avalonia.Desktop.props" />
   <Import Project="..\..\build\Avalonia.Diagnostics.props" />
-  <Import Project="..\..\build\Avalonia.ReactiveUI.props" />
-  <Import Project="..\..\build\Newtonsoft.Json.props" />
-
-  <ItemGroup>
-    <EmbeddedResource Include="Themes\Themes.themes" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\ThemeEditor.Controls.ColorPicker\ThemeEditor.Controls.ColorPicker.csproj" />
-  </ItemGroup>
 
 </Project>
