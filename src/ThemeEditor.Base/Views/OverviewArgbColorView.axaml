@@ -46,7 +46,7 @@
                 </Panel>
             </ToggleButton>
             <Popup IsOpen="{Binding #PopupButton.IsChecked, Mode=TwoWay}" IsLightDismissEnabled="True" PlacementMode="AnchorAndGravity" PlacementGravity="BottomLeft" PlacementAnchor="BottomLeft">
-                <Border Background="{DynamicResource SystemChromeMediumColor}" CornerRadius="0">
+                <Border Background="{DynamicResource ThemeBackgroundBrush}" CornerRadius="0">
                     <cp:ColorPicker Color="{Binding Hex, Mode=TwoWay, Converter={StaticResource HexToColorConverter}}" Margin="8" />
                 </Border>
             </Popup>
