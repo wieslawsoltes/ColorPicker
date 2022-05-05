@@ -88,7 +88,7 @@ public class CmykProperties : ColorPickerProperties
         set { SetValue(BlackKeyProperty, value); }
     }
 
-    public override void UpdateColorPickerValues()
+    protected override void UpdateColorPickerValues()
     {
         if (_updating == false && ColorPicker != null)
         {

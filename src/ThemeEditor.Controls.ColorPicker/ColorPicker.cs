@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using Avalonia;
+using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Data.Converters;
 using Avalonia.Input;
 using Avalonia.Media;
 using ThemeEditor.Controls.ColorPicker.Converters;
+using ThemeEditor.Controls.ColorPicker.Props;
 
 namespace ThemeEditor.Controls.ColorPicker;
 
@@ -27,6 +30,9 @@ public class ColorPicker : TemplatedControl
     public static readonly StyledProperty<Color> ColorProperty =
         AvaloniaProperty.Register<ColorPicker, Color>(nameof(Color));
 
+    public static readonly StyledProperty<IEnumerable<ColorPickerProperties>> PropertiesProperty = 
+        AvaloniaProperty.Register<ColorPicker, IEnumerable<ColorPickerProperties>>(nameof(Properties));
+
     private Canvas? _colorCanvas;
     private Thumb? _colorThumb;
     private Canvas? _hueCanvas;
@@ -39,9 +45,38 @@ public class ColorPicker : TemplatedControl
     private readonly IValueConverter _value2Converter = new SaturationConverter();
     private readonly IValueConverter _value3Converter = new ValueConverter();
     private readonly IValueConverter _value4Converter = new AlphaConverter();
-    
+
     public ColorPicker()
     {
+        Properties = new AvaloniaList<ColorPickerProperties>()
+        {
+            new HexProperties
+            {
+                Header = "Hex",
+                ColorPicker = this
+            },
+            new AlphaProperties
+            {
+                Header = "Alpha",
+                ColorPicker = this
+            },
+            new RgbProperties
+            {
+                Header = "RGB",
+                ColorPicker = this
+            },
+            new HsvProperties
+            {
+                Header = "HSV",
+                ColorPicker = this
+            },
+            new CmykProperties
+            {
+                Header = "CMYK",
+                ColorPicker = this
+            }
+        };
+
         this.GetObservable(Value1Property).Subscribe(_ => OnValueChange());
         this.GetObservable(Value2Property).Subscribe(_ => OnValueChange());
         this.GetObservable(Value3Property).Subscribe(_ => OnValueChange());
@@ -77,6 +112,12 @@ public class ColorPicker : TemplatedControl
     {
         get { return GetValue(ColorProperty); }
         set { SetValue(ColorProperty, value); }
+    }
+
+    public IEnumerable<ColorPickerProperties> Properties
+    {
+        get => GetValue(PropertiesProperty);
+        set => SetValue(PropertiesProperty, value);
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)

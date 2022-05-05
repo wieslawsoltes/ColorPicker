@@ -31,7 +31,7 @@ public class AlphaProperties : ColorPickerProperties
         set { SetValue(AlphaProperty, value); }
     }
 
-    public override void UpdateColorPickerValues()
+    protected override void UpdateColorPickerValues()
     {
         if (_updating == false && ColorPicker != null)
         {

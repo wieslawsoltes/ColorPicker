@@ -32,7 +32,7 @@ public class HexProperties : ColorPickerProperties
         set { SetValue(HexProperty, value); }
     }
 
-    public override void UpdateColorPickerValues()
+    protected override void UpdateColorPickerValues()
     {
         if (_updating == false && ColorPicker != null)
         {

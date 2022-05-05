@@ -74,7 +74,7 @@ public class RgbProperties : ColorPickerProperties
         set { SetValue(BlueProperty, value); }
     }
 
-    public override void UpdateColorPickerValues()
+    protected override void UpdateColorPickerValues()
     {
         if (_updating == false && ColorPicker != null)
         {

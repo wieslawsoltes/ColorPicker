@@ -5,6 +5,9 @@ namespace ThemeEditor.Controls.ColorPicker;
 
 public abstract class ColorPickerProperties : AvaloniaObject
 {
+    public static readonly StyledProperty<object?> HeaderProperty =
+        AvaloniaProperty.Register<ColorPickerProperties, object?>(nameof(Header));
+
     public static readonly StyledProperty<ColorPicker?> ColorPickerProperty =
         AvaloniaProperty.Register<ColorPickerProperties, ColorPicker?>(nameof(ColorPicker));
 
@@ -13,17 +16,23 @@ public abstract class ColorPickerProperties : AvaloniaObject
         this.GetObservable(ColorPickerProperty).Subscribe(_ => OnColorPickerChange());
     }
 
-    public ColorPicker? ColorPicker
+    public object? Header
     {
-        get { return GetValue(ColorPickerProperty); }
-        set { SetValue(ColorPickerProperty, value); }
+        get => GetValue(HeaderProperty);
+        set => SetValue(HeaderProperty, value);
     }
 
-    public abstract void UpdateColorPickerValues();
+    public ColorPicker? ColorPicker
+    {
+        get => GetValue(ColorPickerProperty);
+        set => SetValue(ColorPickerProperty, value);
+    }
+
+    protected abstract void UpdateColorPickerValues();
 
     public abstract void UpdatePropertyValues();
 
-    public virtual void OnColorPickerChange()
+    protected virtual void OnColorPickerChange()
     {
         ColorPicker?.GetObservable(ColorPicker.Value1Property).Subscribe(_ => UpdatePropertyValues());
         ColorPicker?.GetObservable(ColorPicker.Value2Property).Subscribe(_ => UpdatePropertyValues());

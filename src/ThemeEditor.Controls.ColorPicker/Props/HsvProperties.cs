@@ -68,7 +68,7 @@ public class HsvProperties : ColorPickerProperties
         set { SetValue(ValueProperty, value); }
     }
 
-    public override void UpdateColorPickerValues()
+    protected override void UpdateColorPickerValues()
     {
         if (_updating == false && ColorPicker != null)
         {
