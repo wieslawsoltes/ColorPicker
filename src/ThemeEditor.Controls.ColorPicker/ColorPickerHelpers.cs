@@ -6,7 +6,7 @@ namespace ThemeEditor.Controls.ColorPicker;
 
 public static class ColorPickerHelpers
 {
-    private static readonly Regex s_hexRegex = new Regex("^#[a-fA-F0-9]{8}$");
+    private static readonly Regex s_hexRegex = new("^#[a-fA-F0-9]{8}$", RegexOptions.Compiled);
 
     public static bool IsValidHexColor(string hex)
     {
