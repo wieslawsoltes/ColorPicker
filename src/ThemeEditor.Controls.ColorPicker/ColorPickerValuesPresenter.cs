@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.Reactive.Disposables;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
@@ -25,7 +24,6 @@ public class ColorPickerValuesPresenter : TemplatedControl
     public static readonly StyledProperty<double> Value4Property =
         AvaloniaProperty.Register<ColorPickerValuesPresenter, double>(nameof(Value4));
 
-    private CompositeDisposable? _disposable;
     private Canvas? _colorCanvas;
     private Thumb? _colorThumb;
     private Canvas? _hueCanvas;
@@ -67,8 +65,6 @@ public class ColorPickerValuesPresenter : TemplatedControl
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
-
-        _disposable?.Dispose();
 
         if (_colorCanvas != null)
         {
@@ -112,8 +108,6 @@ public class ColorPickerValuesPresenter : TemplatedControl
         _hueThumb = e.NameScope.Find<Thumb>("PART_HueThumb");
         _alphaCanvas = e.NameScope.Find<Canvas>("PART_AlphaCanvas");
         _alphaThumb = e.NameScope.Find<Thumb>("PART_AlphaThumb");
-
-        _disposable = new CompositeDisposable();
 
         if (_colorCanvas != null)
         {
