@@ -4,7 +4,7 @@
         xmlns:converters="clr-namespace:ThemeEditor.Controls.ColorPicker.Converters"
         xmlns:props="clr-namespace:ThemeEditor.Controls.ColorPicker.Props">
     <Design.PreviewWith>
-        <Border Padding="5" Width="300" Height="400">
+        <Border Padding="5" Width="400" Height="400">
             <cp:ColorPicker Color="#5F1F001F"/>
         </Border>
     </Design.PreviewWith>
