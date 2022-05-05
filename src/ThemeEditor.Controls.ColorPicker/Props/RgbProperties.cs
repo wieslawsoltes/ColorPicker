@@ -58,20 +58,20 @@ public class RgbProperties : ColorPickerProperties
 
     public byte Red
     {
-        get { return GetValue(RedProperty); }
-        set { SetValue(RedProperty, value); }
+        get => GetValue(RedProperty);
+        set => SetValue(RedProperty, value);
     }
 
     public byte Green
     {
-        get { return GetValue(GreenProperty); }
-        set { SetValue(GreenProperty, value); }
+        get => GetValue(GreenProperty);
+        set => SetValue(GreenProperty, value);
     }
 
     public byte Blue
     {
-        get { return GetValue(BlueProperty); }
-        set { SetValue(BlueProperty, value); }
+        get => GetValue(BlueProperty);
+        set => SetValue(BlueProperty, value);
     }
 
     protected override void UpdateColorPickerValues()
