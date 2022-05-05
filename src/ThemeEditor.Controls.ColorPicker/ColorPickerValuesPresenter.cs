@@ -171,8 +171,8 @@ public class ColorPickerValuesPresenter : TemplatedControl
     {
         if (canvas != null && thumb != null)
         {
-            var left = Clamp(x, 0, canvas.Bounds.Width);
-            var top = Clamp(y, 0, canvas.Bounds.Height);
+            var left = ColorPickerHelpers.Clamp(x, 0, canvas.Bounds.Width);
+            var top = ColorPickerHelpers.Clamp(y, 0, canvas.Bounds.Height);
             Canvas.SetLeft(thumb, left);
             Canvas.SetTop(thumb, top); 
         }
