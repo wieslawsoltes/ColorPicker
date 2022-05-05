@@ -132,9 +132,9 @@
       "System.Threading.Thread.dll": "sha256-YvcjtOGcudlPyyq6XypxFmEQDzR+KY\/IHwgFJyZR\/Q4=",
       "System.Threading.ThreadPool.dll": "sha256-ESKOacGX0c2G4O0A1fQJ6T\/hkc2lqg7fQC+DXA1BTuc=",
       "System.Threading.Timer.dll": "sha256-qU0Zhun\/9x77zBNsACGRabnz8TshagMr2oFwppOSedw=",
-      "ThemeEditor.Base.dll": "sha256-EMJ3RRii9DE\/T4gvZS8Huz2GKw\/Go7KbCw3NxGBEUGA=",
-      "ThemeEditor.Controls.ColorPicker.dll": "sha256-xuPnRbvGhgp1tqfIV8T5VM4I7CrQJUlsFMUZ5G4YiqQ=",
-      "ThemeEditor.Web.dll": "sha256-M9mXAmKk1vSQK\/VTX4XmbkXmi3eqBM3eILIXRIY06xA=",
+      "ThemeEditor.Base.dll": "sha256-d\/b\/Y7iTqEyBL3X9K0HpVSobqczvZQEQibtQtw7DzY8=",
+      "ThemeEditor.Controls.ColorPicker.dll": "sha256-HuiCVIexVJLgxQVJc7wRT2MrDzUu7ll2JkRPnL16Npc=",
+      "ThemeEditor.Web.dll": "sha256-hhjOk2XMmNlAZWc33rCS9\/7fBNADz3Q\/8ogfm\/qWlUo=",
       "Tmds.DBus.dll": "sha256-nyV1LWmSnDnTpR2fRuiHdt\/17QzgwU76pu5F76AU+Tk="
     },
     "extensions": null,
