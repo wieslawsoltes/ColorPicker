@@ -21,8 +21,8 @@ public class ColorPicker : TemplatedControl
 
     public Color Color
     {
-        get { return GetValue(ColorProperty); }
-        set { SetValue(ColorProperty, value); }
+        get => GetValue(ColorProperty);
+        set => SetValue(ColorProperty, value);
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
