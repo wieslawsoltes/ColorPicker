@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reactive.Disposables;
 using Avalonia;
 using Avalonia.Collections;
@@ -16,10 +15,8 @@ public class ColorPicker : TemplatedControl
     public static readonly StyledProperty<Color> ColorProperty =
         AvaloniaProperty.Register<ColorPicker, Color>(nameof(Color));
 
-    public static readonly StyledProperty<IEnumerable<ColorPickerProperties>> PropertiesProperty = 
-        AvaloniaProperty.Register<ColorPicker, IEnumerable<ColorPickerProperties>>(nameof(Properties));
-
-    private ColorPickerPresenter? _colorPickerPresenter;
+    private ColorPickerPropertiesPresenter? _propertiesPresenter;
+    private ColorPickerValuesPresenter? _valuesPresenter;
     private CompositeDisposable? _disposable;
 
     public Color Color
@@ -28,51 +25,48 @@ public class ColorPicker : TemplatedControl
         set { SetValue(ColorProperty, value); }
     }
 
-    public IEnumerable<ColorPickerProperties> Properties
-    {
-        get => GetValue(PropertiesProperty);
-        set => SetValue(PropertiesProperty, value);
-    }
-
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         _disposable?.Dispose();
+        _disposable = new CompositeDisposable();
 
-        _colorPickerPresenter = e.NameScope.Find<ColorPickerPresenter>("PART_ColorPickerPresenter");
+        _propertiesPresenter = e.NameScope.Find<ColorPickerPropertiesPresenter>("PART_ColorPickerPropertiesPresenter");
+        _valuesPresenter = e.NameScope.Find<ColorPickerValuesPresenter>("PART_ColorPickerValuesPresenter");
 
-        if (_colorPickerPresenter is { })
+        if (_propertiesPresenter is { } && _valuesPresenter is { })
         {
-            _disposable = new CompositeDisposable();
-
-            Properties = new AvaloniaList<ColorPickerProperties>
+            _propertiesPresenter.Properties = new AvaloniaList<ColorPickerProperties>
             {
-                new HexProperties { Header = "Hex", Presenter = _colorPickerPresenter },
-                new AlphaProperties { Header = "Alpha", Presenter = _colorPickerPresenter },
-                new RgbProperties { Header = "RGB", Presenter = _colorPickerPresenter },
-                new HsvProperties { Header = "HSV", Presenter = _colorPickerPresenter },
-                new CmykProperties { Header = "CMYK", Presenter = _colorPickerPresenter }
+                new HexProperties { Header = "Hex", Presenter = _valuesPresenter },
+                new AlphaProperties { Header = "Alpha", Presenter = _valuesPresenter },
+                new RgbProperties { Header = "RGB", Presenter = _valuesPresenter },
+                new HsvProperties { Header = "HSV", Presenter = _valuesPresenter },
+                new CmykProperties { Header = "CMYK", Presenter = _valuesPresenter }
             };
+        }
 
-            _colorPickerPresenter.GetObservable(ColorPickerPresenter.Value1Property)
-                .Subscribe(_ => _colorPickerPresenter.OnValueChange())
+        if (_valuesPresenter is { })
+        {
+            _valuesPresenter.GetObservable(ColorPickerValuesPresenter.Value1Property)
+                .Subscribe(_ => _valuesPresenter.OnValueChange())
                 .DisposeWith(_disposable);
 
-            _colorPickerPresenter.GetObservable(ColorPickerPresenter.Value2Property)
-                .Subscribe(_ => _colorPickerPresenter.OnValueChange())
+            _valuesPresenter.GetObservable(ColorPickerValuesPresenter.Value2Property)
+                .Subscribe(_ => _valuesPresenter.OnValueChange())
                 .DisposeWith(_disposable);
 
-            _colorPickerPresenter.GetObservable(ColorPickerPresenter.Value3Property)
-                .Subscribe(_ => _colorPickerPresenter.OnValueChange())
+            _valuesPresenter.GetObservable(ColorPickerValuesPresenter.Value3Property)
+                .Subscribe(_ => _valuesPresenter.OnValueChange())
                 .DisposeWith(_disposable);
 
-            _colorPickerPresenter.GetObservable(ColorPickerPresenter.Value4Property)
-                .Subscribe(_ => _colorPickerPresenter.OnValueChange())
+            _valuesPresenter.GetObservable(ColorPickerValuesPresenter.Value4Property)
+                .Subscribe(_ => _valuesPresenter.OnValueChange())
                 .DisposeWith(_disposable);
 
-            _colorPickerPresenter._colorPicker = this;
+            _valuesPresenter._colorPicker = this;
 
             this.GetObservable(ColorProperty)
-                .Subscribe(_ => _colorPickerPresenter.OnColorChange())
+                .Subscribe(_ => _valuesPresenter.OnColorChange())
                 .DisposeWith(_disposable);
         }
     }
@@ -81,7 +75,7 @@ public class ColorPicker : TemplatedControl
     {
         var size = base.ArrangeOverride(finalSize);
 
-        _colorPickerPresenter?.OnColorChange();
+        _valuesPresenter?.OnColorChange();
 
         return size;
     }

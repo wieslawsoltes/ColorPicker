@@ -11,74 +11,82 @@
   </Design.PreviewWith>
 
   <Style Selector="cp|ColorPicker">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <DockPanel x:Name="PART_DockPanel">
+          <cp:ColorPickerPropertiesPresenter x:Name="PART_ColorPickerPropertiesPresenter" />
+          <cp:ColorPickerValuesPresenter x:Name="PART_ColorPickerValuesPresenter" />
+        </DockPanel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+
+  <Style Selector="cp|ColorPickerPropertiesPresenter">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <TabControl Items="{TemplateBinding Properties}" Classes="picker">
+          <TabControl.DataTemplates>
+            <DataTemplate DataType="props:HexProperties">
+              <Grid RowDefinitions="Auto" ColumnDefinitions="*" Classes="properties">
+                <TextBox Text="{Binding Hex, Mode=TwoWay}" ToolTip.Tip="Hex value" Classes="picker" />
+              </Grid>
+            </DataTemplate>
+            <DataTemplate DataType="props:AlphaProperties">
+              <Grid RowDefinitions="Auto" ColumnDefinitions="*" Classes="properties">
+                <NumericUpDown Value="{Binding Alpha, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" />
+              </Grid>
+            </DataTemplate>
+            <DataTemplate DataType="props:RgbProperties">
+              <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*" Classes="properties">
+                <TextBlock Text="R" ToolTip.Tip="Red" Classes="picker" Grid.Row="0" Grid.Column="0" />
+                <NumericUpDown Value="{Binding Red, Mode=TwoWay}" Minimum="0" Maximum="255" Increment="1" FormatString="G" Classes="picker" Grid.Row="0" Grid.Column="1" />
+                <TextBlock Text="G" ToolTip.Tip="Green" Classes="picker" Grid.Row="1" Grid.Column="0" />
+                <NumericUpDown Value="{Binding Green, Mode=TwoWay}" Minimum="0" Maximum="255" Increment="1" FormatString="G" Classes="picker" Grid.Row="1" Grid.Column="1" />
+                <TextBlock Text="B" ToolTip.Tip="Blue" Classes="picker" Grid.Row="2" Grid.Column="0" />
+                <NumericUpDown Value="{Binding Blue, Mode=TwoWay}" Minimum="0" Maximum="255" Increment="1" FormatString="G" Classes="picker" Grid.Row="2" Grid.Column="1" />
+              </Grid>
+            </DataTemplate>
+            <DataTemplate DataType="props:HsvProperties">
+              <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*" Classes="properties">
+                <TextBlock Text="H" ToolTip.Tip="Hue" Classes="picker" Grid.Row="0" Grid.Column="0" />
+                <NumericUpDown Value="{Binding Hue, Mode=TwoWay}" Minimum="0" Maximum="360" Increment="0.5" FormatString="{}{0:N2} °" Classes="picker" Grid.Row="0" Grid.Column="1" />
+                <TextBlock Text="S" ToolTip.Tip="Saturation" Classes="picker" Grid.Row="1" Grid.Column="0" />
+                <NumericUpDown Value="{Binding Saturation, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="1" Grid.Column="1" />
+                <TextBlock Text="V" ToolTip.Tip="Value" Classes="picker" Grid.Row="2" Grid.Column="0" />
+                <NumericUpDown Value="{Binding Value, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="2" Grid.Column="1" />
+              </Grid>
+            </DataTemplate>
+            <DataTemplate DataType="props:CmykProperties">
+              <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*" Classes="properties">
+                <TextBlock Text="C" ToolTip.Tip="Cyan" Classes="picker" Grid.Row="0" Grid.Column="0" />
+                <NumericUpDown Value="{Binding Cyan, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="0" Grid.Column="1" />
+                <TextBlock Text="M" ToolTip.Tip="Magenta" Classes="picker" Grid.Row="1" Grid.Column="0" />
+                <NumericUpDown Value="{Binding Magenta, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="1" Grid.Column="1" />
+                <TextBlock Text="Y" ToolTip.Tip="Yellow" Classes="picker" Grid.Row="2" Grid.Column="0" />
+                <NumericUpDown Value="{Binding Yellow, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="2" Grid.Column="1" />
+                <TextBlock Text="K" ToolTip.Tip="Black key" Classes="picker" Grid.Row="3" Grid.Column="0" />
+                <NumericUpDown Value="{Binding BlackKey, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="3" Grid.Column="1" />
+              </Grid>
+            </DataTemplate>
+          </TabControl.DataTemplates>
+          <TabControl.ItemTemplate>
+            <DataTemplate DataType="cp:ColorPickerProperties">
+              <ContentControl Content="{Binding Header}" />
+            </DataTemplate>
+          </TabControl.ItemTemplate>
+        </TabControl>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+
+  <Style Selector="cp|ColorPickerValuesPresenter">
     <Style.Resources>
       <converters:HueToColorConverter x:Key="HueToColorConverter" />
       <converters:HsvaToColorConverter x:Key="HsvaToColorConverter" />
     </Style.Resources>
     <Setter Property="Template">
       <ControlTemplate>
-        <DockPanel x:Name="PART_DockPanel">
-          <TabControl x:Name="PART_Properties" Items="{TemplateBinding Properties}" Classes="picker">
-            <TabControl.DataTemplates>
-              <DataTemplate DataType="props:HexProperties">
-                <Grid RowDefinitions="Auto" ColumnDefinitions="*" Classes="properties">
-                  <TextBox Text="{Binding Hex, Mode=TwoWay}" ToolTip.Tip="Hex value" Classes="picker" />
-                </Grid>
-              </DataTemplate>
-              <DataTemplate DataType="props:AlphaProperties">
-                <Grid RowDefinitions="Auto" ColumnDefinitions="*" Classes="properties">
-                  <NumericUpDown Value="{Binding Alpha, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" />
-                </Grid>
-              </DataTemplate>
-              <DataTemplate DataType="props:RgbProperties">
-                <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*" Classes="properties">
-                  <TextBlock Text="R" ToolTip.Tip="Red" Classes="picker" Grid.Row="0" Grid.Column="0" />
-                  <NumericUpDown Value="{Binding Red, Mode=TwoWay}" Minimum="0" Maximum="255" Increment="1" FormatString="G" Classes="picker" Grid.Row="0" Grid.Column="1" />
-                  <TextBlock Text="G" ToolTip.Tip="Green" Classes="picker" Grid.Row="1" Grid.Column="0" />
-                  <NumericUpDown Value="{Binding Green, Mode=TwoWay}" Minimum="0" Maximum="255" Increment="1" FormatString="G" Classes="picker" Grid.Row="1" Grid.Column="1" />
-                  <TextBlock Text="B" ToolTip.Tip="Blue" Classes="picker" Grid.Row="2" Grid.Column="0" />
-                  <NumericUpDown Value="{Binding Blue, Mode=TwoWay}" Minimum="0" Maximum="255" Increment="1" FormatString="G" Classes="picker" Grid.Row="2" Grid.Column="1" />
-                </Grid>
-              </DataTemplate>
-              <DataTemplate DataType="props:HsvProperties">
-                <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*" Classes="properties">
-                  <TextBlock Text="H" ToolTip.Tip="Hue" Classes="picker" Grid.Row="0" Grid.Column="0" />
-                  <NumericUpDown Value="{Binding Hue, Mode=TwoWay}" Minimum="0" Maximum="360" Increment="0.5" FormatString="{}{0:N2} °" Classes="picker" Grid.Row="0" Grid.Column="1" />
-                  <TextBlock Text="S" ToolTip.Tip="Saturation" Classes="picker" Grid.Row="1" Grid.Column="0" />
-                  <NumericUpDown Value="{Binding Saturation, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="1" Grid.Column="1" />
-                  <TextBlock Text="V" ToolTip.Tip="Value" Classes="picker" Grid.Row="2" Grid.Column="0" />
-                  <NumericUpDown Value="{Binding Value, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="2" Grid.Column="1" />
-                </Grid>
-              </DataTemplate>
-              <DataTemplate DataType="props:CmykProperties">
-                <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*" Classes="properties">
-                  <TextBlock Text="C" ToolTip.Tip="Cyan" Classes="picker" Grid.Row="0" Grid.Column="0" />
-                  <NumericUpDown Value="{Binding Cyan, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="0" Grid.Column="1" />
-                  <TextBlock Text="M" ToolTip.Tip="Magenta" Classes="picker" Grid.Row="1" Grid.Column="0" />
-                  <NumericUpDown Value="{Binding Magenta, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="1" Grid.Column="1" />
-                  <TextBlock Text="Y" ToolTip.Tip="Yellow" Classes="picker" Grid.Row="2" Grid.Column="0" />
-                  <NumericUpDown Value="{Binding Yellow, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="2" Grid.Column="1" />
-                  <TextBlock Text="K" ToolTip.Tip="Black key" Classes="picker" Grid.Row="3" Grid.Column="0" />
-                  <NumericUpDown Value="{Binding BlackKey, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="3" Grid.Column="1" />
-                </Grid>
-              </DataTemplate>
-            </TabControl.DataTemplates>
-            <TabControl.ItemTemplate>
-              <DataTemplate DataType="cp:ColorPickerProperties">
-                <ContentControl Content="{Binding Header}" />
-              </DataTemplate>
-            </TabControl.ItemTemplate>
-          </TabControl>
-          <cp:ColorPickerPresenter x:Name="PART_ColorPickerPresenter" />
-        </DockPanel>
-      </ControlTemplate>
-    </Setter>
-  </Style>
-
-  <Style Selector="cp|ColorPickerPresenter">
-    <Setter Property="Template">
-      <ControlTemplate>
-          <Grid x:Name="PART_Picker" ColumnDefinitions="*,3,Auto" RowDefinitions="*,3,Auto">
+          <Grid ColumnDefinitions="*,3,Auto" RowDefinitions="*,3,Auto">
             <Grid Grid.Column="0" Grid.Row="0">
               <Grid.Background>
                 <LinearGradientBrush StartPoint="0%,50%" EndPoint="100%,50%">
@@ -178,12 +186,12 @@
     </Setter>
   </Style>
 
-  <Style Selector="cp|ColorPickerPresenter /template/ Grid#PART_Picker">
+  <Style Selector="cp|ColorPicker /template/ cp|ColorPickerValuesPresenter">
     <Setter Property="MinHeight" Value="200" />
     <Setter Property="MinWidth" Value="200" />
   </Style>
 
-  <Style Selector="cp|ColorPicker /template/ TabControl#PART_Properties">
+  <Style Selector="cp|ColorPicker /template/ cp|ColorPickerPropertiesPresenter#PART_ColorPickerPropertiesPresenter">
     <Setter Property="(DockPanel.Dock)" Value="Bottom" />
   </Style>
 

@@ -8,8 +8,8 @@ public abstract class ColorPickerProperties : AvaloniaObject
     public static readonly StyledProperty<object?> HeaderProperty =
         AvaloniaProperty.Register<ColorPickerProperties, object?>(nameof(Header));
 
-    public static readonly StyledProperty<ColorPickerPresenter?> PresenterProperty =
-        AvaloniaProperty.Register<ColorPickerProperties, ColorPickerPresenter?>(nameof(Presenter));
+    public static readonly StyledProperty<ColorPickerValuesPresenter?> PresenterProperty =
+        AvaloniaProperty.Register<ColorPickerProperties, ColorPickerValuesPresenter?>(nameof(Presenter));
 
     public ColorPickerProperties()
     {
@@ -22,7 +22,7 @@ public abstract class ColorPickerProperties : AvaloniaObject
         set => SetValue(HeaderProperty, value);
     }
 
-    public ColorPickerPresenter? Presenter
+    public ColorPickerValuesPresenter? Presenter
     {
         get => GetValue(PresenterProperty);
         set => SetValue(PresenterProperty, value);
@@ -34,9 +34,9 @@ public abstract class ColorPickerProperties : AvaloniaObject
 
     protected virtual void OnColorPickerChange()
     {
-        Presenter?.GetObservable(ColorPickerPresenter.Value1Property).Subscribe(_ => UpdatePropertyValues());
-        Presenter?.GetObservable(ColorPickerPresenter.Value2Property).Subscribe(_ => UpdatePropertyValues());
-        Presenter?.GetObservable(ColorPickerPresenter.Value3Property).Subscribe(_ => UpdatePropertyValues());
-        Presenter?.GetObservable(ColorPickerPresenter.Value4Property).Subscribe(_ => UpdatePropertyValues());
+        Presenter?.GetObservable(ColorPickerValuesPresenter.Value1Property).Subscribe(_ => UpdatePropertyValues());
+        Presenter?.GetObservable(ColorPickerValuesPresenter.Value2Property).Subscribe(_ => UpdatePropertyValues());
+        Presenter?.GetObservable(ColorPickerValuesPresenter.Value3Property).Subscribe(_ => UpdatePropertyValues());
+        Presenter?.GetObservable(ColorPickerValuesPresenter.Value4Property).Subscribe(_ => UpdatePropertyValues());
     }
 }

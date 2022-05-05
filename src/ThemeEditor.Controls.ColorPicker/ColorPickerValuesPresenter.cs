@@ -11,19 +11,19 @@ using ThemeEditor.Controls.ColorPicker.Converters;
 
 namespace ThemeEditor.Controls.ColorPicker;
 
-public class ColorPickerPresenter : TemplatedControl
+public class ColorPickerValuesPresenter : TemplatedControl
 {
     public static readonly StyledProperty<double> Value1Property =
-        AvaloniaProperty.Register<ColorPickerPresenter, double>(nameof(Value1));
+        AvaloniaProperty.Register<ColorPickerValuesPresenter, double>(nameof(Value1));
 
     public static readonly StyledProperty<double> Value2Property =
-        AvaloniaProperty.Register<ColorPickerPresenter, double>(nameof(Value2));
+        AvaloniaProperty.Register<ColorPickerValuesPresenter, double>(nameof(Value2));
 
     public static readonly StyledProperty<double> Value3Property =
-        AvaloniaProperty.Register<ColorPickerPresenter, double>(nameof(Value3));
+        AvaloniaProperty.Register<ColorPickerValuesPresenter, double>(nameof(Value3));
 
     public static readonly StyledProperty<double> Value4Property =
-        AvaloniaProperty.Register<ColorPickerPresenter, double>(nameof(Value4));
+        AvaloniaProperty.Register<ColorPickerValuesPresenter, double>(nameof(Value4));
 
     private CompositeDisposable? _disposable;
     private Canvas? _colorCanvas;
