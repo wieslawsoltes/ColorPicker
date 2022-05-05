@@ -162,11 +162,6 @@ public class ColorPickerValuesPresenter : TemplatedControl
                && _alphaThumb != null;
     }
 
-    private double Clamp(double val, double min, double max)
-    {
-        return Math.Min(Math.Max(val, min), max);
-    }
-
     private void MoveThumb(Canvas? canvas, Thumb? thumb, double x, double y)
     {
         if (canvas != null && thumb != null)
