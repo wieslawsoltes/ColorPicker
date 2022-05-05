@@ -27,8 +27,8 @@ public class AlphaProperties : ColorPickerProperties
 
     public double Alpha
     {
-        get { return GetValue(AlphaProperty); }
-        set { SetValue(AlphaProperty, value); }
+        get => GetValue(AlphaProperty);
+        set => SetValue(AlphaProperty, value);
     }
 
     protected override void UpdateColorPickerValues()
