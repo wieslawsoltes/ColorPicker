@@ -102,7 +102,7 @@ public class CmykProperties : ColorPickerProperties
         }
     }
 
-    public override void UpdatePropertyValues()
+    protected override void UpdatePropertyValues()
     {
         if (_updating == false && Presenter != null)
         {
