@@ -62,6 +62,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThemeEditor.Desktop", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThemeEditor.Web", "src\ThemeEditor.Web\ThemeEditor.Web.csproj", "{67D52AF3-AA89-4F2A-9942-4DD1ED149292}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{36BF846B-4111-4E27-BA46-914619733808}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorPickerDemo", "samples\ColorPickerDemo\ColorPickerDemo.csproj", "{693C3A1A-D210-40A2-A159-DB56C042BC0D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +96,10 @@ Global
 		{67D52AF3-AA89-4F2A-9942-4DD1ED149292}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67D52AF3-AA89-4F2A-9942-4DD1ED149292}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67D52AF3-AA89-4F2A-9942-4DD1ED149292}.Release|Any CPU.Build.0 = Release|Any CPU
+		{693C3A1A-D210-40A2-A159-DB56C042BC0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{693C3A1A-D210-40A2-A159-DB56C042BC0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{693C3A1A-D210-40A2-A159-DB56C042BC0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{693C3A1A-D210-40A2-A159-DB56C042BC0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -106,6 +114,7 @@ Global
 		{DD390F62-BC92-4012-9C09-B2ED62CBFAA4} = {3353FD4A-FE9B-4670-86C9-09EF0F7CEDB2}
 		{F5DB7435-DCE2-4CC1-8673-054BC0013325} = {219954C4-6A40-4D94-914E-148B7EBB718E}
 		{67D52AF3-AA89-4F2A-9942-4DD1ED149292} = {219954C4-6A40-4D94-914E-148B7EBB718E}
+		{693C3A1A-D210-40A2-A159-DB56C042BC0D} = {36BF846B-4111-4E27-BA46-914619733808}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CF676549-9409-4598-8229-80E04B51ADC5}
