@@ -47,4 +47,14 @@ public static class ColorPickerHelpers
         var A = (byte)(a * 255.0 / 100.0);
         return new Color(A, r, g, b);
     }
+
+    internal static double Clamp(double val, double min, double max)
+    {
+        return Math.Min(Math.Max(val, min), max);
+    }
+
+    internal static byte Clamp(byte val, byte min, byte max)
+    {
+        return Math.Min(Math.Max(val, min), max);
+    }
 }
