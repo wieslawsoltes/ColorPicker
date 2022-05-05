@@ -6,7 +6,12 @@ namespace ThemeEditor.Controls.ColorPicker.Props;
 public class AlphaProperties : ColorPickerProperties
 {
     public static readonly StyledProperty<double> AlphaProperty =
-        AvaloniaProperty.Register<AlphaProperties, double>(nameof(Alpha), 100.0, validate: ValidateAlpha);
+        AvaloniaProperty.Register<AlphaProperties, double>(nameof(Alpha), 100.0, validate: ValidateAlpha, coerce: CoerceAlpha);
+
+    private static double CoerceAlpha(IAvaloniaObject arg1, double arg2)
+    {
+        return ColorPickerHelpers.Clamp(arg2, 0.0, 100.0);
+    }
 
     private static bool ValidateAlpha(double alpha)
     {

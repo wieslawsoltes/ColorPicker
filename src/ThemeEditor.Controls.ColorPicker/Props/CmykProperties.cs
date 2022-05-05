@@ -7,16 +7,36 @@ namespace ThemeEditor.Controls.ColorPicker.Props;
 public class CmykProperties : ColorPickerProperties
 {
     public static readonly StyledProperty<double> CyanProperty =
-        AvaloniaProperty.Register<CmykProperties, double>(nameof(Cyan), 0.0, validate: ValidateCyan);
+        AvaloniaProperty.Register<CmykProperties, double>(nameof(Cyan), 0.0, validate: ValidateCyan, coerce: CoerceCyan);
 
     public static readonly StyledProperty<double> MagentaProperty =
-        AvaloniaProperty.Register<CmykProperties, double>(nameof(Magenta), 100.0, validate: ValidateMagenta);
+        AvaloniaProperty.Register<CmykProperties, double>(nameof(Magenta), 100.0, validate: ValidateMagenta, coerce: CoerceMagenta);
 
     public static readonly StyledProperty<double> YellowProperty =
-        AvaloniaProperty.Register<CmykProperties, double>(nameof(Yellow), 100.0, validate: ValidateYellow);
+        AvaloniaProperty.Register<CmykProperties, double>(nameof(Yellow), 100.0, validate: ValidateYellow, coerce: CoerceYellow);
 
     public static readonly StyledProperty<double> BlackKeyProperty =
-        AvaloniaProperty.Register<CmykProperties, double>(nameof(BlackKey), 0.0, validate: ValidateBlackKey);
+        AvaloniaProperty.Register<CmykProperties, double>(nameof(BlackKey), 0.0, validate: ValidateBlackKey, coerce: CoerceBlackKey);
+
+    private static double CoerceCyan(IAvaloniaObject arg1, double arg2)
+    {
+        return ColorPickerHelpers.Clamp(arg2, 0.0, 100.0);
+    }
+
+    private static double CoerceMagenta(IAvaloniaObject arg1, double arg2)
+    {
+        return ColorPickerHelpers.Clamp(arg2, 0.0, 100.0);
+    }
+
+    private static double CoerceYellow(IAvaloniaObject arg1, double arg2)
+    {
+        return ColorPickerHelpers.Clamp(arg2, 0.0, 100.0);
+    }
+
+    private static double CoerceBlackKey(IAvaloniaObject arg1, double arg2)
+    {
+        return ColorPickerHelpers.Clamp(arg2, 0.0, 100.0);
+    }
 
     private static bool ValidateCyan(double cyan)
     {

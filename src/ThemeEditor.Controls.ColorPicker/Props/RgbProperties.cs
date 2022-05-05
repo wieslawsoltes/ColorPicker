@@ -7,13 +7,28 @@ namespace ThemeEditor.Controls.ColorPicker.Props;
 public class RgbProperties : ColorPickerProperties
 {
     public static readonly StyledProperty<byte> RedProperty =
-        AvaloniaProperty.Register<RgbProperties, byte>(nameof(Red), 0xFF, validate: ValidateRed);
+        AvaloniaProperty.Register<RgbProperties, byte>(nameof(Red), 0xFF, validate: ValidateRed, coerce: CoerceRed);
 
     public static readonly StyledProperty<byte> GreenProperty =
-        AvaloniaProperty.Register<RgbProperties, byte>(nameof(Green), 0x00, validate: ValidateGreen);
+        AvaloniaProperty.Register<RgbProperties, byte>(nameof(Green), 0x00, validate: ValidateGreen, coerce: CoerceGreen);
 
     public static readonly StyledProperty<byte> BlueProperty =
-        AvaloniaProperty.Register<RgbProperties, byte>(nameof(Blue), 0x00, validate: ValidateBlue);
+        AvaloniaProperty.Register<RgbProperties, byte>(nameof(Blue), 0x00, validate: ValidateBlue, coerce: CoerceBlue);
+
+    private static byte CoerceRed(IAvaloniaObject arg1, byte arg2)
+    {
+        return ColorPickerHelpers.Clamp(arg2, 0, 255);
+    }
+
+    private static byte CoerceGreen(IAvaloniaObject arg1, byte arg2)
+    {
+        return ColorPickerHelpers.Clamp(arg2, 0, 255);
+    }
+
+    private static byte CoerceBlue(IAvaloniaObject arg1, byte arg2)
+    {
+        return ColorPickerHelpers.Clamp(arg2, 0, 255);
+    }
 
     private static bool ValidateRed(byte red)
     {

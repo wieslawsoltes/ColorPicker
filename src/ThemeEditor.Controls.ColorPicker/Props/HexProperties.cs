@@ -7,7 +7,12 @@ namespace ThemeEditor.Controls.ColorPicker.Props;
 public class HexProperties : ColorPickerProperties
 {
     public static readonly StyledProperty<string> HexProperty =
-        AvaloniaProperty.Register<HexProperties, string>(nameof(Hex), "#FFFF0000", validate: ValidateHex);
+        AvaloniaProperty.Register<HexProperties, string>(nameof(Hex), "#FFFF0000", validate: ValidateHex, coerce: CoerceHex);
+
+    private static string CoerceHex(IAvaloniaObject arg1, string arg2)
+    {
+        return arg2;
+    }
 
     private static bool ValidateHex(string hex)
     {
