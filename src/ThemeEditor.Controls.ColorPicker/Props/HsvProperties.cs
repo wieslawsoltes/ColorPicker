@@ -52,20 +52,20 @@ public class HsvProperties : ColorPickerProperties
 
     public double Hue
     {
-        get { return GetValue(HueProperty); }
-        set { SetValue(HueProperty, value); }
+        get => GetValue(HueProperty);
+        set => SetValue(HueProperty, value);
     }
 
     public double Saturation
     {
-        get { return GetValue(SaturationProperty); }
-        set { SetValue(SaturationProperty, value); }
+        get => GetValue(SaturationProperty);
+        set => SetValue(SaturationProperty, value);
     }
 
     public double Value
     {
-        get { return GetValue(ValueProperty); }
-        set { SetValue(ValueProperty, value); }
+        get => GetValue(ValueProperty);
+        set => SetValue(ValueProperty, value);
     }
 
     protected override void UpdateColorPickerValues()
