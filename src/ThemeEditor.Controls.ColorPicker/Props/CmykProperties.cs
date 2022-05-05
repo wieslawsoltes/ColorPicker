@@ -66,26 +66,26 @@ public class CmykProperties : ColorPickerProperties
 
     public double Cyan
     {
-        get { return GetValue(CyanProperty); }
-        set { SetValue(CyanProperty, value); }
+        get => GetValue(CyanProperty);
+        set => SetValue(CyanProperty, value);
     }
 
     public double Magenta
     {
-        get { return GetValue(MagentaProperty); }
-        set { SetValue(MagentaProperty, value); }
+        get => GetValue(MagentaProperty);
+        set => SetValue(MagentaProperty, value);
     }
 
     public double Yellow
     {
-        get { return GetValue(YellowProperty); }
-        set { SetValue(YellowProperty, value); }
+        get => GetValue(YellowProperty);
+        set => SetValue(YellowProperty, value);
     }
 
     public double BlackKey
     {
-        get { return GetValue(BlackKeyProperty); }
-        set { SetValue(BlackKeyProperty, value); }
+        get => GetValue(BlackKeyProperty);
+        set => SetValue(BlackKeyProperty, value);
     }
 
     protected override void UpdateColorPickerValues()
