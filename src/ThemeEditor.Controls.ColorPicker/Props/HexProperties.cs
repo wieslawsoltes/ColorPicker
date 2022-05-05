@@ -34,25 +34,25 @@ public class HexProperties : ColorPickerProperties
 
     protected override void UpdateColorPickerValues()
     {
-        if (_updating == false && ColorPicker != null)
+        if (_updating == false && Presenter != null)
         {
             _updating = true;
             var color = Color.Parse(Hex);
             ColorPickerHelpers.FromColor(color, out var h, out var s, out var v, out var a);
-            ColorPicker.Value1 = h;
-            ColorPicker.Value2 = s;
-            ColorPicker.Value3 = v;
-            ColorPicker.Value4 = a;
+            Presenter.Value1 = h;
+            Presenter.Value2 = s;
+            Presenter.Value3 = v;
+            Presenter.Value4 = a;
             _updating = false;
         }
     }
 
     public override void UpdatePropertyValues()
     {
-        if (_updating == false && ColorPicker != null)
+        if (_updating == false && Presenter != null)
         {
             _updating = true;
-            var color = ColorPickerHelpers.FromHSVA(ColorPicker.Value1, ColorPicker.Value2, ColorPicker.Value3, ColorPicker.Value4);
+            var color = ColorPickerHelpers.FromHSVA(Presenter.Value1, Presenter.Value2, Presenter.Value3, Presenter.Value4);
             Hex = ColorPickerHelpers.ToHexColor(color);
             _updating = false;
         }

@@ -90,24 +90,24 @@ public class CmykProperties : ColorPickerProperties
 
     protected override void UpdateColorPickerValues()
     {
-        if (_updating == false && ColorPicker != null)
+        if (_updating == false && Presenter != null)
         {
             _updating = true;
             var cmyk = new CMYK(Cyan, Magenta, Yellow, BlackKey);
             var hsv = cmyk.ToHSV();
-            ColorPicker.Value1 = hsv.H;
-            ColorPicker.Value2 = hsv.S;
-            ColorPicker.Value3 = hsv.V;
+            Presenter.Value1 = hsv.H;
+            Presenter.Value2 = hsv.S;
+            Presenter.Value3 = hsv.V;
             _updating = false;
         }
     }
 
     public override void UpdatePropertyValues()
     {
-        if (_updating == false && ColorPicker != null)
+        if (_updating == false && Presenter != null)
         {
             _updating = true;
-            var hsv = new HSV(ColorPicker.Value1, ColorPicker.Value2, ColorPicker.Value3);
+            var hsv = new HSV(Presenter.Value1, Presenter.Value2, Presenter.Value3);
             var cmyk = hsv.ToCMYK();
             Cyan = cmyk.C;
             Magenta = cmyk.M;

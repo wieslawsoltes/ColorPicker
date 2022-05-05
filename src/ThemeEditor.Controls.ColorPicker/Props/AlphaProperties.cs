@@ -33,20 +33,20 @@ public class AlphaProperties : ColorPickerProperties
 
     protected override void UpdateColorPickerValues()
     {
-        if (_updating == false && ColorPicker != null)
+        if (_updating == false && Presenter != null)
         {
             _updating = true;
-            ColorPicker.Value4 = Alpha;
+            Presenter.Value4 = Alpha;
             _updating = false;
         }
     }
 
     public override void UpdatePropertyValues()
     {
-        if (_updating == false && ColorPicker != null)
+        if (_updating == false && Presenter != null)
         {
             _updating = true;
-            Alpha = ColorPicker.Value4;
+            Alpha = Presenter.Value4;
             _updating = false;
         }
     }

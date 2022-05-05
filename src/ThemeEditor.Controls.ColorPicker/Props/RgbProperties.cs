@@ -76,24 +76,24 @@ public class RgbProperties : ColorPickerProperties
 
     protected override void UpdateColorPickerValues()
     {
-        if (_updating == false && ColorPicker != null)
+        if (_updating == false && Presenter != null)
         {
             _updating = true;
             var rgb = new RGB(Red, Green, Blue);
             var hsv = rgb.ToHSV();
-            ColorPicker.Value1 = hsv.H;
-            ColorPicker.Value2 = hsv.S;
-            ColorPicker.Value3 = hsv.V;
+            Presenter.Value1 = hsv.H;
+            Presenter.Value2 = hsv.S;
+            Presenter.Value3 = hsv.V;
             _updating = false;
         }
     }
 
     public override void UpdatePropertyValues()
     {
-        if (_updating == false && ColorPicker != null)
+        if (_updating == false && Presenter != null)
         {
             _updating = true;
-            var hsv = new HSV(ColorPicker.Value1, ColorPicker.Value2, ColorPicker.Value3);
+            var hsv = new HSV(Presenter.Value1, Presenter.Value2, Presenter.Value3);
             var rgb = hsv.ToRGB();
             Red = (byte)rgb.R;
             Green = (byte)rgb.G;

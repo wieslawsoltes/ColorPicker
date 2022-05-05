@@ -3,11 +3,13 @@
         xmlns:cp="using:ThemeEditor.Controls.ColorPicker"
         xmlns:converters="clr-namespace:ThemeEditor.Controls.ColorPicker.Converters"
         xmlns:props="clr-namespace:ThemeEditor.Controls.ColorPicker.Props">
+
   <Design.PreviewWith>
     <Border Padding="5" Width="400" Height="400">
       <cp:ColorPicker Color="#5F1F001F" />
     </Border>
   </Design.PreviewWith>
+
   <Style Selector="cp|ColorPicker">
     <Style.Resources>
       <converters:HueToColorConverter x:Key="HueToColorConverter" />
@@ -67,6 +69,15 @@
               </DataTemplate>
             </TabControl.ItemTemplate>
           </TabControl>
+          <cp:ColorPickerPresenter x:Name="PART_ColorPickerPresenter" />
+        </DockPanel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+
+  <Style Selector="cp|ColorPickerPresenter">
+    <Setter Property="Template">
+      <ControlTemplate>
           <Grid x:Name="PART_Picker" ColumnDefinitions="*,3,Auto" RowDefinitions="*,3,Auto">
             <Grid Grid.Column="0" Grid.Row="0">
               <Grid.Background>
@@ -163,12 +174,11 @@
               </Canvas>
             </Grid>
           </Grid>
-        </DockPanel>
       </ControlTemplate>
     </Setter>
   </Style>
 
-  <Style Selector="cp|ColorPicker /template/ Grid#PART_Picker">
+  <Style Selector="cp|ColorPickerPresenter /template/ Grid#PART_Picker">
     <Setter Property="MinHeight" Value="200" />
     <Setter Property="MinWidth" Value="200" />
   </Style>

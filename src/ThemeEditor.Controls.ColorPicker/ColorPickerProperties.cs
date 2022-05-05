@@ -8,12 +8,12 @@ public abstract class ColorPickerProperties : AvaloniaObject
     public static readonly StyledProperty<object?> HeaderProperty =
         AvaloniaProperty.Register<ColorPickerProperties, object?>(nameof(Header));
 
-    public static readonly StyledProperty<ColorPicker?> ColorPickerProperty =
-        AvaloniaProperty.Register<ColorPickerProperties, ColorPicker?>(nameof(ColorPicker));
+    public static readonly StyledProperty<ColorPickerPresenter?> PresenterProperty =
+        AvaloniaProperty.Register<ColorPickerProperties, ColorPickerPresenter?>(nameof(Presenter));
 
     public ColorPickerProperties()
     {
-        this.GetObservable(ColorPickerProperty).Subscribe(_ => OnColorPickerChange());
+        this.GetObservable(PresenterProperty).Subscribe(_ => OnColorPickerChange());
     }
 
     public object? Header
@@ -22,10 +22,10 @@ public abstract class ColorPickerProperties : AvaloniaObject
         set => SetValue(HeaderProperty, value);
     }
 
-    public ColorPicker? ColorPicker
+    public ColorPickerPresenter? Presenter
     {
-        get => GetValue(ColorPickerProperty);
-        set => SetValue(ColorPickerProperty, value);
+        get => GetValue(PresenterProperty);
+        set => SetValue(PresenterProperty, value);
     }
 
     protected abstract void UpdateColorPickerValues();
@@ -34,9 +34,9 @@ public abstract class ColorPickerProperties : AvaloniaObject
 
     protected virtual void OnColorPickerChange()
     {
-        ColorPicker?.GetObservable(ColorPicker.Value1Property).Subscribe(_ => UpdatePropertyValues());
-        ColorPicker?.GetObservable(ColorPicker.Value2Property).Subscribe(_ => UpdatePropertyValues());
-        ColorPicker?.GetObservable(ColorPicker.Value3Property).Subscribe(_ => UpdatePropertyValues());
-        ColorPicker?.GetObservable(ColorPicker.Value4Property).Subscribe(_ => UpdatePropertyValues());
+        Presenter?.GetObservable(ColorPickerPresenter.Value1Property).Subscribe(_ => UpdatePropertyValues());
+        Presenter?.GetObservable(ColorPickerPresenter.Value2Property).Subscribe(_ => UpdatePropertyValues());
+        Presenter?.GetObservable(ColorPickerPresenter.Value3Property).Subscribe(_ => UpdatePropertyValues());
+        Presenter?.GetObservable(ColorPickerPresenter.Value4Property).Subscribe(_ => UpdatePropertyValues());
     }
 }

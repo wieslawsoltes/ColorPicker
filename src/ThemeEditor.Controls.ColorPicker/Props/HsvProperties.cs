@@ -70,24 +70,24 @@ public class HsvProperties : ColorPickerProperties
 
     protected override void UpdateColorPickerValues()
     {
-        if (_updating == false && ColorPicker != null)
+        if (_updating == false && Presenter != null)
         {
             _updating = true;
-            ColorPicker.Value1 = Hue;
-            ColorPicker.Value2 = Saturation;
-            ColorPicker.Value3 = Value;
+            Presenter.Value1 = Hue;
+            Presenter.Value2 = Saturation;
+            Presenter.Value3 = Value;
             _updating = false;
         }
     }
 
     public override void UpdatePropertyValues()
     {
-        if (_updating == false && ColorPicker != null)
+        if (_updating == false && Presenter != null)
         {
             _updating = true;
-            Hue = ColorPicker.Value1;
-            Saturation = ColorPicker.Value2;
-            Value = ColorPicker.Value3;
+            Hue = Presenter.Value1;
+            Saturation = Presenter.Value2;
+            Value = Presenter.Value3;
             _updating = false;
         }
     }
