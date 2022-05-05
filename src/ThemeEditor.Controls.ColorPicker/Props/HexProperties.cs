@@ -28,8 +28,8 @@ public class HexProperties : ColorPickerProperties
 
     public string Hex
     {
-        get { return GetValue(HexProperty); }
-        set { SetValue(HexProperty, value); }
+        get => GetValue(HexProperty);
+        set => SetValue(HexProperty, value);
     }
 
     protected override void UpdateColorPickerValues()
