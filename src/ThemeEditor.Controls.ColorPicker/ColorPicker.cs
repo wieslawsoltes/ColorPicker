@@ -6,6 +6,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Data.Converters;
 using Avalonia.Input;
 using Avalonia.Media;
+using ThemeEditor.Controls.ColorPicker.Converters;
 
 namespace ThemeEditor.Controls.ColorPicker;
 
@@ -34,8 +35,11 @@ public class ColorPicker : TemplatedControl
     private Thumb? _alphaThumb;
     private bool _updating;
     private bool _captured;
-    private readonly IValueConverters _converters = new HsvValueConverters();
-
+    private readonly IValueConverter _value1Converter = new HueConverter();
+    private readonly IValueConverter _value2Converter = new SaturationConverter();
+    private readonly IValueConverter _value3Converter = new ValueConverter();
+    private readonly IValueConverter _value4Converter = new AlphaConverter();
+    
     public ColorPicker()
     {
         this.GetObservable(Value1Property).Subscribe(_ => OnValueChange());
@@ -211,10 +215,10 @@ public class ColorPicker : TemplatedControl
     private void UpdateThumbsFromColor()
     {
         ColorPickerHelpers.FromColor(Color, out var h, out var s, out var v, out var a);
-        var hueY = Convert(_converters.Value1Converter, h, GetValue1Range());
-        var colorX = Convert(_converters.Value2Converter, s, GetValue2Range());
-        var colorY = Convert(_converters.Value3Converter, v, GetValue3Range());
-        var alphaX = Convert(_converters.Value4Converter, a, GetValue4Range());
+        var hueY = Convert(_value1Converter, h, GetValue1Range());
+        var colorX = Convert(_value2Converter, s, GetValue2Range());
+        var colorY = Convert(_value3Converter, v, GetValue3Range());
+        var alphaX = Convert(_value4Converter, a, GetValue4Range());
         MoveThumb(_hueCanvas, _hueThumb, 0, hueY);
         MoveThumb(_colorCanvas, _colorThumb, colorX, colorY);
         MoveThumb(_alphaCanvas, _alphaThumb, alphaX, 0);
@@ -222,10 +226,10 @@ public class ColorPicker : TemplatedControl
 
     private void UpdateThumbsFromValues()
     {
-        var hueY = Convert(_converters.Value1Converter, Value1, GetValue1Range());
-        var colorX = Convert(_converters.Value2Converter, Value2, GetValue2Range());
-        var colorY = Convert(_converters.Value3Converter, Value3, GetValue3Range());
-        var alphaX = Convert(_converters.Value4Converter, Value4, GetValue4Range());
+        var hueY = Convert(_value1Converter, Value1, GetValue1Range());
+        var colorX = Convert(_value2Converter, Value2, GetValue2Range());
+        var colorY = Convert(_value3Converter, Value3, GetValue3Range());
+        var alphaX = Convert(_value4Converter, Value4, GetValue4Range());
         MoveThumb(_hueCanvas, _hueThumb, 0, hueY);
         MoveThumb(_colorCanvas, _colorThumb, colorX, colorY);
         MoveThumb(_alphaCanvas, _alphaThumb, alphaX, 0);
@@ -237,10 +241,10 @@ public class ColorPicker : TemplatedControl
         var colorX = Canvas.GetLeft(_colorThumb);
         var colorY = Canvas.GetTop(_colorThumb);
         var alphaX = Canvas.GetLeft(_alphaThumb);
-        Value1 = ConvertBack(_converters.Value1Converter, hueY, GetValue1Range());
-        Value2 = ConvertBack(_converters.Value2Converter, colorX, GetValue2Range());
-        Value3 = ConvertBack(_converters.Value3Converter, colorY, GetValue3Range());
-        Value4 = ConvertBack(_converters.Value4Converter, alphaX, GetValue4Range());
+        Value1 = ConvertBack(_value1Converter, hueY, GetValue1Range());
+        Value2 = ConvertBack(_value2Converter, colorX, GetValue2Range());
+        Value3 = ConvertBack(_value3Converter, colorY, GetValue3Range());
+        Value4 = ConvertBack(_value4Converter, alphaX, GetValue4Range());
         Color = ColorPickerHelpers.FromHSVA(Value1, Value2, Value3, Value4);
     }
 
@@ -250,10 +254,10 @@ public class ColorPicker : TemplatedControl
         var colorX = Canvas.GetLeft(_colorThumb);
         var colorY = Canvas.GetTop(_colorThumb);
         var alphaX = Canvas.GetLeft(_alphaThumb);
-        var h = ConvertBack(_converters.Value1Converter, hueY, GetValue1Range());
-        var s = ConvertBack(_converters.Value2Converter, colorX, GetValue2Range());
-        var v = ConvertBack(_converters.Value3Converter, colorY, GetValue3Range());
-        var a = ConvertBack(_converters.Value4Converter, alphaX, GetValue4Range());
+        var h = ConvertBack(_value1Converter, hueY, GetValue1Range());
+        var s = ConvertBack(_value2Converter, colorX, GetValue2Range());
+        var v = ConvertBack(_value3Converter, colorY, GetValue3Range());
+        var a = ConvertBack(_value4Converter, alphaX, GetValue4Range());
         Color = ColorPickerHelpers.FromHSVA(h, s, v, a);
     }
 
