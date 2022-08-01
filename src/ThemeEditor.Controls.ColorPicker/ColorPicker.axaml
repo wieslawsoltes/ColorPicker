@@ -82,19 +82,7 @@
   <Style Selector="cp|ColorPickerHorizontalSlider">
     <Setter Property="Template">
       <ControlTemplate>
-        <Canvas x:Name="PART_AlphaCanvas" Height="20">
-          <Canvas.Background>
-            <SolidColorBrush>
-              <SolidColorBrush.Color>
-                <MultiBinding Mode="OneWay" Converter="{x:Static converters:HsvaToColorConverter.Instance}">
-                  <Binding Path="Value1" RelativeSource="{RelativeSource TemplatedParent}" />
-                  <Binding Path="Value2" RelativeSource="{RelativeSource TemplatedParent}" />
-                  <Binding Path="Value3" RelativeSource="{RelativeSource TemplatedParent}" />
-                  <Binding Path="Value4" RelativeSource="{RelativeSource TemplatedParent}" />
-                </MultiBinding>
-              </SolidColorBrush.Color>
-            </SolidColorBrush>
-          </Canvas.Background>
+        <Canvas x:Name="PART_AlphaCanvas" Background="Transparent" Height="20">
           <Thumb x:Name="PART_AlphaThumb" Height="20" Canvas.Left="0" Canvas.Top="0" Margin="-5,0,-5,0">
             <Thumb.Template>
               <ControlTemplate>
@@ -158,17 +146,17 @@
                   <GradientStop Offset="1" Color="{Binding Value1, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static converters:HueToColorConverter.Instance}}" />
                 </LinearGradientBrush>
               </Grid.Background>
-              <Grid>
+              <Grid IsHitTestVisible="False">
                 <Grid.Background>
                   <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
                     <GradientStop Offset="0" Color="#00000000" />
                     <GradientStop Offset="1" Color="#FF000000" />
                   </LinearGradientBrush>
                 </Grid.Background>
-                <cp:ColorPickerAreaSlider Name="PART_ColorPickerAreaSlider" 
-                                          Value2="{TemplateBinding Value2, Mode=TwoWay}"
-                                          Value3="{TemplateBinding Value3, Mode=TwoWay}" />
               </Grid>
+              <cp:ColorPickerAreaSlider Name="PART_ColorPickerAreaSlider" 
+                                        Value2="{TemplateBinding Value2, Mode=TwoWay}"
+                                        Value3="{TemplateBinding Value3, Mode=TwoWay}" />
             </Grid>
             <Grid Grid.Column="2" Grid.Row="0">
               <Grid.Background>
@@ -202,6 +190,20 @@
                   </VisualBrush.Visual>
                 </VisualBrush>
               </Grid.Background>
+              <Grid IsHitTestVisible="False">
+                <Grid.Background>
+                  <SolidColorBrush>
+                    <SolidColorBrush.Color>
+                      <MultiBinding Mode="OneWay" Converter="{x:Static converters:HsvaToColorConverter.Instance}">
+                        <Binding Path="Value1" RelativeSource="{RelativeSource TemplatedParent}" />
+                        <Binding Path="Value2" RelativeSource="{RelativeSource TemplatedParent}" />
+                        <Binding Path="Value3" RelativeSource="{RelativeSource TemplatedParent}" />
+                        <Binding Path="Value4" RelativeSource="{RelativeSource TemplatedParent}" />
+                      </MultiBinding>
+                    </SolidColorBrush.Color>
+                  </SolidColorBrush>
+                </Grid.Background>
+              </Grid>
               <cp:ColorPickerHorizontalSlider Name="PART_ColorPickerHorizontalSlider"
                                               Value4="{TemplateBinding Value4, Mode=TwoWay}" />
             </Grid>
