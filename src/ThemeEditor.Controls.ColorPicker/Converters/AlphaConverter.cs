@@ -7,6 +7,8 @@ namespace ThemeEditor.Controls.ColorPicker.Converters;
 
 public class AlphaConverter : IValueConverter
 {
+    public static readonly AlphaConverter Instance = new();
+
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (value is double v && parameter is double range && targetType == typeof(double))
