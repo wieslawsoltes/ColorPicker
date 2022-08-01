@@ -1,10 +1,7 @@
-﻿using System.Globalization;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
-using Avalonia.Data.Converters;
 using Avalonia.Media;
-using ThemeEditor.Controls.ColorPicker.Converters;
 
 namespace ThemeEditor.Controls.ColorPicker;
 
@@ -23,10 +20,6 @@ public class ColorPickerValuesPresenter : TemplatedControl
         AvaloniaProperty.Register<ColorPickerValuesPresenter, double?>(nameof(Value4));
 
     private bool _updating;
-    private readonly IValueConverter _value1Converter = HueConverter.Instance;
-    private readonly IValueConverter _value2Converter = SaturationConverter.Instance;
-    private readonly IValueConverter _value3Converter = ValueConverter.Instance;
-    private readonly IValueConverter _value4Converter = AlphaConverter.Instance;
     internal ColorPicker? _colorPicker;
     private ColorPickerAreaSlider? _colorPickerAreaSlider;
     private ColorPickerVerticalSlider? _colorPickerVerticalSlider;
@@ -72,16 +65,6 @@ public class ColorPickerValuesPresenter : TemplatedControl
                && _colorPickerHorizontalSlider != null;
     }
 
-    private T? Convert<T>(IValueConverter converter, T? value, T? range)
-    {
-        return (T?)converter.Convert(value, typeof(T), range, CultureInfo.CurrentCulture);
-    }
-
-    private T? ConvertBack<T>(IValueConverter converter, T? value, T? range)
-    {
-        return (T?)converter.ConvertBack(value, typeof(T), range, CultureInfo.CurrentCulture);
-    }
-
     private void UpdateThumbsFromColor()
     {
         ColorPickerHelpers.FromColor(GetColor(), out var h, out var s, out var v, out var a);
@@ -122,8 +105,6 @@ public class ColorPickerValuesPresenter : TemplatedControl
         if (_updating == false && IsTemplateValid())
         {
             _updating = true;
-            //UpdateThumbsFromValues();
-            //UpdateValuesFromThumbs();
             UpdateColorFromThumbs();
             _updating = false;
         }
@@ -135,7 +116,6 @@ public class ColorPickerValuesPresenter : TemplatedControl
         {
             _updating = true;
             UpdateThumbsFromColor();
-            //UpdateValuesFromThumbs();
             UpdateColorFromThumbs();
             _updating = false;
         }
