@@ -85,27 +85,19 @@ public class ColorPickerValuesPresenter : TemplatedControl
     private void UpdateThumbsFromColor()
     {
         ColorPickerHelpers.FromColor(GetColor(), out var h, out var s, out var v, out var a);
-        var hueY = Convert(_value1Converter, h, _colorPickerVerticalSlider?.GetValue1Range());
-        var colorX = Convert(_value2Converter, s, _colorPickerAreaSlider?.GetValue2Range());
-        var colorY = Convert(_value3Converter, v, _colorPickerAreaSlider?.GetValue3Range());
-        var alphaX = Convert(_value4Converter, a, _colorPickerHorizontalSlider?.GetValue4Range());
-        Value1 = hueY;
-        Value2 = colorX;
-        Value3 = colorY;
-        Value4 = alphaX;
+        Value1 = h;
+        Value2 = s;
+        Value3 = v;
+        Value4 = a;
     }
 
     private void UpdateColorFromThumbs()
     {
-        var hueY = Value1;
-        var colorX = Value2;
-        var colorY = Value3;
-        var alphaX = Value4;
-        var h = ConvertBack(_value1Converter, hueY, _colorPickerVerticalSlider?.GetValue1Range());
-        var s = ConvertBack(_value2Converter, colorX, _colorPickerAreaSlider?.GetValue2Range());
-        var v = ConvertBack(_value3Converter, colorY, _colorPickerAreaSlider?.GetValue3Range());
-        var a = ConvertBack(_value4Converter, alphaX, _colorPickerHorizontalSlider?.GetValue4Range());
-  
+        var h = Value1;
+        var s = Value2;
+        var v = Value3;
+        var a = Value4;
+
         if (h is not null && s is not null && v is not null && a is not null)
         {
             SetColor(h.Value, s.Value, v.Value, a.Value);

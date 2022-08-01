@@ -1,7 +1,10 @@
-﻿using Avalonia;
+﻿using System.Globalization;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Data.Converters;
 using Avalonia.Input;
+using ThemeEditor.Controls.ColorPicker.Converters;
 
 namespace ThemeEditor.Controls.ColorPicker;
 
@@ -14,6 +17,7 @@ public class ColorPickerHorizontalSlider : TemplatedControl
     private Thumb? _alphaThumb;
     private bool _updating;
     private bool _captured;
+    private readonly IValueConverter _value4Converter = AlphaConverter.Instance;
 
     public double? Value4
     {
@@ -130,10 +134,15 @@ public class ColorPickerHorizontalSlider : TemplatedControl
         MoveThumb(_alphaCanvas, _alphaThumb, alphaX ?? 0.0, 0.0);
     }
 
+    private T? ConvertBack<T>(IValueConverter converter, T? value, T? range)
+    {
+        return (T?)converter.ConvertBack(value, typeof(T), range, CultureInfo.CurrentCulture);
+    }
+
     private void UpdateValuesFromThumbs()
     {
         var alphaX = Canvas.GetLeft(_alphaThumb);
-        Value4 = alphaX;
+        Value4 = ConvertBack(_value4Converter, alphaX, GetValue4Range());
     }
 
     protected override void OnPropertyChanged<T>(AvaloniaPropertyChangedEventArgs<T> change)
