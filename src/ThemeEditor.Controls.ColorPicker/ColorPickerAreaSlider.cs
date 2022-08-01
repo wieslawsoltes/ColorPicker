@@ -143,9 +143,14 @@ public class ColorPickerAreaSlider : TemplatedControl
     
     private void UpdateThumbsFromValues()
     {
-        var colorX = Value2;
-        var colorY = Value3;
+        var colorX = Convert(_value2Converter, Value2, GetValue2Range());
+        var colorY = Convert(_value3Converter, Value3, GetValue3Range());
         MoveThumb(_colorCanvas, _colorThumb, colorX ?? 0.0, colorY ?? 0.0);
+    }
+
+    private T? Convert<T>(IValueConverter converter, T? value, T? range)
+    {
+        return (T?)converter.Convert(value, typeof(T), range, CultureInfo.CurrentCulture);
     }
 
     private T? ConvertBack<T>(IValueConverter converter, T? value, T? range)
@@ -171,7 +176,7 @@ public class ColorPickerAreaSlider : TemplatedControl
             {
                 _updating = true;
                 UpdateThumbsFromValues();
-                UpdateValuesFromThumbs();
+                //UpdateValuesFromThumbs();
                 //UpdateColorFromThumbs();
                 _updating = false;
             }
