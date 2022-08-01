@@ -9,6 +9,8 @@ namespace ThemeEditor.Converters;
 
 public class ThicknessViewModelToThicknessConverter : IMultiValueConverter
 {
+    public static readonly ThicknessViewModelToThicknessConverter Instance = new();
+
     public object Convert(IList<object?>? values, Type targetType, object? parameter, CultureInfo culture)
     {
         if (values != null && values.Count() == 4)

@@ -8,6 +8,8 @@ namespace ThemeEditor.Controls.ColorPicker.Converters;
 
 public class HueToColorConverter : IValueConverter
 {
+    public static readonly HueToColorConverter Instance = new();
+
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (value is double h && targetType == typeof(Color))

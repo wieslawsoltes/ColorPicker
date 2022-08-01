@@ -10,6 +10,8 @@ namespace ThemeEditor.Converters;
 
 public class ColorViewModelToBrushConverter : IMultiValueConverter
 {
+    public static readonly ColorViewModelToBrushConverter Instance = new();
+
     public object Convert(IList<object?>? values, Type targetType, object? parameter, CultureInfo culture)
     {
         if (values != null && values.Count() == 4)

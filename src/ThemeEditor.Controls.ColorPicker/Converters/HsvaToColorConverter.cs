@@ -9,6 +9,8 @@ namespace ThemeEditor.Controls.ColorPicker.Converters;
 
 public class HsvaToColorConverter : IMultiValueConverter
 {
+    public static readonly HsvaToColorConverter Instance = new();
+
     public object Convert(IList<object?>? values, Type targetType, object? parameter, CultureInfo culture)
     {
         if (values is { })

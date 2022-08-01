@@ -8,6 +8,8 @@ namespace ThemeEditor.Controls.ColorPicker.Converters;
 
 public class HexToColorConverter : IValueConverter
 {
+    public static readonly HexToColorConverter Instance = new();
+
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (value is string s && targetType == typeof(Color))
