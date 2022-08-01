@@ -20,7 +20,7 @@ public class SaturationConverter : IValueConverter
 
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is double v && parameter is double range && targetType == typeof(double))
+        if (value is double v && parameter is double range && (targetType == typeof(double) || targetType == typeof(double?)))
         {
             return v * 100.0 / range;
         }
