@@ -32,10 +32,10 @@ public class ColorPickerValuesPresenter : TemplatedControl
     private Thumb? _alphaThumb;
     private bool _updating;
     private bool _captured;
-    private readonly IValueConverter _value1Converter = new HueConverter();
-    private readonly IValueConverter _value2Converter = new SaturationConverter();
-    private readonly IValueConverter _value3Converter = new ValueConverter();
-    private readonly IValueConverter _value4Converter = new AlphaConverter();
+    private readonly IValueConverter _value1Converter = HueConverter.Instance;
+    private readonly IValueConverter _value2Converter = SaturationConverter.Instance;
+    private readonly IValueConverter _value3Converter = ValueConverter.Instance;
+    private readonly IValueConverter _value4Converter = AlphaConverter.Instance;
     internal ColorPicker? _colorPicker;
 
     public double Value1

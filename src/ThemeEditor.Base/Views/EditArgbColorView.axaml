@@ -7,8 +7,5 @@
              xmlns:cpc="using:ThemeEditor.Controls.ColorPicker.Converters"
              mc:Ignorable="d"
              d:DesignWidth="500" d:DesignHeight="400">
-    <UserControl.Resources>
-        <cpc:HexToColorConverter x:Key="HexToColorConverter"/>
-    </UserControl.Resources>
-    <cp:ColorPicker Color="{Binding Hex, Mode=TwoWay, Converter={StaticResource HexToColorConverter}}"/>
+    <cp:ColorPicker Color="{Binding Hex, Mode=TwoWay, Converter={x:Static cpc:HexToColorConverter.Instance}}"/>
 </UserControl>

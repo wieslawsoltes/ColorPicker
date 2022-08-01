@@ -80,10 +80,6 @@
   </Style>
 
   <Style Selector="cp|ColorPickerValuesPresenter">
-    <Style.Resources>
-      <converters:HueToColorConverter x:Key="HueToColorConverter" />
-      <converters:HsvaToColorConverter x:Key="HsvaToColorConverter" />
-    </Style.Resources>
     <Setter Property="Template">
       <ControlTemplate>
           <Grid ColumnDefinitions="*,3,Auto" RowDefinitions="*,3,Auto">
@@ -91,7 +87,7 @@
               <Grid.Background>
                 <LinearGradientBrush StartPoint="0%,50%" EndPoint="100%,50%">
                   <GradientStop Offset="0" Color="#FFFFFFFF" />
-                  <GradientStop Offset="1" Color="{Binding Value1, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HueToColorConverter}}" />
+                  <GradientStop Offset="1" Color="{Binding Value1, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static converters:HueToColorConverter.Instance}}" />
                 </LinearGradientBrush>
               </Grid.Background>
               <Grid>
@@ -161,7 +157,7 @@
                 <Canvas.Background>
                   <SolidColorBrush>
                     <SolidColorBrush.Color>
-                      <MultiBinding Mode="OneWay" Converter="{StaticResource HsvaToColorConverter}">
+                      <MultiBinding Mode="OneWay" Converter="{x:Static converters:HsvaToColorConverter.Instance}">
                         <Binding Path="Value1" RelativeSource="{RelativeSource TemplatedParent}" />
                         <Binding Path="Value2" RelativeSource="{RelativeSource TemplatedParent}" />
                         <Binding Path="Value3" RelativeSource="{RelativeSource TemplatedParent}" />

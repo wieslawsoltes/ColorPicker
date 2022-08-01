@@ -8,10 +8,6 @@
              xmlns:cpc="using:ThemeEditor.Controls.ColorPicker.Converters"
              mc:Ignorable="d"
              d:DesignWidth="500" d:DesignHeight="400">
-    <UserControl.Resources>
-        <converters:ColorViewModelToBrushConverter x:Key="ColorViewModelToBrushConverter"/>
-        <cpc:HexToColorConverter x:Key="HexToColorConverter"/>
-    </UserControl.Resources>
     <Grid RowDefinitions="Auto" ColumnDefinitions="100,*">
         <TextBox Text="{Binding Hex, Mode=TwoWay}" IsReadOnly="False" Classes="left" Grid.Row="0" Grid.Column="0"/>
         <Grid Grid.Row="0" Grid.Column="1" Margin="2">
@@ -36,7 +32,7 @@
                     <Border BorderThickness="0" CornerRadius="0" Background="{DynamicResource ColorCheckerBoard}" />
                     <Border BorderThickness="0" CornerRadius="0">
                         <Border.Background>
-                            <MultiBinding Mode="OneWay" Converter="{StaticResource ColorViewModelToBrushConverter}">
+                            <MultiBinding Mode="OneWay" Converter="{x:Static converters:ColorViewModelToBrushConverter.Instance}">
                                 <Binding Path="A"/>
                                 <Binding Path="R"/>
                                 <Binding Path="G"/>
@@ -48,7 +44,7 @@
             </ToggleButton>
             <Popup IsOpen="{Binding #PopupButton.IsChecked, Mode=TwoWay}" IsLightDismissEnabled="True" PlacementMode="AnchorAndGravity" PlacementGravity="BottomLeft" PlacementAnchor="BottomLeft">
                 <Border Background="{DynamicResource ThemeBackgroundBrush}" CornerRadius="0">
-                    <cp:ColorPicker Color="{Binding Hex, Mode=TwoWay, Converter={StaticResource HexToColorConverter}}" Margin="8" />
+                    <cp:ColorPicker Color="{Binding Hex, Mode=TwoWay, Converter={x:Static cpc:HexToColorConverter.Instance}}" Margin="8" />
                 </Border>
             </Popup>
         </Grid>
