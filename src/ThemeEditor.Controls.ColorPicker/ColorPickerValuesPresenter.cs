@@ -1,5 +1,4 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
@@ -12,17 +11,17 @@ namespace ThemeEditor.Controls.ColorPicker;
 
 public class ColorPickerValuesPresenter : TemplatedControl
 {
-    public static readonly StyledProperty<double> Value1Property =
-        AvaloniaProperty.Register<ColorPickerValuesPresenter, double>(nameof(Value1));
+    public static readonly StyledProperty<double?> Value1Property =
+        AvaloniaProperty.Register<ColorPickerValuesPresenter, double?>(nameof(Value1));
 
-    public static readonly StyledProperty<double> Value2Property =
-        AvaloniaProperty.Register<ColorPickerValuesPresenter, double>(nameof(Value2));
+    public static readonly StyledProperty<double?> Value2Property =
+        AvaloniaProperty.Register<ColorPickerValuesPresenter, double?>(nameof(Value2));
 
-    public static readonly StyledProperty<double> Value3Property =
-        AvaloniaProperty.Register<ColorPickerValuesPresenter, double>(nameof(Value3));
+    public static readonly StyledProperty<double?> Value3Property =
+        AvaloniaProperty.Register<ColorPickerValuesPresenter, double?>(nameof(Value3));
 
-    public static readonly StyledProperty<double> Value4Property =
-        AvaloniaProperty.Register<ColorPickerValuesPresenter, double>(nameof(Value4));
+    public static readonly StyledProperty<double?> Value4Property =
+        AvaloniaProperty.Register<ColorPickerValuesPresenter, double?>(nameof(Value4));
 
     private Canvas? _colorCanvas;
     private Thumb? _colorThumb;
@@ -38,25 +37,25 @@ public class ColorPickerValuesPresenter : TemplatedControl
     private readonly IValueConverter _value4Converter = AlphaConverter.Instance;
     internal ColorPicker? _colorPicker;
 
-    public double Value1
+    public double? Value1
     {
         get => GetValue(Value1Property);
         set => SetValue(Value1Property, value);
     }
 
-    public double Value2
+    public double? Value2
     {
         get => GetValue(Value2Property);
         set => SetValue(Value2Property, value);
     }
 
-    public double Value3
+    public double? Value3
     {
         get => GetValue(Value3Property);
         set => SetValue(Value3Property, value);
     }
 
-    public double Value4
+    public double? Value4
     {
         get => GetValue(Value4Property);
         set => SetValue(Value4Property, value);
@@ -204,9 +203,9 @@ public class ColorPickerValuesPresenter : TemplatedControl
         var colorY = Convert(_value3Converter, Value3, GetValue3Range());
         var alphaX = Convert(_value4Converter, Value4, GetValue4Range());
 
-        MoveThumb(_hueCanvas, _hueThumb, 0, hueY);
-        MoveThumb(_colorCanvas, _colorThumb, colorX, colorY);
-        MoveThumb(_alphaCanvas, _alphaThumb, alphaX, 0);
+        MoveThumb(_hueCanvas, _hueThumb, 0, hueY ?? 0.0);
+        MoveThumb(_colorCanvas, _colorThumb, colorX ?? 0.0, colorY ?? 0.0);
+        MoveThumb(_alphaCanvas, _alphaThumb, alphaX ?? 0.0, 0.0);
     }
 
     private void UpdateValuesFromThumbs()
@@ -219,7 +218,7 @@ public class ColorPickerValuesPresenter : TemplatedControl
         Value2 = ConvertBack(_value2Converter, colorX, GetValue2Range());
         Value3 = ConvertBack(_value3Converter, colorY, GetValue3Range());
         Value4 = ConvertBack(_value4Converter, alphaX, GetValue4Range());
-        SetColor(Value1, Value2, Value3, Value4);
+        SetColor(Value1 ?? 0.0, Value2 ?? 0.0, Value3 ?? 0.0, Value4 ?? 100.0);
     }
  
     private void UpdateColorFromThumbs()

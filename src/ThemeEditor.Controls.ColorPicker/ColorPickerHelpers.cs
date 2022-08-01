@@ -9,7 +9,7 @@ public static class ColorPickerHelpers
 {
     private static readonly Regex s_hexRegex = new("^#[a-fA-F0-9]{8}$", RegexOptions.Compiled);
 
-    public static bool IsValidHexColor(string hex)
+    public static bool IsValidHexColor(string? hex)
     {
         return !string.IsNullOrWhiteSpace(hex) && s_hexRegex.Match(hex).Success;
     }

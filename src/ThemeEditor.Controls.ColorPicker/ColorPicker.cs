@@ -12,14 +12,14 @@ namespace ThemeEditor.Controls.ColorPicker;
 
 public class ColorPicker : TemplatedControl
 {
-    public static readonly StyledProperty<Color> ColorProperty =
-        AvaloniaProperty.Register<ColorPicker, Color>(nameof(Color));
+    public static readonly StyledProperty<Color?> ColorProperty =
+        AvaloniaProperty.Register<ColorPicker, Color?>(nameof(Color));
 
     private ColorPickerPropertiesPresenter? _propertiesPresenter;
     private ColorPickerValuesPresenter? _valuesPresenter;
     private CompositeDisposable? _disposable;
 
-    public Color Color
+    public Color? Color
     {
         get => GetValue(ColorProperty);
         set => SetValue(ColorProperty, value);

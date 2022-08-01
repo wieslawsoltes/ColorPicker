@@ -6,16 +6,24 @@ namespace ThemeEditor.Controls.ColorPicker.Props;
 
 public class HexProperties : ColorPickerProperties
 {
-    public static readonly StyledProperty<string> HexProperty =
-        AvaloniaProperty.Register<HexProperties, string>(nameof(Hex), "#FFFF0000", validate: ValidateHex, coerce: CoerceHex);
+    public static readonly StyledProperty<string?> HexProperty =
+        AvaloniaProperty.Register<HexProperties, string?>(nameof(Hex), "#FFFF0000", validate: ValidateHex, coerce: CoerceHex);
 
-    private static string CoerceHex(IAvaloniaObject arg1, string arg2)
+    private static string? CoerceHex(IAvaloniaObject arg1, string? arg2)
     {
+        if (arg2 is null)
+        {
+            return null;
+        }
         return arg2;
     }
 
-    private static bool ValidateHex(string hex)
+    private static bool ValidateHex(string? hex)
     {
+        if (hex is null)
+        {
+            return true;
+        }
         if (!ColorPickerHelpers.IsValidHexColor(hex))
         {
             throw new ArgumentException("Invalid Hex value.");
@@ -31,7 +39,7 @@ public class HexProperties : ColorPickerProperties
         this.GetObservable(HexProperty).Subscribe(_ => UpdateColorPickerValues());
     }
 
-    public string Hex
+    public string? Hex
     {
         get => GetValue(HexProperty);
         set => SetValue(HexProperty, value);
@@ -57,7 +65,7 @@ public class HexProperties : ColorPickerProperties
         if (_updating == false && Presenter != null)
         {
             _updating = true;
-            var color = ColorPickerHelpers.FromHSVA(Presenter.Value1, Presenter.Value2, Presenter.Value3, Presenter.Value4);
+            var color = ColorPickerHelpers.FromHSVA(Presenter.Value1 ?? 0.0, Presenter.Value2 ?? 0.0, Presenter.Value3 ?? 0.0, Presenter.Value4 ?? 100.0);
             Hex = ColorPickerHelpers.ToHexColor(color);
             _updating = false;
         }
