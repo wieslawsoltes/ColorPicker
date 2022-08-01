@@ -24,6 +24,10 @@ public class CmykProperties : ColorPickerProperties
         {
             return null;
         }
+        if (double.IsNaN(arg2.Value))
+        {
+            return 0.0;
+        }
         return ColorPickerHelpers.Clamp(arg2.Value, 0.0, 100.0);
     }
 
@@ -32,6 +36,10 @@ public class CmykProperties : ColorPickerProperties
         if (arg2 is null)
         {
             return null;
+        }
+        if (double.IsNaN(arg2.Value))
+        {
+            return 0.0;
         }
         return ColorPickerHelpers.Clamp(arg2.Value, 0.0, 100.0);
     }
@@ -42,6 +50,10 @@ public class CmykProperties : ColorPickerProperties
         {
             return null;
         }
+        if (double.IsNaN(arg2.Value))
+        {
+            return 0.0;
+        }
         return ColorPickerHelpers.Clamp(arg2.Value, 0.0, 100.0);
     }
 
@@ -50,6 +62,10 @@ public class CmykProperties : ColorPickerProperties
         if (arg2 is null)
         {
             return null;
+        }
+        if (double.IsNaN(arg2.Value))
+        {
+            return 0.0;
         }
         return ColorPickerHelpers.Clamp(arg2.Value, 0.0, 100.0);
     }

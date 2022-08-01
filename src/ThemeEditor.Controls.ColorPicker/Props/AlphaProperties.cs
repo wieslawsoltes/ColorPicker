@@ -14,6 +14,10 @@ public class AlphaProperties : ColorPickerProperties
         {
             return null;
         }
+        if (double.IsNaN(arg2.Value))
+        {
+            return 100.0;
+        }
         return ColorPickerHelpers.Clamp(arg2.Value, 0.0, 100.0);
     }
 
