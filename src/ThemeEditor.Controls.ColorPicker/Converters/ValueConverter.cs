@@ -11,7 +11,7 @@ public class ValueConverter : IValueConverter
 
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is double v && parameter is double range && targetType == typeof(double))
+        if (value is double v && parameter is double range && (targetType == typeof(double) || targetType == typeof(double?)))
         {
             return range - (v * range / 100.0);
         }

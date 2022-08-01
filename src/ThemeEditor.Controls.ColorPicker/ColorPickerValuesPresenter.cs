@@ -3,7 +3,6 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Data.Converters;
-using Avalonia.Input;
 using Avalonia.Media;
 using ThemeEditor.Controls.ColorPicker.Converters;
 
@@ -23,19 +22,15 @@ public class ColorPickerValuesPresenter : TemplatedControl
     public static readonly StyledProperty<double?> Value4Property =
         AvaloniaProperty.Register<ColorPickerValuesPresenter, double?>(nameof(Value4));
 
-    private Canvas? _colorCanvas;
-    private Thumb? _colorThumb;
-    private Canvas? _hueCanvas;
-    private Thumb? _hueThumb;
-    private Canvas? _alphaCanvas;
-    private Thumb? _alphaThumb;
     private bool _updating;
-    private bool _captured;
     private readonly IValueConverter _value1Converter = HueConverter.Instance;
     private readonly IValueConverter _value2Converter = SaturationConverter.Instance;
     private readonly IValueConverter _value3Converter = ValueConverter.Instance;
     private readonly IValueConverter _value4Converter = AlphaConverter.Instance;
     internal ColorPicker? _colorPicker;
+    private ColorPickerAreaSlider? _colorPickerAreaSlider;
+    private ColorPickerVerticalSlider? _colorPickerVerticalSlider;
+    private ColorPickerHorizontalSlider? _colorPickerHorizontalSlider;
 
     public double? Value1
     {
@@ -65,105 +60,16 @@ public class ColorPickerValuesPresenter : TemplatedControl
     {
         base.OnApplyTemplate(e);
 
-        if (_colorCanvas != null)
-        {
-            _colorCanvas.PointerPressed -= ColorCanvas_PointerPressed;
-            _colorCanvas.PointerReleased -= ColorCanvas_PointerReleased;
-            _colorCanvas.PointerMoved -= ColorCanvas_PointerMoved;
-        }
-
-        if (_colorThumb != null)
-        {
-            _colorThumb.DragDelta -= ColorThumb_DragDelta;
-        }
-
-        if (_hueCanvas != null)
-        {
-            _hueCanvas.PointerPressed -= HueCanvas_PointerPressed;
-            _hueCanvas.PointerReleased -= HueCanvas_PointerReleased;
-            _hueCanvas.PointerMoved -= HueCanvas_PointerMoved;
-        }
-
-        if (_hueThumb != null)
-        {
-            _hueThumb.DragDelta -= HueThumb_DragDelta;
-        }
-
-        if (_alphaCanvas != null)
-        {
-            _alphaCanvas.PointerPressed -= AlphaCanvas_PointerPressed;
-            _alphaCanvas.PointerReleased -= AlphaCanvas_PointerReleased;
-            _alphaCanvas.PointerMoved -= AlphaCanvas_PointerMoved;
-        }
-
-        if (_alphaThumb != null)
-        {
-            _alphaThumb.DragDelta -= AlphaThumb_DragDelta;
-        }
-
-        _colorCanvas = e.NameScope.Find<Canvas>("PART_ColorCanvas");
-        _colorThumb = e.NameScope.Find<Thumb>("PART_ColorThumb");
-        _hueCanvas = e.NameScope.Find<Canvas>("PART_HueCanvas");
-        _hueThumb = e.NameScope.Find<Thumb>("PART_HueThumb");
-        _alphaCanvas = e.NameScope.Find<Canvas>("PART_AlphaCanvas");
-        _alphaThumb = e.NameScope.Find<Thumb>("PART_AlphaThumb");
-
-        if (_colorCanvas != null)
-        {
-            _colorCanvas.PointerPressed += ColorCanvas_PointerPressed;
-            _colorCanvas.PointerReleased += ColorCanvas_PointerReleased;
-            _colorCanvas.PointerMoved += ColorCanvas_PointerMoved;
-        }
-
-        if (_colorThumb != null)
-        {
-            _colorThumb.DragDelta += ColorThumb_DragDelta;
-        }
-
-        if (_hueCanvas != null)
-        {
-            _hueCanvas.PointerPressed += HueCanvas_PointerPressed;
-            _hueCanvas.PointerReleased += HueCanvas_PointerReleased;
-            _hueCanvas.PointerMoved += HueCanvas_PointerMoved;
-        }
-
-        if (_hueThumb != null)
-        {
-            _hueThumb.DragDelta += HueThumb_DragDelta;
-        }
-
-        if (_alphaCanvas != null)
-        {
-            _alphaCanvas.PointerPressed += AlphaCanvas_PointerPressed;
-            _alphaCanvas.PointerReleased += AlphaCanvas_PointerReleased;
-            _alphaCanvas.PointerMoved += AlphaCanvas_PointerMoved;
-        }
-
-        if (_alphaThumb != null)
-        {
-            _alphaThumb.DragDelta += AlphaThumb_DragDelta;
-        }
+        _colorPickerAreaSlider = e.NameScope.Find<ColorPickerAreaSlider>("PART_ColorPickerAreaSlider");
+        _colorPickerVerticalSlider = e.NameScope.Find<ColorPickerVerticalSlider>("PART_ColorPickerVerticalSlider");
+        _colorPickerHorizontalSlider = e.NameScope.Find<ColorPickerHorizontalSlider>("PART_ColorPickerHorizontalSlider");
     }
 
     private bool IsTemplateValid()
     {
-        return _colorCanvas != null
-               && _colorThumb != null
-               && _hueCanvas != null
-               && _hueThumb != null
-               && _alphaCanvas != null
-               && _alphaThumb != null;
-    }
-
-    private void MoveThumb(Canvas? canvas, Thumb? thumb, double x, double y)
-    {
-        if (canvas != null && thumb != null)
-        {
-            var left = ColorPickerHelpers.Clamp(x, 0, canvas.Bounds.Width);
-            var top = ColorPickerHelpers.Clamp(y, 0, canvas.Bounds.Height);
-            Canvas.SetLeft(thumb, left);
-            Canvas.SetTop(thumb, top); 
-        }
+        return _colorPickerAreaSlider != null
+               && _colorPickerVerticalSlider != null
+               && _colorPickerHorizontalSlider != null;
     }
 
     private T? Convert<T>(IValueConverter converter, T? value, T? range)
@@ -176,62 +82,34 @@ public class ColorPickerValuesPresenter : TemplatedControl
         return (T?)converter.ConvertBack(value, typeof(T), range, CultureInfo.CurrentCulture);
     }
 
-    private double GetValue1Range() => _hueCanvas?.Bounds.Height ?? 0.0;
-
-    private double GetValue2Range() => _colorCanvas?.Bounds.Width ?? 0.0;
-
-    private double GetValue3Range() => _colorCanvas?.Bounds.Height ?? 0.0;
-
-    private double GetValue4Range() => _alphaCanvas?.Bounds.Width ?? 0.0;
-
     private void UpdateThumbsFromColor()
     {
         ColorPickerHelpers.FromColor(GetColor(), out var h, out var s, out var v, out var a);
-        var hueY = Convert(_value1Converter, h, GetValue1Range());
-        var colorX = Convert(_value2Converter, s, GetValue2Range());
-        var colorY = Convert(_value3Converter, v, GetValue3Range());
-        var alphaX = Convert(_value4Converter, a, GetValue4Range());
-        MoveThumb(_hueCanvas, _hueThumb, 0, hueY);
-        MoveThumb(_colorCanvas, _colorThumb, colorX, colorY);
-        MoveThumb(_alphaCanvas, _alphaThumb, alphaX, 0);
+        var hueY = Convert(_value1Converter, h, _colorPickerVerticalSlider?.GetValue1Range());
+        var colorX = Convert(_value2Converter, s, _colorPickerAreaSlider?.GetValue2Range());
+        var colorY = Convert(_value3Converter, v, _colorPickerAreaSlider?.GetValue3Range());
+        var alphaX = Convert(_value4Converter, a, _colorPickerHorizontalSlider?.GetValue4Range());
+        Value1 = hueY;
+        Value2 = colorX;
+        Value3 = colorY;
+        Value4 = alphaX;
     }
 
-    private void UpdateThumbsFromValues()
-    {
-        var hueY = Convert(_value1Converter, Value1, GetValue1Range());
-        var colorX = Convert(_value2Converter, Value2, GetValue2Range());
-        var colorY = Convert(_value3Converter, Value3, GetValue3Range());
-        var alphaX = Convert(_value4Converter, Value4, GetValue4Range());
-
-        MoveThumb(_hueCanvas, _hueThumb, 0, hueY ?? 0.0);
-        MoveThumb(_colorCanvas, _colorThumb, colorX ?? 0.0, colorY ?? 0.0);
-        MoveThumb(_alphaCanvas, _alphaThumb, alphaX ?? 0.0, 0.0);
-    }
-
-    private void UpdateValuesFromThumbs()
-    {
-        var hueY = Canvas.GetTop(_hueThumb);
-        var colorX = Canvas.GetLeft(_colorThumb);
-        var colorY = Canvas.GetTop(_colorThumb);
-        var alphaX = Canvas.GetLeft(_alphaThumb);
-        Value1 = ConvertBack(_value1Converter, hueY, GetValue1Range());
-        Value2 = ConvertBack(_value2Converter, colorX, GetValue2Range());
-        Value3 = ConvertBack(_value3Converter, colorY, GetValue3Range());
-        Value4 = ConvertBack(_value4Converter, alphaX, GetValue4Range());
-        SetColor(Value1 ?? 0.0, Value2 ?? 0.0, Value3 ?? 0.0, Value4 ?? 100.0);
-    }
- 
     private void UpdateColorFromThumbs()
     {
-        var hueY = Canvas.GetTop(_hueThumb);
-        var colorX = Canvas.GetLeft(_colorThumb);
-        var colorY = Canvas.GetTop(_colorThumb);
-        var alphaX = Canvas.GetLeft(_alphaThumb);
-        var h = ConvertBack(_value1Converter, hueY, GetValue1Range());
-        var s = ConvertBack(_value2Converter, colorX, GetValue2Range());
-        var v = ConvertBack(_value3Converter, colorY, GetValue3Range());
-        var a = ConvertBack(_value4Converter, alphaX, GetValue4Range());
-        SetColor(h, s, v, a);
+        var hueY = Value1;
+        var colorX = Value2;
+        var colorY = Value3;
+        var alphaX = Value4;
+        var h = ConvertBack(_value1Converter, hueY, _colorPickerVerticalSlider?.GetValue1Range());
+        var s = ConvertBack(_value2Converter, colorX, _colorPickerAreaSlider?.GetValue2Range());
+        var v = ConvertBack(_value3Converter, colorY, _colorPickerAreaSlider?.GetValue3Range());
+        var a = ConvertBack(_value4Converter, alphaX, _colorPickerHorizontalSlider?.GetValue4Range());
+  
+        if (h is not null && s is not null && v is not null && a is not null)
+        {
+            SetColor(h.Value, s.Value, v.Value, a.Value);
+        }
     }
 
     private Color GetColor()
@@ -252,8 +130,8 @@ public class ColorPickerValuesPresenter : TemplatedControl
         if (_updating == false && IsTemplateValid())
         {
             _updating = true;
-            UpdateThumbsFromValues();
-            UpdateValuesFromThumbs();
+            //UpdateThumbsFromValues();
+            //UpdateValuesFromThumbs();
             UpdateColorFromThumbs();
             _updating = false;
         }
@@ -265,166 +143,9 @@ public class ColorPickerValuesPresenter : TemplatedControl
         {
             _updating = true;
             UpdateThumbsFromColor();
-            UpdateValuesFromThumbs();
+            //UpdateValuesFromThumbs();
             UpdateColorFromThumbs();
             _updating = false;
         }
-    }
-
-    private void ColorCanvas_PointerPressed(object? sender, PointerPressedEventArgs e)
-    {
-        var position = e.GetPosition(_colorCanvas);
-        _updating = true;
-        MoveThumb(_colorCanvas, _colorThumb, position.X, position.Y);
-        UpdateValuesFromThumbs();
-        UpdateColorFromThumbs();
-        if (_colorCanvas is { } && _colorThumb is { })
-        {
-            _colorCanvas.Cursor = new Cursor(StandardCursorType.None);
-            _colorThumb.Cursor = new Cursor(StandardCursorType.None);
-        }
-        _updating = false;
-        _captured = true;
-    }
-
-    private void ColorCanvas_PointerReleased(object? sender, PointerReleasedEventArgs e)
-    {
-        if (_captured)
-        {
-            if (_colorCanvas is { } && _colorThumb is { })
-            {
-                _colorCanvas.Cursor = Cursor.Default;
-                _colorThumb.Cursor = Cursor.Default;
-            }
-            _captured = false;
-        }
-    }
-
-    private void ColorCanvas_PointerMoved(object? sender, PointerEventArgs e)
-    {
-        if (_captured)
-        {
-            var position = e.GetPosition(_colorCanvas);
-            _updating = true;
-            MoveThumb(_colorCanvas, _colorThumb, position.X, position.Y);
-            UpdateValuesFromThumbs();
-            UpdateColorFromThumbs();
-            _updating = false;
-        }
-    }
-
-    private void ColorThumb_DragDelta(object? sender, VectorEventArgs e)
-    {
-        var left = Canvas.GetLeft(_colorThumb);
-        var top = Canvas.GetTop(_colorThumb);
-        _updating = true;
-        MoveThumb(_colorCanvas, _colorThumb, left + e.Vector.X, top + e.Vector.Y);
-        UpdateValuesFromThumbs();
-        UpdateColorFromThumbs();
-        _updating = false;
-    }
-
-    private void HueCanvas_PointerPressed(object? sender, PointerPressedEventArgs e)
-    {
-        var position = e.GetPosition(_hueCanvas);
-        _updating = true;
-        MoveThumb(_hueCanvas, _hueThumb, 0, position.Y);
-        UpdateValuesFromThumbs();
-        UpdateColorFromThumbs();
-        if (_hueCanvas is { } && _hueThumb is { })
-        {
-            _hueCanvas.Cursor = new Cursor(StandardCursorType.SizeNorthSouth);
-            _hueThumb.Cursor = new Cursor(StandardCursorType.SizeNorthSouth);
-        }
-        _updating = false;
-        _captured = true;
-    }
-
-    private void HueCanvas_PointerReleased(object? sender, PointerReleasedEventArgs e)
-    {
-        if (_captured)
-        {
-            if (_hueCanvas is { } && _hueThumb is { })
-            {
-                _hueCanvas.Cursor = Cursor.Default;
-                _hueThumb.Cursor = Cursor.Default;
-            }
-            _captured = false;
-        }
-    }
-
-    private void HueCanvas_PointerMoved(object? sender, PointerEventArgs e)
-    {
-        if (_captured)
-        {
-            var position = e.GetPosition(_hueCanvas);
-            _updating = true;
-            MoveThumb(_hueCanvas, _hueThumb, 0, position.Y);
-            UpdateValuesFromThumbs();
-            UpdateColorFromThumbs();
-            _updating = false;
-        }
-    }
-
-    private void HueThumb_DragDelta(object? sender, VectorEventArgs e)
-    {
-        var top = Canvas.GetTop(_hueThumb);
-        _updating = true;
-        MoveThumb(_hueCanvas, _hueThumb, 0, top + e.Vector.Y);
-        UpdateValuesFromThumbs();
-        UpdateColorFromThumbs();
-        _updating = false;
-    }
-
-    private void AlphaCanvas_PointerPressed(object? sender, PointerPressedEventArgs e)
-    {
-        var position = e.GetPosition(_alphaCanvas);
-        _updating = true;
-        MoveThumb(_alphaCanvas, _alphaThumb, position.X, 0);
-        UpdateValuesFromThumbs();
-        UpdateColorFromThumbs();
-        if (_alphaCanvas is { } && _alphaThumb is { })
-        {
-            _alphaCanvas.Cursor = new Cursor(StandardCursorType.SizeWestEast);
-            _alphaThumb.Cursor = new Cursor(StandardCursorType.SizeWestEast);
-        }
-        _updating = false;
-        _captured = true;
-    }
-
-    private void AlphaCanvas_PointerReleased(object? sender, PointerReleasedEventArgs e)
-    {
-        if (_captured)
-        {
-            if (_alphaCanvas is { } && _alphaThumb is { })
-            {
-                _alphaCanvas.Cursor = Cursor.Default;
-                _alphaThumb.Cursor = Cursor.Default;
-            }
-            _captured = false;
-        }
-    }
-
-    private void AlphaCanvas_PointerMoved(object? sender, PointerEventArgs e)
-    {
-        if (_captured)
-        {
-            var position = e.GetPosition(_alphaCanvas);
-            _updating = true;
-            MoveThumb(_alphaCanvas, _alphaThumb, position.X, 0);
-            UpdateValuesFromThumbs();
-            UpdateColorFromThumbs();
-            _updating = false;
-        }
-    }
-
-    private void AlphaThumb_DragDelta(object? sender, VectorEventArgs e)
-    {
-        var left = Canvas.GetLeft(_alphaThumb);
-        _updating = true;
-        MoveThumb(_alphaCanvas, _alphaThumb, left + e.Vector.X, 0);
-        UpdateValuesFromThumbs();
-        UpdateColorFromThumbs();
-        _updating = false;
     }
 }

@@ -79,6 +79,74 @@
     </Setter>
   </Style>
 
+  <Style Selector="cp|ColorPickerHorizontalSlider">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Canvas x:Name="PART_AlphaCanvas" Height="20">
+          <Canvas.Background>
+            <SolidColorBrush>
+              <SolidColorBrush.Color>
+                <MultiBinding Mode="OneWay" Converter="{x:Static converters:HsvaToColorConverter.Instance}">
+                  <Binding Path="Value1" RelativeSource="{RelativeSource TemplatedParent}" />
+                  <Binding Path="Value2" RelativeSource="{RelativeSource TemplatedParent}" />
+                  <Binding Path="Value3" RelativeSource="{RelativeSource TemplatedParent}" />
+                  <Binding Path="Value4" RelativeSource="{RelativeSource TemplatedParent}" />
+                </MultiBinding>
+              </SolidColorBrush.Color>
+            </SolidColorBrush>
+          </Canvas.Background>
+          <Thumb x:Name="PART_AlphaThumb" Height="20" Canvas.Left="0" Canvas.Top="0" Margin="-5,0,-5,0">
+            <Thumb.Template>
+              <ControlTemplate>
+                <Grid Background="Transparent">
+                  <Path Fill="#FF000000" Data="M 0,9 L 0,4 L 5,0 L 10,4 L 10,9 Z" VerticalAlignment="Bottom" />
+                </Grid>
+              </ControlTemplate>
+            </Thumb.Template>
+          </Thumb>
+        </Canvas>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+
+  <Style Selector="cp|ColorPickerVerticalSlider">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Canvas x:Name="PART_HueCanvas" Background="Transparent" Width="20">
+          <Thumb x:Name="PART_HueThumb" Width="20" Canvas.Left="0" Canvas.Top="0" Margin="0,-5,0,-5">
+            <Thumb.Template>
+              <ControlTemplate>
+                <Grid Background="Transparent">
+                  <Path Fill="#FF000000" Data="M 0,0 L 5,5 L 0,10 Z" />
+                  <Path Fill="#FF000000" Data="M 5,0 L 0,5 L 5,10 Z" HorizontalAlignment="Right" />
+                </Grid>
+              </ControlTemplate>
+            </Thumb.Template>
+          </Thumb>
+        </Canvas>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+
+  <Style Selector="cp|ColorPickerAreaSlider">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Canvas x:Name="PART_ColorCanvas" Background="Transparent">
+          <Thumb x:Name="PART_ColorThumb" Canvas.Left="0" Canvas.Top="0" Margin="-5.5,-5.5,0,0">
+            <Thumb.Template>
+              <ControlTemplate>
+                <Grid Background="Transparent">
+                  <Ellipse Width="11" Height="11" Stroke="#FFFFFFFF" StrokeThickness="1" />
+                  <Ellipse Width="9" Height="9" Stroke="#FF000000" StrokeThickness="1" />
+                </Grid>
+              </ControlTemplate>
+            </Thumb.Template>
+          </Thumb>
+        </Canvas>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+
   <Style Selector="cp|ColorPickerValuesPresenter">
     <Setter Property="Template">
       <ControlTemplate>
@@ -97,18 +165,9 @@
                     <GradientStop Offset="1" Color="#FF000000" />
                   </LinearGradientBrush>
                 </Grid.Background>
-                <Canvas x:Name="PART_ColorCanvas" Background="Transparent">
-                  <Thumb x:Name="PART_ColorThumb" Canvas.Left="0" Canvas.Top="0" Margin="-5.5,-5.5,0,0">
-                    <Thumb.Template>
-                      <ControlTemplate>
-                        <Grid Background="Transparent">
-                          <Ellipse Width="11" Height="11" Stroke="#FFFFFFFF" StrokeThickness="1" />
-                          <Ellipse Width="9" Height="9" Stroke="#FF000000" StrokeThickness="1" />
-                        </Grid>
-                      </ControlTemplate>
-                    </Thumb.Template>
-                  </Thumb>
-                </Canvas>
+                <cp:ColorPickerAreaSlider Name="PART_ColorPickerAreaSlider" 
+                                          Value2="{Binding Value2, Mode=TwoWay}"
+                                          Value3="{Binding Value3, Mode=TwoWay}" />
               </Grid>
             </Grid>
             <Grid Grid.Column="2" Grid.Row="0">
@@ -123,18 +182,8 @@
                   <GradientStop Color="#FFFF0000" Offset="1.0" />
                 </LinearGradientBrush>
               </Grid.Background>
-              <Canvas x:Name="PART_HueCanvas" Background="Transparent" Width="20">
-                <Thumb x:Name="PART_HueThumb" Width="20" Canvas.Left="0" Canvas.Top="0" Margin="0,-5,0,-5">
-                  <Thumb.Template>
-                    <ControlTemplate>
-                      <Grid Background="Transparent">
-                        <Path Fill="#FF000000" Data="M 0,0 L 5,5 L 0,10 Z" />
-                        <Path Fill="#FF000000" Data="M 5,0 L 0,5 L 5,10 Z" HorizontalAlignment="Right" />
-                      </Grid>
-                    </ControlTemplate>
-                  </Thumb.Template>
-                </Thumb>
-              </Canvas>
+              <cp:ColorPickerVerticalSlider Name="PART_ColorPickerVerticalSlider"
+                                            Value1="{Binding Value1, Mode=TwoWay}" />
             </Grid>
             <Grid Grid.Column="0" Grid.Row="2">
               <Grid.Background>
@@ -153,29 +202,8 @@
                   </VisualBrush.Visual>
                 </VisualBrush>
               </Grid.Background>
-              <Canvas x:Name="PART_AlphaCanvas" Height="20">
-                <Canvas.Background>
-                  <SolidColorBrush>
-                    <SolidColorBrush.Color>
-                      <MultiBinding Mode="OneWay" Converter="{x:Static converters:HsvaToColorConverter.Instance}">
-                        <Binding Path="Value1" RelativeSource="{RelativeSource TemplatedParent}" />
-                        <Binding Path="Value2" RelativeSource="{RelativeSource TemplatedParent}" />
-                        <Binding Path="Value3" RelativeSource="{RelativeSource TemplatedParent}" />
-                        <Binding Path="Value4" RelativeSource="{RelativeSource TemplatedParent}" />
-                      </MultiBinding>
-                    </SolidColorBrush.Color>
-                  </SolidColorBrush>
-                </Canvas.Background>
-                <Thumb x:Name="PART_AlphaThumb" Height="20" Canvas.Left="0" Canvas.Top="0" Margin="-5,0,-5,0">
-                  <Thumb.Template>
-                    <ControlTemplate>
-                      <Grid Background="Transparent">
-                        <Path Fill="#FF000000" Data="M 0,9 L 0,4 L 5,0 L 10,4 L 10,9 Z" VerticalAlignment="Bottom" />
-                      </Grid>
-                    </ControlTemplate>
-                  </Thumb.Template>
-                </Thumb>
-              </Canvas>
+              <cp:ColorPickerHorizontalSlider Name="PART_ColorPickerHorizontalSlider"
+                                              Value4="{Binding Value4, Mode=TwoWay}" />
             </Grid>
           </Grid>
       </ControlTemplate>

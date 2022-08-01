@@ -11,7 +11,7 @@ public class HueConverter : IValueConverter
 
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is double v && parameter is double range && targetType == typeof(double))
+        if (value is double v && parameter is double range && (targetType == typeof(double) || targetType == typeof(double?)))
         {
             return v * range / 360.0;
         }
