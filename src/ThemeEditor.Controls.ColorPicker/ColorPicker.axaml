@@ -166,8 +166,8 @@
                   </LinearGradientBrush>
                 </Grid.Background>
                 <cp:ColorPickerAreaSlider Name="PART_ColorPickerAreaSlider" 
-                                          Value2="{Binding Value2, Mode=TwoWay}"
-                                          Value3="{Binding Value3, Mode=TwoWay}" />
+                                          Value2="{TemplateBinding Value2, Mode=TwoWay}"
+                                          Value3="{TemplateBinding Value3, Mode=TwoWay}" />
               </Grid>
             </Grid>
             <Grid Grid.Column="2" Grid.Row="0">
@@ -183,7 +183,7 @@
                 </LinearGradientBrush>
               </Grid.Background>
               <cp:ColorPickerVerticalSlider Name="PART_ColorPickerVerticalSlider"
-                                            Value1="{Binding Value1, Mode=TwoWay}" />
+                                            Value1="{TemplateBinding Value1, Mode=TwoWay}" />
             </Grid>
             <Grid Grid.Column="0" Grid.Row="2">
               <Grid.Background>
@@ -203,7 +203,7 @@
                 </VisualBrush>
               </Grid.Background>
               <cp:ColorPickerHorizontalSlider Name="PART_ColorPickerHorizontalSlider"
-                                              Value4="{Binding Value4, Mode=TwoWay}" />
+                                              Value4="{TemplateBinding Value4, Mode=TwoWay}" />
             </Grid>
           </Grid>
       </ControlTemplate>
