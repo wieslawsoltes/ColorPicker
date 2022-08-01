@@ -3,9 +3,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:cp="clr-namespace:ThemeEditor.Controls.ColorPicker;assembly=ThemeEditor.Controls.ColorPicker"
+        xmlns:local="clr-namespace:ColorPickerDemo"
         mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="250"
         x:Class="ColorPickerDemo.MainWindow"
-        Title="ColorPickerDemo">
+        Title="ColorPickerDemo"
+        x:DataType="local:MainWindow" x:CompileBindings="True">
   <Panel>
     <Panel.Styles>
       <Style Selector="cp|ColorPicker /template/ cp|ColorPickerValuesPresenter">
@@ -18,6 +20,6 @@
         <Setter Property="IsVisible" Value="True" />
       </Style>
     </Panel.Styles>
-    <cp:ColorPicker Color="#5F1F001F" Margin="12" />
+    <cp:ColorPicker Color="{Binding Color}" Margin="12" />
   </Panel>
 </Window>
