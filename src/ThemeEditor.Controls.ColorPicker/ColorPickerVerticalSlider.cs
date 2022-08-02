@@ -154,7 +154,7 @@ public class ColorPickerVerticalSlider : TemplatedControl
     {
         base.OnPropertyChanged(change);
 
-        if (change.Property == Value1Property)
+        if (change.Property == Value1Property || change.Property == BoundsProperty)
         {
             if (_updating == false && IsTemplateValid())
             {
