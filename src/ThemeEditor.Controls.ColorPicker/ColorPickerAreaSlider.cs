@@ -170,7 +170,7 @@ public class ColorPickerAreaSlider : TemplatedControl
     {
         base.OnPropertyChanged(change);
 
-        if (change.Property == Value2Property || change.Property == Value3Property)
+        if (change.Property == Value2Property || change.Property == Value3Property || change.Property == BoundsProperty)
         {
             if (_updating == false && IsTemplateValid())
             {
