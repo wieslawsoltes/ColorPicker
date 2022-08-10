@@ -111,9 +111,9 @@
       "System.Threading.ThreadPool.dll": "sha256-5M8XKNjBii9IaoOVGT4Z4w7yaWhwaoyKzd0bgquJ76E=",
       "System.Xml.ReaderWriter.dll": "sha256-UwUTvzSeK0Xt0NWYodKashrUxiCcoc1C4sKDy5uH4Hs=",
       "System.Xml.XDocument.dll": "sha256-aifd8kKX4zyhRJnTguuzizKnLmTK+BG95PHBSDcU61I=",
-      "ThemeEditor.Base.dll": "sha256-4+E6gwDtIHv4PjjglwpxrpeF7eDLWgaPTeT8o2uxTqE=",
-      "ThemeEditor.Controls.ColorPicker.dll": "sha256-t5DaknfbdQLF4ONT4DnknCMTnHKP4M6S81UL11PR2FM=",
-      "ThemeEditor.Web.dll": "sha256-KQtIyFzUNSaTu5Jtbmwiw9uSbYCTGfsuNUS0krFkBI4="
+      "ThemeEditor.Base.dll": "sha256-+OmCPBTOToxYRIx0Vn8EiLFMxBmfq9JaKo4Bo2y0cgk=",
+      "ThemeEditor.Controls.ColorPicker.dll": "sha256-DbwWUlfIcetBg3IsRfqBD0Cilmxi70DmwF5aSwU4rY4=",
+      "ThemeEditor.Web.dll": "sha256-juJ\/oi8UhFPxW6bhPfRld5yJVgXp0NBSpfPqG2JJqAk="
     },
     "extensions": null,
     "lazyAssembly": null,
