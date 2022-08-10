@@ -168,12 +168,16 @@ public class ColorPickerValuesPresenter : TemplatedControl
 
     private T? Convert<T>(IValueConverter converter, T? value, T? range)
     {
-        return (T?)converter.Convert(value, typeof(T), range, CultureInfo.CurrentCulture);
+        var converted = converter.Convert(value, typeof(T), range, CultureInfo.CurrentCulture);
+        var result = (T?)converted;
+        return result;
     }
 
     private T? ConvertBack<T>(IValueConverter converter, T? value, T? range)
     {
-        return (T?)converter.ConvertBack(value, typeof(T), range, CultureInfo.CurrentCulture);
+        var converted = converter.ConvertBack(value, typeof(T), range, CultureInfo.CurrentCulture);
+        var result = (T?)converted;
+        return result;
     }
 
     private double GetValue1Range() => _hueCanvas?.Bounds.Height ?? 0.0;
