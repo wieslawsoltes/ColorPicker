@@ -29,7 +29,7 @@ public class AlphaProperties : ColorPickerProperties
         }
         if (alpha < 0.0 || alpha > 100.0)
         {
-            throw new ArgumentException("Invalid Alpha value.");
+            return false;
         }
         return true;
     }

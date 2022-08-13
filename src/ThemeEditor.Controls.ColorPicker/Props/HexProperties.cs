@@ -13,8 +13,14 @@ public class HexProperties : ColorPickerProperties
     {
         if (arg2 is null)
         {
-            return null;
+            return "#FFFF0000";
         }
+
+        if (!ColorPickerHelpers.IsValidHexColor(arg2))
+        {
+            return "#FFFF0000";
+        }
+        
         return arg2;
     }
 
@@ -26,7 +32,7 @@ public class HexProperties : ColorPickerProperties
         }
         if (!ColorPickerHelpers.IsValidHexColor(hex))
         {
-            throw new ArgumentException("Invalid Hex value.");
+            return false;
         }
         return true;
     }

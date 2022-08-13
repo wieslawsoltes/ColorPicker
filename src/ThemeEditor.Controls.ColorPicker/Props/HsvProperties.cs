@@ -57,7 +57,7 @@ public class HsvProperties : ColorPickerProperties
     {
         if (hue < 0.0 || hue > 360.0)
         {
-            throw new ArgumentException("Invalid Hue value.");
+            return false;
         }
         return true;
     }
@@ -70,7 +70,7 @@ public class HsvProperties : ColorPickerProperties
         }
         if (saturation < 0.0 || saturation > 100.0)
         {
-            throw new ArgumentException("Invalid Saturation value.");
+            return false;
         }
         return true;
     }
@@ -83,7 +83,7 @@ public class HsvProperties : ColorPickerProperties
         }
         if (value < 0.0 || value > 100.0)
         {
-            throw new ArgumentException("Invalid Value value.");
+            return false;
         }
         return true;
     }

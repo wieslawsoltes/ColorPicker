@@ -78,7 +78,7 @@ public class CmykProperties : ColorPickerProperties
         }
         if (cyan < 0.0 || cyan > 100.0)
         {
-            throw new ArgumentException("Invalid Cyan value.");
+            return false;
         }
         return true;
     }
@@ -91,7 +91,7 @@ public class CmykProperties : ColorPickerProperties
         }
         if (magenta < 0.0 || magenta > 100.0)
         {
-            throw new ArgumentException("Invalid Magenta value.");
+            return false;
         }
         return true;
     }
@@ -104,7 +104,7 @@ public class CmykProperties : ColorPickerProperties
         }
         if (yellow < 0.0 || yellow > 100.0)
         {
-            throw new ArgumentException("Invalid Yellow value.");
+            return false;
         }
         return true;
     }
@@ -117,7 +117,7 @@ public class CmykProperties : ColorPickerProperties
         }
         if (blackKey < 0.0 || blackKey > 100.0)
         {
-            throw new ArgumentException("Invalid BlackKey value.");
+            return false;
         }
         return true;
     }
