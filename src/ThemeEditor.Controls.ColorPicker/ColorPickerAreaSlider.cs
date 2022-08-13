@@ -166,7 +166,7 @@ public class ColorPickerAreaSlider : TemplatedControl
         Value3 = ConvertBack(_value3Converter, colorY, GetValue3Range());
     }
 
-    protected override void OnPropertyChanged<T>(AvaloniaPropertyChangedEventArgs<T> change)
+    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
 
