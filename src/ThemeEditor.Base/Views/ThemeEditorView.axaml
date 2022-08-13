@@ -11,11 +11,11 @@
             <TabItem Header="Themes" Classes="editor">
                 <StackPanel Spacing="2">
                     <ComboBox Items="{Binding Themes}" SelectedItem="{Binding CurrentTheme, Mode=TwoWay}" Classes="editor">
-                        <ComboBox.DataTemplates>
+                        <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Name}"/>
                             </DataTemplate>
-                        </ComboBox.DataTemplates>
+                        </ComboBox.ItemTemplate>
                     </ComboBox>
                     <TextBox Text="{Binding CurrentTheme.Name, Mode=TwoWay}" Classes="left"/>
                     <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto">

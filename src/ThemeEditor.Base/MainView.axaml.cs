@@ -3,6 +3,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.Styling;
+using Avalonia.Themes.Simple;
 using ThemeEditor.ViewModels;
 using ThemeEditor.Views;
 
@@ -10,8 +11,8 @@ namespace ThemeEditor;
 
 public class MainView : UserControl
 {
-    private readonly StyleInclude? _lightTheme;
-    private readonly StyleInclude? _darkTheme;
+    private readonly SimpleTheme? _lightTheme;
+    private readonly SimpleTheme? _darkTheme;
 
     public MainView()
     {
@@ -38,14 +39,14 @@ public class MainView : UserControl
             }
         };
             
-        _lightTheme = new StyleInclude(new Uri("resm:Styles?assembly=ThemeEditor"))
+        _lightTheme = new SimpleTheme(new Uri("resm:Styles?assembly=ThemeEditor"))
         {
-            Source = new Uri("resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default")
+            Mode = SimpleThemeMode.Light
         };
             
-        _darkTheme = new StyleInclude(new Uri("resm:Styles?assembly=ThemeEditor"))
+        _darkTheme = new SimpleTheme(new Uri("resm:Styles?assembly=ThemeEditor"))
         {
-            Source = new Uri("resm:Avalonia.Themes.Default.Accents.BaseDark.xaml?assembly=Avalonia.Themes.Default")
+            Mode = SimpleThemeMode.Dark
         };
             
         Styles.Add(_darkTheme);
