@@ -150,7 +150,7 @@ public class ColorPickerVerticalSlider : TemplatedControl
         Value1 = ConvertBack(_value1Converter, hueY, GetValue1Range());
     }
 
-    protected override void OnPropertyChanged<T>(AvaloniaPropertyChangedEventArgs<T> change)
+    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
 
