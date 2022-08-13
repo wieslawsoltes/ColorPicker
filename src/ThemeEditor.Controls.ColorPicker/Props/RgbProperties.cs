@@ -51,7 +51,7 @@ public class RgbProperties : ColorPickerProperties
         // ReSharper disable ConditionIsAlwaysTrueOrFalse
         if (red < 0 || red > 255) // ReSharper restore ConditionIsAlwaysTrueOrFalse
         {
-            throw new ArgumentException("Invalid Red value.");
+            return false;
         }
         return true;
     }
@@ -66,7 +66,7 @@ public class RgbProperties : ColorPickerProperties
         if (green < 0 || green > 255)
             // ReSharper restore ConditionIsAlwaysTrueOrFalse
         {
-            throw new ArgumentException("Invalid Green value.");
+            return false;
         }
         return true;
     }
@@ -81,7 +81,7 @@ public class RgbProperties : ColorPickerProperties
         if (blue < 0 || blue > 255)
             // ReSharper restore ConditionIsAlwaysTrueOrFalse
         {
-            throw new ArgumentException("Invalid Blue value.");
+            return false;
         }
         return true;
     }
