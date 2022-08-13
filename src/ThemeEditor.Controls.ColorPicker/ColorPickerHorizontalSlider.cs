@@ -150,7 +150,7 @@ public class ColorPickerHorizontalSlider : TemplatedControl
         Value4 = ConvertBack(_value4Converter, alphaX, GetValue4Range());
     }
 
-    protected override void OnPropertyChanged<T>(AvaloniaPropertyChangedEventArgs<T> change)
+    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
 
