@@ -150,12 +150,24 @@ public class ColorPickerAreaSlider : TemplatedControl
 
     private T? Convert<T>(IValueConverter converter, T? value, T? range)
     {
-        return (T?)converter.Convert(value, typeof(T), range, CultureInfo.CurrentCulture);
+        var converted = converter.Convert(value, typeof(T), range, CultureInfo.CurrentCulture);
+        if (converted == AvaloniaProperty.UnsetValue)
+        {
+            return default;
+        }
+        var result = (T?)converted;
+        return result;
     }
 
     private T? ConvertBack<T>(IValueConverter converter, T? value, T? range)
     {
-        return (T?)converter.ConvertBack(value, typeof(T), range, CultureInfo.CurrentCulture);
+        var converted = converter.ConvertBack(value, typeof(T), range, CultureInfo.CurrentCulture);
+        if (converted == AvaloniaProperty.UnsetValue)
+        {
+            return default;
+        }
+        var result = (T?)converted;
+        return result;
     }
 
     private void UpdateValuesFromThumbs()
