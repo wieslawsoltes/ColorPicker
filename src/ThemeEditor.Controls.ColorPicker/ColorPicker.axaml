@@ -225,7 +225,7 @@
     <Setter Property="ClipValueToMinMax" Value="True" />
     <Setter Property="ShowButtonSpinner" Value="True" />
     <Setter Property="AllowSpin" Value="True" />
-    <Setter Property="CultureInfo" Value="en-US" />
+    <Setter Property="NumberFormat" Value="{x:Static cp:ColorPicker.NumberFormat}" />
     <Setter Property="Margin" Value="2" />
     <Setter Property="Padding" Value="1" />
   </Style>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Reactive.Disposables;
 using Avalonia;
 using Avalonia.Collections;
@@ -12,6 +13,8 @@ namespace ThemeEditor.Controls.ColorPicker;
 
 public class ColorPicker : TemplatedControl
 {
+    public static readonly NumberFormatInfo NumberFormat = new CultureInfo("en-US").NumberFormat;
+
     public static readonly StyledProperty<Color?> ColorProperty =
         AvaloniaProperty.Register<ColorPicker, Color?>(nameof(Color));
 
