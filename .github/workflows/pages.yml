@@ -17,7 +17,7 @@ jobs:
       run: dotnet workload install wasm-tools
 
     - name: Publish .NET Project
-      run: dotnet publish src/ThemeEditor.Web/ThemeEditor.Web.csproj -c Release -o release --nologo
+      run: dotnet publish samples/ColorPickerDemo/ColorPickerDemo.csproj -c Release -o release --nologo
 
     - name: Change base-tag in index.html from / to ColorPicker
       run: sed -i 's/<base href="\/" \/>/<base href="\/ColorPicker\/" \/>/g' release/wwwroot/index.html
