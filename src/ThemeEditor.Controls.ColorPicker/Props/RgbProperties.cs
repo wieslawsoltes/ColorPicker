@@ -7,84 +7,13 @@ namespace ThemeEditor.Controls.ColorPicker.Props;
 public class RgbProperties : ColorPickerProperties
 {
     public static readonly StyledProperty<byte?> RedProperty =
-        AvaloniaProperty.Register<RgbProperties, byte?>(nameof(Red), 0xFF, validate: ValidateRed, coerce: CoerceRed);
+        AvaloniaProperty.Register<RgbProperties, byte?>(nameof(Red), 0xFF);
 
     public static readonly StyledProperty<byte?> GreenProperty =
-        AvaloniaProperty.Register<RgbProperties, byte?>(nameof(Green), 0x00, validate: ValidateGreen, coerce: CoerceGreen);
+        AvaloniaProperty.Register<RgbProperties, byte?>(nameof(Green));
 
     public static readonly StyledProperty<byte?> BlueProperty =
-        AvaloniaProperty.Register<RgbProperties, byte?>(nameof(Blue), 0x00, validate: ValidateBlue, coerce: CoerceBlue);
-
-    private static byte? CoerceRed(IAvaloniaObject arg1, byte? arg2)
-    {
-        if (arg2 is null)
-        {
-            return null;
-        }
-        return ColorPickerHelpers.Clamp(arg2.Value, 0, 255);
-    }
-
-    private static byte? CoerceGreen(IAvaloniaObject arg1, byte? arg2)
-    {
-        if (arg2 is null)
-        {
-            return null;
-        }
-        return ColorPickerHelpers.Clamp(arg2.Value, 0, 255);
-    }
-
-    private static byte? CoerceBlue(IAvaloniaObject arg1, byte? arg2)
-    {
-        if (arg2 is null)
-        {
-            return null;
-        }
-        return ColorPickerHelpers.Clamp(arg2.Value, 0, 255);
-    }
-
-    private static bool ValidateRed(byte? red)
-    {
-        if (red is null)
-        {
-            return true;
-        }
-        // ReSharper disable ConditionIsAlwaysTrueOrFalse
-        if (red < 0 || red > 255) // ReSharper restore ConditionIsAlwaysTrueOrFalse
-        {
-            return false;
-        }
-        return true;
-    }
-
-    private static bool ValidateGreen(byte? green)
-    {
-        if (green is null)
-        {
-            return true;
-        }
-        // ReSharper disable ConditionIsAlwaysTrueOrFalse
-        if (green < 0 || green > 255)
-            // ReSharper restore ConditionIsAlwaysTrueOrFalse
-        {
-            return false;
-        }
-        return true;
-    }
-
-    private static bool ValidateBlue(byte? blue)
-    {
-        if (blue is null)
-        {
-            return true;
-        }
-        // ReSharper disable ConditionIsAlwaysTrueOrFalse
-        if (blue < 0 || blue > 255)
-            // ReSharper restore ConditionIsAlwaysTrueOrFalse
-        {
-            return false;
-        }
-        return true;
-    }
+        AvaloniaProperty.Register<RgbProperties, byte?>(nameof(Blue));
 
     private bool _updating;
 

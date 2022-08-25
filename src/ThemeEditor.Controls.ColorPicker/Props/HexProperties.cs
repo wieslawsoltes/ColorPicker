@@ -7,35 +7,7 @@ namespace ThemeEditor.Controls.ColorPicker.Props;
 public class HexProperties : ColorPickerProperties
 {
     public static readonly StyledProperty<string?> HexProperty =
-        AvaloniaProperty.Register<HexProperties, string?>(nameof(Hex), "#FFFF0000", validate: ValidateHex, coerce: CoerceHex);
-
-    private static string? CoerceHex(IAvaloniaObject arg1, string? arg2)
-    {
-        if (arg2 is null)
-        {
-            return "#FFFF0000";
-        }
-
-        if (!ColorPickerHelpers.IsValidHexColor(arg2))
-        {
-            return "#FFFF0000";
-        }
-        
-        return arg2;
-    }
-
-    private static bool ValidateHex(string? hex)
-    {
-        if (hex is null)
-        {
-            return true;
-        }
-        if (!ColorPickerHelpers.IsValidHexColor(hex))
-        {
-            return false;
-        }
-        return true;
-    }
+        AvaloniaProperty.Register<HexProperties, string?>(nameof(Hex));
 
     private bool _updating;
 
@@ -53,7 +25,7 @@ public class HexProperties : ColorPickerProperties
 
     protected override void UpdateColorPickerValues()
     {
-        if (_updating == false && Presenter != null)
+        if (_updating == false && Presenter != null && Hex is { })
         {
             _updating = true;
             var color = Color.Parse(Hex);
