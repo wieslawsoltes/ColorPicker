@@ -120,6 +120,10 @@ public class ColorPickerHorizontalSlider : TemplatedControl
 
     private void AlphaThumb_DragDelta(object? sender, VectorEventArgs e)
     {
+        if (_alphaThumb is null)
+        {
+            return;
+        }
         var left = Canvas.GetLeft(_alphaThumb);
         _updating = true;
         MoveThumb(_alphaCanvas, _alphaThumb, left + e.Vector.X, 0);
@@ -158,6 +162,10 @@ public class ColorPickerHorizontalSlider : TemplatedControl
 
     private void UpdateValuesFromThumbs()
     {
+        if (_alphaThumb is null)
+        {
+            return;
+        }
         var alphaX = Canvas.GetLeft(_alphaThumb);
         Value4 = ConvertBack(_value4Converter, alphaX, GetValue4Range());
     }
