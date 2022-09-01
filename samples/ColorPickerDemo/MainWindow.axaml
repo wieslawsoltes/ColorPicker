@@ -4,6 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:cp="clr-namespace:ThemeEditor.Controls.ColorPicker;assembly=ThemeEditor.Controls.ColorPicker"
         xmlns:local="clr-namespace:ColorPickerDemo"
+        xmlns:converters="clr-namespace:ThemeEditor.Controls.ColorPicker.Converters;assembly=ThemeEditor.Controls.ColorPicker"
         mc:Ignorable="d" d:DesignWidth="700" d:DesignHeight="350"
         x:Class="ColorPickerDemo.MainWindow"
         Title="ColorPickerDemo"
@@ -22,6 +23,31 @@
         <Setter Property="IsVisible" Value="True" />
       </Style>
     </Panel.Styles>
-    <cp:ColorPicker Color="{Binding Color}" Margin="12" />
+    <TabControl>
+      <TabItem Header="Color">
+        <cp:ColorPicker Color="{Binding Color}" 
+                        Margin="12" />
+      </TabItem>
+      <TabItem Header="Color=null">
+        <cp:ColorPicker Color="{Binding NullColor}" 
+                        Margin="12" />
+      </TabItem>
+      <TabItem Header="Hex">
+        <cp:ColorPicker Color="{Binding Hex, Mode=TwoWay, Converter={x:Static local:HexToColorConverter.Instance}}" 
+                        Margin="12" />
+      </TabItem>
+      <TabItem Header="Hex=null">
+        <cp:ColorPicker Color="{Binding NullHex, Mode=TwoWay, Converter={x:Static local:HexToColorConverter.Instance}}" 
+                        Margin="12" />
+      </TabItem>
+      <TabItem Header="uint">
+        <cp:ColorPicker Color="{Binding Value, Mode=TwoWay, Converter={x:Static local:UInt32ToColorConverter.Instance}}" 
+                        Margin="12" />
+      </TabItem>
+      <TabItem Header="uint=null">
+        <cp:ColorPicker Color="{Binding NullValue, Mode=TwoWay, Converter={x:Static local:UInt32ToColorConverter.Instance}}" 
+                        Margin="12" />
+      </TabItem>
+    </TabControl>
   </Panel>
 </Window>
