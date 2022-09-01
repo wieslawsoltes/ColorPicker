@@ -67,11 +67,15 @@ public class ColorPickerValuesPresenter : TemplatedControl
 
     private void UpdateThumbsFromColor()
     {
-        ColorPickerHelpers.FromColor(GetColor(), out var h, out var s, out var v, out var a);
-        Value1 = h;
-        Value2 = s;
-        Value3 = v;
-        Value4 = a;
+        var color = GetColor();
+        if (color is { })
+        {
+            ColorPickerHelpers.FromColor(color.Value, out var h, out var s, out var v, out var a);
+            Value1 = h;
+            Value2 = s;
+            Value3 = v;
+            Value4 = a;
+        }
     }
 
     private void UpdateColorFromThumbs()
@@ -87,9 +91,9 @@ public class ColorPickerValuesPresenter : TemplatedControl
         }
     }
 
-    private Color GetColor()
+    private Color? GetColor()
     {
-        return _colorPicker?.Color ?? Avalonia.Media.Colors.Black;
+        return _colorPicker?.Color;
     }
 
     private void SetColor(double h, double s, double v, double a)
