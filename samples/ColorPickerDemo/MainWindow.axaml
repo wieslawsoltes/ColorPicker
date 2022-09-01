@@ -4,9 +4,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:cp="clr-namespace:ThemeEditor.Controls.ColorPicker;assembly=ThemeEditor.Controls.ColorPicker"
         xmlns:local="clr-namespace:ColorPickerDemo"
-        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="250"
+        mc:Ignorable="d" d:DesignWidth="700" d:DesignHeight="350"
         x:Class="ColorPickerDemo.MainWindow"
         Title="ColorPickerDemo"
+        Width="800" Height="450"
+        WindowStartupLocation="CenterScreen"
         x:DataType="local:MainWindow" x:CompileBindings="True">
   <Panel>
     <Panel.Styles>
