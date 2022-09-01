@@ -7,120 +7,16 @@ namespace ThemeEditor.Controls.ColorPicker.Props;
 public class CmykProperties : ColorPickerProperties
 {
     public static readonly StyledProperty<double?> CyanProperty =
-        AvaloniaProperty.Register<CmykProperties, double?>(nameof(Cyan), 0.0, validate: ValidateCyan, coerce: CoerceCyan);
+        AvaloniaProperty.Register<CmykProperties, double?>(nameof(Cyan), 0.0);
 
     public static readonly StyledProperty<double?> MagentaProperty =
-        AvaloniaProperty.Register<CmykProperties, double?>(nameof(Magenta), 100.0, validate: ValidateMagenta, coerce: CoerceMagenta);
+        AvaloniaProperty.Register<CmykProperties, double?>(nameof(Magenta), 100.0);
 
     public static readonly StyledProperty<double?> YellowProperty =
-        AvaloniaProperty.Register<CmykProperties, double?>(nameof(Yellow), 100.0, validate: ValidateYellow, coerce: CoerceYellow);
+        AvaloniaProperty.Register<CmykProperties, double?>(nameof(Yellow), 100.0);
 
     public static readonly StyledProperty<double?> BlackKeyProperty =
-        AvaloniaProperty.Register<CmykProperties, double?>(nameof(BlackKey), 0.0, validate: ValidateBlackKey, coerce: CoerceBlackKey);
-
-    private static double? CoerceCyan(IAvaloniaObject arg1, double? arg2)
-    {
-        if (arg2 is null)
-        {
-            return null;
-        }
-        if (double.IsNaN(arg2.Value))
-        {
-            return 0.0;
-        }
-        return ColorPickerHelpers.Clamp(arg2.Value, 0.0, 100.0);
-    }
-
-    private static double? CoerceMagenta(IAvaloniaObject arg1, double? arg2)
-    {
-        if (arg2 is null)
-        {
-            return null;
-        }
-        if (double.IsNaN(arg2.Value))
-        {
-            return 0.0;
-        }
-        return ColorPickerHelpers.Clamp(arg2.Value, 0.0, 100.0);
-    }
-
-    private static double? CoerceYellow(IAvaloniaObject arg1, double? arg2)
-    {
-        if (arg2 is null)
-        {
-            return null;
-        }
-        if (double.IsNaN(arg2.Value))
-        {
-            return 0.0;
-        }
-        return ColorPickerHelpers.Clamp(arg2.Value, 0.0, 100.0);
-    }
-
-    private static double? CoerceBlackKey(IAvaloniaObject arg1, double? arg2)
-    {
-        if (arg2 is null)
-        {
-            return null;
-        }
-        if (double.IsNaN(arg2.Value))
-        {
-            return 0.0;
-        }
-        return ColorPickerHelpers.Clamp(arg2.Value, 0.0, 100.0);
-    }
-
-    private static bool ValidateCyan(double? cyan)
-    {
-        if (cyan is null)
-        {
-            return true;
-        }
-        if (cyan < 0.0 || cyan > 100.0)
-        {
-            return false;
-        }
-        return true;
-    }
-
-    private static bool ValidateMagenta(double? magenta)
-    {
-        if (magenta is null)
-        {
-            return true;
-        }
-        if (magenta < 0.0 || magenta > 100.0)
-        {
-            return false;
-        }
-        return true;
-    }
-
-    private static bool ValidateYellow(double? yellow)
-    {
-        if (yellow is null)
-        {
-            return true;
-        }
-        if (yellow < 0.0 || yellow > 100.0)
-        {
-            return false;
-        }
-        return true;
-    }
-
-    private static bool ValidateBlackKey(double? blackKey)
-    {
-        if (blackKey is null)
-        {
-            return true;
-        }
-        if (blackKey < 0.0 || blackKey > 100.0)
-        {
-            return false;
-        }
-        return true;
-    }
+        AvaloniaProperty.Register<CmykProperties, double?>(nameof(BlackKey), 0.0);
 
     private bool _updating;
 

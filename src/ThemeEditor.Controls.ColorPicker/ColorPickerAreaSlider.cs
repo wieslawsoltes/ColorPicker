@@ -132,6 +132,10 @@ public class ColorPickerAreaSlider : TemplatedControl
 
     private void ColorThumb_DragDelta(object? sender, VectorEventArgs e)
     {
+        if (_colorThumb is null)
+        {
+            return;
+        }
         var left = Canvas.GetLeft(_colorThumb);
         var top = Canvas.GetTop(_colorThumb);
         _updating = true;
@@ -172,6 +176,10 @@ public class ColorPickerAreaSlider : TemplatedControl
 
     private void UpdateValuesFromThumbs()
     {
+        if (_colorThumb is null)
+        {
+            return;
+        }
         var colorX = Canvas.GetLeft(_colorThumb);
         var colorY = Canvas.GetTop(_colorThumb);
         Value2 = ConvertBack(_value2Converter, colorX, GetValue2Range());

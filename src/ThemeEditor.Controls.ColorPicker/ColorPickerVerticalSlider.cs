@@ -120,6 +120,10 @@ public class ColorPickerVerticalSlider : TemplatedControl
 
     private void HueThumb_DragDelta(object? sender, VectorEventArgs e)
     {
+        if (_hueThumb is null)
+        {
+            return;
+        }
         var top = Canvas.GetTop(_hueThumb);
         _updating = true;
         MoveThumb(_hueCanvas, _hueThumb, 0, top + e.Vector.Y);
@@ -158,6 +162,10 @@ public class ColorPickerVerticalSlider : TemplatedControl
 
     private void UpdateValuesFromThumbs()
     {
+        if (_hueThumb is null)
+        {
+            return;
+        }
         var hueY = Canvas.GetTop(_hueThumb);
         Value1 = ConvertBack(_value1Converter, hueY, GetValue1Range());
     }
