@@ -64,7 +64,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-            
+
         Color = Avalonia.Media.Color.FromArgb(0x5F, 0x1F, 0x00, 0x1F);
         NullColor = null;
         Hex = "#5F1F001F";
