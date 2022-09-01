@@ -21,6 +21,11 @@
         <Setter Property="(DockPanel.Dock)" Value="Right" />
         <Setter Property="IsVisible" Value="True" />
       </Style>
+      <Style Selector="TabItem">
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="4" />
+        <Setter Property="FontSize" Value="14" />
+      </Style>
     </Panel.Styles>
     <TabControl>
       <TabItem Header="Color">
