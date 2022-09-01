@@ -9,13 +9,13 @@
     <IsPackable>False</IsPackable>
   </PropertyGroup>
 
-  <Import Project="..\..\build\ReferenceAssemblies.props"/>
+  <Import Project="..\..\build\ReferenceAssemblies.props" />
   <Import Project="..\..\build\Avalonia.Themes.Fluent.props" />
-  <Import Project="..\..\build\Avalonia.Desktop.props"/>
-  <Import Project="..\..\build\Avalonia.Diagnostics.props"/>
+  <Import Project="..\..\build\Avalonia.Desktop.props" />
+  <Import Project="..\..\build\Avalonia.Diagnostics.props" />
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ThemeEditor.Controls.ColorPicker\ThemeEditor.Controls.ColorPicker.csproj"/>
+    <ProjectReference Include="..\..\src\ThemeEditor.Controls.ColorPicker\ThemeEditor.Controls.ColorPicker.csproj" />
   </ItemGroup>
 
 </Project>
