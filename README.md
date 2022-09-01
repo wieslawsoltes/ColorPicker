@@ -1,7 +1,7 @@
-# Avalonia Theme Editor
+# ColorPicker
 
 [![Build Status](https://dev.azure.com/wieslawsoltes/GitHub/_apis/build/status/wieslawsoltes.ColorPicker?repoName=wieslawsoltes%2FColorPicker&branchName=release%2F0.10.11-rc.1)](https://dev.azure.com/wieslawsoltes/GitHub/_build/latest?definitionId=106&repoName=wieslawsoltes%2FColorPicker&branchName=release%2F0.10.11-rc.1)
-[![CI](https://github.com/wieslawsoltes/ThemeEditor/actions/workflows/build.yml/badge.svg)](https://github.com/wieslawsoltes/ThemeEditor/actions/workflows/build.yml)
+[![CI](https://github.com/wieslawsoltes/ColorPicker/actions/workflows/build.yml/badge.svg)](https://github.com/wieslawsoltes/ThemeEditor/actions/workflows/build.yml)
 
 [![NuGet](https://img.shields.io/nuget/v/ThemeEditor.Controls.ColorPicker.svg)](https://www.nuget.org/packages/ThemeEditor.Controls.ColorPicker)
 [![NuGet](https://img.shields.io/nuget/dt/ThemeEditor.Controls.ColorPicker.svg)](https://www.nuget.org/packages/ThemeEditor.Controls.ColorPicker)
@@ -13,25 +13,23 @@
 
 ## Download
 
-[The latest downloads are available in the release section.](https://github.com/wieslawsoltes/ThemeEditor/releases/latest)
+[The latest downloads are available in the release section.](https://github.com/wieslawsoltes/ColorPicker/releases/latest)
 
 # About
 
-ThemeEditor is an [Avalonia UI Framework](http://avaloniaui.net/) theme editor.
-
-[![ThemeEditor](images/ThemeEditor.png)](images/ThemeEditor.png)
+ColorPicker is an [Avalonia UI Framework](http://avaloniaui.net/) color picker control.
 
 # Usage
 
-[Usage instructions](https://github.com/wieslawsoltes/ThemeEditor/wiki/Usage).
+[Usage instructions](https://github.com/wieslawsoltes/ColorPicker/wiki/Usage).
 
 # Build
 
-[Build instructions](https://github.com/wieslawsoltes/ThemeEditor/wiki/Build).
+[Build instructions](https://github.com/wieslawsoltes/ColorPicker/wiki/Build).
 
 ## NuGet
 
-ThemeEditor color picker control is delivered as a NuGet package.
+Color picker control is delivered as a NuGet package.
 
 You can find the packages here [NuGet](https://www.nuget.org/packages/ThemeEditor.Controls.ColorPicker/) and install the package like this:
 
@@ -48,9 +46,9 @@ and install the package like this:
 
 # Resources
 
-* [GitHub source code repository.](https://github.com/wieslawsoltes/ThemeEditor)
-* [Wiki.](https://github.com/wieslawsoltes/ThemeEditor/wiki)
+* [GitHub source code repository.](https://github.com/wieslawsoltes/ColorPicker)
+* [Wiki.](https://github.com/wieslawsoltes/ColorPicker/wiki)
 
 # License
 
-ThemeEditor is licensed under the [MIT license](LICENSE.TXT).
+ColorPicker is licensed under the [MIT license](LICENSE.TXT).
