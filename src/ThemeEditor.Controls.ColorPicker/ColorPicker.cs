@@ -13,7 +13,7 @@ namespace ThemeEditor.Controls.ColorPicker;
 
 public class ColorPicker : TemplatedControl
 {
-    public readonly NumberFormatInfo NumberFormat = new CultureInfo("en-US").NumberFormat;
+    public static NumberFormatInfo NumberFormat = new CultureInfo("en-US").NumberFormat;
 
     public static readonly StyledProperty<Color?> ColorProperty =
         AvaloniaProperty.Register<ColorPicker, Color?>(nameof(Color));
