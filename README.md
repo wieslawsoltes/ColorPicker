@@ -21,11 +21,19 @@ ColorPicker is an [Avalonia UI Framework](http://avaloniaui.net/) color picker c
 
 # Usage
 
-[Usage instructions](https://github.com/wieslawsoltes/ColorPicker/wiki/Usage).
+`Install-Package ThemeEditor.Controls.ColorPicker`
 
-# Build
+```xaml
+<StyleInclude Source="avares://ThemeEditor.Controls.ColorPicker/ColorPicker.axaml" />
+```
 
-[Build instructions](https://github.com/wieslawsoltes/ColorPicker/wiki/Build).
+```xaml
+xmlns:cp="clr-namespace:ThemeEditor.Controls.ColorPicker;assembly=ThemeEditor.Controls.ColorPicker"
+```
+
+```xaml
+<cp:ColorPicker Color="Red" />
+```
 
 ## NuGet
 
