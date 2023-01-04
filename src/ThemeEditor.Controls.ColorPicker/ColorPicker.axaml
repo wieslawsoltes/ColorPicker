@@ -33,39 +33,105 @@
             </DataTemplate>
             <DataTemplate DataType="props:AlphaProperties">
               <Grid RowDefinitions="Auto" ColumnDefinitions="*" Classes="properties">
-                <NumericUpDown Value="{Binding Alpha, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" />
+                <NumericUpDown Value="{Binding Alpha, Mode=TwoWay}" 
+                               Minimum="0" Maximum="100" Increment="0.5" 
+                               FormatString="{}{0:N2} %" 
+                               ClipValueToMinMax="True"
+                               NumberFormat="{x:Static cp:ColorPicker.NumberFormat}"
+                               Classes="picker" />
               </Grid>
             </DataTemplate>
             <DataTemplate DataType="props:RgbProperties">
               <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*" Classes="properties">
                 <TextBlock Text="R" ToolTip.Tip="Red" Classes="picker" Grid.Row="0" Grid.Column="0" />
-                <NumericUpDown Value="{Binding Red, Mode=TwoWay}" Minimum="0" Maximum="255" Increment="1" FormatString="G" Classes="picker" Grid.Row="0" Grid.Column="1" />
+                <NumericUpDown Value="{Binding Red, Mode=TwoWay}" 
+                               Minimum="0" Maximum="255" Increment="1" 
+                               FormatString="G" 
+                               ClipValueToMinMax="True"
+                               NumberFormat="{x:Static cp:ColorPicker.NumberFormat}"
+                               Classes="picker" 
+                               Grid.Row="0" Grid.Column="1" />
                 <TextBlock Text="G" ToolTip.Tip="Green" Classes="picker" Grid.Row="1" Grid.Column="0" />
-                <NumericUpDown Value="{Binding Green, Mode=TwoWay}" Minimum="0" Maximum="255" Increment="1" FormatString="G" Classes="picker" Grid.Row="1" Grid.Column="1" />
+                <NumericUpDown Value="{Binding Green, Mode=TwoWay}" 
+                               Minimum="0" Maximum="255" Increment="1" 
+                               FormatString="G" 
+                               ClipValueToMinMax="True"
+                               NumberFormat="{x:Static cp:ColorPicker.NumberFormat}"
+                               Classes="picker" 
+                               Grid.Row="1" Grid.Column="1" />
                 <TextBlock Text="B" ToolTip.Tip="Blue" Classes="picker" Grid.Row="2" Grid.Column="0" />
-                <NumericUpDown Value="{Binding Blue, Mode=TwoWay}" Minimum="0" Maximum="255" Increment="1" FormatString="G" Classes="picker" Grid.Row="2" Grid.Column="1" />
+                <NumericUpDown Value="{Binding Blue, Mode=TwoWay}" 
+                               Minimum="0" Maximum="255" Increment="1" 
+                               FormatString="G" 
+                               ClipValueToMinMax="True"
+                               NumberFormat="{x:Static cp:ColorPicker.NumberFormat}"
+                               Classes="picker" 
+                               Grid.Row="2" Grid.Column="1" />
               </Grid>
             </DataTemplate>
             <DataTemplate DataType="props:HsvProperties">
               <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*" Classes="properties">
                 <TextBlock Text="H" ToolTip.Tip="Hue" Classes="picker" Grid.Row="0" Grid.Column="0" />
-                <NumericUpDown Value="{Binding Hue, Mode=TwoWay}" Minimum="0" Maximum="360" Increment="0.5" FormatString="{}{0:N2} °" Classes="picker" Grid.Row="0" Grid.Column="1" />
+                <NumericUpDown Value="{Binding Hue, Mode=TwoWay}" 
+                               Minimum="0" Maximum="360" Increment="0.5" 
+                               FormatString="{}{0:N2} °" 
+                               ClipValueToMinMax="True"
+                               NumberFormat="{x:Static cp:ColorPicker.NumberFormat}"
+                               Classes="picker" 
+                               Grid.Row="0" Grid.Column="1" />
                 <TextBlock Text="S" ToolTip.Tip="Saturation" Classes="picker" Grid.Row="1" Grid.Column="0" />
-                <NumericUpDown Value="{Binding Saturation, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="1" Grid.Column="1" />
+                <NumericUpDown Value="{Binding Saturation, Mode=TwoWay}" 
+                               Minimum="0" Maximum="100" Increment="0.5" 
+                               FormatString="{}{0:N2} %" 
+                               ClipValueToMinMax="True"
+                               NumberFormat="{x:Static cp:ColorPicker.NumberFormat}"
+                               Classes="picker" 
+                               Grid.Row="1" Grid.Column="1" />
                 <TextBlock Text="V" ToolTip.Tip="Value" Classes="picker" Grid.Row="2" Grid.Column="0" />
-                <NumericUpDown Value="{Binding Value, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="2" Grid.Column="1" />
+                <NumericUpDown Value="{Binding Value, Mode=TwoWay}" 
+                               Minimum="0" Maximum="100" Increment="0.5" 
+                               FormatString="{}{0:N2} %" 
+                               ClipValueToMinMax="True"
+                               NumberFormat="{x:Static cp:ColorPicker.NumberFormat}"
+                               Classes="picker" 
+                               Grid.Row="2" Grid.Column="1" />
               </Grid>
             </DataTemplate>
             <DataTemplate DataType="props:CmykProperties">
               <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*" Classes="properties">
                 <TextBlock Text="C" ToolTip.Tip="Cyan" Classes="picker" Grid.Row="0" Grid.Column="0" />
-                <NumericUpDown Value="{Binding Cyan, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="0" Grid.Column="1" />
-                <TextBlock Text="M" ToolTip.Tip="Magenta" Classes="picker" Grid.Row="1" Grid.Column="0" />
-                <NumericUpDown Value="{Binding Magenta, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="1" Grid.Column="1" />
+                <NumericUpDown Value="{Binding Cyan, Mode=TwoWay}" 
+                               Minimum="0" Maximum="100" Increment="0.5" 
+                               FormatString="{}{0:N2} %" 
+                               ClipValueToMinMax="True"
+                               NumberFormat="{x:Static cp:ColorPicker.NumberFormat}"
+                               Classes="picker" 
+                               Grid.Row="0" Grid.Column="1" />
+                <TextBlock Text="M" ToolTip.Tip="Magenta" 
+                           Classes="picker" 
+                           Grid.Row="1" Grid.Column="0" />
+                <NumericUpDown Value="{Binding Magenta, Mode=TwoWay}"
+                               Minimum="0" Maximum="100" Increment="0.5" 
+                               FormatString="{}{0:N2} %" 
+                               ClipValueToMinMax="True"
+                               NumberFormat="{x:Static cp:ColorPicker.NumberFormat}"
+                               Classes="picker" 
+                               Grid.Row="1" Grid.Column="1" />
                 <TextBlock Text="Y" ToolTip.Tip="Yellow" Classes="picker" Grid.Row="2" Grid.Column="0" />
-                <NumericUpDown Value="{Binding Yellow, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="2" Grid.Column="1" />
+                <NumericUpDown Value="{Binding Yellow, Mode=TwoWay}" 
+                               Minimum="0" Maximum="100" Increment="0.5" 
+                               FormatString="{}{0:N2} %" 
+                               ClipValueToMinMax="True"
+                               NumberFormat="{x:Static cp:ColorPicker.NumberFormat}"
+                               Classes="picker" 
+                               Grid.Row="2" Grid.Column="1" />
                 <TextBlock Text="K" ToolTip.Tip="Black key" Classes="picker" Grid.Row="3" Grid.Column="0" />
-                <NumericUpDown Value="{Binding BlackKey, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" FormatString="{}{0:N2} %" Classes="picker" Grid.Row="3" Grid.Column="1" />
+                <NumericUpDown Value="{Binding BlackKey, Mode=TwoWay}" 
+                               Minimum="0" Maximum="100" Increment="0.5" 
+                               FormatString="{}{0:N2} %" 
+                               ClipValueToMinMax="True"
+                               NumberFormat="{x:Static cp:ColorPicker.NumberFormat}"
+                               Classes="picker" Grid.Row="3" Grid.Column="1" />
               </Grid>
             </DataTemplate>
           </TabControl.DataTemplates>
@@ -222,10 +288,8 @@
   </Style>
 
   <Style Selector="NumericUpDown.picker">
-    <Setter Property="ClipValueToMinMax" Value="True" />
     <Setter Property="ShowButtonSpinner" Value="True" />
     <Setter Property="AllowSpin" Value="True" />
-    <Setter Property="NumberFormat" Value="{x:Static cp:ColorPicker.NumberFormat}" />
     <Setter Property="Margin" Value="2" />
     <Setter Property="Padding" Value="1" />
   </Style>
