@@ -1,5 +1,5 @@
-﻿using System;
-using Avalonia;
+﻿using Avalonia;
+using Avalonia.Reactive;
 using ThemeEditor.Controls.ColorPicker.Colors;
 
 namespace ThemeEditor.Controls.ColorPicker.Props;
@@ -19,9 +19,9 @@ public class RgbProperties : ColorPickerProperties
 
     public RgbProperties()
     {
-        this.GetObservable(RedProperty).Subscribe(_ => UpdateColorPickerValues());
-        this.GetObservable(GreenProperty).Subscribe(_ => UpdateColorPickerValues());
-        this.GetObservable(BlueProperty).Subscribe(_ => UpdateColorPickerValues());
+        this.GetObservable(RedProperty).Subscribe(new AnonymousObserver<byte?>(_ => UpdateColorPickerValues()));
+        this.GetObservable(GreenProperty).Subscribe(new AnonymousObserver<byte?>(_ => UpdateColorPickerValues()));
+        this.GetObservable(BlueProperty).Subscribe(new AnonymousObserver<byte?>(_ => UpdateColorPickerValues()));
     }
 
     public byte? Red

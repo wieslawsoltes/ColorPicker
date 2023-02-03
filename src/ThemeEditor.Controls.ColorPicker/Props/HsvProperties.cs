@@ -1,5 +1,5 @@
-﻿using System;
-using Avalonia;
+﻿using Avalonia;
+using Avalonia.Reactive;
 
 namespace ThemeEditor.Controls.ColorPicker.Props;
 
@@ -18,9 +18,9 @@ public class HsvProperties : ColorPickerProperties
 
     public HsvProperties()
     {
-        this.GetObservable(HueProperty).Subscribe(_ => UpdateColorPickerValues());
-        this.GetObservable(SaturationProperty).Subscribe(_ => UpdateColorPickerValues());
-        this.GetObservable(ValueProperty).Subscribe(_ => UpdateColorPickerValues());
+        this.GetObservable(HueProperty).Subscribe(new AnonymousObserver<double?>(_ => UpdateColorPickerValues()));
+        this.GetObservable(SaturationProperty).Subscribe(new AnonymousObserver<double?>(_ => UpdateColorPickerValues()));
+        this.GetObservable(ValueProperty).Subscribe(new AnonymousObserver<double?>(_ => UpdateColorPickerValues()));
     }
 
     public double? Hue

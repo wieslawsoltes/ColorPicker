@@ -1,5 +1,5 @@
-﻿using System;
-using Avalonia;
+﻿using Avalonia;
+using Avalonia.Reactive;
 using ThemeEditor.Controls.ColorPicker.Colors;
 
 namespace ThemeEditor.Controls.ColorPicker.Props;
@@ -22,10 +22,10 @@ public class CmykProperties : ColorPickerProperties
 
     public CmykProperties()
     {
-        this.GetObservable(CyanProperty).Subscribe(_ => UpdateColorPickerValues());
-        this.GetObservable(MagentaProperty).Subscribe(_ => UpdateColorPickerValues());
-        this.GetObservable(YellowProperty).Subscribe(_ => UpdateColorPickerValues());
-        this.GetObservable(BlackKeyProperty).Subscribe(_ => UpdateColorPickerValues());
+        this.GetObservable(CyanProperty).Subscribe(new AnonymousObserver<double?>(_ => UpdateColorPickerValues()));
+        this.GetObservable(MagentaProperty).Subscribe(new AnonymousObserver<double?>(_ => UpdateColorPickerValues()));
+        this.GetObservable(YellowProperty).Subscribe(new AnonymousObserver<double?>(_ => UpdateColorPickerValues()));
+        this.GetObservable(BlackKeyProperty).Subscribe(new AnonymousObserver<double?>(_ => UpdateColorPickerValues()));
     }
 
     public double? Cyan

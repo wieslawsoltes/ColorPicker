@@ -1,5 +1,5 @@
-﻿using System;
-using Avalonia;
+﻿using Avalonia;
+using Avalonia.Reactive;
 
 namespace ThemeEditor.Controls.ColorPicker.Props;
 
@@ -13,7 +13,7 @@ public class AlphaProperties : ColorPickerProperties
     public AlphaProperties()
     {
         _updating = false;
-        this.GetObservable(AlphaProperty).Subscribe(_ => UpdateColorPickerValues());
+        this.GetObservable(AlphaProperty).Subscribe(new AnonymousObserver<double?>(_ => UpdateColorPickerValues()));
     }
 
     public double? Alpha

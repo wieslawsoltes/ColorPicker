@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Globalization;
-using System.Reactive.Disposables;
 using Avalonia;
 using Avalonia.Collections;
 using Avalonia.Controls;
-using Avalonia.Controls.Mixins;
 using Avalonia.Controls.Primitives;
 using Avalonia.Media;
+using Avalonia.Reactive;
 using ThemeEditor.Controls.ColorPicker.Props;
 
 namespace ThemeEditor.Controls.ColorPicker;
@@ -20,7 +19,11 @@ public class ColorPicker : TemplatedControl
 
     private ColorPickerPropertiesPresenter? _propertiesPresenter;
     private ColorPickerValuesPresenter? _valuesPresenter;
-    private CompositeDisposable? _disposable;
+    private IDisposable? _value1Disposable;
+    private IDisposable? _value2Disposable;
+    private IDisposable? _value3Disposable;
+    private IDisposable? _value4Disposable;
+    private IDisposable? _colorDisposable;
 
     public Color? Color
     {
@@ -30,8 +33,11 @@ public class ColorPicker : TemplatedControl
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
-        _disposable?.Dispose();
-        _disposable = new CompositeDisposable();
+        _value1Disposable?.Dispose();
+        _value2Disposable?.Dispose();
+        _value3Disposable?.Dispose();
+        _value4Disposable?.Dispose();
+        _colorDisposable?.Dispose();
 
         _propertiesPresenter = e.NameScope.Find<ColorPickerPropertiesPresenter>("PART_ColorPickerPropertiesPresenter");
         _valuesPresenter = e.NameScope.Find<ColorPickerValuesPresenter>("PART_ColorPickerValuesPresenter");
@@ -50,27 +56,27 @@ public class ColorPicker : TemplatedControl
 
         if (_valuesPresenter is { })
         {
-            _valuesPresenter.GetObservable(ColorPickerValuesPresenter.Value1Property)
-                .Subscribe(_ => _valuesPresenter.OnValueChange())
-                .DisposeWith(_disposable);
+            _value1Disposable = _valuesPresenter
+                .GetObservable(ColorPickerValuesPresenter.Value1Property)
+                .Subscribe(new AnonymousObserver<double?>(_ => _valuesPresenter.OnValueChange()));
 
-            _valuesPresenter.GetObservable(ColorPickerValuesPresenter.Value2Property)
-                .Subscribe(_ => _valuesPresenter.OnValueChange())
-                .DisposeWith(_disposable);
+            _value2Disposable = _valuesPresenter
+                .GetObservable(ColorPickerValuesPresenter.Value2Property)
+                .Subscribe(new AnonymousObserver<double?>(_ => _valuesPresenter.OnValueChange()));
 
-            _valuesPresenter.GetObservable(ColorPickerValuesPresenter.Value3Property)
-                .Subscribe(_ => _valuesPresenter.OnValueChange())
-                .DisposeWith(_disposable);
+            _value3Disposable = _valuesPresenter
+                .GetObservable(ColorPickerValuesPresenter.Value3Property)
+                .Subscribe(new AnonymousObserver<double?>(_ => _valuesPresenter.OnValueChange()));
 
-            _valuesPresenter.GetObservable(ColorPickerValuesPresenter.Value4Property)
-                .Subscribe(_ => _valuesPresenter.OnValueChange())
-                .DisposeWith(_disposable);
+            _value4Disposable = _valuesPresenter
+                    .GetObservable(ColorPickerValuesPresenter.Value4Property)
+                    .Subscribe(new AnonymousObserver<double?>(_ => _valuesPresenter.OnValueChange()));
 
             _valuesPresenter._colorPicker = this;
 
-            this.GetObservable(ColorProperty)
-                .Subscribe(_ => _valuesPresenter.OnColorChange())
-                .DisposeWith(_disposable);
+            _colorDisposable = this
+                .GetObservable(ColorProperty)
+                .Subscribe(new AnonymousObserver<Color?>(_ => _valuesPresenter.OnColorChange()));
         }
     }
 

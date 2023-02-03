@@ -1,6 +1,6 @@
-﻿using System;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Media;
+using Avalonia.Reactive;
 
 namespace ThemeEditor.Controls.ColorPicker.Props;
 
@@ -14,7 +14,7 @@ public class HexProperties : ColorPickerProperties
     public HexProperties()
     {
         _updating = false;
-        this.GetObservable(HexProperty).Subscribe(_ => UpdateColorPickerValues());
+        this.GetObservable(HexProperty).Subscribe(new AnonymousObserver<string?>(_ => UpdateColorPickerValues()));
     }
 
     public string? Hex
