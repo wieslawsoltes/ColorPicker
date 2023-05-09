@@ -24,7 +24,7 @@
   <Style Selector="cp|ColorPickerPropertiesPresenter">
     <Setter Property="Template">
       <ControlTemplate>
-        <TabControl Items="{TemplateBinding Properties}" Classes="picker">
+        <TabControl ItemsSource="{TemplateBinding Properties}" Classes="picker">
           <TabControl.DataTemplates>
             <DataTemplate DataType="props:HexProperties">
               <Grid RowDefinitions="Auto" ColumnDefinitions="*" Classes="properties">

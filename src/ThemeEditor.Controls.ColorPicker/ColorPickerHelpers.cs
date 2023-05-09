@@ -16,7 +16,7 @@ public static class ColorPickerHelpers
 
     public static string ToHexColor(Color color)
     {
-        return $"#{color.ToUint32():X8}";
+        return $"#{color.ToUInt32():X8}";
     }
 
     public static Color FromHexColor(string hex)

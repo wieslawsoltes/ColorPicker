@@ -35,7 +35,7 @@ public class HexToColorConverter : IValueConverter
         {
             try
             {
-                return $"#{c.ToUint32():x8}";
+                return $"#{c.ToUInt32():x8}";
             }
             catch (Exception)
             {

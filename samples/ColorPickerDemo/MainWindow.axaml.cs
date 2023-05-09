@@ -69,7 +69,7 @@ public partial class MainWindow : Window
         NullColor = null;
         Hex = "#5F1F001F";
         NullHex = null;
-        Value = Colors.Green.ToUint32();
+        Value = Colors.Green.ToUInt32();
         NullValue = null;
         DataContext = this;
     }
