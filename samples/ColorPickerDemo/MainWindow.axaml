@@ -3,6 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:cp="clr-namespace:ThemeEditor.Controls.ColorPicker;assembly=ThemeEditor.Controls.ColorPicker"
+        xmlns:converters="clr-namespace:ThemeEditor.Controls.ColorPicker.Converters;assembly=ThemeEditor.Controls.ColorPicker"
         xmlns:local="clr-namespace:ColorPickerDemo"
         mc:Ignorable="d" d:DesignWidth="550" d:DesignHeight="350"
         x:Class="ColorPickerDemo.MainWindow"
@@ -51,6 +52,20 @@
       <TabItem Header="uint=null">
         <cp:ColorPicker Color="{Binding NullValue, Mode=TwoWay, Converter={x:Static local:UInt32ToColorConverter.Instance}}" 
                         Margin="12" />
+      </TabItem>
+      
+      <TabItem Header="Gradient">
+        <DockPanel>
+          <Slider DockPanel.Dock="Top" Value="{Binding Value1}" Minimum="0" Maximum="255" SmallChange="1" LargeChange="1" />
+          <Grid>
+            <Grid.Background>
+              <LinearGradientBrush StartPoint="0%,50%" EndPoint="100%,50%">
+                <GradientStop Offset="0" Color="#FFFFFFFF" />
+                <GradientStop Offset="1" Color="{Binding Value1, Converter={x:Static converters:HueToColorConverter.Instance}}" />
+              </LinearGradientBrush>
+            </Grid.Background>
+          </Grid>
+        </DockPanel>
       </TabItem>
     </TabControl>
   </Panel>

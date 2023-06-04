@@ -25,6 +25,9 @@ public partial class MainWindow : Window
     public static readonly StyledProperty<uint?> NullValueProperty =
         AvaloniaProperty.Register<MainWindow, uint?>(nameof(NullValue));
 
+    public static readonly StyledProperty<double> Value1Property =
+        AvaloniaProperty.Register<MainWindow, double>(nameof(Value1));
+
     public Color? Color
     {
         get => GetValue(ColorProperty);
@@ -61,6 +64,12 @@ public partial class MainWindow : Window
         set => SetValue(NullValueProperty, value);
     }
 
+    public double Value1
+    {
+        get => GetValue(Value1Property);
+        set => SetValue(Value1Property, value);
+    }
+
     public MainWindow()
     {
         InitializeComponent();
@@ -72,6 +81,7 @@ public partial class MainWindow : Window
         Value = Colors.Green.ToUInt32();
         NullValue = null;
         DataContext = this;
+        Value1 = 0;
     }
 
     private void InitializeComponent()
