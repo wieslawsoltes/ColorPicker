@@ -46,9 +46,9 @@ public class HsvProperties : ColorPickerProperties
         if (_updating == false && Presenter != null)
         {
             _updating = true;
-            Presenter.Value1 = Hue;
-            Presenter.Value2 = Saturation;
-            Presenter.Value3 = Value;
+            Presenter.SetCurrentValue(ColorPickerValuesPresenter.Value1Property, Hue);
+            Presenter.SetCurrentValue(ColorPickerValuesPresenter.Value2Property, Saturation);
+            Presenter.SetCurrentValue(ColorPickerValuesPresenter.Value3Property, Value);
             _updating = false;
         }
     }
@@ -58,9 +58,9 @@ public class HsvProperties : ColorPickerProperties
         if (_updating == false && Presenter != null)
         {
             _updating = true;
-            Hue = Presenter.Value1;
-            Saturation = Presenter.Value2;
-            Value = Presenter.Value3;
+            SetCurrentValue(HueProperty, Presenter.Value1);
+            SetCurrentValue(SaturationProperty, Presenter.Value2);
+            SetCurrentValue(ValueProperty, Presenter.Value3);
             _updating = false;
         }
     }

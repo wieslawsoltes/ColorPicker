@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics;
+using System.Globalization;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
@@ -182,8 +183,8 @@ public class ColorPickerAreaSlider : TemplatedControl
         }
         var colorX = Canvas.GetLeft(_colorThumb);
         var colorY = Canvas.GetTop(_colorThumb);
-        Value2 = ConvertBack(_value2Converter, colorX, GetValue2Range());
-        Value3 = ConvertBack(_value3Converter, colorY, GetValue3Range());
+        SetCurrentValue(Value2Property, ConvertBack(_value2Converter, colorX, GetValue2Range()));
+        SetCurrentValue(Value3Property, ConvertBack(_value3Converter, colorY, GetValue3Range()));
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)

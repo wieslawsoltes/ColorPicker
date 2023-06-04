@@ -7,7 +7,7 @@ namespace ThemeEditor.Controls.ColorPicker;
 public class ColorPickerPropertiesPresenter : TemplatedControl
 {
     public static readonly StyledProperty<IEnumerable<ColorPickerProperties>> PropertiesProperty = 
-        AvaloniaProperty.Register<ColorPicker, IEnumerable<ColorPickerProperties>>(nameof(Properties));
+        AvaloniaProperty.Register<ColorPickerPropertiesPresenter, IEnumerable<ColorPickerProperties>>(nameof(Properties));
 
     public IEnumerable<ColorPickerProperties> Properties
     {

@@ -59,9 +59,9 @@ public class CmykProperties : ColorPickerProperties
             _updating = true;
             var cmyk = new CMYK(Cyan ?? 0.0, Magenta ?? 0.0, Yellow ?? 0.0, BlackKey ?? 0.0);
             var hsv = cmyk.ToHSV();
-            Presenter.Value1 = hsv.H;
-            Presenter.Value2 = hsv.S;
-            Presenter.Value3 = hsv.V;
+            Presenter.SetCurrentValue(ColorPickerValuesPresenter.Value1Property, hsv.H);
+            Presenter.SetCurrentValue(ColorPickerValuesPresenter.Value2Property, hsv.S);
+            Presenter.SetCurrentValue(ColorPickerValuesPresenter.Value3Property, hsv.V);
             _updating = false;
         }
     }
@@ -73,10 +73,10 @@ public class CmykProperties : ColorPickerProperties
             _updating = true;
             var hsv = new HSV(Presenter.Value1 ?? 0.0, Presenter.Value2 ?? 0.0, Presenter.Value3 ?? 0.0);
             var cmyk = hsv.ToCMYK();
-            Cyan = cmyk.C;
-            Magenta = cmyk.M;
-            Yellow = cmyk.Y;
-            BlackKey = cmyk.K;
+            SetCurrentValue(CyanProperty, cmyk.C);
+            SetCurrentValue(MagentaProperty, cmyk.M);
+            SetCurrentValue(YellowProperty, cmyk.Y);
+            SetCurrentValue(BlackKeyProperty, cmyk.K);
             _updating = false;
         }
     }

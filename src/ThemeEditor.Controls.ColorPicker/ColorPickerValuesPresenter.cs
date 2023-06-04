@@ -71,10 +71,10 @@ public class ColorPickerValuesPresenter : TemplatedControl
         if (color is { })
         {
             ColorPickerHelpers.FromColor(color.Value, out var h, out var s, out var v, out var a);
-            Value1 = h;
-            Value2 = s;
-            Value3 = v;
-            Value4 = a;
+            SetCurrentValue(Value1Property, h);
+            SetCurrentValue(Value2Property, s);
+            SetCurrentValue(Value3Property, v);
+            SetCurrentValue(Value4Property, a);
         }
     }
 
@@ -100,7 +100,7 @@ public class ColorPickerValuesPresenter : TemplatedControl
     {
         if (_colorPicker is { })
         {
-            _colorPicker.Color = ColorPickerHelpers.FromHSVA(h, s, v, a);
+            _colorPicker.SetCurrentValue(ColorPicker.ColorProperty, ColorPickerHelpers.FromHSVA(h, s, v, a));
         }
     }
 

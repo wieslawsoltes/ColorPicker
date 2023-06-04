@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics;
+using System.Globalization;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
@@ -167,7 +168,7 @@ public class ColorPickerVerticalSlider : TemplatedControl
             return;
         }
         var hueY = Canvas.GetTop(_hueThumb);
-        Value1 = ConvertBack(_value1Converter, hueY, GetValue1Range());
+        SetCurrentValue(Value1Property, ConvertBack(_value1Converter, hueY, GetValue1Range()));
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)

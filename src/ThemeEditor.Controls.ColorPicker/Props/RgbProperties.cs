@@ -49,9 +49,9 @@ public class RgbProperties : ColorPickerProperties
             _updating = true;
             var rgb = new RGB(Red ?? 0x00, Green ?? 0x00, Blue ?? 0x00);
             var hsv = rgb.ToHSV();
-            Presenter.Value1 = hsv.H;
-            Presenter.Value2 = hsv.S;
-            Presenter.Value3 = hsv.V;
+            Presenter.SetCurrentValue(ColorPickerValuesPresenter.Value1Property, hsv.H);
+            Presenter.SetCurrentValue(ColorPickerValuesPresenter.Value2Property, hsv.S);
+            Presenter.SetCurrentValue(ColorPickerValuesPresenter.Value3Property, hsv.V);
             _updating = false;
         }
     }
@@ -63,9 +63,9 @@ public class RgbProperties : ColorPickerProperties
             _updating = true;
             var hsv = new HSV(Presenter.Value1 ?? 0x00, Presenter.Value2 ?? 0x00, Presenter.Value3 ?? 0x00);
             var rgb = hsv.ToRGB();
-            Red = (byte)rgb.R;
-            Green = (byte)rgb.G;
-            Blue = (byte)rgb.B;
+            SetCurrentValue(RedProperty, (byte)rgb.R);
+            SetCurrentValue(GreenProperty, (byte)rgb.G);
+            SetCurrentValue(BlueProperty, (byte)rgb.B);
             _updating = false;
         }
     }

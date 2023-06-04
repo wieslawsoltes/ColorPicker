@@ -30,10 +30,10 @@ public class HexProperties : ColorPickerProperties
             _updating = true;
             var color = Color.Parse(Hex);
             ColorPickerHelpers.FromColor(color, out var h, out var s, out var v, out var a);
-            Presenter.Value1 = h;
-            Presenter.Value2 = s;
-            Presenter.Value3 = v;
-            Presenter.Value4 = a;
+            Presenter.SetCurrentValue(ColorPickerValuesPresenter.Value1Property, h);
+            Presenter.SetCurrentValue(ColorPickerValuesPresenter.Value2Property, s);
+            Presenter.SetCurrentValue(ColorPickerValuesPresenter.Value3Property, v);
+            Presenter.SetCurrentValue(ColorPickerValuesPresenter.Value4Property, a);
             _updating = false;
         }
     }
@@ -44,7 +44,7 @@ public class HexProperties : ColorPickerProperties
         {
             _updating = true;
             var color = ColorPickerHelpers.FromHSVA(Presenter.Value1 ?? 0.0, Presenter.Value2 ?? 0.0, Presenter.Value3 ?? 0.0, Presenter.Value4 ?? 100.0);
-            Hex = ColorPickerHelpers.ToHexColor(color);
+            SetCurrentValue(HexProperty, ColorPickerHelpers.ToHexColor(color));
             _updating = false;
         }
     }

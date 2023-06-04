@@ -167,7 +167,7 @@ public class ColorPickerHorizontalSlider : TemplatedControl
             return;
         }
         var alphaX = Canvas.GetLeft(_alphaThumb);
-        Value4 = ConvertBack(_value4Converter, alphaX, GetValue4Range());
+        SetCurrentValue(Value4Property, ConvertBack(_value4Converter, alphaX, GetValue4Range()));
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
