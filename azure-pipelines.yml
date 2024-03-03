@@ -53,7 +53,7 @@ jobs:
       BuildConfiguration: ${{ variables.BuildConfiguration }}
       PublishFramework: ${{ variables.PublishFramework }}
       PublishProject: ${{ variables.PublishProject }}
-      PublishRuntime: 'win7-x64'
+      PublishRuntime: 'win-x64'
 
   - template: Publish-Bash.yml@templates
     parameters:
@@ -62,7 +62,7 @@ jobs:
       BuildConfiguration: ${{ variables.BuildConfiguration }}
       PublishFramework: ${{ variables.PublishFramework }}
       PublishProject: ${{ variables.PublishProject }}
-      PublishRuntime: 'ubuntu.14.04-x64'
+      PublishRuntime: 'linux-x64'
 
   - template: Publish-Bash.yml@templates
     parameters:
@@ -71,7 +71,7 @@ jobs:
       BuildConfiguration: ${{ variables.BuildConfiguration }}
       PublishFramework: ${{ variables.PublishFramework }}
       PublishProject: ${{ variables.PublishProject }}
-      PublishRuntime: 'debian.8-x64'
+      PublishRuntime: 'linux-x64'
 
   - template: Publish-Bash.yml@templates
     parameters:
@@ -80,4 +80,4 @@ jobs:
       BuildConfiguration: ${{ variables.BuildConfiguration }}
       PublishFramework: ${{ variables.PublishFramework }}
       PublishProject: ${{ variables.PublishProject }}
-      PublishRuntime: 'osx.10.12-x64'
+      PublishRuntime: 'osx-x64'
