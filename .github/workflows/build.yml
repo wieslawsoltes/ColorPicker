@@ -51,7 +51,7 @@ jobs:
           if [[ "${{ github.ref }}" == refs/heads/release/* ]]; then
             echo "VERSION_SUFFIX=" >> "$GITHUB_ENV"
           else
-            echo "VERSION_SUFFIX=-build.${{ github.run_number }}" >> "$GITHUB_ENV"
+            echo "VERSION_SUFFIX=build.${{ github.run_number }}" >> "$GITHUB_ENV"
           fi
 
       - name: Restore
@@ -85,7 +85,7 @@ jobs:
           if [[ "${{ github.ref }}" == refs/heads/release/* ]]; then
             echo "VERSION_SUFFIX=" >> "$GITHUB_ENV"
           else
-            echo "VERSION_SUFFIX=-build.${{ github.run_number }}" >> "$GITHUB_ENV"
+            echo "VERSION_SUFFIX=build.${{ github.run_number }}" >> "$GITHUB_ENV"
           fi
 
       - name: Restore
@@ -137,7 +137,7 @@ jobs:
           if [[ "${{ github.ref }}" == refs/heads/release/* ]]; then
             echo "VERSION_SUFFIX=" >> "$GITHUB_ENV"
           else
-            echo "VERSION_SUFFIX=-build.${{ github.run_number }}" >> "$GITHUB_ENV"
+            echo "VERSION_SUFFIX=build.${{ github.run_number }}" >> "$GITHUB_ENV"
           fi
 
       - name: Restore
@@ -197,7 +197,7 @@ jobs:
           if [[ "${{ github.ref }}" == refs/heads/release/* ]]; then
             echo "VERSION_SUFFIX=" >> "$GITHUB_ENV"
           else
-            echo "VERSION_SUFFIX=-build.${{ github.run_number }}" >> "$GITHUB_ENV"
+            echo "VERSION_SUFFIX=build.${{ github.run_number }}" >> "$GITHUB_ENV"
           fi
 
       - name: Restore
