@@ -1,10 +1,10 @@
 using System.Collections.Generic;
+using System.IO;
 using Nuke.Common;
 using Nuke.Common.Git;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.IO;
-using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.IO.PathConstruction;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
@@ -48,20 +48,31 @@ class Build : NukeBuild
         VersionSuffix = VersionSuffix ?? "";
     }
 
-    private void DeleteDirectories(IReadOnlyCollection<string> directories)
+    private void DeleteDirectories(IEnumerable<string> directories)
     {
         foreach (var directory in directories)
         {
-            DeleteDirectory(directory);
+            if (Directory.Exists(directory))
+            {
+                Directory.Delete(directory, recursive: true);
+            }
         }
     }
 
     Target Clean => _ => _
         .Executes(() =>
         {
-            DeleteDirectories(GlobDirectories(SourceDirectory, "**/bin", "**/obj"));
-            DeleteDirectories(GlobDirectories(TestsDirectory, "**/bin", "**/obj"));
-            EnsureCleanDirectory(ArtifactsDirectory);
+            DeleteDirectories(Directory.GetDirectories(SourceDirectory, "bin", SearchOption.AllDirectories));
+            DeleteDirectories(Directory.GetDirectories(SourceDirectory, "obj", SearchOption.AllDirectories));
+            DeleteDirectories(Directory.GetDirectories(TestsDirectory, "bin", SearchOption.AllDirectories));
+            DeleteDirectories(Directory.GetDirectories(TestsDirectory, "obj", SearchOption.AllDirectories));
+
+            if (Directory.Exists(ArtifactsDirectory))
+            {
+                Directory.Delete(ArtifactsDirectory, recursive: true);
+            }
+
+            Directory.CreateDirectory(ArtifactsDirectory);
         });
 
     Target Restore => _ => _
