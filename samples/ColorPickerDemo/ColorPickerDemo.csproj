@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <TrimMode>copyused</TrimMode>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
@@ -12,7 +12,7 @@
   <Import Project="..\..\build\ReferenceAssemblies.props" />
   <Import Project="..\..\build\Avalonia.Themes.Fluent.props" />
   <Import Project="..\..\build\Avalonia.Desktop.props" />
-  <Import Project="..\..\build\Avalonia.Diagnostics.props" />
+  <Import Project="..\..\build\ProDiagnostics.props" />
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\ThemeEditor.Controls.ColorPicker\ThemeEditor.Controls.ColorPicker.csproj" />
