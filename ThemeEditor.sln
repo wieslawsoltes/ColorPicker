@@ -10,7 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{3353FD4A
 		build.sh = build.sh
 		global.json = global.json
 		build\themeeditor.public.snk = build\themeeditor.public.snk
-		azure-pipelines.yml = azure-pipelines.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{2134CB05-065F-4694-83B7-3DF4E9CAFD0E}"
