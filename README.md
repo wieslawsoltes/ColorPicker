@@ -1,15 +1,15 @@
 # ColorPicker
 
-[![Build Status](https://dev.azure.com/wieslawsoltes/GitHub/_apis/build/status/wieslawsoltes.ColorPicker?repoName=wieslawsoltes%2FColorPicker&branchName=release%2F0.10.11-rc.1)](https://dev.azure.com/wieslawsoltes/GitHub/_build/latest?definitionId=106&repoName=wieslawsoltes%2FColorPicker&branchName=release%2F0.10.11-rc.1)
-[![CI](https://github.com/wieslawsoltes/ColorPicker/actions/workflows/build.yml/badge.svg)](https://github.com/wieslawsoltes/ThemeEditor/actions/workflows/build.yml)
+[![Build Status](https://dev.azure.com/wieslawsoltes/GitHub/_apis/build/status/wieslawsoltes.ColorPicker?repoName=wieslawsoltes%2FColorPicker&branchName=master)](https://dev.azure.com/wieslawsoltes/GitHub/_build/latest?definitionId=106&repoName=wieslawsoltes%2FColorPicker&branchName=master)
+[![CI](https://github.com/wieslawsoltes/ColorPicker/actions/workflows/build.yml/badge.svg)](https://github.com/wieslawsoltes/ColorPicker/actions/workflows/build.yml)
 
 [![NuGet](https://img.shields.io/nuget/v/ThemeEditor.Controls.ColorPicker.svg)](https://www.nuget.org/packages/ThemeEditor.Controls.ColorPicker)
 [![NuGet](https://img.shields.io/nuget/dt/ThemeEditor.Controls.ColorPicker.svg)](https://www.nuget.org/packages/ThemeEditor.Controls.ColorPicker)
 [![MyGet](https://img.shields.io/myget/themeeditor-nightly/vpre/ThemeEditor.Controls.ColorPicker.svg?label=myget)](https://www.myget.org/gallery/themeeditor-nightly)
 
-[![Github All Releases](https://img.shields.io/github/downloads/wieslawsoltes/themeeditor/total.svg)](https://github.com/wieslawsoltes/ThemeEditor/releases)
-[![GitHub Release](https://img.shields.io/github/release/wieslawsoltes/themeeditor.svg)](https://github.com/wieslawsoltes/ThemeEditor/releases/latest)
-[![Github Releases](https://img.shields.io/github/downloads/wieslawsoltes/themeeditor/latest/total.svg)](https://github.com/wieslawsoltes/ThemeEditor/releases)
+[![Github All Releases](https://img.shields.io/github/downloads/wieslawsoltes/ColorPicker/total.svg)](https://github.com/wieslawsoltes/ColorPicker/releases)
+[![GitHub Release](https://img.shields.io/github/release/wieslawsoltes/ColorPicker.svg)](https://github.com/wieslawsoltes/ColorPicker/releases/latest)
+[![Github Releases](https://img.shields.io/github/downloads/wieslawsoltes/ColorPicker/latest/total.svg)](https://github.com/wieslawsoltes/ColorPicker/releases)
 
 ## Download
 
@@ -17,7 +17,7 @@
 
 # About
 
-ColorPicker is an [Avalonia UI Framework](http://avaloniaui.net/) color picker control.
+ColorPicker is an [Avalonia UI Framework](https://avaloniaui.net/) color picker control.
 
 # Usage
 
